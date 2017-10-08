@@ -1,4 +1,4 @@
-package com.example.hanghang0713.sanxing;
+package io.github.celestialphineas.sanxing;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.hanghang0713.sanxing", appContext.getPackageName());
+        assertEquals("io.github.celestialphineas.sanxing", appContext.getPackageName());
     }
 }

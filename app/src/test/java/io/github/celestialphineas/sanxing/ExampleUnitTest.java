@@ -1,4 +1,4 @@
-package com.example.hanghang0713.sanxing;
+package io.github.celestialphineas.sanxing;
 
 import org.junit.Test;
 

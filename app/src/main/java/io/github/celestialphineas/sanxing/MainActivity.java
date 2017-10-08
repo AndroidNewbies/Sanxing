@@ -1,4 +1,4 @@
-package com.example.hanghang0713.sanxing;
+package io.github.celestialphineas.sanxing;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
