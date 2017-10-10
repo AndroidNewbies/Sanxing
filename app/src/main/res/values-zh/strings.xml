@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">三省</string>
+    <string name="hello_blank_fragment"></string>
+    <string name="tab_habits">习惯</string>
+    <string name="tab_tasks">任务</string>
+    <string name="tab_time_left">余时</string>
 </resources>
