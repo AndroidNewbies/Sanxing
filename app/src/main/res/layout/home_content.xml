@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:elevation="4dp">
+        <android.support.v7.widget.Toolbar android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        </android.support.v7.widget.Toolbar>
+        <android.support.design.widget.TabLayout android:id="@+id/main_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right|end"
+        android:src="@drawable/ic_add"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:backgroundTint="@color/colorTasks"
+        app:elevation="6dp" />
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add"
+        android:visibility="invisible"
+        android:clickable="true"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:backgroundTint="@color/colorHabits"
+        app:elevation="6dp" />
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_time_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add"
+        android:visibility="invisible"
+        android:clickable="true"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:backgroundTint="@color/colorTimeLeft"
+        app:elevation="6dp" />
+    <android.support.v4.view.ViewPager android:id="@+id/main_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</android.support.design.widget.CoordinatorLayout>
