@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,8 +27,8 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
         // Set drawer layout
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -40,9 +41,9 @@ public class HomeActivity extends AppCompatActivity
         // Set the adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Add view pagers
-        adapter.addFrag(new CountdownFrag(), getString(R.string.tab_tasks));
-        adapter.addFrag(new CountdownFrag(), getString(R.string.tab_habits));
-        adapter.addFrag(new CountdownFrag(), getString(R.string.tab_time_left));
+        adapter.addFrag(new TaskFrag(), getString(R.string.tab_tasks));
+        adapter.addFrag(new TaskFrag(), getString(R.string.tab_habits));
+        adapter.addFrag(new TaskFrag(), getString(R.string.tab_time_left));
         // Binding the view pager with the layout, as well as the fab button
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -100,7 +101,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.home_menu, menu);
         return true;
     }
 
@@ -112,7 +113,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_calendar) {
             return true;
         }
 
@@ -125,17 +126,20 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        // Handle the navigation actions
+        if (id == R.id.nav_calendar) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_statistics) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_achievements) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_timeline) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_help) {
+
+        } else if (id == R.id.nav_settings) {
+
+        } else if (id == R.id.nav_about) {
 
         }
 
