@@ -4,4 +4,7 @@
     <string name="tab_habits">习惯</string>
     <string name="tab_tasks">任务</string>
     <string name="tab_time_left">余时</string>
+    <string name="navigation_drawer_close">关闭导航</string>
+    <string name="navigation_drawer_open">打开导航</string>
+    <string name="action_settings">设置</string>
 </resources>

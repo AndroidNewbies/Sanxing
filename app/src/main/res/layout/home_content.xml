@@ -26,6 +26,7 @@
         android:src="@drawable/ic_add"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
+        android:tint="@android:color/white"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:backgroundTint="@color/colorTasks"
         app:elevation="6dp" />
@@ -37,6 +38,7 @@
         android:src="@drawable/ic_add"
         android:visibility="invisible"
         android:clickable="true"
+        android:tint="@android:color/white"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:backgroundTint="@color/colorHabits"
         app:elevation="6dp" />
@@ -48,6 +50,7 @@
         android:src="@drawable/ic_add"
         android:visibility="invisible"
         android:clickable="true"
+        android:tint="@android:color/white"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:backgroundTint="@color/colorTimeLeft"
         app:elevation="6dp" />

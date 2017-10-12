@@ -6,11 +6,9 @@
     <string name="tab_tasks">Tasks</string>
     <string name="tab_habits">Habits</string>
     <string name="tab_time_left">My Time Left</string>
-    <string name="title_activity_side_navigation">SideNavigation</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
 </resources>
