@@ -6,5 +6,12 @@
     <string name="tab_time_left">余时</string>
     <string name="navigation_drawer_close">关闭导航</string>
     <string name="navigation_drawer_open">打开导航</string>
-    <string name="action_settings">设置</string>
+    <string name="calendar">日历</string>
+    <string name="help">帮助</string>
+    <string name="settings">设置</string>
+    <string name="statistics">统计</string>
+    <string name="supports">支持</string>
+    <string name="about">关于</string>
+    <string name="timeline">时间线</string>
+    <string name="achievements">成就</string>
 </resources>

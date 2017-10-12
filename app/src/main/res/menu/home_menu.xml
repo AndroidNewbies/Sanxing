@@ -6,6 +6,5 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_calendar"
         android:title="@string/calendar"
-        android:iconTint="@android:color/white"
         app:showAsAction="always" />
 </menu>

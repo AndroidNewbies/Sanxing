@@ -7,4 +7,5 @@
     <color name="colorPrimaryLight">#58a5ef</color>
     <color name="colorPrimaryDark">#004c8b</color>
     <color name="colorAccent">#4fc3f7</color>
+    <color name="appBarWhite">#ffffff</color>
 </resources>
