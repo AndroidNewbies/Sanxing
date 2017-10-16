@@ -1,5 +1,6 @@
 package io.github.celestialphineas.sanxing;
 
+import java.util.Timer;
 import android.app.ActionBar;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import com.konifar.fab_transformation.FabTransformation;
+
+import java.util.TimerTask;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -45,11 +48,25 @@ public class CalendarActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        final Toolbar toolbarFooter = (Toolbar) findViewById(R.id.toolbar_footer);
+        final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.toolbar_footer);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FabTransformation.with(fab).transformTo(toolbarFooter);
+                FabTransformation.with(fab).transformTo(bottomNav);
+                // Automatic close after a few seconds
+                TimerTask closeBottomNav = new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            if(fab.getVisibility() != View.VISIBLE)
+                                FabTransformation.with(fab).transformFrom(bottomNav);
+                        } catch(Exception e) {
+                            // Do nothing
+                        }
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(closeBottomNav, 5000);
             }
         });
     }

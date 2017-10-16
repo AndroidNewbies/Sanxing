@@ -9,4 +9,5 @@
     <color name="colorAccent">#4fc3f7</color>
     <color name="appBarWhite">#ffffff</color>
     <color name="white">#ffffff</color>
+    <color name="bottomNavigation">#fbfbfb</color>
 </resources>
