@@ -20,4 +20,31 @@
             android:spinnerMode="dropdown"
             app:popupTheme="@style/AppTheme.PopupTheme" />
     </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right|end"
+        android:src="@drawable/ic_add"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:tint="@android:color/white"
+        app:popupTheme="@style/AppTheme.PopupTheme"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="6dp" />
+    <!-- You must wrap transform view in Circular reveal container -->
+    <io.codetail.widget.RevealFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <!-- Transform view -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_footer"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="bottom|end"
+            android:visibility="invisible">
+            <!-- Put view you like -->
+        </android.support.v7.widget.Toolbar>
+    </io.codetail.widget.RevealFrameLayout>
 </android.support.design.widget.CoordinatorLayout>
