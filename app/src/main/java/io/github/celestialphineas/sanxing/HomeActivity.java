@@ -1,5 +1,6 @@
 package io.github.celestialphineas.sanxing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,13 +17,12 @@ import android.view.View;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Get the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         // Set the toolbar as the default action bar of the window
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
@@ -35,11 +35,11 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // Get the view pager
-        ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
         // Get the tab layout
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tab);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tab);
         // Set the adapter
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Add view pagers
         adapter.addFrag(new TaskFrag(), getString(R.string.tab_tasks));
         adapter.addFrag(new TaskFrag(), getString(R.string.tab_habits));
@@ -114,12 +114,17 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_calendar) {
+            // Intent to navigate to the calendar activity
+            Intent navigateCalendarIntent = new Intent(this, CalendarActivity.class);
+            startActivity(navigateCalendarIntent);
+            // TODO: Pass message to calendar activity through intent here
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    // Navigation drawer implementation
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -128,7 +133,10 @@ public class HomeActivity extends AppCompatActivity
 
         // Handle the navigation actions
         if (id == R.id.nav_calendar) {
-
+            // Intent to navigate to the calendar activity
+            Intent navigateCalendarIntent = new Intent(this, CalendarActivity.class);
+            startActivity(navigateCalendarIntent);
+            // TODO: Pass message to calendar activity through intent here
         } else if (id == R.id.nav_statistics) {
 
         } else if (id == R.id.nav_achievements) {

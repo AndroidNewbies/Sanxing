@@ -8,4 +8,5 @@
     <color name="colorPrimaryDark">#004c8b</color>
     <color name="colorAccent">#4fc3f7</color>
     <color name="appBarWhite">#ffffff</color>
+    <color name="white">#ffffff</color>
 </resources>
