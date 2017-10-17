@@ -5,5 +5,11 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_margin_vertical">5dp</dimen>
+    <dimen name="card_margin_horizontal">8dp</dimen>
+    <dimen name="card_padding_top">10dp</dimen>
+    <dimen name="card_padding_horizontal">32dp</dimen>
+    <dimen name="card_padding_bottom">5dp</dimen>
+    <dimen name="typo_headline_margin">4dp</dimen>
+    <dimen name="typo_subheading_margin">3dp</dimen>
 </resources>

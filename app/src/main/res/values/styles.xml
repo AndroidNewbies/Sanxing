@@ -10,6 +10,16 @@
     <style name="AppTheme.SpinnerTitleStyle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="AppTheme.CardHeadingStyle" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:textColor">@color/black87</item>
+        <item name="android:layout_marginTop">@dimen/typo_headline_margin</item>
+        <item name="android:layout_marginBottom">@dimen/typo_headline_margin</item>
+    </style>
+    <style name="AppTheme.CardSubheadingStyle" parent="Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/black87</item>
+        <item name="android:layout_marginTop">@dimen/typo_subheading_margin</item>
+        <item name="android:layout_marginBottom">@dimen/typo_subheading_margin</item>
+    </style>
     <style name="AppTheme.SpinnerStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">@color/white</item>
         <item name="android:titleTextStyle">@style/AppTheme.SpinnerTitleStyle</item>
