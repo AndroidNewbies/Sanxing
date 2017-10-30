@@ -29,7 +29,7 @@
         android:clickable="true"
         android:tint="@android:color/white"
         app:popupTheme="@style/AppTheme.PopupTheme"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/bottomNavigation"
         app:elevation="6dp" />
     <!-- You must wrap transform view in Circular reveal container -->
     <io.codetail.widget.RevealFrameLayout
@@ -40,7 +40,7 @@
         android:layout_alignParentBottom="true">
         <!-- Transform view -->
         <android.support.design.widget.BottomNavigationView
-            android:id="@+id/toolbar_footer"
+            android:id="@+id/calendar_bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

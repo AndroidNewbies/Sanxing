@@ -1,7 +1,7 @@
 package io.github.celestialphineas.sanxing;
 
 import java.util.Timer;
-import android.app.ActionBar;
+
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.konifar.fab_transformation.FabTransformation;
 
@@ -44,11 +42,11 @@ public class CalendarActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.calendar_spinner_array,
                 R.layout.calendar_spinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_items);
         spinner.setAdapter(adapter);
-        //
+        // Fab and toggle footer navigation
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.toolbar_footer);
+        final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.calendar_bottom_navigation);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +64,7 @@ public class CalendarActivity extends AppCompatActivity {
                     }
                 };
                 Timer timer = new Timer();
+                // Navigation toggle timeout
                 timer.schedule(closeBottomNav, 5000);
             }
         });
