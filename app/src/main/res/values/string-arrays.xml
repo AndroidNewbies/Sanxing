@@ -4,5 +4,6 @@
         <item>@string/tab_tasks</item>
         <item>@string/tab_habits</item>
         <item>@string/tab_time_left</item>
+        <item>@string/tab_learn</item>
     </string-array>
 </resources>

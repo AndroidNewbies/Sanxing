@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/myeditText"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorHabits"
+        android:enabled="false"
+        android:ems="10"
+        android:hint="add a task"
+        android:inputType="textLongMessage"
+        android:layout_weight="0.06" />
+
+</RelativeLayout>

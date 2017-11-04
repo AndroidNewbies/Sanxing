@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Sanxing</name>
+	<content>Sanxing</content>
 	<comment>Project Sanxing created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+			<content>org.eclipse.buildship.core.gradleprojectbuilder</content>
 			<arguments>
 			</arguments>
 		</buildCommand>

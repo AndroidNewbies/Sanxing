@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>app</name>
+	<content>app</content>
 	<comment>Project app created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
+			<content>org.eclipse.jdt.core.javabuilder</content>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+			<content>org.eclipse.buildship.core.gradleprojectbuilder</content>
 			<arguments>
 			</arguments>
 		</buildCommand>

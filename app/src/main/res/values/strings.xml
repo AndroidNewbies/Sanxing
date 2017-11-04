@@ -6,6 +6,7 @@
     <string name="tab_tasks">Tasks</string>
     <string name="tab_habits">Habits</string>
     <string name="tab_time_left">My Time Left</string>
+    <string name="tab_learn">Learn</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
