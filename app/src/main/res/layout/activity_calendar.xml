@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarTheme"
         app:popupTheme="@style/AppTheme.PopupTheme">
         <android.support.v7.widget.AppCompatSpinner android:id="@+id/toolbar_spinner"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.SpinnerStyle"
             android:spinnerMode="dropdown"
