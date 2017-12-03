@@ -16,7 +16,7 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.github.celestialphineas.sanxing.UINewItemCreationActivities.BaseCreateNewItemActivity;
+import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTaskActivity;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -99,12 +99,14 @@ public class HomeActivity extends AppCompatActivity
             _task_manager.addObject(new Task("ts1"));
             _task_manager.addObject(new Task("ts2"));
         }
-        else _task_manager = new TaskManager(repo.getTaskList()) ;
+        else _task_manager = new TaskManager(repo.getTaskList());
+
+        // End of the onCreate(Bundle) method
     }
 
     @OnClick(R.id.fab_tasks)
     void fabTasksOnClickBehavior() {
-        Intent intent = new Intent(this, BaseCreateNewItemActivity.class);
+        Intent intent = new Intent(this, CreateNewTaskActivity.class);
         startActivity(intent);
     }
 
@@ -218,37 +220,26 @@ public class HomeActivity extends AppCompatActivity
         FloatingActionButton fabTasks = (FloatingActionButton) findViewById(R.id.fab_tasks);
         FloatingActionButton fabHabits = (FloatingActionButton) findViewById(R.id.fab_habits);
         FloatingActionButton fabTimeLeft = (FloatingActionButton) findViewById(R.id.fab_time_left);
-        FloatingActionButton fabLearn = (FloatingActionButton) findViewById(R.id.fab_learn);
         switch (tabPos) {
             case 0:
                 fabTasks.show();
                 fabHabits.hide();
                 fabTimeLeft.hide();
-                fabLearn.hide();
                 break;
             case 1:
                 fabTasks.hide();
                 fabHabits.show();
                 fabTimeLeft.hide();
-                fabLearn.hide();
                 break;
             case 2:
                 fabTasks.hide();
                 fabHabits.hide();
                 fabTimeLeft.show();
-                fabLearn.hide();
-                break;
-            case 3:
-                fabTasks.hide();
-                fabHabits.hide();
-                fabTimeLeft.hide();
-                fabLearn.show();
                 break;
             default:
                 fabTasks.hide();
                 fabHabits.hide();
                 fabTimeLeft.hide();
-                fabLearn.hide();
                 break;
         }
     }

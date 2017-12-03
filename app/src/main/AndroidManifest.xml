@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".UINewItemCreationActivities.BaseCreateNewItemActivity"></activity>
+        <activity android:name=".UINewItemCreationActivities.CreateNewTaskActivity" />
     </application>
 
 </manifest>

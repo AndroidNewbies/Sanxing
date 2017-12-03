@@ -15,4 +15,9 @@
     <string name="about">关于</string>
     <string name="timeline">时间线</string>
     <string name="achievements">成就</string>
+    <string name="hint_task_title">标题</string>
+    <string name="create_new_task">新任务</string>
+    <string name="hint_due">期限日</string>
+    <string name="hint_due_time">时间</string>
+    <string name="hint_description">描述</string>
 </resources>

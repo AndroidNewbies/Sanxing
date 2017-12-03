@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--Reuse the app bar resource-->
+    <include
+        layout="@layout/app_bar_create_new_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/form_padding"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/task_due_date"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/task_due_date_content"
+                        android:clickable="true"
+                        android:inputType="date"
+                        android:drawableLeft="@drawable/ic_date_picker"
+                        android:drawablePadding="@dimen/edit_drawable_padding"
+                        android:hint="@string/hint_due" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:id="@+id/task_due_time"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/task_due_time_content"
+                        android:clickable="true"
+                        android:inputType="time"
+                        android:drawableLeft="@drawable/ic_time_picker"
+                        android:drawablePadding="@dimen/edit_drawable_padding"
+                        android:hint="@string/hint_due_time" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.LinearLayoutCompat>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/form_padding"
+                    android:hint="@string/hint_description"/>
+            </android.support.design.widget.TextInputLayout>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </ScrollView>
+</android.support.v7.widget.LinearLayoutCompat>
