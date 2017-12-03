@@ -16,14 +16,23 @@ import com.konifar.fab_transformation.FabTransformation;
 
 import java.util.TimerTask;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class CalendarActivity extends AppCompatActivity {
+    @BindView(R.id.calendar_toolbar)            Toolbar toolbar;
+    @BindView(R.id.toolbar_spinner)             AppCompatSpinner spinner;
+    @BindView(R.id.fab)                         FloatingActionButton fab;
+    @BindView(R.id.calendar_bottom_navigation)  BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        // Get the toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.calendar_toolbar);
+        ButterKnife.bind(this);
+
+        //////// Toolbar ////////
         // Set the toolbar as the default action bar of the window
         setSupportActionBar(toolbar);
         // Disable the title
@@ -37,36 +46,32 @@ public class CalendarActivity extends AppCompatActivity {
                 finish();
             }
         });
-        // Spinner
-        AppCompatSpinner spinner = (AppCompatSpinner) findViewById(R.id.toolbar_spinner);
+
+        //////// Spinner ////////
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.calendar_spinner_array,
                 R.layout.calendar_spinner);
         adapter.setDropDownViewResource(R.layout.spinner_items);
         spinner.setAdapter(adapter);
-        // Fab and toggle footer navigation
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.calendar_bottom_navigation);
-        fab.setOnClickListener(new View.OnClickListener() {
+    }
+
+    @OnClick(R.id.fab)
+    void calendarFabOnClickBehavior() {
+        FabTransformation.with(fab).transformTo(bottomNav);
+        // Automatic close after a few seconds
+        TimerTask closeBottomNav = new TimerTask() {
             @Override
-            public void onClick(View view) {
-                FabTransformation.with(fab).transformTo(bottomNav);
-                // Automatic close after a few seconds
-                TimerTask closeBottomNav = new TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            if(fab.getVisibility() != View.VISIBLE)
-                                FabTransformation.with(fab).transformFrom(bottomNav);
-                        } catch(Exception e) {
-                            // Do nothing
-                        }
-                    }
-                };
-                Timer timer = new Timer();
-                // Navigation toggle timeout
-                timer.schedule(closeBottomNav, 5000);
+            public void run() {
+                try {
+                    if(fab.getVisibility() != View.VISIBLE)
+                        FabTransformation.with(fab).transformFrom(bottomNav);
+                } catch(Exception e) {
+                    // Do nothing
+                }
             }
-        });
+        };
+        Timer timer = new Timer();
+        // Navigation toggle timeout
+        timer.schedule(closeBottomNav, 5000);
     }
 }
