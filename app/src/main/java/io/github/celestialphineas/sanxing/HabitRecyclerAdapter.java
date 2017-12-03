@@ -4,11 +4,14 @@ package io.github.celestialphineas.sanxing;
  * Created by apple on 2017/11/3.
  */
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,14 +23,16 @@ public class HabitRecyclerAdapter
         extends RecyclerView.Adapter<HabitRecyclerAdapter.HabitViewHolder> {
     private String mArguments="l";
     private int count;
+    private Context context;
     private List<Habit> mlist;
     HabitRecyclerAdapter() {
         // Empty constructor
     }
 
-    HabitRecyclerAdapter(List<Habit> Habit_list) {
+    HabitRecyclerAdapter(List<Habit> Habit_list, Context context_) {
         mlist = Habit_list;
         count = 2;
+        context = context_;
     }
 
     class HabitViewHolder extends RecyclerView.ViewHolder {
@@ -69,6 +74,7 @@ public class HabitRecyclerAdapter
 
         holder.cardTitle.setText(mlist.get(position).getContent());
         // TODO: Bind the view with data
+        setAnimation(holder.itemView, position);
     }
 
     @Override
@@ -78,4 +84,11 @@ public class HabitRecyclerAdapter
 
     }
 
+    private void setAnimation(View viewToAnimate, int position) {
+        if(position > count) {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            count = position;
+        }
+    }
 }
