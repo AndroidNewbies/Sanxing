@@ -5,6 +5,6 @@
         android:id="@+id/action_confirm_new_item"
         android:orderInCategory="100"
         android:icon="@drawable/ic_check"
-        android:title="@string/calendar"
+        android:title="@string/confirm"
         app:showAsAction="always" />
 </menu>

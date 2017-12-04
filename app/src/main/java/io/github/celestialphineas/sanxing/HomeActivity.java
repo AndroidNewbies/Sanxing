@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewHabitActivity;
 import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTaskActivity;
 
 public class HomeActivity extends AppCompatActivity
@@ -108,7 +109,12 @@ public class HomeActivity extends AppCompatActivity
     void fabTasksOnClickBehavior() {
         Intent intent = new Intent(this, CreateNewTaskActivity.class);
         startActivity(intent);
-        overridePendingTransition(0,0);
+    }
+
+    @OnClick(R.id.fab_habits)
+    void fabHabitsOnClickBehavior() {
+        Intent intent = new Intent(this, CreateNewHabitActivity.class);
+        startActivity(intent);
     }
 
 

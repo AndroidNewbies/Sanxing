@@ -30,4 +30,16 @@
     <string name="snack_time_not_set">Please select due time.</string>
     <string name="snack_title_not_set">Title not set.</string>
     <string name="snack_time_passed">has passed.</string>
+    <string name="confirm">Confirm</string>
+    <string name="time">Time</string>
+    <string name="hint_freq">Frequency</string>
+    <string name="create_new_habit">New habit</string>
+    <string name="thrice_a_day">Three times a day</string>
+    <string name="twice_a_day">Twice a day</string>
+    <string name="every_day">Every day</string>
+    <string name="once_two_days">Once two days</string>
+    <string name="once_three_days">Once three days</string>
+    <string name="once_a_week">Once a week</string>
+    <string name="once_a_fortnight">Once a fortnight</string>
+    <string name="once_a_month">Once a month</string>
 </resources>

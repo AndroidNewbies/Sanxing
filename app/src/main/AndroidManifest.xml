@@ -23,6 +23,9 @@
         <activity
             android:name=".UINewItemCreationActivities.CreateNewTaskActivity"
             android:theme="@style/TasksTheme"/>
+        <activity
+            android:name=".UINewItemCreationActivities.CreateNewHabitActivity"
+            android:theme="@style/HabitsTheme"/>
     </application>
 
 </manifest>

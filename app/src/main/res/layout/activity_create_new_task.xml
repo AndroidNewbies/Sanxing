@@ -19,14 +19,21 @@
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/form_padding"
+            android:padding="20dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/form_padding"
                 android:orientation="horizontal">
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:paddingTop="@dimen/edit_drawable_padding"
+                    android:paddingRight="@dimen/edit_drawable_padding"
+                    android:src="@drawable/ic_date_picker"
+                    android:contentDescription="@string/calendar" />
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -40,10 +47,16 @@
                         android:id="@+id/task_due_date_content"
                         android:clickable="true"
                         android:inputType="date"
-                        android:drawableLeft="@drawable/ic_date_picker"
-                        android:drawablePadding="@dimen/edit_drawable_padding"
                         android:hint="@string/hint_due" />
                 </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:paddingTop="@dimen/edit_drawable_padding"
+                    android:paddingRight="@dimen/edit_drawable_padding"
+                    android:src="@drawable/ic_time_picker"
+                    android:contentDescription="@string/time" />
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,19 +70,19 @@
                         android:id="@+id/task_due_time_content"
                         android:clickable="true"
                         android:inputType="time"
-                        android:drawableLeft="@drawable/ic_time_picker"
-                        android:drawablePadding="@dimen/edit_drawable_padding"
                         android:hint="@string/hint_due_time" />
                 </android.support.design.widget.TextInputLayout>
             </android.support.v7.widget.LinearLayoutCompat>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/task_description"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="bottom">
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/task_description_content"
                     android:padding="@dimen/form_padding"
                     android:hint="@string/hint_description"/>
             </android.support.design.widget.TextInputLayout>

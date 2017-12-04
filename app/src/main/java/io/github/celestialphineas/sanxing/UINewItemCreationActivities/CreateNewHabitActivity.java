@@ -4,14 +4,14 @@ import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.AppCompatSeekBar;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,18 +19,12 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.SeekBar;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.SimpleTimeZone;
 
-import butterknife.BindDimen;
 import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
@@ -39,23 +33,35 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import io.github.celestialphineas.sanxing.R;
 
-public class CreateNewTaskActivity extends AppCompatActivity {
-    // The selected date/time will be stored here
-    final Calendar dueCalendar = Calendar.getInstance();
-    // Flags to show if the user has already set date and time
-    boolean setDate = false, setTime = false;
+public class CreateNewHabitActivity extends AppCompatActivity {
+    // Frequency select value
+    // 0 - Thrice a day
+    // 1 - Twice a day
+    // 2 - Once a day
+    // 3 - Once two days
+    // 4 - Once three days
+    // 5 - Once a week
+    // 6 - Once a fortnight
+    // 7 - Once a month
+    int selectedFreq = 2;
     @BindView(R.id.create_new_item_toolbar)         Toolbar toolbar;
     @BindView(R.id.input_title)                     TextInputEditText inputTitle;
-    @BindView(R.id.task_due_date_content)           TextInputEditText dueDateContent;
-    @BindView(R.id.task_due_time_content)           TextInputEditText dueTimeContent;
-    @BindView(R.id.task_description_content)        TextInputEditText descriptionContent;
-    @BindView(R.id.task_linear_layout)              LinearLayoutCompat linearLayout;
+    @BindView(R.id.habit_description_content)       TextInputEditText descriptionContent;
+    @BindView(R.id.freq_text)                       AppCompatTextView freqText;
+    @BindView(R.id.habit_freq_seek_bar)             AppCompatSeekBar habitFreqSeekBar;
+    @BindView(R.id.habit_linear_layout)             LinearLayoutCompat linearLayout;
     @BindString(R.string.snack_title_not_set)       String titleNotSet;
-    @BindString(R.string.snack_date_not_set)        String dateNotSet;
-    @BindString(R.string.snack_time_not_set)        String timeNotSet;
-    @BindString(R.string.snack_op_set)              String setSnack;
-    @BindString(R.string.create_new_task)           String title;
-    @BindString(R.string.snack_time_passed)         String hasPassed;
+    @BindString(R.string.create_new_habit)          String title;
+
+    @BindString(R.string.thrice_a_day)              String thriceADay;
+    @BindString(R.string.twice_a_day)               String twiceADay;
+    @BindString(R.string.every_day)                 String everyDay;
+    @BindString(R.string.once_two_days)             String onceTwoDays;
+    @BindString(R.string.once_three_days)           String onceThreeDays;
+    @BindString(R.string.once_a_week)               String onceAWeek;
+    @BindString(R.string.once_a_fortnight)          String onceAFortnight;
+    @BindString(R.string.once_a_month)              String onceAMonth;
+
     @BindInt(R.integer.snack_bar_timeout)           int snackBarTimeout;
     @BindInt(R.integer.reveal_time)                 int revealTime;
     // Animation center
@@ -63,7 +69,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_task);
+        setContentView(R.layout.activity_create_new_habit);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         ButterKnife.bind(this);
         cx = getResources().getDisplayMetrics().widthPixels - 120;
@@ -86,12 +92,34 @@ public class CreateNewTaskActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         // Single line input of the title
         inputTitle.setSingleLine();
 
-        //////// Disable keyboard events of the date and text editTexts
-        dueDateContent.setKeyListener(null);
-        dueTimeContent.setKeyListener(null);
+        // Seekbar on change
+        freqText.setText(freqIntToString(selectedFreq));
+        habitFreqSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                selectedFreq = seekBar.getProgress();
+                freqText.setText(freqIntToString(selectedFreq));
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+    }
+
+    private String freqIntToString(int freq) {
+        switch (freq) {
+            case 0: return thriceADay;
+            case 1: return twiceADay;
+            case 2: return everyDay;
+            case 3: return onceTwoDays;
+            case 4: return onceThreeDays;
+            case 5: return onceAWeek;
+            case 6: return onceAFortnight;
+            case 7: default: return onceAMonth;
+        }
     }
 
     @Override
@@ -115,6 +143,9 @@ public class CreateNewTaskActivity extends AppCompatActivity {
             ////////
             // TODO: Then register the changes in the database
             //////// INSERT NECESSARY CODE HERE
+            // Use "selectedFreq" for frequency index
+            // Use inputTitle.getText().toString() to get the title
+            // Use descriptionContent.getText().toString() to get the description
 
             // finish
             cx = getResources().getDisplayMetrics().widthPixels - 120;
@@ -127,97 +158,17 @@ public class CreateNewTaskActivity extends AppCompatActivity {
 
     // Verify input
     private boolean verifyForm() {
-        Calendar now = Calendar.getInstance();
         if(inputTitle != null && inputTitle.getText() != null
                 && inputTitle.getText().toString().trim().isEmpty()) {
             Snackbar.make(linearLayout, titleNotSet, snackBarTimeout)
                     .show();
             inputTitle.requestFocus();
             return false;
-        } else if(!setDate) {
-            Snackbar.make(linearLayout, dateNotSet, snackBarTimeout)
-                    .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueDateOnClickBehavior(); } })
-                    .show();
-            return false;
-        } else if(!setTime) {
-            Snackbar.make(linearLayout, timeNotSet, snackBarTimeout)
-                    .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueTimeOnClickBehavior(); } })
-                    .show();
-            return false;
-        } else if(dueCalendar.before(now)) {
-            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getBaseContext());
-            DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getBaseContext());
-            String timeString = dateFormat.format(dueCalendar.getTime())
-                    + " " + timeFormat.format(dueCalendar.getTime()) + " ";
-            Snackbar.make(linearLayout, timeString + hasPassed, snackBarTimeout)
-                    .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueDateOnClickBehavior(); } })
-                    .show();
-            return false;
         }
+        // TODO
         return true;
     }
 
-    //////////////// SELECT DATE ////////////////
-    // Select date
-    // This method pop up a date selector, and allow user to select date.
-    // The selected date will be stored in the dueCalendar object.
-    @OnFocusChange(R.id.task_due_date_content)
-    void taskDueDateOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
-            taskDueDateOnClickBehavior();
-        }
-    }
-    @OnClick(R.id.task_due_date_content)
-    void taskDueDateOnClickBehavior() {
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                dueCalendar.set(Calendar.YEAR, year);
-                dueCalendar.set(Calendar.MONTH, monthOfYear);
-                dueCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                DateFormat sdf = android.text.format.DateFormat.getDateFormat(getBaseContext());
-                dueDateContent.setText(sdf.format(dueCalendar.getTime()));
-                setDate = true;
-            }
-        };
-        new DatePickerDialog(this, date,
-                dueCalendar.get(Calendar.YEAR),
-                dueCalendar.get(Calendar.MONTH),
-                dueCalendar.get(Calendar.DAY_OF_MONTH)).show();
-    }
-
-    //////////////// SELECT TIME ////////////////
-    // Select time
-    // This method pop up a time selector, and allow user to select time.
-    // The selected time will be stored in the dueCalendar object.
-    @OnFocusChange(R.id.task_due_time_content)
-    void taskDueTimeOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
-            taskDueTimeOnClickBehavior();
-        }
-    }
-    @OnClick(R.id.task_due_time_content)
-    void taskDueTimeOnClickBehavior() {
-        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minuteOfHour) {
-                dueCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                dueCalendar.set(Calendar.MINUTE, minuteOfHour);
-                DateFormat sdf = android.text.format.DateFormat.getTimeFormat(getBaseContext());
-                dueTimeContent.setText(sdf.format(dueCalendar.getTime()));
-                setTime = true;
-            }
-        };
-        new TimePickerDialog(this, time,
-                dueCalendar.get(Calendar.HOUR_OF_DAY),
-                dueCalendar.get(Calendar.MINUTE), true).show();
-    }
 
     //////////////// ANIMATIONS ////////////////
     // Reveal animation implementation
@@ -270,11 +221,11 @@ public class CreateNewTaskActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
     @Override
     public void onBackPressed() {
         cx = 120;
         cy = 100;
         animationExit();
     }
-
 }

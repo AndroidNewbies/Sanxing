@@ -25,4 +25,16 @@
     <string name="snack_time_not_set">您还没有选择一个截止时间。</string>
     <string name="snack_title_not_set">还没有写标题。</string>
     <string name="snack_time_passed">已经是过去了。</string>
+    <string name="confirm">确认</string>
+    <string name="time">时间</string>
+    <string name="hint_freq">频率</string>
+    <string name="create_new_habit">新习惯</string>
+    <string name="thrice_a_day">一日三次</string>
+    <string name="twice_a_day">一日两次</string>
+    <string name="every_day">每天</string>
+    <string name="once_two_days">两天一次</string>
+    <string name="once_three_days">三天一次</string>
+    <string name="once_a_week">一周一次</string>
+    <string name="once_a_fortnight">半月一次</string>
+    <string name="once_a_month">一月一次</string>
 </resources>

@@ -17,6 +17,8 @@
     </style>
     <style name="HabitsTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="colorPrimary">@color/colorHabits</item>
         <item name="colorPrimaryDark">@color/colorHabitsDark</item>
         <item name="colorAccent">@color/colorHabitsAccent</item>
