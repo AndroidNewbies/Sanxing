@@ -46,4 +46,8 @@
     <string name="hint_importance">Importance</string>
     <string name="create_new_time_left">New countdown</string>
     <string name="hint_quick_add">Quick add</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="undo">Undo</string>
+    <string name="snack_one_item_deleted">One item deleted.</string>
 </resources>

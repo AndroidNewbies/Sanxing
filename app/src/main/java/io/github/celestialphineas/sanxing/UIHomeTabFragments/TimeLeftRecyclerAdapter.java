@@ -35,30 +35,30 @@ public class TimeLeftRecyclerAdapter
         TextView cardSubheading;
         TimeLeftViewHolder(View itemView) {
             super(itemView);
-            cardTitle = itemView.findViewById(R.id.task_card_headline);
-            cardSubheading = itemView.findViewById(R.id.task_card_subheading);
+            cardTitle = itemView.findViewById(R.id.card_headline);
+            cardSubheading = itemView.findViewById(R.id.card_subheading);
             cardTitle.setText(mArguments);
             cardSubheading.setText("Good night, my friend!");
         }
         TimeLeftViewHolder(View itemView,String title) {
             super(itemView);
 
-            cardTitle = itemView.findViewById(R.id.task_card_headline);
-            cardSubheading = itemView.findViewById(R.id.task_card_subheading);
+            cardTitle = itemView.findViewById(R.id.card_headline);
+            cardSubheading = itemView.findViewById(R.id.card_subheading);
             cardTitle.setText(title);
         }
         TimeLeftViewHolder(View itemView,List<TimeLeft> list) {
             super(itemView);
 
             mlist = list;
-            cardTitle = itemView.findViewById(R.id.task_card_headline);
-            cardSubheading = itemView.findViewById(R.id.task_card_subheading);
+            cardTitle = itemView.findViewById(R.id.card_headline);
+            cardSubheading = itemView.findViewById(R.id.card_subheading);
         }
     }
 
     @Override
     public TimeLeftViewHolder onCreateViewHolder(ViewGroup parent, int viewGroup) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_card, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_card, parent, false);
 
         if (!mArguments.equals("l")||mlist==null) return new TimeLeftViewHolder(itemView,mArguments);
         return new TimeLeftViewHolder(itemView,mlist);

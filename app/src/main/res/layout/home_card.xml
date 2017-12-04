@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="@dimen/card_margin_horizontal"
+    android:layout_marginRight="@dimen/card_margin_horizontal"
+    android:layout_marginTop="@dimen/card_margin_vertical"
+    android:layout_marginBottom="@dimen/card_padding_bottom"
+    android:clickable="true"
+    app:cardCornerRadius="2dp"
+    app:cardPreventCornerOverlap="true">
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/card_padding_top"
+        android:paddingLeft="@dimen/card_padding_horizontal"
+        android:paddingRight="@dimen/card_padding_horizontal"
+        android:paddingBottom="@dimen/card_padding_bottom"
+        android:orientation="vertical">
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/card_headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            tools:text="Title"
+            style="@style/CardHeadingStyle" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/card_subheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_headline"
+            tools:text="Due: Nov. 12, 2012"
+            style="@style/CardSubheadingStyle" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/card_countdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_subheading"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            tools:text="15 Days 11:13"
+            style="@style/CardSubheadingStyle" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/card_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_countdown"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla." />
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/card_padding_bottom">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/card_button_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                style="?android:attr/borderlessButtonStyle"
+                android:drawableStart="@drawable/ic_edit"
+                android:drawablePadding="5dp"
+                android:text="@string/edit" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/card_button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="?attr/colorPrimary"
+                android:drawableStart="@drawable/ic_delete"
+                android:drawableTint="?attr/colorPrimary"
+                android:drawablePadding="5dp"
+                android:text="@string/delete"
+                style="?android:attr/borderlessButtonStyle" />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v7.widget.CardView>
