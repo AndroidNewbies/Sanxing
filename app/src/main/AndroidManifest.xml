@@ -26,6 +26,9 @@
         <activity
             android:name=".UINewItemCreationActivities.CreateNewHabitActivity"
             android:theme="@style/HabitsTheme"/>
+        <activity
+            android:name=".UINewItemCreationActivities.CreateNewTimeLeftActivity"
+            android:theme="@style/TimeLeftTheme"/>
     </application>
 
 </manifest>

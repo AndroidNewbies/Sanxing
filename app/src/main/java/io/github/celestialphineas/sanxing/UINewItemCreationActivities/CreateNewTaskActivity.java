@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -40,6 +42,8 @@ import butterknife.OnFocusChange;
 import io.github.celestialphineas.sanxing.R;
 
 public class CreateNewTaskActivity extends AppCompatActivity {
+    // Selected importance 0, 1, 2, 3, 4
+    int selectedImportance = 2;
     // The selected date/time will be stored here
     final Calendar dueCalendar = Calendar.getInstance();
     // Flags to show if the user has already set date and time
@@ -49,6 +53,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
     @BindView(R.id.task_due_date_content)           TextInputEditText dueDateContent;
     @BindView(R.id.task_due_time_content)           TextInputEditText dueTimeContent;
     @BindView(R.id.task_description_content)        TextInputEditText descriptionContent;
+    @BindView(R.id.task_importance_seek_bar)        AppCompatSeekBar taskImportance;
     @BindView(R.id.task_linear_layout)              LinearLayoutCompat linearLayout;
     @BindString(R.string.snack_title_not_set)       String titleNotSet;
     @BindString(R.string.snack_date_not_set)        String dateNotSet;
@@ -92,6 +97,15 @@ public class CreateNewTaskActivity extends AppCompatActivity {
         //////// Disable keyboard events of the date and text editTexts
         dueDateContent.setKeyListener(null);
         dueTimeContent.setKeyListener(null);
+
+        taskImportance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                selectedImportance = seekBar.getProgress();
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
     }
 
     @Override
@@ -115,6 +129,10 @@ public class CreateNewTaskActivity extends AppCompatActivity {
             ////////
             // TODO: Then register the changes in the database
             //////// INSERT NECESSARY CODE HERE
+            // Use "dueCalendar" for due date and time
+            // Use "selectedImportance" for the the importance 0~4
+            // Use inputTitle.getText().toString() to get the title
+            // Use descriptionContent.getText().toString() to get the description
 
             // finish
             cx = getResources().getDisplayMetrics().widthPixels - 120;

@@ -42,4 +42,6 @@
     <string name="once_a_week">Once a week</string>
     <string name="once_a_fortnight">Once a fortnight</string>
     <string name="once_a_month">Once a month</string>
+    <string name="hint_importance">Importance</string>
+    <string name="create_new_time_left">New countdown</string>
 </resources>

@@ -25,6 +25,8 @@
     </style>
     <style name="TimeLeftTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="colorPrimary">@color/colorTimeLeft</item>
         <item name="colorPrimaryDark">@color/colorTimeLeftDark</item>
         <item name="colorAccent">@color/colorTimeLeftAccent</item>

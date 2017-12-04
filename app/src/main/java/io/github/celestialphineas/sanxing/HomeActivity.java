@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewHabitActivity;
 import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTaskActivity;
+import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTimeLeftActivity;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -114,6 +115,12 @@ public class HomeActivity extends AppCompatActivity
     @OnClick(R.id.fab_habits)
     void fabHabitsOnClickBehavior() {
         Intent intent = new Intent(this, CreateNewHabitActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.fab_time_left)
+    void fabTimeLeftOnClickBehavior() {
+        Intent intent = new Intent(this, CreateNewTimeLeftActivity.class);
         startActivity(intent);
     }
 

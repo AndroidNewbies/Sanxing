@@ -37,4 +37,6 @@
     <string name="once_a_week">一周一次</string>
     <string name="once_a_fortnight">半月一次</string>
     <string name="once_a_month">一月一次</string>
+    <string name="hint_importance">重要性</string>
+    <string name="create_new_time_left">新倒计时</string>
 </resources>
