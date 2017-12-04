@@ -1,10 +1,13 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 
 /**
  * Created by apple on 2017/11/3.
  */
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.celestialphineas.sanxing.Habit;
+import io.github.celestialphineas.sanxing.SxObjectManager;
 
 public class HabitManager implements SxObjectManager {
     private  List<Habit> HabitPool;

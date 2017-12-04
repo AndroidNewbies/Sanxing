@@ -16,6 +16,12 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.HabitFrag;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.HabitManager;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.TaskFrag;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.TaskManager;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.TimeLeftFrag;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.TimeLeftManager;
 import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewHabitActivity;
 import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTaskActivity;
 import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTimeLeftActivity;

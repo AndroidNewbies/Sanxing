@@ -1,8 +1,6 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 
-/**
- * Created by apple on 2017/11/3.
- */
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,21 +12,24 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.celestialphineas.sanxing.Habit;
+import io.github.celestialphineas.sanxing.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TimeLeftFrag#newInstance} factory method to
+ * Use the {@link HabitFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
 
-public class TimeLeftFrag extends Fragment {
+public class HabitFrag extends Fragment {
 
-    private TimeLeftManager _time_left_manager;
+    private HabitManager _habit_manager;
     private String mArgs;
-    public TimeLeftFrag() {
+    public HabitFrag() {
         // Required empty public constructor
     }
-//    public TimeLeftFrag(String args) {
+//    public HabitFrag(String args) {
 //        mArgs = "r";
 //        // Required empty public constructor
 //    }
@@ -38,25 +39,25 @@ public class TimeLeftFrag extends Fragment {
      * this fragment using the provided parameters.
      */
     // TODO: Rename and change types and number of parameters
-    public static TimeLeftFrag newInstance() {
-        TimeLeftFrag fragment = new TimeLeftFrag();
+    public static HabitFrag newInstance() {
+        HabitFrag fragment = new HabitFrag();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
-    public TimeLeftFrag newInstance(String arguments) {
+    public HabitFrag newInstance(String arguments) {
 
-        TimeLeftFrag fragment = new TimeLeftFrag();
+        HabitFrag fragment = new HabitFrag();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         fragment.mArgs = arguments;
         return fragment;
     }
-    public TimeLeftFrag newInstance(List<TimeLeft> mylist) {
+    public HabitFrag newInstance(List<Habit> mylist) {
         mArgs = "list";
-        _time_left_manager = new TimeLeftManager(mylist);
+        _habit_manager = new HabitManager(mylist);
 
-        TimeLeftFrag fragment = new TimeLeftFrag();
+        HabitFrag fragment = new HabitFrag();
         Bundle args = new Bundle();
         ArrayList<String> test_args = new ArrayList<String>();
         for (int i=0;i<mylist.size();i++){
@@ -64,7 +65,7 @@ public class TimeLeftFrag extends Fragment {
         }
         //args.putStringArrayList("data",test_args);
         //fragment.setArguments(args);
-        fragment._time_left_manager = new TimeLeftManager(mylist);
+        fragment._habit_manager = new HabitManager(mylist);
         fragment.mArgs = "list";
         return fragment;
     }
@@ -85,7 +86,8 @@ public class TimeLeftFrag extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        if (_time_left_manager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(_time_left_manager.readObjectList()));
+        if (_habit_manager !=null)
+            recyclerView.setAdapter(new HabitRecyclerAdapter(_habit_manager.readObjectList(), getContext()));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

@@ -1,7 +1,10 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.celestialphineas.sanxing.SxObjectManager;
+import io.github.celestialphineas.sanxing.Task;
 
 //对Task的list的封装
 public class TaskManager implements SxObjectManager {
