@@ -10,8 +10,7 @@
             android:id="@+id/create_new_item_toolbar"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:theme="@style/AppTheme.FormBarTheme"
+            android:theme="@style/FormBarTheme"
             app:popupTheme="@style/AppTheme.PopupTheme">
         </android.support.v7.widget.Toolbar>
         <android.support.design.widget.TextInputLayout
@@ -22,13 +21,13 @@
             android:layout_gravity="bottom"
             android:theme="@style/TextEditHeadlineStyle"
             android:layout_margin="10dp">
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/input_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:maxLines="1"
-                android:theme="@style/AppTheme.ItemTitleStyle"
+                android:theme="@style/ItemTitleStyle"
                 android:textColor="@color/white"
                 android:hint="@string/hint_task_title" />
         </android.support.design.widget.TextInputLayout>

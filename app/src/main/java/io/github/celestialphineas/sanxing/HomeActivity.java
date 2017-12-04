@@ -108,6 +108,7 @@ public class HomeActivity extends AppCompatActivity
     void fabTasksOnClickBehavior() {
         Intent intent = new Intent(this, CreateNewTaskActivity.class);
         startActivity(intent);
+        overridePendingTransition(0,0);
     }
 
 

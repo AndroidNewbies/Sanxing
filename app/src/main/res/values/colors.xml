@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorTasks">#c2185b</color>
-    <color name="colorHabits">#689f38</color>
+    <color name="colorTasksDark">#8c0032</color>
+    <color name="colorTasksAccent">#fa5788</color>
+    <color name="colorHabits">#33691e</color>
+    <color name="colorHabitsDark">#003d00</color>
+    <color name="colorHabitsAccent">#629749</color>
     <color name="colorTimeLeft">#ff6f00</color>
+    <color name="colorTimeLeftDark">#c43e00</color>
+    <color name="colorTimeLeftAccent">#ffa040</color>
     <color name="colorPrimary">#0277bd</color>
     <color name="colorPrimaryLight">#58a5f0</color>
     <color name="colorPrimaryDark">#004c8c</color>

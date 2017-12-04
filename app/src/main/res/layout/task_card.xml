@@ -22,12 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            style="@style/AppTheme.CardHeadingStyle" />
+            style="@style/CardHeadingStyle" />
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/task_card_subheading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/task_card_headline"
-            style="@style/AppTheme.CardSubheadingStyle" />
+            style="@style/CardSubheadingStyle" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

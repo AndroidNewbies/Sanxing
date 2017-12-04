@@ -20,4 +20,9 @@
     <string name="hint_due">期限日</string>
     <string name="hint_due_time">时间</string>
     <string name="hint_description">描述</string>
+    <string name="snack_date_not_set">您还没有选择一个期限日。</string>
+    <string name="snack_op_set">设定</string>
+    <string name="snack_time_not_set">您还没有选择一个截止时间。</string>
+    <string name="snack_title_not_set">还没有写标题。</string>
+    <string name="snack_time_passed">已经是过去了。</string>
 </resources>

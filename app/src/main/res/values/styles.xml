@@ -7,30 +7,50 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppTheme.SpinnerTitleStyle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <style name="TasksTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorPrimary">@color/colorTasks</item>
+        <item name="colorPrimaryDark">@color/colorTasksDark</item>
+        <item name="colorAccent">@color/colorTasksAccent</item>
+    </style>
+    <style name="HabitsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorHabits</item>
+        <item name="colorPrimaryDark">@color/colorHabitsDark</item>
+        <item name="colorAccent">@color/colorHabitsAccent</item>
+    </style>
+    <style name="TimeLeftTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorTimeLeft</item>
+        <item name="colorPrimaryDark">@color/colorTimeLeftDark</item>
+        <item name="colorAccent">@color/colorTimeLeftAccent</item>
+    </style>
+    <style name="SpinnerTitleStyle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
-    <style name="AppTheme.CardHeadingStyle" parent="Base.TextAppearance.AppCompat.Headline">
+    <style name="CardHeadingStyle" parent="Base.TextAppearance.AppCompat.Headline">
         <item name="android:textColor">@color/black87</item>
         <item name="android:layout_marginTop">@dimen/typo_headline_margin</item>
         <item name="android:layout_marginBottom">@dimen/typo_headline_margin</item>
     </style>
-    <style name="AppTheme.CardSubheadingStyle" parent="Base.TextAppearance.AppCompat.Subhead">
+    <style name="CardSubheadingStyle" parent="Base.TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/black87</item>
         <item name="android:layout_marginTop">@dimen/typo_subheading_margin</item>
         <item name="android:layout_marginBottom">@dimen/typo_subheading_margin</item>
     </style>
-    <style name="AppTheme.SpinnerStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="SpinnerStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">@color/white</item>
-        <item name="android:titleTextStyle">@style/AppTheme.SpinnerTitleStyle</item>
+        <item name="android:titleTextStyle">@style/SpinnerTitleStyle</item>
         <item name="android:textColor">@color/appBarWhite</item>
     </style>
     <style name="AppTheme.AppBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupTheme" parent="ThemeOverlay.AppCompat.Light" />
-    <style name="AppTheme.FormBarTheme" parent="AppTheme.AppBarTheme">
+    <style name="FormBarTheme" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:homeAsUpIndicator">@drawable/ic_close</item>
     </style>
-    <style name="AppTheme.ItemTitleStyle" parent="Base.TextAppearance.AppCompat.Headline">
+    <style name="ItemTitleStyle" parent="Base.TextAppearance.AppCompat.Headline">
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginTop">@dimen/typo_headline_margin</item>
         <item name="android:layout_marginBottom">@dimen/typo_headline_margin</item>

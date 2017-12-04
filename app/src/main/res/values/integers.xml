@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="snack_bar_timeout">1500</integer>
+    <integer name="reveal_time">500</integer>
+</resources>

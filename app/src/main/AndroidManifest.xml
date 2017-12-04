@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".UINewItemCreationActivities.CreateNewTaskActivity" />
+        <activity
+            android:name=".UINewItemCreationActivities.CreateNewTaskActivity"
+            android:theme="@style/TasksTheme"/>
     </application>
 
 </manifest>

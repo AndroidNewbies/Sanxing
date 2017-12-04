@@ -25,4 +25,9 @@
     <string name="hint_due">Due day</string>
     <string name="hint_due_time">Time</string>
     <string name="hint_description">Enter your description</string>
+    <string name="snack_date_not_set">Please select a due date.</string>
+    <string name="snack_op_set">Set</string>
+    <string name="snack_time_not_set">Please select due time.</string>
+    <string name="snack_title_not_set">Title not set.</string>
+    <string name="snack_time_passed">has passed.</string>
 </resources>
