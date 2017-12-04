@@ -6,6 +6,7 @@
     <string name="tab_tasks">Tasks</string>
     <string name="tab_habits">Habits</string>
     <string name="tab_time_left">My Time Left</string>
+    <!-- TODO: This line could possibly be removed -->
     <string name="tab_learn">Learn</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -44,4 +45,5 @@
     <string name="once_a_month">Once a month</string>
     <string name="hint_importance">Importance</string>
     <string name="create_new_time_left">New countdown</string>
+    <string name="hint_quick_add">Quick add</string>
 </resources>

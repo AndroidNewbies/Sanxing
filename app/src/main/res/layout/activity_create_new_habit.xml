@@ -136,7 +136,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:src="@drawable/ic_star"
-                    android:contentDescription="@string/time" />
+                    android:contentDescription="@string/hint_importance" />
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
