@@ -1,4 +1,4 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.SanxingBackend;
 
 import java.util.List;
 

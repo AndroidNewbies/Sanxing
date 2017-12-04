@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.github.celestialphineas.sanxing.Habit;
+import io.github.celestialphineas.sanxing.SanxingBackend.Habit;
 import io.github.celestialphineas.sanxing.R;
 
 

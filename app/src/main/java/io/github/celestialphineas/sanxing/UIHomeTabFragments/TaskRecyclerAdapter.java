@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.Task;
+import io.github.celestialphineas.sanxing.SanxingBackend.Task;
 
 /**
  * Created by celestialphineas on 17-10-17.
@@ -19,25 +19,22 @@ import io.github.celestialphineas.sanxing.Task;
 public class TaskRecyclerAdapter
         extends RecyclerView.Adapter<TaskRecyclerAdapter.TaskViewHolder> implements View.OnClickListener {
 
-    private String mArguments;
-    private List<Task> mlist;
+    private List<Task> taskList;
     private OnItemClickListener mOnItemClickListener = null;
     TaskRecyclerAdapter() {
         // Empty constructor
     }
-    TaskRecyclerAdapter(String content) {
-        mArguments = content;
-    }
+
     TaskRecyclerAdapter(List<Task> task_list) {
-        mlist = task_list;
+        taskList = task_list;
     }
 
-    public List<Task> getMlist() {
-        return mlist;
+    public List<Task> getTaskList() {
+        return taskList;
     }
 
-    public void setMlist(List<Task> mlist) {
-        this.mlist = mlist;
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
         notifyDataSetChanged();
     }
 
@@ -49,7 +46,6 @@ public class TaskRecyclerAdapter
 
             cardTitle = itemView.findViewById(R.id.task_card_headline);
             cardSubheading = itemView.findViewById(R.id.task_card_subheading);
-            cardTitle.setText(mArguments);
             cardSubheading.setText("Good night, my friend!");
         }
         TaskViewHolder(View itemView,String title) {
@@ -63,7 +59,7 @@ public class TaskRecyclerAdapter
         TaskViewHolder(View itemView,List<Task> list) {
             super(itemView);
 
-            mlist = list;
+            taskList = list;
             cardTitle = itemView.findViewById(R.id.task_card_headline);
             cardSubheading = itemView.findViewById(R.id.task_card_subheading);
 
@@ -84,7 +80,7 @@ public class TaskRecyclerAdapter
     public void onBindViewHolder(TaskViewHolder holder, int position) {
 
 
-        holder.cardTitle.setText(mlist.get(position).getContent());
+        holder.cardTitle.setText(taskList.get(position).getContent());
         holder.cardSubheading.setText("Good for task!");
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);
@@ -93,7 +89,7 @@ public class TaskRecyclerAdapter
     @Override
     public int getItemCount() {
         // TODO: Implement this, and return how many cards concerned
-        return mlist==null?0:mlist.size();
+        return taskList ==null?0: taskList.size();
 
     }
 

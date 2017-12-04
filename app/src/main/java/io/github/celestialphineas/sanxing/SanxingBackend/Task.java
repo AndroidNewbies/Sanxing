@@ -1,10 +1,13 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.SanxingBackend;
 
 /**
  * Created by apple on 2017/11/2.
  */
 import java.io.Serializable;
-public class Task extends SxObject  implements Serializable{
+
+import io.github.celestialphineas.sanxing.SanxingBackend.SxObject;
+
+public class Task extends SxObject implements Serializable{
     //为了实现数据库操作而定义的常量
     // Labels table name
     public static final String TABLE = "Task";

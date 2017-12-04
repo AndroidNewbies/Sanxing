@@ -1,4 +1,4 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.SanxingBackend;
 
 /**
  * Created by apple on 2017/11/3.
@@ -10,15 +10,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import io.github.celestialphineas.sanxing.SanxingBackend.DBHelper;
+import io.github.celestialphineas.sanxing.SanxingBackend.Task;
 
 
 //封装了对sqlite数据库的增删改查操作 目前只是针对task表 后续应考虑扩充

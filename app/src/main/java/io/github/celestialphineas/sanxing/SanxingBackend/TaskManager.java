@@ -1,19 +1,16 @@
-package io.github.celestialphineas.sanxing.UIHomeTabFragments;
+package io.github.celestialphineas.sanxing.SanxingBackend;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.celestialphineas.sanxing.SxObjectManager;
-import io.github.celestialphineas.sanxing.Task;
-
 //对Task的list的封装
 public class TaskManager implements SxObjectManager {
     private  List<Task> TaskPool;
-    TaskManager(){
+    public TaskManager(){
         TaskPool = new ArrayList<Task>();
 
     }
-    TaskManager(List<Task> list){
+    public TaskManager(List<Task> list){
         TaskPool = list;
     }
 

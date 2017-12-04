@@ -1,4 +1,6 @@
-package io.github.celestialphineas.sanxing;
+package io.github.celestialphineas.sanxing.SanxingBackend;
+
+import io.github.celestialphineas.sanxing.SanxingBackend.SxObject;
 
 /**
  * Created by apple on 2017/11/3.

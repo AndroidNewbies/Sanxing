@@ -32,6 +32,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.+'
     compile 'konifar:fab-transformation:1.0.0'
     compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.7'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

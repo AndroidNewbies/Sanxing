@@ -1,19 +1,16 @@
-package io.github.celestialphineas.sanxing.UIHomeTabFragments;
+package io.github.celestialphineas.sanxing.SanxingBackend;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.celestialphineas.sanxing.SxObjectManager;
-import io.github.celestialphineas.sanxing.TimeLeft;
-
 
 public class TimeLeftManager implements SxObjectManager {
     private  List<TimeLeft> TimeLeftPool;
-    TimeLeftManager(){
+    public TimeLeftManager(){
         TimeLeftPool = new ArrayList<TimeLeft>();
 
     }
-    TimeLeftManager(List<TimeLeft> list){
+    public TimeLeftManager(List<TimeLeft> list){
         TimeLeftPool = list;
     }
 
