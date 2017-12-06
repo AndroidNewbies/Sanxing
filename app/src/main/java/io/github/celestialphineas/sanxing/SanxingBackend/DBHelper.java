@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import io.github.celestialphineas.sanxing.sxObject.Task;
+
 /**
  * Created by apple on 2017/11/3.
  */

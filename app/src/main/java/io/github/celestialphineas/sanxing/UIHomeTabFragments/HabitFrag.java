@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.celestialphineas.sanxing.SanxingBackend.Habit;
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.SanxingBackend.HabitManager;
+import io.github.celestialphineas.sanxing.sxObject.Habit;
+import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
 
 
 /**

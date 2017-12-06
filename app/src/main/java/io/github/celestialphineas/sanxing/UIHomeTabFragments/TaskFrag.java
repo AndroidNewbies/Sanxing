@@ -14,8 +14,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.SanxingBackend.TaskManager;
-import io.github.celestialphineas.sanxing.SanxingBackend.Task;
+import io.github.celestialphineas.sanxing.sxObject.Task;
+import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
 
 

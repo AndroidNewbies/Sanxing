@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftManager;
-import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeft;
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
+import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
 
 /**

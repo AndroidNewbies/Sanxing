@@ -1,7 +1,9 @@
-package io.github.celestialphineas.sanxing.SanxingBackend;
+package io.github.celestialphineas.sanxing.sxObjectManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
 
 public class TimeLeftManager implements SxObjectManager {
@@ -28,7 +30,7 @@ public class TimeLeftManager implements SxObjectManager {
     }
 
     public boolean checkObjectState(int index){
-        return TimeLeftPool.get(index).isChecked();
+        return TimeLeftPool.get(index).checkState();
     }
 
     public List<TimeLeft> readObjectList(){

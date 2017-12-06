@@ -1,7 +1,10 @@
-package io.github.celestialphineas.sanxing.SanxingBackend;
+package io.github.celestialphineas.sanxing.sxObjectManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.celestialphineas.sanxing.sxObject.Task;
+
 
 //对Task的list的封装
 public class TaskManager implements SxObjectManager {
@@ -32,7 +35,7 @@ public class TaskManager implements SxObjectManager {
     }
 
     public boolean checkObjectState(int index){
-        return TaskPool.get(index).isChecked();
+        return TaskPool.get(index).checkState();
     }
 
     public List<Task> readObjectList(){

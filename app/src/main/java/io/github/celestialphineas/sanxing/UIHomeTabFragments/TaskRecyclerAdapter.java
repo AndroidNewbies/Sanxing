@@ -20,7 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.SanxingBackend.Task;
+import io.github.celestialphineas.sanxing.sxObject.Task;
+
 
 /**
  * Created by celestialphineas on 17-10-17.

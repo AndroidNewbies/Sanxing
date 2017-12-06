@@ -1,10 +1,13 @@
-package io.github.celestialphineas.sanxing.SanxingBackend;
+package io.github.celestialphineas.sanxing.sxObjectManager;
 
 /**
  * Created by apple on 2017/11/3.
  */
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.celestialphineas.sanxing.sxObject.Habit;
+
 
 public class HabitManager implements SxObjectManager {
     private  List<Habit> HabitPool;
@@ -30,7 +33,7 @@ public class HabitManager implements SxObjectManager {
     }
 
     public boolean checkObjectState(int index){
-        return HabitPool.get(index).isChecked();
+        return HabitPool.get(index).checkState();
     }
 
     public List<Habit> readObjectList(){

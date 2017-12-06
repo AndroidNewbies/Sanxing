@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.SanxingBackend.DBHelper;
-import io.github.celestialphineas.sanxing.SanxingBackend.Task;
+import io.github.celestialphineas.sanxing.sxObject.Task;
 
 
 //封装了对sqlite数据库的增删改查操作 目前只是针对task表 后续应考虑扩充

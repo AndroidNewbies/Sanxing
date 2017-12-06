@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "io.github.celestialphineas.sanxing"
         minSdkVersion 21
@@ -33,6 +33,7 @@ dependencies {
     compile 'konifar:fab-transformation:1.0.0'
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
+    compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

@@ -15,8 +15,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.github.celestialphineas.sanxing.SanxingBackend.Habit;
+
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.sxObject.Habit;
 
 
 public class HabitRecyclerAdapter

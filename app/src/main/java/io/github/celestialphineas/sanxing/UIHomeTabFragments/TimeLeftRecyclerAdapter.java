@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeft;
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
 
 public class TimeLeftRecyclerAdapter

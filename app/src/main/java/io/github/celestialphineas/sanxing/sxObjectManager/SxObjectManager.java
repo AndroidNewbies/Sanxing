@@ -1,6 +1,4 @@
-package io.github.celestialphineas.sanxing.SanxingBackend;
-
-import java.util.List;
+package io.github.celestialphineas.sanxing.sxObjectManager;
 
 /**
  * Created by apple on 2017/11/2.
