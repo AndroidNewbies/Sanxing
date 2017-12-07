@@ -37,22 +37,22 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         // TODO: Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
-        String taskTitle = "Hello world!";
+        String habitTitle = "Hello world!";
         // Frequency, edit the selectedFreq according to the model
         selectedFreq = 4;
         // Importance, edit the selectedImportance according to the model
         selectedImportance = 3;
         // Description
-        String taskDescription = "To be implemented...";
+        String habitDescription = "To be implemented...";
         // End of the TODO
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
         super.onCreate(savedInstanceState);
         // Sync the view, this does not need to be changed
-        inputTitle.setText(taskTitle);
+        inputTitle.setText(habitTitle);
         habitFreqSeekBar.setProgress(selectedFreq);
         habitImportance.setProgress(selectedImportance);
-        descriptionContent.setText(taskDescription);
+        descriptionContent.setText(habitDescription);
     }
 
     @Override

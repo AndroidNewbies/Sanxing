@@ -38,6 +38,9 @@
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity"
             android:theme="@style/TimeLeftTheme"/>
+        <activity
+            android:name=".UIOperateItemActivities.EditItem.EditTimeLeftActivity"
+            android:theme="@style/TimeLeftTheme"/>
         <service android:name=".timer.MyService"
             android:process="io.github.celestialphineas.sanxing.timer.myservice">
         </service>

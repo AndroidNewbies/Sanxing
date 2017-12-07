@@ -42,8 +42,8 @@ public class TaskRecyclerAdapter
     public List<Task> getTaskList() {
         return taskList;
     }
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public void setTaskList(List<Task> task_list) {
+        taskList = task_list;
         notifyDataSetChanged();
     }
 

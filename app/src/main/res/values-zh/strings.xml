@@ -46,4 +46,5 @@
     <string name="edit_habit">编辑习惯</string>
     <string name="edit_task">编辑任务</string>
     <string name="edit_time_left">编辑倒计时</string>
+    <string name="hint_quick_add">快速添加</string>
 </resources>
