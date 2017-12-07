@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.celestialphineas.sanxing"
     android:versionCode="1"
-    android:versionName="1.0"
-    >
+    android:versionName="1.0">
 
     <application
         android:name=".MyApplication"
@@ -25,27 +24,33 @@
         <activity android:name=".CalendarActivity" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity"
-            android:theme="@style/TasksTheme"/>
+            android:theme="@style/TasksTheme" />
         <activity
             android:name=".UIOperateItemActivities.EditItem.EditTaskActivity"
-            android:theme="@style/TasksTheme"/>
+            android:theme="@style/TasksTheme" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewHabitActivity"
-            android:theme="@style/HabitsTheme"/>
+            android:theme="@style/HabitsTheme" />
         <activity
             android:name=".UIOperateItemActivities.EditItem.EditHabitActivity"
-            android:theme="@style/HabitsTheme"/>
+            android:theme="@style/HabitsTheme" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity"
-            android:theme="@style/TimeLeftTheme"/>
+            android:theme="@style/TimeLeftTheme" />
         <activity
             android:name=".UIOperateItemActivities.EditItem.EditTimeLeftActivity"
-            android:theme="@style/TimeLeftTheme"/>
-        <service android:name=".timer.MyService"
-            android:process="io.github.celestialphineas.sanxing.timer.myservice">
-        </service>
-        <receiver android:name=".timer.AlarmReceiver">
-        </receiver>
+            android:theme="@style/TimeLeftTheme" />
+
+        <service
+            android:name=".timer.MyService"
+            android:process="io.github.celestialphineas.sanxing.timer.myservice" />
+
+        <receiver android:name=".timer.AlarmReceiver" />
+
+        <activity android:name=".UISupportActivities.AboutActivity" />
+        <activity
+            android:name=".UISupportActivities.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

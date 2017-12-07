@@ -53,4 +53,9 @@
     <string name="right_arrow">" → "</string>
     <string name="button_check">打卡</string>
     <string name="snack_already_checked">您已经打过卡了。</string>
+    <string name="authors">作者</string>
+    <string name="feedback">反馈</string>
+    <string name="feedback_info">通过GitHub Issue向我们反馈。</string>
+    <string name="opensource_license">开源许可证</string>
+    <string name="opensource_license_info">感谢这些开源项目让我们能够更加快速地开发。</string>
 </resources>

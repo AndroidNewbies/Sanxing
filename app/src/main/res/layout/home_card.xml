@@ -9,6 +9,7 @@
     android:layout_marginTop="@dimen/card_margin_vertical"
     android:layout_marginBottom="@dimen/card_padding_bottom"
     android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="2dp"
     app:cardPreventCornerOverlap="true">
     <android.support.v7.widget.LinearLayoutCompat

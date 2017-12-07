@@ -16,6 +16,8 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
+import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
@@ -326,9 +328,11 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_help) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent navigateSettings = new Intent(this, SettingsActivity.class);
+            startActivity(navigateSettings);
         } else if (id == R.id.nav_about) {
-
+            Intent navigateAboutIntent = new Intent(this, AboutActivity.class);
+            startActivity(navigateAboutIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
