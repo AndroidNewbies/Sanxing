@@ -1,16 +1,20 @@
 package io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.MenuItem;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTaskActivityBase;
 
 public class EditTaskActivity extends OperateTaskActivityBase {
 
+    @BindView(R.id.task_linear_layout)      LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_task);
@@ -55,7 +59,7 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
             // TODO: The verifyForm() method can be modified if necessary
-            if(!verifyForm()) return true;
+            if(!verifyForm(linearLayout)) return true;
             ////////
             // TODO: Write back the changes to the database
             //////// INSERT NECESSARY CODE HERE

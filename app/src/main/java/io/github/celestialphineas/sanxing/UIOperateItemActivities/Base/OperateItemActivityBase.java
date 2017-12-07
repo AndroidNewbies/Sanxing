@@ -31,6 +31,8 @@ public class OperateItemActivityBase extends AppCompatActivity {
     //////////////// ANIMATIONS ////////////////
     // Reveal animation implementation
     protected void animationReveal(Bundle savedInstanceState) {
+        cx = getResources().getDisplayMetrics().widthPixels - 120;
+        cy = getResources().getDisplayMetrics().heightPixels - 180;
         final View rootLayout = getWindow().getDecorView().getRootView();
         if (savedInstanceState == null) {
             rootLayout.setVisibility(View.INVISIBLE);

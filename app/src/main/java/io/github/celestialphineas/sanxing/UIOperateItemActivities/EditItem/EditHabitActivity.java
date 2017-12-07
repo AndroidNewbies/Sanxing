@@ -29,6 +29,7 @@ import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateHa
 
 public class EditHabitActivity extends OperateHabitActivityBase {
 
+    @BindView(R.id.habit_linear_layout)         LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_habit);
@@ -65,7 +66,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
             // TODO: The verifyForm() method can be modified if necessary
-            if(!verifyForm()) return true;
+            if(!verifyForm(linearLayout)) return true;
             ////////
             // TODO: Then register the changes in the database
             //////// INSERT NECESSARY CODE HERE

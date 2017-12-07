@@ -87,16 +87,16 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
     }
 
     // Verify input
-    protected boolean verifyForm() {
+    protected boolean verifyForm(View layout) {
         Calendar now = Calendar.getInstance();
         if(inputTitle != null && inputTitle.getText() != null
                 && inputTitle.getText().toString().trim().isEmpty()) {
-            Snackbar.make(rootLayout, titleNotSet, snackBarTimeout)
+            Snackbar.make(layout, titleNotSet, snackBarTimeout)
                     .show();
             inputTitle.requestFocus();
             return false;
         } else if(!setDate) {
-            Snackbar.make(rootLayout, dateNotSet, snackBarTimeout)
+            Snackbar.make(layout, dateNotSet, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
                         @Override public void onClick(View view)
                         { timeLeftDueDateOnClickBehavior(); } })
@@ -105,7 +105,7 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
         } else if(dueCalendar.before(now)) {
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getBaseContext());
             String timeString = dateFormat.format(dueCalendar.getTime()) +  " ";
-            Snackbar.make(rootLayout, timeString + hasPassed, snackBarTimeout)
+            Snackbar.make(layout, timeString + hasPassed, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
                         @Override public void onClick(View view)
                         { timeLeftDueDateOnClickBehavior(); } })

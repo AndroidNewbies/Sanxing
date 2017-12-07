@@ -99,7 +99,7 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
         });
     }
 
-    private String freqIntToString(int freq) {
+    public String freqIntToString(int freq) {
         switch (freq) {
             case 0: return thriceADay;
             case 1: return twiceADay;
@@ -113,10 +113,10 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
     }
 
     // Verify input
-    protected boolean verifyForm() {
+    protected boolean verifyForm(View layout) {
         if(inputTitle != null && inputTitle.getText() != null
                 && inputTitle.getText().toString().trim().isEmpty()) {
-            Snackbar.make(rootLayout, titleNotSet, snackBarTimeout)
+            Snackbar.make(layout, titleNotSet, snackBarTimeout)
                     .show();
             inputTitle.requestFocus();
             return false;
