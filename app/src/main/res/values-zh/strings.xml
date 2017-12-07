@@ -47,4 +47,8 @@
     <string name="edit_task">编辑任务</string>
     <string name="edit_time_left">编辑倒计时</string>
     <string name="hint_quick_add">快速添加</string>
+    <string name="hint_start_epoch">从这时</string>
+    <string name="hint_countdown_due">到结束</string>
+    <string name="snack_start_before_due">起始时间似乎比结束时间早呢。</string>
+    <string name="right_arrow">" → "</string>
 </resources>

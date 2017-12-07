@@ -88,8 +88,8 @@ public class HabitFrag extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         if (_habit_manager !=null)
-            recyclerView.setAdapter(new HabitRecyclerAdapter(_habit_manager.readObjectList(), getContext()));
-        else recyclerView.setAdapter(new TaskRecyclerAdapter());
+            recyclerView.setAdapter(new HabitRecyclerAdapter(_habit_manager.readObjectList()));
+        else recyclerView.setAdapter(new HabitRecyclerAdapter());
         return view;
     }
 

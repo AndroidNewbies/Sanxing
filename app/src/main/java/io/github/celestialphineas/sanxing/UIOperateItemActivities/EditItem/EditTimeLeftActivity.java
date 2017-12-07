@@ -45,8 +45,14 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         // Title
         String timeLeftTitle = "Hello world!";
         // Change the "2017-12-25 14:28 below" to the model's value
+        startCalendar.set(Calendar.YEAR, 2017);
+        startCalendar.set(Calendar.MONTH, Calendar.DECEMBER);
+        startCalendar.set(Calendar.DAY_OF_MONTH, 23);
+        startCalendar.set(Calendar.HOUR_OF_DAY, 14);
+        startCalendar.set(Calendar.MINUTE, 28);
+        // Change the "2017-12-25 14:28 below" to the model's value
         dueCalendar.set(Calendar.YEAR, 2017);
-        dueCalendar.set(Calendar.MONTH, 12);
+        dueCalendar.set(Calendar.MONTH, Calendar.DECEMBER);
         dueCalendar.set(Calendar.DAY_OF_MONTH, 25);
         dueCalendar.set(Calendar.HOUR_OF_DAY, 14);
         dueCalendar.set(Calendar.MINUTE, 28);
@@ -59,9 +65,10 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
         super.onCreate(savedInstanceState);
         // Sync the view, this does not need to be changed
-        setDate = true;
+        setDate1 = true; setDate2 = true;
         inputTitle.setText(timeLeftTitle);
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getBaseContext());
+        startDateContent.setText(dateFormat.format(startCalendar.getTime()));
         dueDateContent.setText(dateFormat.format(dueCalendar.getTime()));
         timeLeftImportance.setProgress(selectedImportance);
         descriptionContent.setText(timeLeftDescription);

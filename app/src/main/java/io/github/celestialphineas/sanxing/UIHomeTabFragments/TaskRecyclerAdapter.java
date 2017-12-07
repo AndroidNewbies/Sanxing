@@ -43,7 +43,7 @@ public class TaskRecyclerAdapter
         return taskList;
     }
     public void setTaskList(List<Task> task_list) {
-        taskList = task_list;
+        this.taskList = task_list;
         notifyDataSetChanged();
     }
 
@@ -71,12 +71,12 @@ public class TaskRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, final int position) {
+        holder.taskTitle.setText(taskList.get(position).getContent());
         // TODO: Set taskCalendar to the due calendar got from the database
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
         DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
         String timeString = dateFormat.format(taskCalendar.getTime())
                 + " " + timeFormat.format(taskCalendar.getTime());
-        holder.taskTitle.setText(taskList.get(position).getContent());
         holder.taskDueTime.setText(timeString);
 
         // TODO: Calculate the time difference (i.e. the countdown) and print it here
@@ -103,7 +103,7 @@ public class TaskRecyclerAdapter
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
                         add(task, position);
-                        // TODO: Resume the lazily deleted database entry
+                        // TODO: Restore the lazily deleted database entry
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)

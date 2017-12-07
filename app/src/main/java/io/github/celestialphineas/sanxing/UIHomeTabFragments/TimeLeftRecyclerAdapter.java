@@ -15,17 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTaskActivity;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTimeLeftActivity;
-import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
 
@@ -34,7 +32,8 @@ public class TimeLeftRecyclerAdapter
 
     private List<TimeLeft> timeLeftList;
     private Context context;
-    private Calendar timeLeftCalendar = Calendar.getInstance();
+    private Calendar timeLeftStartCalendar = Calendar.getInstance();
+    private Calendar timeLeftDueCalendar = Calendar.getInstance();
 
     TimeLeftRecyclerAdapter() { }
 
@@ -55,6 +54,7 @@ public class TimeLeftRecyclerAdapter
         @BindView(R.id.card_description)    TextView timeLeftDescription;
         @BindView(R.id.card_button_edit)    AppCompatButton buttonEdit;
         @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
+        @BindString(R.string.right_arrow)   String rightArrow;
         TimeLeftViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -72,11 +72,15 @@ public class TimeLeftRecyclerAdapter
 
     @Override
     public void onBindViewHolder(TimeLeftViewHolder holder, final int position) {
-        // TODO: Bind the view with data
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
-        String timeString = dateFormat.format(timeLeftCalendar.getTime());
+
         holder.timeLeftTitle.setText(timeLeftList.get(position).getContent());
-        holder.timeLeftDueTime.setText(timeString);
+        // TODO: Bind the view with data
+        // Please make changes to the timeLeftStartCalendar and timeLeftDueCalendar
+        // to match the date with the model
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        String timeStartString = dateFormat.format(timeLeftStartCalendar.getTime());
+        String timeDueString = dateFormat.format(timeLeftDueCalendar.getTime());
+        holder.timeLeftDueTime.setText(timeStartString + holder.rightArrow + timeDueString);
 
         // TODO: Calculate the time difference and print it here
         holder.timeLeftCountDown.setText("23 Years");
@@ -102,7 +106,7 @@ public class TimeLeftRecyclerAdapter
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
                         add(timeLeft, position);
-                        // TODO: Resume the lazily deleted database entry
+                        // TODO: Restore the lazily deleted database entry
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
@@ -123,7 +127,7 @@ public class TimeLeftRecyclerAdapter
     // Remove an entry
     public void remove(int position) {
         try { timeLeftList.remove(position); } catch (Exception e) {
-            Log.e("TaskRecyclerAdapter", "remove: " + position + ", " + timeLeftList.size());
+            Log.e("TimeLeftRecyclerAdapter", "remove: " + position + ", " + timeLeftList.size());
         }
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, timeLeftList.size());
@@ -132,7 +136,7 @@ public class TimeLeftRecyclerAdapter
     // Add an entry
     public void add(TimeLeft timeLeft, int position) {
         try { timeLeftList.add(position, timeLeft); } catch (Exception e) {
-            Log.e("TaskRecyclerAdapter", "add: " + position + ", " + timeLeftList.size());
+            Log.e("TimeLeftRecyclerAdapter", "add: " + position + ", " + timeLeftList.size());
         }
         notifyItemInserted(position);
         notifyItemRangeChanged(position, timeLeftList.size());

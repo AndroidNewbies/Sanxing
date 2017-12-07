@@ -1,18 +1,15 @@
 package io.github.celestialphineas.sanxing.UIOperateItemActivities.Base;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatSeekBar;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.SeekBar;
-import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -34,12 +31,14 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
     // Root view of the activity
     View rootLayout;
     // The selected date/time will be stored here
+    protected final Calendar startCalendar = Calendar.getInstance();
     protected final Calendar dueCalendar = Calendar.getInstance();
     // Flags to show if the user has already set date and time
-    protected boolean setDate = false;
+    protected boolean setDate1 = false, setDate2 = false;
     @BindView(R.id.create_new_item_toolbar)
     Toolbar toolbar;
     @BindView(R.id.input_title)                     protected TextInputEditText inputTitle;
+    @BindView(R.id.time_left_from_date_content)     protected TextInputEditText startDateContent;
     @BindView(R.id.time_left_due_date_content)      protected TextInputEditText dueDateContent;
     @BindView(R.id.time_left_description_content)   protected TextInputEditText descriptionContent;
     @BindView(R.id.time_left_importance_seek_bar)   protected AppCompatSeekBar timeLeftImportance;
@@ -48,6 +47,7 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
     @BindString(R.string.snack_time_not_set)        protected String timeNotSet;
     @BindString(R.string.snack_op_set)              protected String setSnack;
     @BindString(R.string.snack_time_passed)         protected String hasPassed;
+    @BindString(R.string.snack_start_before_due)         protected String startBeforeDue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         rootLayout = getWindow().getDecorView().getRootView();
@@ -74,6 +74,7 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
         inputTitle.setSingleLine();
 
         //////// Disable keyboard events of the date and text editTexts
+        startDateContent.setKeyListener(null);
         dueDateContent.setKeyListener(null);
 
         timeLeftImportance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -95,8 +96,22 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
                     .show();
             inputTitle.requestFocus();
             return false;
-        } else if(!setDate) {
+        } else if(!setDate1) {
             Snackbar.make(layout, dateNotSet, snackBarTimeout)
+                    .setAction(setSnack, new View.OnClickListener() {
+                        @Override public void onClick(View view)
+                        { timeLeftStartDateOnClickBehavior(); } })
+                    .show();
+            return false;
+        } else if(!setDate2) {
+            Snackbar.make(layout, dateNotSet, snackBarTimeout)
+                    .setAction(setSnack, new View.OnClickListener() {
+                        @Override public void onClick(View view)
+                        { timeLeftDueDateOnClickBehavior(); } })
+                    .show();
+            return false;
+        } else if(dueCalendar.before(startCalendar)) {
+            Snackbar.make(layout, startBeforeDue, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
                         @Override public void onClick(View view)
                         { timeLeftDueDateOnClickBehavior(); } })
@@ -119,6 +134,31 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
     // Select date
     // This method pop up a date selector, and allow user to select date.
     // The selected date will be stored in the dueCalendar object.
+    @OnFocusChange(R.id.time_left_from_date_content)
+    void timeLeftFromDateOnFocusBehavior(View view, boolean hasFocus) {
+        if(hasFocus) {
+            timeLeftStartDateOnClickBehavior();
+        }
+    }
+    @OnClick(R.id.time_left_from_date_content)
+    void timeLeftStartDateOnClickBehavior() {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                startCalendar.set(Calendar.YEAR, year);
+                startCalendar.set(Calendar.MONTH, monthOfYear);
+                startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                DateFormat sdf = android.text.format.DateFormat.getDateFormat(getBaseContext());
+                startDateContent.setText(sdf.format(startCalendar.getTime()));
+                setDate1 = true;
+            }
+        };
+        new DatePickerDialog(this, date,
+                startCalendar.get(Calendar.YEAR),
+                startCalendar.get(Calendar.MONTH),
+                startCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
     @OnFocusChange(R.id.time_left_due_date_content)
     void timeLeftDueDateOnFocusBehavior(View view, boolean hasFocus) {
         if(hasFocus) {
@@ -135,7 +175,7 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
                 dueCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 DateFormat sdf = android.text.format.DateFormat.getDateFormat(getBaseContext());
                 dueDateContent.setText(sdf.format(dueCalendar.getTime()));
-                setDate = true;
+                setDate2 = true;
             }
         };
         new DatePickerDialog(this, date,

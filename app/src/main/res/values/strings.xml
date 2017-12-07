@@ -53,4 +53,8 @@
     <string name="edit_habit">Edit habit</string>
     <string name="edit_task">Edit task</string>
     <string name="edit_time_left">Edit countdown</string>
+    <string name="hint_start_epoch">From</string>
+    <string name="hint_countdown_due">To</string>
+    <string name="snack_start_before_due">The start time seems earlier than the due.</string>
+    <string name="right_arrow">" → "</string>
 </resources>

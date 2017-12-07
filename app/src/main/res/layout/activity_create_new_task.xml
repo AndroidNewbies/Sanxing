@@ -32,6 +32,7 @@
                     android:layout_width="wrap_content"
                     android:paddingTop="@dimen/edit_drawable_padding"
                     android:paddingRight="@dimen/edit_drawable_padding"
+                    android:tint="@color/grey"
                     android:src="@drawable/ic_date_picker"
                     android:contentDescription="@string/calendar" />
                 <android.support.design.widget.TextInputLayout
@@ -55,6 +56,7 @@
                     android:layout_marginLeft="25dp"
                     android:paddingTop="@dimen/edit_drawable_padding"
                     android:paddingRight="@dimen/edit_drawable_padding"
+                    android:tint="@color/grey"
                     android:src="@drawable/ic_time_picker"
                     android:contentDescription="@string/time" />
                 <android.support.design.widget.TextInputLayout
@@ -85,6 +87,7 @@
                     android:paddingRight="@dimen/edit_drawable_padding"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:tint="@color/grey"
                     android:src="@drawable/ic_star"
                     android:contentDescription="@string/hint_importance" />
                 <android.support.v7.widget.AppCompatTextView
