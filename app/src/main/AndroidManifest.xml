@@ -24,13 +24,19 @@
         </activity>
         <activity android:name=".CalendarActivity" />
         <activity
-            android:name=".UINewItemCreationActivities.CreateNewTaskActivity"
+            android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity"
             android:theme="@style/TasksTheme"/>
         <activity
-            android:name=".UINewItemCreationActivities.CreateNewHabitActivity"
+            android:name=".UIOperateItemActivities.EditItem.EditTaskActivity"
+            android:theme="@style/TasksTheme"/>
+        <activity
+            android:name=".UIOperateItemActivities.NewItemCreation.CreateNewHabitActivity"
             android:theme="@style/HabitsTheme"/>
         <activity
-            android:name=".UINewItemCreationActivities.CreateNewTimeLeftActivity"
+            android:name=".UIOperateItemActivities.EditItem.EditHabitActivity"
+            android:theme="@style/HabitsTheme"/>
+        <activity
+            android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity"
             android:theme="@style/TimeLeftTheme"/>
         <service android:name=".timer.MyService"
             android:process="io.github.celestialphineas.sanxing.timer.myservice">

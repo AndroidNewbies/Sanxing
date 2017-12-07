@@ -26,9 +26,9 @@ import io.github.celestialphineas.sanxing.UIHomeTabFragments.TaskFrag;
 import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 import io.github.celestialphineas.sanxing.UIHomeTabFragments.TimeLeftFrag;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
-import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewHabitActivity;
-import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTaskActivity;
-import io.github.celestialphineas.sanxing.UINewItemCreationActivities.CreateNewTimeLeftActivity;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewHabitActivity;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

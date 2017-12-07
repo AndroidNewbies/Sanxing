@@ -1,8 +1,7 @@
-package io.github.celestialphineas.sanxing.UINewItemCreationActivities;
+package io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem;
 
 import android.animation.Animator;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -19,7 +18,6 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.SeekBar;
-import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -32,7 +30,7 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import io.github.celestialphineas.sanxing.R;
 
-public class CreateNewTimeLeftActivity extends AppCompatActivity {
+public class EditTimeLeftActivity extends AppCompatActivity {
     // Selected importance 0, 1, 2, 3, 4
     int selectedImportance = 2;
     // The selected date/time will be stored here

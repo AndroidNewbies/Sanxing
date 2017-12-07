@@ -1,6 +1,7 @@
 package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
@@ -14,12 +15,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import butterknife.BindInt;
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTaskActivity;
 import io.github.celestialphineas.sanxing.sxObject.Task;
 
 
@@ -90,7 +89,9 @@ public class TaskRecyclerAdapter
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Create a new activity for editing
+                Intent intent = new Intent(context, EditTaskActivity.class);
+                // TODO: Send the object to edit via intent
+                context.startActivity(intent);
             }
         });
         // Button delete behavior

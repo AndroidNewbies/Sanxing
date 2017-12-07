@@ -50,4 +50,7 @@
     <string name="edit">Edit</string>
     <string name="undo">Undo</string>
     <string name="snack_one_item_deleted">One item deleted.</string>
+    <string name="edit_habit">Edit habit</string>
+    <string name="edit_task">Edit task</string>
+    <string name="edit_time_left">Edit countdown</string>
 </resources>

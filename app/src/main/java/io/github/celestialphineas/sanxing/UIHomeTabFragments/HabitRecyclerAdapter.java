@@ -5,6 +5,8 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
  */
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,11 @@ import android.widget.TextView;
 import java.util.List;
 
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditHabitActivity;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTaskActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 
 
@@ -26,9 +32,8 @@ public class HabitRecyclerAdapter
     private int count;
     private Context context;
     private List<Habit> mlist;
-    HabitRecyclerAdapter() {
-        // Empty constructor
-    }
+
+    HabitRecyclerAdapter() { }
 
     HabitRecyclerAdapter(List<Habit> Habit_list, Context context_) {
         mlist = Habit_list;
@@ -37,45 +42,42 @@ public class HabitRecyclerAdapter
     }
 
     class HabitViewHolder extends RecyclerView.ViewHolder {
-        TextView cardTitle;
-        TextView cardSubheading;
+        @BindView(R.id.card_headline)       TextView taskTitle;
+        @BindView(R.id.card_subheading)     TextView taskDueTime;
+        @BindView(R.id.card_countdown)      TextView taskCountdown;
+        @BindView(R.id.card_description)    TextView taskDescription;
+        @BindView(R.id.card_button_edit)
+        AppCompatButton buttonEdit;
+        @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
         HabitViewHolder(View itemView) {
             super(itemView);
-            cardTitle = itemView.findViewById(R.id.card_headline);
-            cardSubheading = itemView.findViewById(R.id.card_subheading);
-            cardTitle.setText(mArguments);
-            cardSubheading.setText("Good night, my friend!");
-        }
-        HabitViewHolder(View itemView,String title) {
-            super(itemView);
-
-            cardTitle = itemView.findViewById(R.id.card_headline);
-            cardSubheading = itemView.findViewById(R.id.card_subheading);
-            cardTitle.setText(title);
-        }
-        HabitViewHolder(View itemView,List<Habit> list) {
-            super(itemView);
-
-            mlist = list;
-            cardTitle = itemView.findViewById(R.id.card_headline);
-
+            ButterKnife.bind(this, itemView);
         }
     }
 
     @Override
     public HabitViewHolder onCreateViewHolder(ViewGroup parent, int viewGroup) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_card, parent, false);
-
-        if (!mArguments.equals("l")||mlist==null) return new HabitViewHolder(itemView,mArguments);
-        return new HabitViewHolder(itemView,mlist);
+        View itemView = LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.home_card, parent, false);
+        context = parent.getContext();
+        return new HabitViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(HabitViewHolder holder, int position) {
 
-        holder.cardTitle.setText(mlist.get(position).getContent());
+        holder.taskTitle.setText(mlist.get(position).getContent());
         // TODO: Bind the view with data
-        setAnimation(holder.itemView, position);
+        // Button edit behavior
+        holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditHabitActivity.class);
+                // TODO: Send the object to edit via intent
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -83,13 +85,5 @@ public class HabitRecyclerAdapter
         // TODO: Implement this, and return how many cards concerned
        return mlist==null?0:mlist.size();
 
-    }
-
-    private void setAnimation(View viewToAnimate, int position) {
-        if(position > count) {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-            viewToAnimate.startAnimation(animation);
-            count = position;
-        }
     }
 }

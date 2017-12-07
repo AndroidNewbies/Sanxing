@@ -1,18 +1,15 @@
-package io.github.celestialphineas.sanxing.UINewItemCreationActivities;
+package io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation;
 
 import android.animation.Animator;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatSeekBar;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,19 +17,11 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.SimpleTimeZone;
 
-import butterknife.BindDimen;
 import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
@@ -41,7 +30,7 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import io.github.celestialphineas.sanxing.R;
 
-public class CreateNewTaskActivity extends AppCompatActivity {
+public class CreateNewTimeLeftActivity extends AppCompatActivity {
     // Selected importance 0, 1, 2, 3, 4
     int selectedImportance = 2;
     // The selected date/time will be stored here
@@ -50,16 +39,15 @@ public class CreateNewTaskActivity extends AppCompatActivity {
     boolean setDate = false, setTime = false;
     @BindView(R.id.create_new_item_toolbar)         Toolbar toolbar;
     @BindView(R.id.input_title)                     TextInputEditText inputTitle;
-    @BindView(R.id.task_due_date_content)           TextInputEditText dueDateContent;
-    @BindView(R.id.task_due_time_content)           TextInputEditText dueTimeContent;
-    @BindView(R.id.task_description_content)        TextInputEditText descriptionContent;
-    @BindView(R.id.task_importance_seek_bar)        AppCompatSeekBar taskImportance;
-    @BindView(R.id.task_linear_layout)              LinearLayoutCompat linearLayout;
+    @BindView(R.id.time_left_due_date_content)      TextInputEditText dueDateContent;
+    @BindView(R.id.time_left_description_content)   TextInputEditText descriptionContent;
+    @BindView(R.id.time_left_importance_seek_bar)   AppCompatSeekBar timeLeftImportance;
+    @BindView(R.id.time_left_linear_layout)         LinearLayoutCompat linearLayout;
     @BindString(R.string.snack_title_not_set)       String titleNotSet;
     @BindString(R.string.snack_date_not_set)        String dateNotSet;
     @BindString(R.string.snack_time_not_set)        String timeNotSet;
     @BindString(R.string.snack_op_set)              String setSnack;
-    @BindString(R.string.create_new_task)           String title;
+    @BindString(R.string.create_new_time_left)      String title;
     @BindString(R.string.snack_time_passed)         String hasPassed;
     @BindInt(R.integer.snack_bar_timeout)           int snackBarTimeout;
     @BindInt(R.integer.reveal_time)                 int revealTime;
@@ -68,7 +56,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_task);
+        setContentView(R.layout.activity_create_new_time_left);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         ButterKnife.bind(this);
         cx = getResources().getDisplayMetrics().widthPixels - 120;
@@ -96,9 +84,8 @@ public class CreateNewTaskActivity extends AppCompatActivity {
 
         //////// Disable keyboard events of the date and text editTexts
         dueDateContent.setKeyListener(null);
-        dueTimeContent.setKeyListener(null);
 
-        taskImportance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        timeLeftImportance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 selectedImportance = seekBar.getProgress();
@@ -156,25 +143,16 @@ public class CreateNewTaskActivity extends AppCompatActivity {
             Snackbar.make(linearLayout, dateNotSet, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
                         @Override public void onClick(View view)
-                        { taskDueDateOnClickBehavior(); } })
-                    .show();
-            return false;
-        } else if(!setTime) {
-            Snackbar.make(linearLayout, timeNotSet, snackBarTimeout)
-                    .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueTimeOnClickBehavior(); } })
+                        { timeLeftDueDateOnClickBehavior(); } })
                     .show();
             return false;
         } else if(dueCalendar.before(now)) {
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getBaseContext());
-            DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getBaseContext());
-            String timeString = dateFormat.format(dueCalendar.getTime())
-                    + " " + timeFormat.format(dueCalendar.getTime()) + " ";
+            String timeString = dateFormat.format(dueCalendar.getTime()) +  " ";
             Snackbar.make(linearLayout, timeString + hasPassed, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
                         @Override public void onClick(View view)
-                        { taskDueDateOnClickBehavior(); } })
+                        { timeLeftDueDateOnClickBehavior(); } })
                     .show();
             return false;
         }
@@ -185,14 +163,14 @@ public class CreateNewTaskActivity extends AppCompatActivity {
     // Select date
     // This method pop up a date selector, and allow user to select date.
     // The selected date will be stored in the dueCalendar object.
-    @OnFocusChange(R.id.task_due_date_content)
-    void taskDueDateOnFocusBehavior(View view, boolean hasFocus) {
+    @OnFocusChange(R.id.time_left_due_date_content)
+    void timeLeftDueDateOnFocusBehavior(View view, boolean hasFocus) {
         if(hasFocus) {
-            taskDueDateOnClickBehavior();
+            timeLeftDueDateOnClickBehavior();
         }
     }
-    @OnClick(R.id.task_due_date_content)
-    void taskDueDateOnClickBehavior() {
+    @OnClick(R.id.time_left_due_date_content)
+    void timeLeftDueDateOnClickBehavior() {
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -208,33 +186,6 @@ public class CreateNewTaskActivity extends AppCompatActivity {
                 dueCalendar.get(Calendar.YEAR),
                 dueCalendar.get(Calendar.MONTH),
                 dueCalendar.get(Calendar.DAY_OF_MONTH)).show();
-    }
-
-    //////////////// SELECT TIME ////////////////
-    // Select time
-    // This method pop up a time selector, and allow user to select time.
-    // The selected time will be stored in the dueCalendar object.
-    @OnFocusChange(R.id.task_due_time_content)
-    void taskDueTimeOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
-            taskDueTimeOnClickBehavior();
-        }
-    }
-    @OnClick(R.id.task_due_time_content)
-    void taskDueTimeOnClickBehavior() {
-        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minuteOfHour) {
-                dueCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                dueCalendar.set(Calendar.MINUTE, minuteOfHour);
-                DateFormat sdf = android.text.format.DateFormat.getTimeFormat(getBaseContext());
-                dueTimeContent.setText(sdf.format(dueCalendar.getTime()));
-                setTime = true;
-            }
-        };
-        new TimePickerDialog(this, time,
-                dueCalendar.get(Calendar.HOUR_OF_DAY),
-                dueCalendar.get(Calendar.MINUTE), true).show();
     }
 
     //////////////// ANIMATIONS ////////////////
