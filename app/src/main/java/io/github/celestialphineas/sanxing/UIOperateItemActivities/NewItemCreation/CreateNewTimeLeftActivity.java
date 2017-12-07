@@ -37,7 +37,7 @@ public class CreateNewTimeLeftActivity extends OperateTimeLeftActivityBase {
     @BindView(R.id.time_left_linear_layout)         LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        title = getString(R.string.create_new_task);
+        title = getString(R.string.create_new_time_left);
 
         setContentView(R.layout.activity_create_new_time_left);
 
