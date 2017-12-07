@@ -57,4 +57,6 @@
     <string name="hint_countdown_due">To</string>
     <string name="snack_start_before_due">The start time seems earlier than the due.</string>
     <string name="right_arrow">" → "</string>
+    <string name="button_check">Check</string>
+    <string name="snack_already_checked">You have already checked this.</string>
 </resources>

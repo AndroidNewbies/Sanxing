@@ -57,6 +57,19 @@ Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendiss
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/card_padding_bottom">
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/card_button_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="-10dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:drawableStart="@drawable/ic_done"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/grey"
+                android:visibility="gone"
+                android:textColor="@color/grey"
+                android:text="@string/button_check" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -69,12 +82,15 @@ Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendiss
                 style="?android:attr/borderlessButtonStyle"
                 android:drawableStart="@drawable/ic_edit"
                 android:drawablePadding="5dp"
+                android:drawableTint="@color/grey"
+                android:textColor="@color/grey"
                 android:text="@string/edit" />
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/card_button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:layout_marginRight="-10dp"
                 android:textColor="?attr/colorPrimary"
                 android:drawableStart="@drawable/ic_delete"
                 android:drawableTint="?attr/colorPrimary"

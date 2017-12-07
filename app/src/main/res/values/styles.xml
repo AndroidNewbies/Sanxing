@@ -67,4 +67,7 @@
         <item name="colorControlNormal">@color/transparent</item>
         <!--<item name="colorControlActivated">@color/Color Name</item>-->
     </style>
+    <style name="CheckButtonStyle" parent="Widget.AppCompat.Button">
+
+    </style>
 </resources>

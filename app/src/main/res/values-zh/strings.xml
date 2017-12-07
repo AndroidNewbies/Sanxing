@@ -51,4 +51,6 @@
     <string name="hint_countdown_due">到结束</string>
     <string name="snack_start_before_due">起始时间似乎比结束时间早呢。</string>
     <string name="right_arrow">" → "</string>
+    <string name="button_check">打卡</string>
+    <string name="snack_already_checked">您已经打过卡了。</string>
 </resources>

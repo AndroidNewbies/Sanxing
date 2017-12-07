@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.List;
 
 
+import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +55,7 @@ public class HabitRecyclerAdapter
         @BindView(R.id.card_description)            TextView habitDescription;
         @BindView(R.id.card_button_edit)            AppCompatButton buttonEdit;
         @BindView(R.id.card_button_delete)          AppCompatButton buttonDelete;
+        @BindView(R.id.card_button_check)           AppCompatButton buttonCheck;
         @BindString(R.string.thrice_a_day)          String thriceADay;
         @BindString(R.string.twice_a_day)           String twiceADay;
         @BindString(R.string.every_day)             String everyDay;
@@ -62,6 +64,8 @@ public class HabitRecyclerAdapter
         @BindString(R.string.once_a_week)           String onceAWeek;
         @BindString(R.string.once_a_fortnight)      String onceAFortnight;
         @BindString(R.string.once_a_month)          String onceAMonth;
+        @BindString(R.string.snack_already_checked)     String alreadyChecked;
+        @BindInt(R.integer.snack_bar_timeout)           int snackBarTimeout;
         HabitViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -90,7 +94,7 @@ public class HabitRecyclerAdapter
     }
 
     @Override
-    public void onBindViewHolder(HabitViewHolder holder, final int position) {
+    public void onBindViewHolder(final HabitViewHolder holder, final int position) {
         holder.habitTitle.setText(habitList.get(position).getContent());
         // TODO: Set the frequency (in the form of integer, see OperateHabitActivity for definition)
         // TODO: Modify the habitFreq private variable
@@ -125,6 +129,23 @@ public class HabitRecyclerAdapter
                         .setAction(R.string.undo, redo)
                         .show();
                 // TODO: Lazy delete a database entry
+            }
+        });
+        // Button check
+        holder.buttonCheck.setVisibility(View.VISIBLE);
+        holder.buttonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean status = true;
+                // TODO: Check the checking status
+                if(status) {
+                    // The user has already checked today
+                    Snackbar.make(view, holder.alreadyChecked, holder.snackBarTimeout)
+                            .show();
+                } else {
+                    // The user has not checked yet
+                    // TODO: Check, write the database and refresh view
+                }
             }
         });
     }
