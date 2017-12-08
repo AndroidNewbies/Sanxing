@@ -1,9 +1,9 @@
 package io.github.celestialphineas.sanxing.UISupportActivities;
 
-
-import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -13,33 +13,88 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBar;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
+import android.support.design.widget.AppBarLayout;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatCheckedTextView;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.MenuItem;
-
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import io.github.celestialphineas.sanxing.R;
 
-import java.util.List;
+/*
+https://github.com/davcpas1234/MaterialSettings
+*/
 
-/**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
- */
-public class SettingsActivity extends AppCompatPreferenceActivity {
-    /**
-     * A preference value change listener that updates the preference's summary
-     * to reflect its new value.
-     */
+public class SettingsActivity extends PreferenceActivity {
+    private static String appVersion;
+
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        AppBarLayout bar;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+            LinearLayout root = (LinearLayout) findViewById(android.R.id.list).getParent().getParent().getParent();
+            bar = (AppBarLayout) LayoutInflater.from(this).inflate(R.layout.activity_settings, root, false);
+            root.addView(bar, 0);
+        } else {
+            ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+            ListView content = (ListView) root.getChildAt(0);
+            root.removeAllViews();
+            bar = (AppBarLayout) LayoutInflater.from(this).inflate(R.layout.activity_settings, root, false);
+
+            int height;
+            TypedValue tv = new TypedValue();
+            if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+                height = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+            }else{
+                height = bar.getHeight();
+            }
+
+            content.setPadding(0, height, 0, 0);
+
+            root.addView(content);
+            root.addView(bar);
+        }
+
+        Toolbar Tbar = (Toolbar) bar.getChildAt(0);
+
+        Tbar.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            appVersion = pInfo.versionName;
+        } catch(PackageManager.NameNotFoundException e) {
+            appVersion = "unknown";
+        }
+
+        setupSimplePreferencesScreen();
+    }
+
+    @SuppressWarnings("deprecation")
+    private void setupSimplePreferencesScreen() {
+        addPreferencesFromResource(R.xml.pref_general);
+        bindPreferenceSummaryToValue(findPreference("notifications_ringtone"));
+        Preference app_version = findPreference("application_version");
+        setPreferenceSummary(app_version, appVersion);
+    }
+
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -88,24 +143,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     };
 
-    /**
-     * Helper method to determine if the device has an extra-large screen. For
-     * example, 10" tablets are extra-large.
-     */
-    private static boolean isXLargeTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-    }
-
-    /**
-     * Binds a preference's summary to its value. More specifically, when the
-     * preference's value is changed, its summary (line of text below the
-     * preference title) is updated to reflect the value. The summary is also
-     * immediately updated upon calling this method. The exact display format is
-     * dependent on the type of preference.
-     *
-     * @see #sBindPreferenceSummaryToValueListener
-     */
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -118,139 +155,131 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
+    private static void setPreferenceSummary(Preference preference, String value) {
+        preference.setSummary(value);
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setupActionBar();
-    }
-
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        // Allow super to try and create a view first
+        final View result = super.onCreateView(name, context, attrs);
+        if (result != null) {
+            return result;
         }
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // If we're running pre-L, we need to 'inject' our tint aware Views in place of the
+            // standard framework versions
+            switch (name) {
+                case "EditText":
+                    return new AppCompatEditText(this, attrs);
+                case "Spinner":
+                    return new AppCompatSpinner(this, attrs);
+                case "CheckBox":
+                    return new AppCompatCheckBox(this, attrs);
+                case "RadioButton":
+                    return new AppCompatRadioButton(this, attrs);
+                case "CheckedTextView":
+                    return new AppCompatCheckedTextView(this, attrs);
+            }
+        }
+
+        return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean onIsMultiPane() {
-        return isXLargeTablet(this);
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @SuppressWarnings("deprecation")
     @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.pref_headers, target);
-    }
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        super.onPreferenceTreeClick(preferenceScreen, preference);
 
-    /**
-     * This method stops fragment injection in malicious applications.
-     * Make sure to deny any unknown fragments here.
-     */
-    protected boolean isValidFragment(String fragmentName) {
-        return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
-    }
-
-    /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_general);
-            setHasOptionsMenu(true);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
+        if (preference!=null) {
+            if (preference instanceof PreferenceScreen) {
+                if (((PreferenceScreen) preference).getDialog() != null) {
+                    ((PreferenceScreen) preference).getDialog().getWindow().getDecorView().setBackgroundDrawable(this.getWindow().getDecorView().getBackground().getConstantState().newDrawable());
+                    setUpNestedScreen((PreferenceScreen) preference);
+                }
             }
-            return super.onOptionsItemSelected(item);
         }
+
+        return false;
     }
 
-    /**
-     * This fragment shows notification preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class NotificationPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_notification);
-            setHasOptionsMenu(true);
+    public void setUpNestedScreen(PreferenceScreen preferenceScreen) {
+        final Dialog dialog = preferenceScreen.getDialog();
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-        }
+        AppBarLayout appBar;
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
+        View listRoot = dialog.findViewById(android.R.id.list);
+        ViewGroup mRootView = (ViewGroup) dialog.findViewById(android.R.id.content);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LinearLayout root = null;
+            try {
+                root = (LinearLayout) dialog.findViewById(android.R.id.list).getParent();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            return super.onOptionsItemSelected(item);
+
+            try {
+                root = (LinearLayout) dialog.findViewById(android.R.id.list).getParent().getParent();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                root = (LinearLayout) dialog.findViewById(android.R.id.list).getParent().getParent().getParent();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            appBar = (AppBarLayout) LayoutInflater.from(this).inflate(R.layout.activity_settings, root, false);
+            root.addView(appBar, 0);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            LinearLayout root = (LinearLayout) dialog.findViewById(android.R.id.list).getParent();
+            appBar = (AppBarLayout) LayoutInflater.from(this).inflate(R.layout.activity_settings, root, false);
+            root.addView(appBar, 0);
+        } else {
+            ListView content = (ListView) mRootView.getChildAt(0);
+            mRootView.removeAllViews();
+
+            LinearLayout LL = new LinearLayout(this);
+            LL.setOrientation(LinearLayout.VERTICAL);
+
+            ViewGroup.LayoutParams LLParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            LL.setLayoutParams(LLParams);
+
+            appBar = (AppBarLayout) LayoutInflater.from(this).inflate(R.layout.activity_settings, mRootView, false);
+
+            LL.addView(appBar);
+            LL.addView(content);
+
+            mRootView.addView(LL);
         }
+
+        Toolbar Tbar = (Toolbar) appBar.getChildAt(0);
+
+        Tbar.setTitle(preferenceScreen.getTitle());
+
+        Tbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class DataSyncPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_data_sync);
-            setHasOptionsMenu(true);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-        }
+    }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+
     }
 }
