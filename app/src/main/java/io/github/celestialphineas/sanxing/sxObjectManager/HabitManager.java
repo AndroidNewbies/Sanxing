@@ -2,8 +2,10 @@ package io.github.celestialphineas.sanxing.sxObjectManager;
 
 /**
  * Created by apple on 2017/11/3.
+ * 新版增加排序order函数，规则在Habit类中
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.sxObject.Habit;
@@ -40,6 +42,6 @@ public class HabitManager implements SxObjectManager {
 
         return HabitPool;
     }
-
+    public void order(){ Collections.sort(HabitPool);}
 }
 

@@ -36,7 +36,7 @@ public class MyService extends Service {
         if (ifdestory.isEmpty()==false && ifdestory.equals("NO"))
         {
             LocalDateTime date=LocalDateTime.parse(intent.getStringExtra("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            if (LocalDateTime.now().isAfter(date)== true ) date.plusDays(1);
+            if (LocalDateTime.now().isAfter(date)== true ) date=date.plusDays(1);
             Alarmfunction.killalarm(this,AlarmReceiver.class);
             Alarmfunction.startRTCWakeUpAlarm(this,AlarmReceiver.class,date);
         }

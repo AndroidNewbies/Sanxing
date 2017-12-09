@@ -1,11 +1,14 @@
 package io.github.celestialphineas.sanxing.sxObjectManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.sxObject.Task;
 
-
+/* Lin
+ * 新版增加排序order函数，规则在Task类中
+ */
 //对Task的list的封装
 public class TaskManager implements SxObjectManager {
     private  List<Task> TaskPool;
@@ -46,5 +49,10 @@ public class TaskManager implements SxObjectManager {
     public void updateTaskManager(List<Task> list){
         TaskPool.clear();
         TaskPool = list;
+    }
+    //排序函数
+    public void order()
+    {
+        Collections.sort(TaskPool);
     }
 }

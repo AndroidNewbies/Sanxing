@@ -14,21 +14,45 @@ import org.threeten.bp.format.DateTimeFormatter;
  */
 
 public abstract class AbstractsxObject {
-    private LocalDateTime begin ;
-    private LocalDateTime end;
-    private LocalTime noticetime;
-    private boolean state;// Is finished
-    private LocalDateTime frequency;//DateTime
     private String title;
+    private LocalDateTime begin;
+    private LocalDateTime end;
+    private boolean state;// Is finished
+    private String content;
+    private int important;
     AbstractsxObject()
     {
         //initial to now
+        title="object";
         state=false;
-        title ="";
+        content="";
+        important=0;
+    }
+    public void create_object(String title,String begindate,String enddate,String content,int important)
+    {
+        setTitle(title);
+        setBeginDate(begindate);
+        setEndDate(enddate);
+        setContent(content);
+        setImportant(important);
+    }
+    public void edit_object(String title,String enddate,String content,int important)
+    {
+        setTitle(title);
+        setEndDate(enddate);
+        setContent(content);
+        setImportant(important);
+    }
+    public void setTitle(String title)
+    {
+        this.title=title;
+    }
+    public String getTitle()
+    {
+        return this.title;
     }
     public void setBeginDate(String date)
     {
-        date ="1986-04-08 12:30:20";
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         begin= LocalDateTime.parse(date, sf);
     }
@@ -39,6 +63,8 @@ public abstract class AbstractsxObject {
     public String getBeginDate()
     {
         String s=begin.toString();
+        s=s.replace('T',' ');
+        s=s.substring(0,19);
         return s;
     }
     public LocalDateTime getBeginLocalDate()
@@ -47,7 +73,6 @@ public abstract class AbstractsxObject {
     }
     public void setEndDate(String date)
     {
-        date ="1986-04-08 12:30:20";
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         end=LocalDateTime.parse(date, sf);
     }
@@ -58,50 +83,21 @@ public abstract class AbstractsxObject {
     public String getEndDate()
     {
         String s=end.toString();
+        s=s.replace('T',' ');
+        s=s.substring(0,19);
         return s;
     }
     public LocalDateTime getEndLocalDate()
     {
         return end;
     }
-    public void setNoticeTime(String time)//HH:mm:ss
+    public void setContent(String text)
     {
-        noticetime=LocalTime.parse(time);
+        content=text;
     }
-    public void setNoticetime(int day)
+    public String getContent()
     {
-
-    }
-    public LocalTime getNoticeLocalDate()
-    {
-        return noticetime;
-    }
-    public String getNoticeTime()//HH:mm:ss
-    {
-        String s=noticetime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        return s;
-    }
-    public void setFrequencyTime(String date)//yyyy-MM-dd HH:mm:ss
-    {
-        DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        frequency = LocalDateTime.parse(date, sf);
-    }
-    public String getFrequencyTime()//yyyy-MM-dd HH:mm:ss
-    {
-        String s= frequency.toLocalDate().toString()+" "+frequency.toLocalTime().toString();
-        return s;
-    }
-    public LocalDateTime getFrequencyLocalDate()
-    {
-        return frequency;
-    }
-    public void setTitle(String text)
-    {
-        title =text;
-    }
-    public String getTitle()
-    {
-        return title;
+        return content;
     }
     public void setState(boolean newstate)
     {
@@ -111,5 +107,7 @@ public abstract class AbstractsxObject {
     {
         return state;
     }
+    public void setImportant(int i){important=i;}
+    public int getImportant(){return important;}
 
 }

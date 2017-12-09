@@ -38,9 +38,10 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     
     //分别管理三种item
-    private TaskManager _task_manager = new TaskManager();
-    private HabitManager _habit_manager = new HabitManager();
-    private TimeLeftManager _time_left_manager = new TimeLeftManager();
+    private MyApplication myApplication;
+    private TaskManager _task_manager;
+    private HabitManager _habit_manager;
+    private TimeLeftManager _time_left_manager;
     
     private TaskRepo repo = new TaskRepo(this);//用于task的数据库操作
 
@@ -53,6 +54,10 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        myApplication= (MyApplication) getApplication();
+        _task_manager=myApplication.get_task_manager();
+        _habit_manager=myApplication.get_habit_manager();
+        _time_left_manager=myApplication.get_time_left_manager();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

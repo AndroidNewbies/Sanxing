@@ -9,10 +9,23 @@ import android.util.Log;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
+import io.github.celestialphineas.sanxing.sxObject.Habit;
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
+import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
+import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
+import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 import io.github.celestialphineas.sanxing.timer.MyService;
 
 
@@ -24,22 +37,31 @@ import io.github.celestialphineas.sanxing.timer.MyService;
  */
 
 public class MyApplication extends Application {
-    private static MyApplication instance;
+    private MyApplication instance;
     private final static String PROCESS_NAME="io.github.celestialphineas.sanxing";
-
+    private static final String SETTING_FILE_NAME="sanxing.setting";
+    private Setting mysetting;
+    private TaskManager _task_manager;
+    private HabitManager _habit_manager;
+    private TimeLeftManager _time_left_manager;
     @Override
     public void onCreate()
     {
         super.onCreate();
         AndroidThreeTen.init(this);//ThreeTenABP的使用初始化
         instance = this;
-        if (!isServiceRunning(this,"io.github.celestialphineas.Timer.MyService"))
+        //读入设置
+        _task_manager = new TaskManager();
+        _habit_manager = new HabitManager();
+        _time_left_manager = new TimeLeftManager();
+        mysetting=new Setting();
+        readSetting();
+        if (!isServiceRunning(this,"io.github.celestialphineas.imer.MyService"))
         {
-            Log.i("SanxingAPP","I am Application");
             //开启第一次service，设置闹钟
             Intent i = new Intent(this, MyService.class);
             LocalDateTime now= LocalDateTime.now();
-            now=LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),12,0,0);
+            now=LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),mysetting.callTime.getHour(),mysetting.callTime.getMinute(),0);
             i.putExtra("date",now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             i.putExtra("destory","NO");
             i.putExtra("source","Application");
@@ -48,10 +70,13 @@ public class MyApplication extends Application {
         }
 
     }
-    public static MyApplication getInstance(){
+    public MyApplication getInstance(){
         return instance;
     }
-
+    public Setting getMysetting() { return mysetting; }
+    public TaskManager get_task_manager(){return _task_manager;}
+    public HabitManager get_habit_manager(){ return _habit_manager;}
+    public TimeLeftManager get_time_left_manager(){ return _time_left_manager;}
     /**
      * 判断服务是否正在运行
      *
@@ -80,5 +105,89 @@ public class MyApplication extends Application {
         //Log.i("IsServiceRunning",String.valueOf(isRunning));
         return isRunning;
     }
-
+    /* 设置文件的读取
+     *
+     */
+    private void readSetting()
+    {
+        File settingfile=new File(SETTING_FILE_NAME);
+        //文件是否存在
+        if(!settingfile.exists())
+        {
+            return;
+            /*try
+            {
+                //文件不存在，就创建一个新文件
+                settingfile.createNewFile();
+                Log.i("SanxingSettingFile","create");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+        }
+        else
+        {
+            try
+            {
+                FileReader filereader=new FileReader(settingfile);
+                BufferedReader myreader = new BufferedReader(filereader);
+                String hour=myreader.readLine();
+                String minutes=myreader.readLine();
+                mysetting.callTime=LocalTime.of(Integer.valueOf(hour),Integer.valueOf(minutes));
+                mysetting.ifnotify=Boolean.valueOf(myreader.readLine());
+                mysetting.whichRingtone=Integer.valueOf(myreader.readLine());
+                mysetting.ifvibratel=Boolean.valueOf((myreader.readLine()));
+                myreader.close();
+                filereader.close();
+            }
+            catch (FileNotFoundException e) {e.printStackTrace();}
+            catch (IOException e) {e.printStackTrace();}
+        }
+    }
+    public void setSetting()
+    {
+        File settingfile=new File(SETTING_FILE_NAME);
+        //文件是否存在
+        if(!settingfile.exists())
+        {
+            try
+            {
+                //文件不存在，就创建一个新文件
+                settingfile.createNewFile();
+                Log.i("SanxingSettingFile","create");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            try
+            {
+                FileWriter fileWriter=new FileWriter(settingfile,false);//覆盖
+                BufferedWriter mywriter = new BufferedWriter(fileWriter);
+                mywriter.write(String.valueOf(mysetting.callTime.getHour())+"\n");
+                mywriter.write(String.valueOf(mysetting.callTime.getMinute()+"\n"));
+                mywriter.write(String.valueOf(mysetting.ifnotify));
+                mywriter.write(String.valueOf(mysetting.whichRingtone));
+                mywriter.write(String.valueOf(mysetting.ifvibratel));
+                mywriter.close();
+                fileWriter.close();
+            }
+            catch (FileNotFoundException e) {e.printStackTrace();}
+            catch (IOException e) {e.printStackTrace();}
+        }
+    }
+}
+class Setting
+{
+    public LocalTime callTime;//提醒时间
+    public boolean ifnotify;
+    public int whichRingtone;
+    public boolean ifvibratel;
+    public Setting()
+    {
+        callTime=LocalTime.of(12,0);
+        ifnotify=true;
+        whichRingtone=0;
+        ifvibratel=true;
+    }
 }

@@ -1,11 +1,14 @@
 package io.github.celestialphineas.sanxing.sxObjectManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
-
+/* Lin
+ * 新版增加排序order函数，规则在TimeLeft类中
+ */
 public class TimeLeftManager implements SxObjectManager {
     private  List<TimeLeft> TimeLeftPool;
     public TimeLeftManager(){
@@ -37,5 +40,7 @@ public class TimeLeftManager implements SxObjectManager {
 
         return TimeLeftPool;
     }
-
+    //排序函数
+    public void order(){
+        Collections.sort(TimeLeftPool);}
 }
