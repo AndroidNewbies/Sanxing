@@ -24,7 +24,7 @@ import io.github.celestialphineas.sanxing.sxObject.Task;
 
 /**
  * Created by celestialphineas on 17-10-17.
- * Public class recycler view adapter for the task fragment
+ * Public class recycler view mAdapter for the task fragment
  */
 
 public class TaskRecyclerAdapter
@@ -71,7 +71,7 @@ public class TaskRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, final int position) {
-        holder.taskTitle.setText(taskList.get(position).getContent());
+        holder.taskTitle.setText(taskList.get(position).getTitle());
         // TODO: Set taskCalendar to the due calendar got from the database
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
         DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
@@ -132,10 +132,21 @@ public class TaskRecyclerAdapter
 
     // Add an entry
     public void add(Task task, int position) {
-        try { taskList.add(position, task); } catch (Exception e) {
-            Log.e("TaskRecyclerAdapter", "add: " + position + ", " + taskList.size());
+        try { taskList.add(position, task);
+            Log.e("test","??");
+            Log.e("TaskRecyclerAdapter", "add: " + position + ", " + taskList.size());}
+        catch (Exception e) {
+
         }
+        //context.getDatabasePath(Task.TABLE);
+//        TaskRepo taskRepo = new TaskRepo(context);
+//        taskRepo.insert(new Task("test3"));
+//        DatabaseHelper helper = new DatabaseHelper(context);
+//        SQLiteDatabase database = helper.getWritableDatabase();
+//        database.insert(…);
+//        database.close();
         notifyItemInserted(position);
         notifyItemRangeChanged(position, taskList.size());
     }
+
 }

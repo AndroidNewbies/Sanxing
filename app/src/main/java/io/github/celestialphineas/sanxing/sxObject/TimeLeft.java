@@ -15,7 +15,7 @@ public class TimeLeft extends AbstractsxObject {
     public TimeLeft(String content)
     {
         super();
-        super.setContent(content);
+        super.setTitle(content);
     }
     public int getTime_left() {
         return time_left;

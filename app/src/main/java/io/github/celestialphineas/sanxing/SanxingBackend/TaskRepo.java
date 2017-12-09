@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import io.github.celestialphineas.sanxing.SanxingBackend.DBHelper;
 import io.github.celestialphineas.sanxing.sxObject.Task;
 
 
@@ -30,7 +29,11 @@ public class TaskRepo {
         //Open connection to write data
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Task.KEY_content,task.getContent());
+        values.put(Task.KEY_TITLE,task.getTitle());
+//        values.put(Task.KEY_BEGIN_TIME,"1986-04-08 12:30:21");
+//        values.put(Task.KEY_DESCRIPTION,task.getDescription());
+//        values.put(Task.KEY_IMPORTANCE,task.getWeight());
+//        values.put(Task.KEY_END_TIME,"1986-04-08 12:30:21");
 
         // Inserting Row
         long task_Id = db.insert(Task.TABLE, null, values);
@@ -43,7 +46,7 @@ public class TaskRepo {
         ContentValues values = new ContentValues();
         for (int i=0;i<taskList.size();i++){
 
-            values.put(Task.KEY_content,taskList.get(i).getContent());
+            values.put(Task.KEY_TITLE,taskList.get(i).getTitle());
             long task_Id = db.insert(Task.TABLE, null, values);
         }
 
@@ -68,7 +71,7 @@ public class TaskRepo {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(Task.KEY_content, task.getContent());
+        values.put(Task.KEY_TITLE, task.getTitle());
 
 
         // It's a good practice to use parameter ?, instead of concatenate string
@@ -79,12 +82,16 @@ public class TaskRepo {
     public ArrayList<Task> getTaskList() {
         //Open connection to read only
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        String selectQuery =  "SELECT  " +
+//                Task.KEY_ID + "," +
+//                Task.KEY_TITLE+ "," +Task.KEY_BEGIN_TIME+ "," +Task.KEY_END_TIME+ "," +Task.KEY_DESCRIPTION+ "," +Task.KEY_IMPORTANCE+
+//                " FROM " + Task.TABLE;
+
         String selectQuery =  "SELECT  " +
                 Task.KEY_ID + "," +
-                Task.KEY_content +
+                Task.KEY_TITLE +
                 " FROM " + Task.TABLE;
 
-        //Student student = new Student();
         ArrayList<Task> taskList = new ArrayList<Task>();
 
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -92,10 +99,14 @@ public class TaskRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                //HashMap<String, Task> task = new HashMap<String, Task>();
-                //task.put("id", new Task(cursor.getString(cursor.getColumnIndex(Task.KEY_ID))));
-                //task.put("content", new Task(cursor.getString(cursor.getColumnIndex(Task.KEY_content))));
-                taskList.add(new Task(cursor.getString(cursor.getColumnIndex(Task.KEY_content))));
+                String content = cursor.getString(cursor.getColumnIndex(Task.KEY_TITLE));
+//                String begin = cursor.getString(cursor.getColumnIndex(Task.KEY_BEGIN_TIME));
+//                String end=cursor.getString(cursor.getColumnIndex(Task.KEY_END_TIME));
+//                String n_description=cursor.getString(cursor.getColumnIndex(Task.KEY_DESCRIPTION));
+//                int n_importance=cursor.getInt(cursor.getColumnIndex(Task.KEY_IMPORTANCE));
+
+                //taskList.add(new Task(content,begin,end,n_description,n_importance));
+                taskList.add(new Task(content));
 
             } while (cursor.moveToNext());
         }
@@ -110,7 +121,7 @@ public class TaskRepo {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
                 Task.KEY_ID + "," +
-                Task.KEY_content +
+                Task.KEY_TITLE +
                 " FROM " + Task.TABLE
                 + " WHERE " +
                 Task.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string
@@ -123,7 +134,7 @@ public class TaskRepo {
         if (cursor.moveToFirst()) {
             do {
                 task.task_ID =cursor.getInt(cursor.getColumnIndex(Task.KEY_ID));
-                task.setContent(cursor.getString(cursor.getColumnIndex(Task.KEY_content)));
+                task.setTitle(cursor.getString(cursor.getColumnIndex(Task.KEY_TITLE)));
 
 
             } while (cursor.moveToNext());

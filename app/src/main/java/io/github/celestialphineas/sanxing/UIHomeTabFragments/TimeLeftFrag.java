@@ -64,7 +64,7 @@ public class TimeLeftFrag extends Fragment {
         Bundle args = new Bundle();
         ArrayList<String> test_args = new ArrayList<String>();
         for (int i=0;i<mylist.size();i++){
-            test_args.add(mylist.get(i).getContent());
+            test_args.add(mylist.get(i).getTitle());
         }
         //args.putStringArrayList("data",test_args);
         //fragment.setArguments(args);
@@ -89,7 +89,7 @@ public class TimeLeftFrag extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        if (_time_left_manager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(_time_left_manager.readObjectList()));
+        if (_time_left_manager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(_time_left_manager.getObjectList()));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

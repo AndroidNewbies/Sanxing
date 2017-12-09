@@ -62,7 +62,7 @@ public class HabitFrag extends Fragment {
         Bundle args = new Bundle();
         ArrayList<String> test_args = new ArrayList<String>();
         for (int i=0;i<mylist.size();i++){
-            test_args.add(mylist.get(i).getContent());
+            test_args.add(mylist.get(i).getTitle());
         }
         //args.putStringArrayList("data",test_args);
         //fragment.setArguments(args);
@@ -88,7 +88,7 @@ public class HabitFrag extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         if (_habit_manager !=null)
-            recyclerView.setAdapter(new HabitRecyclerAdapter(_habit_manager.readObjectList()));
+            recyclerView.setAdapter(new HabitRecyclerAdapter(_habit_manager.getObjectList()));
         else recyclerView.setAdapter(new HabitRecyclerAdapter());
         return view;
     }

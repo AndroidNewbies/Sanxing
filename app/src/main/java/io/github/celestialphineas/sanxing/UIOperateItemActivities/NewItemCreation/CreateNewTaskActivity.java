@@ -1,8 +1,10 @@
 package io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,10 +34,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTaskActivityBase;
+import io.github.celestialphineas.sanxing.sxObject.Task;
 
 public class CreateNewTaskActivity extends OperateTaskActivityBase {
-
     @BindView(R.id.task_linear_layout)      LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
         animationReveal(savedInstanceState);
 
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
@@ -68,10 +74,26 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
 
-            // finish
+//            TaskRepo repo = new TaskRepo(this);//用于task的数据库操作/
+//            repo.insert(new Task(inputTitle.getText().toString()));
+//            Log.e(inputTitle.getText().toString(),"??");
+
+            Intent intent = new Intent();
+            intent.putExtra("task_title",inputTitle.getText().toString());
+//            intent.putExtra("task_importance",selectedImportance);
+//            intent.putExtra("task_begin_time",dueCalendar.getTime());
+//            intent.putExtra("task_end_time",dueCalendar.getTime());
+//            intent.putExtra("task_description",descriptionContent.getText().toString());
+
             animationSubmit();
+
+            //pass data to the home activity
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

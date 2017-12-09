@@ -38,9 +38,13 @@ public class TaskManager implements SxObjectManager {
         return TaskPool.get(index).checkState();
     }
 
-    public List<Task> readObjectList(){
+    public List<Task> getObjectList(){
 
         return TaskPool;
     }
 
+    public void updateTaskManager(List<Task> list){
+        TaskPool.clear();
+        TaskPool = list;
+    }
 }

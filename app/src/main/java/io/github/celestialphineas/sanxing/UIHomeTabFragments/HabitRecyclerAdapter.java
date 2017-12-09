@@ -23,10 +23,8 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateHabitActivityBase;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditHabitActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
-import io.github.celestialphineas.sanxing.sxObject.Task;
 
 
 public class HabitRecyclerAdapter
@@ -95,7 +93,7 @@ public class HabitRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final HabitViewHolder holder, final int position) {
-        holder.habitTitle.setText(habitList.get(position).getContent());
+        holder.habitTitle.setText(habitList.get(position).getTitle());
         // TODO: Set the frequency (in the form of integer, see OperateHabitActivity for definition)
         // TODO: Modify the habitFreq private variable
         holder.habitFreq.setText(holder.freqIntToString(habitFreq));

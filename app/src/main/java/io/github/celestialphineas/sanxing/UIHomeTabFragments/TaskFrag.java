@@ -28,17 +28,14 @@ import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
 @SuppressWarnings("WrongConstant")
 public class TaskFrag extends Fragment {
     @BindView(R.id.task_recycler_view)      RecyclerView recyclerView;
-    public TaskRecyclerAdapter adapter;
+
+    public TaskRecyclerAdapter mAdapter;
     private TaskManager taskManager;
     private RecyclerView.LayoutManager layoutManager;
-    private String mArgs="l";
+
     public TaskFrag() {
         // Required empty public constructor
     }
-//    public TaskFrag(String args) {
-//        mArgs = "r";
-//        // Required empty public constructor
-//    }
 
     /**
      * Use this factory method to create a new instance of
@@ -55,16 +52,12 @@ public class TaskFrag extends Fragment {
         TaskFrag fragment = new TaskFrag();
         Bundle args = new Bundle();
         fragment.setArguments(args);
-        fragment.mArgs = arguments;
         return fragment;
     }
     public TaskFrag newInstance(List<Task> mylist) {
-        mArgs = "m";
+
         taskManager = new TaskManager(mylist);
-        System.out.println(mArgs);
         TaskFrag fragment = new TaskFrag();
-        Bundle args = new Bundle();
-        //fragment.setArguments(args);
         fragment.taskManager = new TaskManager(mylist);
         return fragment;
     }
@@ -87,8 +80,8 @@ public class TaskFrag extends Fragment {
         // Set animator
         recyclerView.setItemAnimator(new FadeInLeftAnimator());
         // Set recycler
-        adapter = new TaskRecyclerAdapter(taskManager.readObjectList());
-        if(taskManager != null) recyclerView.setAdapter(adapter);
+        mAdapter = new TaskRecyclerAdapter(taskManager.getObjectList());
+        if(taskManager != null) recyclerView.setAdapter(mAdapter);
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
 
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -96,13 +89,13 @@ public class TaskFrag extends Fragment {
 //        recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setHasFixedSize(true);//可提高性能
 //
-//        adapter = new TaskRecyclerAdapter(taskManager.readObjectList());
+//        mAdapter = new TaskRecyclerAdapter(taskManager.getObjectList());
 //
-//        if (taskManager != null) recyclerView.setAdapter(adapter);
+//        if (taskManager != null) recyclerView.setAdapter(mAdapter);
 //        else recyclerView.setAdapter(new TaskRecyclerAdapter());
 //
 //        //以下是为了实现点击一个task 弹出删除界面 进行删除写的尝试性代码 bug很多 不能及时刷新，不能对数据库进行操作等
-//        adapter.setOnItemClickListener(new TaskRecyclerAdapter.OnItemClickListener() {
+//        mAdapter.setOnItemClickListener(new TaskRecyclerAdapter.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(View view, final int position) {
 //                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());

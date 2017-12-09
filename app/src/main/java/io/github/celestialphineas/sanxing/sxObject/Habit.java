@@ -26,7 +26,7 @@ public class Habit extends AbstractsxObject {
         record=new ArrayList<Integer>();
         interval=1;
         recordnumber=1;
-        super.setContent(content);
+        super.setTitle(content);
     }
     public void addRecord(int number)
     {

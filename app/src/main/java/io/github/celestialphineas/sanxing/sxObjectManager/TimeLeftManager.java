@@ -33,7 +33,7 @@ public class TimeLeftManager implements SxObjectManager {
         return TimeLeftPool.get(index).checkState();
     }
 
-    public List<TimeLeft> readObjectList(){
+    public List<TimeLeft> getObjectList(){
 
         return TimeLeftPool;
     }

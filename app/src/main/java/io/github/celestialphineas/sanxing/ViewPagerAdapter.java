@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Created by celestialphineas on 17-10-10.
- * This file is an adapter to the ViewPager
+ * This file is an mAdapter to the ViewPager
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -47,5 +47,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);
+    }
+
+    // Called when the host view is attempting to determine if an item's position has changed. Returns POSITION_UNCHANGED if the position of the given item has not changed or POSITION_NONE if the item is no longer present in the adapter.
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }

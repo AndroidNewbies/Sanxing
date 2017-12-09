@@ -1,5 +1,6 @@
 package io.github.celestialphineas.sanxing;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -40,9 +42,9 @@ public class HomeActivity extends AppCompatActivity
     private HabitManager _habit_manager = new HabitManager();
     private TimeLeftManager _time_left_manager = new TimeLeftManager();
     
-    private TaskRepo repo = new TaskRepo(this);//用于数据库操作
+    private TaskRepo repo = new TaskRepo(this);//用于task的数据库操作
 
-    // Set the adapter
+    // Set the mAdapter
     ViewPagerAdapter adapter;
     // the view pager
     ViewPager viewPager;
@@ -51,6 +53,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -83,12 +86,15 @@ public class HomeActivity extends AppCompatActivity
         tabLayout = (TabLayout) findViewById(R.id.main_tab);
 
         //////// Tab pager fragments ////////
-        TaskFrag _task = new TaskFrag().newInstance(_task_manager.readObjectList());
-        adapter.addFrag(_task, getString(R.string.tab_tasks));
-        HabitFrag _habit =new HabitFrag().newInstance(_habit_manager.readObjectList());
+        TaskFrag taskFrag = new TaskFrag().newInstance(_task_manager.getObjectList());
+        adapter.addFrag(taskFrag, getString(R.string.tab_tasks));
+
+        HabitFrag _habit =new HabitFrag().newInstance(_habit_manager.getObjectList());
         adapter.addFrag(_habit, getString(R.string.tab_habits));
-        TimeLeftFrag _time_left = new TimeLeftFrag().newInstance(_time_left_manager.readObjectList());
+
+        TimeLeftFrag _time_left = new TimeLeftFrag().newInstance(_time_left_manager.getObjectList());
         adapter.addFrag(_time_left, getString(R.string.tab_time_left));
+
         // Binding the view pager with the layout, as well as the fab button
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -109,24 +115,67 @@ public class HomeActivity extends AppCompatActivity
         _habit_manager.addObject(new Habit("eat breakfast"));
         _time_left_manager.addObject(new TimeLeft("University time"));
         _time_left_manager.addObject(new TimeLeft("Left time"));
+
         if (repo.getCount()==0){
-            _task_manager.addObject(new Task("ts1"));
-            _task_manager.addObject(new Task("ts2"));
+            _task_manager.addObject(new Task("task test1"));
+            _task_manager.addObject(new Task("task test2"));
+            //Log.e("test","??");
         }
-        else _task_manager = new TaskManager(repo.getTaskList());
+        else {
+            _task_manager.addAll(repo.getTaskList());
+            //repo.deleteAll();
+            Log.e("test","??");
+        }
 
         // End of the onCreate(Bundle) method
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+//                    if (data!=null) Log.e("??", "?11?"+data.getStringExtra("baba"));
+                    String title = data.getStringExtra("task_title");
+                    Log.e("return data:", title);
+//                    String begin = data.getStringExtra("task_begin_time");
+//                    String end = data.getStringExtra("task_end_time");
+//                    String n_description=data.getStringExtra("task_title");
+//                    int n_importance=data.getIntExtra("task_importance",3);
+
+//                    String begin = "1986-04-08 12:30:20";
+//                    String end="1986-04-08 12:30:20";
+//                    String n_description="busy";
+//                    int n_importance=3;
+                            //insert new task into database
+//                    repo.insert(new Task(title,begin,end,n_description,n_importance));
+                    repo.insert(new Task(title));
+                    //renew _task_manager
+                    _task_manager.updateTaskManager(repo.getTaskList());
+                    //renew viewPager to display the new task in screen at once
+                    adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager.getObjectList()));
+                    viewPager.setAdapter(adapter);
+                    viewPager.setCurrentItem(0);
+                }
+                break;
+            default:
+        }
     }
 
     @OnClick(R.id.fab_tasks)
     void fabTasksOnClickBehavior() {
+        Log.e("repo.size:"+repo.getCount(),"??");
         Intent intent = new Intent(this, CreateNewTaskActivity.class);
-        startActivity(intent);
+
+        //startActivity(intent);
+        startActivityForResult(intent, 0);
+
+
+
     }
 
     @OnClick(R.id.fab_habits)
     void fabHabitsOnClickBehavior() {
         Intent intent = new Intent(this, CreateNewHabitActivity.class);
+
         startActivity(intent);
     }
 
@@ -169,9 +218,9 @@ public class HomeActivity extends AppCompatActivity
 //            b.setView (taskcontent);//设置对话框的内容
 //            b.show();  //必须show一下才能看到对话框
 //
-//            adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager.readObjectList()));
+//            mAdapter.replaceFrag(mAdapter.getItem(0),new TaskFrag().newInstance(_task_manager.getObjectList()));
 //            viewPager.removeAllViewsInLayout();
-//            viewPager.setAdapter(adapter);
+//            viewPager.setAdapter(mAdapter);
 //            viewPager.setCurrentItem(0);
 //            tabLayout.setupWithViewPager(viewPager);
 //
@@ -203,8 +252,8 @@ public class HomeActivity extends AppCompatActivity
 //            b.setView (habitcontent);//设置对话框的内容
 //            b.show();
 //
-//            adapter.replaceFrag(adapter.getItem(1),new HabitFrag().newInstance(_habit_manager.readObjectList()));
-//            viewPager.setAdapter(adapter);
+//            mAdapter.replaceFrag(mAdapter.getItem(1),new HabitFrag().newInstance(_habit_manager.getObjectList()));
+//            viewPager.setAdapter(mAdapter);
 //            viewPager.setCurrentItem(1);
 //            //tabLayout.setupWithViewPager(viewPager);
 //        }else if (v.getId()==R.id.fab_time_left){
@@ -234,9 +283,9 @@ public class HomeActivity extends AppCompatActivity
 //            b.setView (timeleftcontent);//设置对话框的内容
 //            b.show();
 //
-//            adapter.replaceFrag(adapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager.readObjectList()));
+//            mAdapter.replaceFrag(mAdapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager.getObjectList()));
 //            viewPager.removeAllViewsInLayout();
-//            viewPager.setAdapter(adapter);
+//            viewPager.setAdapter(mAdapter);
 //            viewPager.setCurrentItem(2);
 //        }
 //    }

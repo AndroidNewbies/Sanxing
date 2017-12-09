@@ -36,7 +36,7 @@ public class HabitManager implements SxObjectManager {
         return HabitPool.get(index).checkState();
     }
 
-    public List<Habit> readObjectList(){
+    public List<Habit> getObjectList(){
 
         return HabitPool;
     }

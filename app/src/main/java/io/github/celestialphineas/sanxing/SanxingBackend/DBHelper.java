@@ -26,10 +26,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //All necessary tables you like to create will create here
+//
+//        String CREATE_TABLE_TASK = "CREATE TABLE " + Task.TABLE  + "("
+//                + Task.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+//                + Task.KEY_TITLE +"TEXT,"+ Task.KEY_BEGIN_TIME +"TEXT,"+Task.KEY_END_TIME +"TEXT,"+Task.KEY_DESCRIPTION +"TEXT,"+Task.KEY_IMPORTANCE+"INTEGER )";
 
         String CREATE_TABLE_TASK = "CREATE TABLE " + Task.TABLE  + "("
                 + Task.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + Task.KEY_content + " TEXT )";
+                + Task.KEY_TITLE +"  TEXT )";
 
         db.execSQL(CREATE_TABLE_TASK);
 

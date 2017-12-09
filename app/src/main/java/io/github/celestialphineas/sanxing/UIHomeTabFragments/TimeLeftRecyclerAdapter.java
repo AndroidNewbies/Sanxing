@@ -73,7 +73,7 @@ public class TimeLeftRecyclerAdapter
     @Override
     public void onBindViewHolder(TimeLeftViewHolder holder, final int position) {
 
-        holder.timeLeftTitle.setText(timeLeftList.get(position).getContent());
+        holder.timeLeftTitle.setText(timeLeftList.get(position).getTitle());
         // TODO: Bind the view with data
         // Please make changes to the timeLeftStartCalendar and timeLeftDueCalendar
         // to match the date with the model

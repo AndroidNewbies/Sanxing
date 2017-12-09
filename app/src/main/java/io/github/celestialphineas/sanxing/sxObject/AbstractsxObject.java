@@ -14,20 +14,21 @@ import org.threeten.bp.format.DateTimeFormatter;
  */
 
 public abstract class AbstractsxObject {
-    private LocalDateTime begin;
+    private LocalDateTime begin ;
     private LocalDateTime end;
     private LocalTime noticetime;
     private boolean state;// Is finished
     private LocalDateTime frequency;//DateTime
-    private String content;
+    private String title;
     AbstractsxObject()
     {
         //initial to now
         state=false;
-        content="";
+        title ="";
     }
     public void setBeginDate(String date)
     {
+        date ="1986-04-08 12:30:20";
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         begin= LocalDateTime.parse(date, sf);
     }
@@ -46,6 +47,7 @@ public abstract class AbstractsxObject {
     }
     public void setEndDate(String date)
     {
+        date ="1986-04-08 12:30:20";
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         end=LocalDateTime.parse(date, sf);
     }
@@ -93,13 +95,13 @@ public abstract class AbstractsxObject {
     {
         return frequency;
     }
-    public void setContent(String text)
+    public void setTitle(String text)
     {
-        content=text;
+        title =text;
     }
-    public String getContent()
+    public String getTitle()
     {
-        return content;
+        return title;
     }
     public void setState(boolean newstate)
     {
