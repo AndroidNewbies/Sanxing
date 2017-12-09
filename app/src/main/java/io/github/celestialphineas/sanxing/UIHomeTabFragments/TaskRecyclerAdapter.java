@@ -11,15 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTaskActivity;
 import io.github.celestialphineas.sanxing.sxObject.Task;
+import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 
 /**
@@ -71,19 +76,28 @@ public class TaskRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, final int position) {
+        if (taskList.isEmpty()) return;
         holder.taskTitle.setText(taskList.get(position).getTitle());
         // TODO: Set taskCalendar to the due calendar got from the database
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
         DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
-        String timeString = dateFormat.format(taskCalendar.getTime())
-                + " " + timeFormat.format(taskCalendar.getTime());
-        holder.taskDueTime.setText(timeString);
 
-        // TODO: Calculate the time difference (i.e. the countdown) and print it here
-        holder.taskCountdown.setText("3 Days 11:23");
-        // TODO: Get the description and print it out here
-        holder.taskDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                "Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla.");
+        holder.taskDueTime.setText(taskList.get(position).getEndDate());
+
+        String begintime = taskList.get(position).getBeginDate();
+        String endtime = taskList.get(position).getEndDate();
+        Long dif = MyDuration.durationFromAtoB(begintime,endtime);
+
+        long day=dif/(24*60*60*1000);
+        long hour=(dif/(60*60*1000)-day*24);
+        long min=((dif/(60*1000))-day*24*60-hour*60);
+
+        Log.e("dif:",dif.toString());
+        Log.e("begintime:",begintime);
+        Log.e("endtime:",endtime);
+        holder.taskCountdown.setText(""+day+"天"+hour+"小时"+min+"分");
+
+        holder.taskDescription.setText(taskList.get(position).getContent());
 
         // Button edit behavior
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +106,7 @@ public class TaskRecyclerAdapter
                 Intent intent = new Intent(context, EditTaskActivity.class);
                 // TODO: Send the object to edit via intent
                 context.startActivity(intent);
+
             }
         });
         // Button delete behavior
@@ -99,16 +114,21 @@ public class TaskRecyclerAdapter
             @Override
             public void onClick(View view) {
                 final Task task = taskList.get(position);
+                //taskList.remove(task);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
                         add(task, position);
+
                         // TODO: Restore the lazily deleted database entry
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
                         .setAction(R.string.undo, redo)
                         .show();
+                TaskRepo repo = new TaskRepo(context);
+                task.setState(0);
+                repo.update(task);
                 // TODO: Lazy delete a database entry
             }
         });

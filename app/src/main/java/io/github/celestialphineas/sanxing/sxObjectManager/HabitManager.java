@@ -34,7 +34,7 @@ public class HabitManager implements SxObjectManager {
         }else  return false;
     }
 
-    public boolean checkObjectState(int index){
+    public int checkObjectState(int index){
         return HabitPool.get(index).checkState();
     }
 

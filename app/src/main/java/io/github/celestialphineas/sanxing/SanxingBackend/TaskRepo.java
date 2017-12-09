@@ -30,14 +30,15 @@ public class TaskRepo {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Task.KEY_TITLE,task.getTitle());
-//        values.put(Task.KEY_BEGIN_TIME,"1986-04-08 12:30:21");
-//        values.put(Task.KEY_DESCRIPTION,task.getDescription());
-//        values.put(Task.KEY_IMPORTANCE,task.getWeight());
-//        values.put(Task.KEY_END_TIME,"1986-04-08 12:30:21");
+        values.put(Task.KEY_BEGIN_TIME,task.getBeginDate());
+        values.put(Task.KEY_DESCRIPTION,task.getContent());
+        values.put(Task.KEY_IMPORTANCE,task.getImportantance());
+        //values.put(Task.KEY_STATE,task.getState());
+        values.put(Task.KEY_END_TIME,task.getEndDate());
 
         // Inserting Row
         long task_Id = db.insert(Task.TABLE, null, values);
-       // db.notify();
+
         db.close(); // Closing database connection
         return (int) task_Id;
     }
@@ -71,7 +72,12 @@ public class TaskRepo {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(Task.KEY_TITLE, task.getTitle());
+        values.put(Task.KEY_TITLE,task.getTitle());
+        values.put(Task.KEY_BEGIN_TIME,task.getBeginDate());
+        values.put(Task.KEY_DESCRIPTION,task.getContent());
+        values.put(Task.KEY_IMPORTANCE,task.getImportantance());
+        //values.put(Task.KEY_STATE,task.getState());
+        values.put(Task.KEY_END_TIME,task.getEndDate());
 
 
         // It's a good practice to use parameter ?, instead of concatenate string
@@ -83,14 +89,14 @@ public class TaskRepo {
         //Open connection to read only
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 //        String selectQuery =  "SELECT  " +
-//                Task.KEY_ID + "," +
-//                Task.KEY_TITLE+ "," +Task.KEY_BEGIN_TIME+ "," +Task.KEY_END_TIME+ "," +Task.KEY_DESCRIPTION+ "," +Task.KEY_IMPORTANCE+
-//                " FROM " + Task.TABLE;
+//                Task.KEY_ID + ", " +
+//                Task.KEY_TITLE+ ", " +Task.KEY_BEGIN_TIME+ ", " +Task.KEY_END_TIME+ ", " +Task.KEY_DESCRIPTION+ ", " +Task.KEY_IMPORTANCE+
+//                " FROM " + Task.TABLE +"WHERE "+ Task.KEY_STATE +"= true";
 
         String selectQuery =  "SELECT  " +
-                Task.KEY_ID + "," +
-                Task.KEY_TITLE +
-                " FROM " + Task.TABLE;
+                Task.KEY_ID + ", " +
+                Task.KEY_TITLE+ ", " +Task.KEY_BEGIN_TIME+ ", " +Task.KEY_END_TIME+ ", " +Task.KEY_DESCRIPTION+ ", " +Task.KEY_IMPORTANCE+
+                " FROM " + Task.TABLE ;
 
         ArrayList<Task> taskList = new ArrayList<Task>();
 
@@ -99,14 +105,15 @@ public class TaskRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                String content = cursor.getString(cursor.getColumnIndex(Task.KEY_TITLE));
-//                String begin = cursor.getString(cursor.getColumnIndex(Task.KEY_BEGIN_TIME));
-//                String end=cursor.getString(cursor.getColumnIndex(Task.KEY_END_TIME));
-//                String n_description=cursor.getString(cursor.getColumnIndex(Task.KEY_DESCRIPTION));
-//                int n_importance=cursor.getInt(cursor.getColumnIndex(Task.KEY_IMPORTANCE));
+                String title = cursor.getString(cursor.getColumnIndex(Task.KEY_TITLE));
+                String begin = cursor.getString(cursor.getColumnIndex(Task.KEY_BEGIN_TIME));
+                String end=cursor.getString(cursor.getColumnIndex(Task.KEY_END_TIME));
+                String n_description=cursor.getString(cursor.getColumnIndex(Task.KEY_DESCRIPTION));
+                int n_importance=cursor.getInt(cursor.getColumnIndex(Task.KEY_IMPORTANCE));
 
-                //taskList.add(new Task(content,begin,end,n_description,n_importance));
-                taskList.add(new Task(content));
+                taskList.add(new Task(title,begin,end,n_description,n_importance));
+                //taskList.add(new Task(content));
+
 
             } while (cursor.moveToNext());
         }

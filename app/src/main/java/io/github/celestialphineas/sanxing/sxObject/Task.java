@@ -27,6 +27,8 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     public static final String KEY_BEGIN_TIME = "begin_time";
     public static final String KEY_END_TIME = "end_time";
     public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_STATE = "state";
+
     private static final long serialVersionUID = 2L;
     public int task_ID;
     // Labels Table Columns names
@@ -63,7 +65,7 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     //点击完成
     public void accomplish()
     {
-        super.setState(true);
+        super.setState(1);
     }
     @Override
     public int compareTo(Task another_task)
@@ -111,6 +113,6 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
 
         int i=0;
         i=(day>=15)?4:(day>=10)?3:(day>=7)?2:(day>=3)?1:(day>=1)?1:0;
-        return priority[getImportant()*5+i];
+        return priority[getImportantance()*5+i];
     }
 }

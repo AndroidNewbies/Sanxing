@@ -1,8 +1,9 @@
 package io.github.celestialphineas.sanxing.sxObject;
 
 
+import android.util.Log;
+
 import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 /**
@@ -17,31 +18,42 @@ public abstract class AbstractsxObject {
     private String title;
     private LocalDateTime begin;
     private LocalDateTime end;
-    private boolean state;// Is finished
+    private int state;// 1: the object isn't deleted or finished ; use int type to facilitate using where clause in sqlite
     private String content;
-    private int important;
+    private int importantance;
+
+
+    public int getState() {
+        return state;
+    }
+
     AbstractsxObject()
     {
         //initial to now
         title="object";
-        state=false;
+        state=1;
         content="";
-        important=0;
+        importantance =0;
+        begin = LocalDateTime.now();
+
+        end = LocalDateTime.now();
+        Log.e("woc",end.toString());
     }
     public void create_object(String title,String begindate,String enddate,String content,int important)
     {
+        setState(1);
         setTitle(title);
         setBeginDate(begindate);
         setEndDate(enddate);
         setContent(content);
-        setImportant(important);
+        setImportantance(important);
     }
     public void edit_object(String title,String enddate,String content,int important)
     {
         setTitle(title);
         setEndDate(enddate);
         setContent(content);
-        setImportant(important);
+        setImportantance(important);
     }
     public void setTitle(String title)
     {
@@ -83,8 +95,11 @@ public abstract class AbstractsxObject {
     public String getEndDate()
     {
         String s=end.toString();
+        Log.e("???",s);
         s=s.replace('T',' ');
+
         s=s.substring(0,19);
+
         return s;
     }
     public LocalDateTime getEndLocalDate()
@@ -99,15 +114,16 @@ public abstract class AbstractsxObject {
     {
         return content;
     }
-    public void setState(boolean newstate)
+    public void setState(int newstate)
     {
         state= newstate;
     }
-    public boolean checkState()
+    public int checkState()
     {
         return state;
     }
-    public void setImportant(int i){important=i;}
-    public int getImportant(){return important;}
+    public void setImportantance(int i){
+        importantance =i;}
+    public int getImportantance(){return importantance;}
 
 }

@@ -37,7 +37,7 @@ public class TaskManager implements SxObjectManager {
         }else  return false;
     }
 
-    public boolean checkObjectState(int index){
+    public int checkObjectState(int index){
         return TaskPool.get(index).checkState();
     }
 

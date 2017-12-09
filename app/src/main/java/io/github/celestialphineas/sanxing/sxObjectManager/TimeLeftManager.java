@@ -32,7 +32,7 @@ public class TimeLeftManager implements SxObjectManager {
         }else  return false;
     }
 
-    public boolean checkObjectState(int index){
+    public int checkObjectState(int index){
         return TimeLeftPool.get(index).checkState();
     }
 

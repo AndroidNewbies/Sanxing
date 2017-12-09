@@ -24,7 +24,10 @@ import android.widget.DatePicker;
 import android.widget.SeekBar;
 import android.widget.TimePicker;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindInt;
@@ -37,6 +40,7 @@ import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTaskActivityBase;
 import io.github.celestialphineas.sanxing.sxObject.Task;
+import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 public class CreateNewTaskActivity extends OperateTaskActivityBase {
     @BindView(R.id.task_linear_layout)      LinearLayoutCompat linearLayout;
@@ -74,16 +78,18 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
 
-//            TaskRepo repo = new TaskRepo(this);//用于task的数据库操作/
-//            repo.insert(new Task(inputTitle.getText().toString()));
-//            Log.e(inputTitle.getText().toString(),"??");
-
+            String begintime = LocalDateTime.now().toString().replace('T',' ').substring(0,19);
+            SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String endtime = s.format(dueCalendar.getTime());
+            Long dif = MyDuration.durationFromAtoB(begintime,endtime);
+            String diftime = s.format(dif);
+            Log.e("time:",diftime);
             Intent intent = new Intent();
             intent.putExtra("task_title",inputTitle.getText().toString());
-//            intent.putExtra("task_importance",selectedImportance);
-//            intent.putExtra("task_begin_time",dueCalendar.getTime());
-//            intent.putExtra("task_end_time",dueCalendar.getTime());
-//            intent.putExtra("task_description",descriptionContent.getText().toString());
+            intent.putExtra("task_importance",selectedImportance);
+            intent.putExtra("task_begin_time",begintime);
+            intent.putExtra("task_end_time",endtime);
+            intent.putExtra("task_description",descriptionContent.getText().toString());
 
             animationSubmit();
 

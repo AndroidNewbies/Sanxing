@@ -28,8 +28,8 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
     @Override
     public int compareTo(TimeLeft another_left)
     {
-        int this_weight=this.getImportant();
-        int another_weight=another_left.getImportant();
+        int this_weight=this.getImportantance();
+        int another_weight=another_left.getImportantance();
         if (this_weight!=another_weight)
         {
             if (this_weight>another_weight) return -1;

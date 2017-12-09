@@ -1,16 +1,23 @@
 package io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.MenuItem;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTaskActivityBase;
+import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 public class EditTaskActivity extends OperateTaskActivityBase {
 
@@ -69,7 +76,20 @@ public class EditTaskActivity extends OperateTaskActivityBase {
             // Use descriptionContent.getText().toString() to get the description
 
             // finish
+            String begintime = LocalDateTime.now().toString().replace('T',' ').substring(0,19);
+            SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String endtime = s.format(dueCalendar.getTime());
+            Long dif = MyDuration.durationFromAtoB(begintime,endtime);
+            String diftime = s.format(dif);
+            Intent intent = new Intent();
+            intent.putExtra("task_title",inputTitle.getText().toString());
+            intent.putExtra("task_importance",selectedImportance);
+            intent.putExtra("task_begin_time",begintime);
+            intent.putExtra("task_end_time",endtime);
+            intent.putExtra("task_description",descriptionContent.getText().toString());
             animationSubmit();
+            setResult(Activity.RESULT_OK, intent);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

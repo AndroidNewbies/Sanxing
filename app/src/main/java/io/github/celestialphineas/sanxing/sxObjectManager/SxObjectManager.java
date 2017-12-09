@@ -11,7 +11,7 @@ public interface SxObjectManager
 
     boolean removeObject(int index);
 
-    boolean checkObjectState(int index);
+    int checkObjectState(int index);
 
 
 }

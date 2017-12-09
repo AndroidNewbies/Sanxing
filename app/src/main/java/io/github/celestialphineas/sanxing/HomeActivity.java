@@ -141,19 +141,13 @@ public class HomeActivity extends AppCompatActivity
 //                    if (data!=null) Log.e("??", "?11?"+data.getStringExtra("baba"));
                     String title = data.getStringExtra("task_title");
                     Log.e("return data:", title);
-//                    String begin = data.getStringExtra("task_begin_time");
-//                    String end = data.getStringExtra("task_end_time");
-//                    String n_description=data.getStringExtra("task_title");
-//                    int n_importance=data.getIntExtra("task_importance",3);
+                    String begin = data.getStringExtra("task_begin_time");
+                    String end = data.getStringExtra("task_end_time");
+                    String n_description=data.getStringExtra("task_description");
+                    int n_importance=data.getIntExtra("task_importance",3);
 
-//                    String begin = "1986-04-08 12:30:20";
-//                    String end="1986-04-08 12:30:20";
-//                    String n_description="busy";
-//                    int n_importance=3;
-                            //insert new task into database
-//                    repo.insert(new Task(title,begin,end,n_description,n_importance));
-                    repo.insert(new Task(title));
-                    //renew _task_manager
+                    repo.insert(new Task(title,begin,end,n_description,n_importance));
+
                     _task_manager.updateTaskManager(repo.getTaskList());
                     //renew viewPager to display the new task in screen at once
                     adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager.getObjectList()));
@@ -161,6 +155,7 @@ public class HomeActivity extends AppCompatActivity
                     viewPager.setCurrentItem(0);
                 }
                 break;
+
             default:
         }
     }

@@ -1,12 +1,8 @@
 package io.github.celestialphineas.sanxing.sxObject;
 
-import android.content.Loader;
-
 import org.threeten.bp.LocalDateTime;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 
 
 /**
@@ -144,8 +140,8 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     @Override
     public int compareTo(Habit another_habit)
     {
-        int this_weight=this.getImportant();
-        int another_weight=another_habit.getImportant();
+        int this_weight=this.getImportantance();
+        int another_weight=another_habit.getImportantance();
         if (this_weight!=another_weight)
         {
             if (this_weight>another_weight) return -1;
