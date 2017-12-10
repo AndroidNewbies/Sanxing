@@ -52,14 +52,9 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         String habitTitle = habit.getTitle();
         // Frequency, edit the selectedFreq according to the model
         selectedFreq = habit.getFrequency();
-        // Importance, edit the selectedImportance according to the model
-<<<<<<< HEAD
-        selectedImportance = 3;
         // Times checked
         checkTimes = 1;
-=======
         selectedImportance = habit.getImportance();
->>>>>>> 7bc8aec1facc7e2aba54840d59b0a604d401f5ef
         // Description
         String habitDescription = habit.getContent();
         // End of the TODO
