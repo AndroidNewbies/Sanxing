@@ -14,6 +14,7 @@
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait"
+            android:configChanges="locale"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,24 +22,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalendarActivity" />
+        <activity
+            android:name=".CalendarActivity"
+            android:configChanges="layoutDirection|locale" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity"
+            android:configChanges="layoutDirection|locale"
             android:theme="@style/TasksTheme" />
         <activity
             android:name=".UIOperateItemActivities.EditItem.EditTaskActivity"
+            android:configChanges="layoutDirection|locale"
             android:theme="@style/TasksTheme" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewHabitActivity"
+            android:configChanges="layoutDirection|locale"
             android:theme="@style/HabitsTheme" />
         <activity
             android:name=".UIOperateItemActivities.EditItem.EditHabitActivity"
+            android:configChanges="layoutDirection|locale"
             android:theme="@style/HabitsTheme" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity"
+            android:configChanges="layoutDirection|locale"
             android:theme="@style/TimeLeftTheme" />
         <activity
             android:name=".UIOperateItemActivities.EditItem.EditTimeLeftActivity"
+            android:configChanges="layoutDirection|locale"
             android:theme="@style/TimeLeftTheme" />
 
         <service
@@ -47,10 +56,12 @@
 
         <receiver android:name=".timer.AlarmReceiver" />
 
-        <activity android:name=".UISupportActivities.AboutActivity" />
+        <activity
+            android:name=".UISupportActivities.AboutActivity"
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".UISupportActivities.SettingsActivity"
-            android:label="@string/settings"></activity>
+            android:configChanges="layoutDirection|locale" />
     </application>
 
 </manifest>

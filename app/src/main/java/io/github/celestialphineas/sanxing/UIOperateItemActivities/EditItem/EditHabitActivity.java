@@ -43,6 +43,8 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         selectedFreq = 4;
         // Importance, edit the selectedImportance according to the model
         selectedImportance = 3;
+        // Times checked
+        checkTimes = 1;
         // Description
         String habitDescription = "To be implemented...";
         // End of the TODO
@@ -54,6 +56,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         habitFreqSeekBar.setProgress(selectedFreq);
         habitImportance.setProgress(selectedImportance);
         descriptionContent.setText(habitDescription);
+        if(checkTimes != 0) timesContent.setText(Integer.toString(checkTimes));
     }
 
     @Override

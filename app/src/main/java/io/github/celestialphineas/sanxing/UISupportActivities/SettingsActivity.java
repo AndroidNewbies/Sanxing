@@ -2,6 +2,7 @@ package io.github.celestialphineas.sanxing.UISupportActivities;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -16,6 +17,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
+import android.provider.Settings;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatCheckedTextView;
@@ -31,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
 import io.github.celestialphineas.sanxing.R;
 
 /*
@@ -38,7 +41,6 @@ https://github.com/davcpas1234/MaterialSettings
 */
 
 public class SettingsActivity extends PreferenceActivity {
-    private static String appVersion;
 
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -77,22 +79,13 @@ public class SettingsActivity extends PreferenceActivity {
             }
         });
 
-        try {
-            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            appVersion = pInfo.versionName;
-        } catch(PackageManager.NameNotFoundException e) {
-            appVersion = "unknown";
-        }
-
         setupSimplePreferencesScreen();
     }
 
     @SuppressWarnings("deprecation")
     private void setupSimplePreferencesScreen() {
-        addPreferencesFromResource(R.xml.pref_general);
+        addPreferencesFromResource(R.xml.preferences);
         bindPreferenceSummaryToValue(findPreference("notifications_ringtone"));
-        Preference app_version = findPreference("application_version");
-        setPreferenceSummary(app_version, appVersion);
     }
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
@@ -118,7 +111,6 @@ public class SettingsActivity extends PreferenceActivity {
                 if (TextUtils.isEmpty(stringValue)) {
                     // Empty values correspond to 'silent' (no ringtone).
                     preference.setSummary(R.string.pref_ringtone_silent);
-
                 } else {
                     Ringtone ringtone = RingtoneManager.getRingtone(
                             preference.getContext(), Uri.parse(stringValue));
@@ -262,8 +254,6 @@ public class SettingsActivity extends PreferenceActivity {
         }
 
         Toolbar Tbar = (Toolbar) appBar.getChildAt(0);
-
-        Tbar.setTitle(preferenceScreen.getTitle());
 
         Tbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
