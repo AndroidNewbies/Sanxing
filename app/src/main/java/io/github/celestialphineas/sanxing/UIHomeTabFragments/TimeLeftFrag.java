@@ -27,7 +27,7 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
 public class TimeLeftFrag extends Fragment {
 
-    private TimeLeftManager _time_left_manager;
+    private TimeLeftManager timeLeftManager;
     private String mArgs;
     public TimeLeftFrag() {
         // Required empty public constructor
@@ -56,19 +56,19 @@ public class TimeLeftFrag extends Fragment {
         fragment.mArgs = arguments;
         return fragment;
     }
-    public TimeLeftFrag newInstance(List<TimeLeft> mylist) {
+    public TimeLeftFrag newInstance(TimeLeftManager timeLeftManager) {
         mArgs = "list";
-        _time_left_manager = new TimeLeftManager(mylist);
+        this.timeLeftManager = timeLeftManager;
 
         TimeLeftFrag fragment = new TimeLeftFrag();
         Bundle args = new Bundle();
         ArrayList<String> test_args = new ArrayList<String>();
-        for (int i=0;i<mylist.size();i++){
-            test_args.add(mylist.get(i).getTitle());
+        for (int i=0;i<timeLeftManager.getObjectList().size();i++){
+            test_args.add(timeLeftManager.getObjectList().get(i).getTitle());
         }
         //args.putStringArrayList("data",test_args);
         //fragment.setArguments(args);
-        fragment._time_left_manager = new TimeLeftManager(mylist);
+        fragment.timeLeftManager = timeLeftManager;
         fragment.mArgs = "list";
         return fragment;
     }
@@ -89,7 +89,7 @@ public class TimeLeftFrag extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        if (_time_left_manager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(_time_left_manager.getObjectList()));
+        if (timeLeftManager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(timeLeftManager.getObjectList()));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

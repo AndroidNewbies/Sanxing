@@ -4,6 +4,7 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
  * Created by apple on 2017/11/3.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -97,22 +98,27 @@ public class HabitRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final HabitViewHolder holder, final int position) {
-        holder.habitTitle.setText(habitList.get(position).getTitle());
+        final Habit habit_at_position=habitList.get(position);
+        holder.habitTitle.setText(habit_at_position.getTitle());
         // TODO: Set the frequency (in the form of integer, see OperateHabitActivity for definition)
         // TODO: Modify the habitFreq private variable
-        holder.habitFreq.setText(holder.freqIntToString(habitFreq));
+        //done
+        holder.habitFreq.setText(holder.freqIntToString(habit_at_position.getFrequency()));
         // TODO: Bind the view with data
-        holder.habitCount.setText("3 Days");
+        //done
+        holder.habitCount.setText(habit_at_position.getRecordnumber()+"/"+habit_at_position.getNeednumber());
         // TODO: Get the description and print it out here
-        holder.habitDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                "Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla.");
+        //done
+        holder.habitDescription.setText(habit_at_position.getContent());
         // Button edit behavior
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditHabitActivity.class);
+                intent.putExtra("position",position);
                 // TODO: Send the object to edit via intent
-                context.startActivity(intent);
+                //done
+                ((Activity)context).startActivityForResult(intent, 4);
             }
         });
 
@@ -153,6 +159,7 @@ public class HabitRecyclerAdapter
             public void onClick(View view) {
                 boolean status = true;
                 // TODO: Check the checking status
+                status=habit_at_position.getRecordnumber()==habit_at_position.getNeednumber();
                 if(status) {
                     // The user has already checked today
                     Snackbar.make(view, holder.alreadyChecked, holder.snackBarTimeout)
@@ -160,6 +167,8 @@ public class HabitRecyclerAdapter
                 } else {
                     // The user has not checked yet
                     // TODO: Check, write the database and refresh view
+                    habit_at_position.addRecord();
+                    holder.habitCount.setText(habit_at_position.getRecordnumber()+"/"+habit_at_position.getNeednumber());
                 }
             }
         });

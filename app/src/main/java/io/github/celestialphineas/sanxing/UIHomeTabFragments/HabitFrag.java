@@ -25,7 +25,7 @@ import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
 
 public class HabitFrag extends Fragment {
 
-    private HabitManager _habit_manager;
+    private HabitManager habitManager;
     private String mArgs;
     public HabitFrag() {
         // Required empty public constructor
@@ -54,19 +54,19 @@ public class HabitFrag extends Fragment {
         fragment.mArgs = arguments;
         return fragment;
     }
-    public HabitFrag newInstance(List<Habit> mylist) {
+    public HabitFrag newInstance(HabitManager habitManager) {
         mArgs = "list";
-        _habit_manager = new HabitManager(mylist);
+        this.habitManager = habitManager;
 
         HabitFrag fragment = new HabitFrag();
         Bundle args = new Bundle();
         ArrayList<String> test_args = new ArrayList<String>();
-        for (int i=0;i<mylist.size();i++){
-            test_args.add(mylist.get(i).getTitle());
+        for (int i=0;i<habitManager.getObjectList().size();i++){
+            test_args.add(habitManager.getObjectList().get(i).getTitle());
         }
         //args.putStringArrayList("data",test_args);
         //fragment.setArguments(args);
-        fragment._habit_manager = new HabitManager(mylist);
+        fragment.habitManager = habitManager;
         fragment.mArgs = "list";
         return fragment;
     }
@@ -87,8 +87,8 @@ public class HabitFrag extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        if (_habit_manager !=null)
-            recyclerView.setAdapter(new HabitRecyclerAdapter(_habit_manager.getObjectList()));
+        if (habitManager !=null)
+            recyclerView.setAdapter(new HabitRecyclerAdapter(habitManager.getObjectList()));
         else recyclerView.setAdapter(new HabitRecyclerAdapter());
         return view;
     }

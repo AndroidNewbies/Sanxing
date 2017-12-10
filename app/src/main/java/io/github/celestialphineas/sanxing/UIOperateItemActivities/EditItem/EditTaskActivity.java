@@ -1,13 +1,10 @@
 package io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.MenuItem;
-
-import org.threeten.bp.LocalDateTime;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,32 +12,38 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTaskActivityBase;
-import io.github.celestialphineas.sanxing.timer.MyDuration;
+import io.github.celestialphineas.sanxing.sxObject.Task;
 
 public class EditTaskActivity extends OperateTaskActivityBase {
-
+    private MyApplication myApplication;
+    private Task task;
+    private int position;
     @BindView(R.id.task_linear_layout)      LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_task);
-
+        myApplication= (MyApplication) getApplication();
         // TODO: Handle the intent
+        Intent intent=getIntent();
+        position=intent.getIntExtra("position",-1);
+        task=myApplication.get_task_manager().getObjectList().get(position);
         // TODO: Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
-        String taskTitle = "Hello world!";
+        String taskTitle = task.getTitle();
         // Change the "2017-12-25 14:28 below" to the model's value
-        dueCalendar.set(Calendar.YEAR, 2017);
-        dueCalendar.set(Calendar.MONTH, 12);
-        dueCalendar.set(Calendar.DAY_OF_MONTH, 25);
-        dueCalendar.set(Calendar.HOUR_OF_DAY, 14);
-        dueCalendar.set(Calendar.MINUTE, 28);
+        dueCalendar.set(Calendar.YEAR, task.getEndLocalDate().getYear());
+        dueCalendar.set(Calendar.MONTH, task.getEndLocalDate().getMonthValue()-1);
+        dueCalendar.set(Calendar.DAY_OF_MONTH, task.getEndLocalDate().getDayOfMonth());
+        dueCalendar.set(Calendar.HOUR_OF_DAY, task.getEndLocalDate().getHour());
+        dueCalendar.set(Calendar.MINUTE, task.getEndLocalDate().getMinute());
         // Importance, edit the selectedImportance according to the model
-        selectedImportance = 3;
+        selectedImportance = task.getImportance();
         // Description
-        String taskDescription = "To be implemented...";
+        String taskDescription = task.getContent();
         // End of the TODO
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
@@ -62,7 +65,6 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
             // TODO: The verifyForm() method can be modified if necessary
@@ -74,22 +76,18 @@ public class EditTaskActivity extends OperateTaskActivityBase {
             // Use "selectedImportance" for the the importance 0~4
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
-
+            Log.d("where are you","itemselect");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            task.edit_task(inputTitle.getText().toString(),sdf.format(dueCalendar.getTime()).substring(0,16).concat(":00")
+                    ,descriptionContent.getText().toString(),selectedImportance);
             // finish
-            String begintime = LocalDateTime.now().toString().replace('T',' ').substring(0,19);
-            SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String endtime = s.format(dueCalendar.getTime());
-            Long dif = MyDuration.durationFromAtoB(begintime,endtime);
-            String diftime = s.format(dif);
+
             Intent intent = new Intent();
-            intent.putExtra("task_title",inputTitle.getText().toString());
-            intent.putExtra("task_importance",selectedImportance);
-            intent.putExtra("task_begin_time",begintime);
-            intent.putExtra("task_end_time",endtime);
-            intent.putExtra("task_description",descriptionContent.getText().toString());
-            animationSubmit();
-            setResult(Activity.RESULT_OK, intent);
+            intent.putExtra("position",position);
+            intent.putExtra("ID",task.ID);
+            setResult(RESULT_OK, intent);
             finish();
+            animationSubmit();
             return true;
         }
         return super.onOptionsItemSelected(item);

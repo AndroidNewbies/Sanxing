@@ -36,13 +36,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTaskActivityBase;
 import io.github.celestialphineas.sanxing.sxObject.Task;
-import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 public class CreateNewTaskActivity extends OperateTaskActivityBase {
+    private MyApplication myApplication;
+    private Task task;
     @BindView(R.id.task_linear_layout)      LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
         //////// Animation ////////
         overridePendingTransition(R.anim.none, R.anim.none);
         animationReveal(savedInstanceState);
-
+        myApplication= (MyApplication) getApplication();
+        task=new Task();
         super.onCreate(savedInstanceState);
 
 
@@ -77,20 +80,17 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
             // Use "selectedImportance" for the the importance 0~4
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
-
-            String begintime = LocalDateTime.now().toString().replace('T',' ').substring(0,19);
-            SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String endtime = s.format(dueCalendar.getTime());
-            Long dif = MyDuration.durationFromAtoB(begintime,endtime);
-            String diftime = s.format(dif);
-            Log.w("time:",diftime);
+            LocalDateTime now=LocalDateTime.now();
+            String s=now.toString().replace('T',' ');
+            if (s.length()==16) s=s.concat(":00");
+            if (s.length()>19) s=s.substring(0,19);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            task.create_task(inputTitle.getText().toString(),s,sdf.format(dueCalendar.getTime()).substring(0,16).concat(":00"),
+                    descriptionContent.getText().toString(),selectedImportance);
+            myApplication.getApplicationContext();
+            myApplication.get_task_manager().addObject(task);
             Intent intent = new Intent();
             intent.putExtra("task_title",inputTitle.getText().toString());
-            intent.putExtra("task_importance",selectedImportance);
-            intent.putExtra("task_begin_time",begintime);
-            intent.putExtra("task_end_time",endtime);
-            intent.putExtra("task_description",descriptionContent.getText().toString());
-
             animationSubmit();
 
             //pass data to the home activity

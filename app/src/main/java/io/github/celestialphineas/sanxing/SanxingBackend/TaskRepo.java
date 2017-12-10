@@ -32,7 +32,7 @@ public class TaskRepo {
         values.put(Task.KEY_TITLE,task.getTitle());
         values.put(Task.KEY_BEGIN_TIME,task.getBeginDate());
         values.put(Task.KEY_DESCRIPTION,task.getContent());
-        values.put(Task.KEY_IMPORTANCE,task.getImportantance());
+        values.put(Task.KEY_IMPORTANCE,task.getImportance());
         //values.put(Task.KEY_STATE,task.getState());
         values.put(Task.KEY_END_TIME,task.getEndDate());
 
@@ -75,7 +75,7 @@ public class TaskRepo {
         values.put(Task.KEY_TITLE,task.getTitle());
         values.put(Task.KEY_BEGIN_TIME,task.getBeginDate());
         values.put(Task.KEY_DESCRIPTION,task.getContent());
-        values.put(Task.KEY_IMPORTANCE,task.getImportantance());
+        values.put(Task.KEY_IMPORTANCE,task.getImportance());
         //values.put(Task.KEY_STATE,task.getState());
         values.put(Task.KEY_END_TIME,task.getEndDate());
 

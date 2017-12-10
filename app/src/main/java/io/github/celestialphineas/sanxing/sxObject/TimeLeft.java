@@ -11,10 +11,10 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
     {
         super();
     }
-    public TimeLeft(String content)
+    public TimeLeft(String title)
     {
         super();
-        super.setContent(content);
+        super.setTitle(title);
     }
     public void create_timeleft(String title,String begindate,String enddate,String content,int important)
     {
@@ -28,8 +28,8 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
     @Override
     public int compareTo(TimeLeft another_left)
     {
-        int this_weight=this.getImportantance();
-        int another_weight=another_left.getImportantance();
+        int this_weight=this.getImportance();
+        int another_weight=another_left.getImportance();
         if (this_weight!=another_weight)
         {
             if (this_weight>another_weight) return -1;

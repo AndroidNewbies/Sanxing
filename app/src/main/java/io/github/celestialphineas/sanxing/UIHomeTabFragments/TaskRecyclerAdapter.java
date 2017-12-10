@@ -1,5 +1,6 @@
 package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -83,29 +84,26 @@ public class TaskRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, final int position) {
-        if (taskList.isEmpty()) return;
-        holder.taskTitle.setText(taskList.get(position).getTitle());
+        Task task_at_position=taskList.get(position);
+        if (task_at_position==null) Log.e("task","empty");
+        holder.taskTitle.setText(task_at_position.getTitle());
         // TODO: Set taskCalendar to the due calendar got from the database
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
-        DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
-
-        holder.taskDueTime.setText(taskList.get(position).getEndDate());
-
-        String begintime = taskList.get(position).getBeginDate();
-        String endtime = taskList.get(position).getEndDate();
-        Long dif = MyDuration.durationFromAtoB(begintime,endtime);
-
-        long day=dif/(24*60*60*1000);
-        long hour=(dif/(60*60*1000)-day*24);
-        long min=((dif/(60*1000))-day*24*60-hour*60);
-
-        Log.w("dif:",dif.toString());
-        Log.w("begintime:",begintime);
-        Log.w("endtime:",endtime);
-        holder.taskCountdown.setText("" + day + holder.unitDay
-                + hour + holder.unitHour + min + holder.unitMinute);
-
-        holder.taskDescription.setText(taskList.get(position).getContent());
+        // done by Lin
+        holder.taskDueTime.setText(task_at_position.getEndDate());
+        // TODO: Calculate the time difference (i.e. the countdown) and print it here
+        //done by Lin
+        String endtime=task_at_position.getEndDate();
+        long diff= MyDuration.durationFromNowtoB(endtime);
+        diff /=1000;
+        long days= diff/60/60/24;
+        diff %=86400;
+        long hours=diff/60/60;
+        diff %=3600;
+        long minutes=diff/60;
+        holder.taskCountdown.setText(String.valueOf(days)+" Days "+hours+":"+minutes);
+        // TODO: Get the description and print it out here
+        //done by Lin
+        holder.taskDescription.setText(task_at_position.getContent());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,10 +122,11 @@ public class TaskRecyclerAdapter
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditTaskActivity.class);
+                intent.putExtra("position",position);
                 // TODO: Send the object to edit via intent
-                context.startActivity(intent);
-
+                ((Activity)context).startActivityForResult(intent, 3);
             }
+
         });
         // Button delete behavior
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {

@@ -1,8 +1,12 @@
 package io.github.celestialphineas.sanxing.sxObject;
 
+import android.content.Loader;
+
 import org.threeten.bp.LocalDateTime;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -27,12 +31,12 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         have_record_all=0;
         nextddl=LocalDateTime.now();
     }
-    public Habit(String content)
+    public Habit(String title)
     {
         super();
         frequency=2;
         recordnumber=0;
-        super.setContent(content);
+        super.setTitle(title);
     }
     public int getFrequency(){ return frequency;}
     public int getRecordnumber(){ return recordnumber;}
@@ -53,8 +57,8 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     {
         super.create_object(title, begindate, enddate, content, important);
         this.frequency=frequency;
-        nextddl=LocalDateTime.of(getEndLocalDate().getYear(),getEndLocalDate().getMonth(),
-                getEndLocalDate().getDayOfMonth(),0,0,0);
+        nextddl=LocalDateTime.of(getBeginLocalDate().getYear(),getBeginLocalDate().getMonth(),
+                getBeginLocalDate().getDayOfMonth(),0,0,0);
         need_record_all=0;
         have_record_all=0;
         recordnumber=0;
@@ -140,8 +144,8 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     @Override
     public int compareTo(Habit another_habit)
     {
-        int this_weight=this.getImportantance();
-        int another_weight=another_habit.getImportantance();
+        int this_weight=this.getImportance();
+        int another_weight=another_habit.getImportance();
         if (this_weight!=another_weight)
         {
             if (this_weight>another_weight) return -1;

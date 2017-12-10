@@ -4,6 +4,7 @@ package io.github.celestialphineas.sanxing.sxObject;
 import android.util.Log;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 /**
@@ -18,42 +19,35 @@ public abstract class AbstractsxObject {
     private String title;
     private LocalDateTime begin;
     private LocalDateTime end;
-    private int state;// 1: the object isn't deleted or finished ; use int type to facilitate using where clause in sqlite
+    private int state;// Is finished,0,delete,1,unfinished,2,finished
     private String content;
-    private int importantance;
-
-
-    public int getState() {
-        return state;
-    }
-
+    private int importance;
+    public int ID;
     AbstractsxObject()
     {
         //initial to now
+        ID=0;
         title="object";
         state=1;
         content="";
-        importantance =0;
-        begin = LocalDateTime.now();
-
-        end = LocalDateTime.now();
-        Log.w("woc",end.toString());
+        importance=0;
+        begin=LocalDateTime.now();
+        end=LocalDateTime.now().plusDays(10);
     }
-    public void create_object(String title,String begindate,String enddate,String content,int important)
+    public void create_object(String title,String begindate,String enddate,String content,int importance)
     {
-        setState(1);
         setTitle(title);
         setBeginDate(begindate);
         setEndDate(enddate);
         setContent(content);
-        setImportantance(important);
+        setImportance(importance);
     }
-    public void edit_object(String title,String enddate,String content,int important)
+    public void edit_object(String title,String enddate,String content,int importance)
     {
         setTitle(title);
         setEndDate(enddate);
         setContent(content);
-        setImportantance(important);
+        setImportance(importance);
     }
     public void setTitle(String title)
     {
@@ -67,6 +61,7 @@ public abstract class AbstractsxObject {
     {
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         begin= LocalDateTime.parse(date, sf);
+        Log.d("begindate",begin.toString());
     }
     public void setBeginDate(int year,int month,int day,int hour,int minute,int second)
     {
@@ -76,7 +71,8 @@ public abstract class AbstractsxObject {
     {
         String s=begin.toString();
         s=s.replace('T',' ');
-        s=s.substring(0,19);
+        if (s.length()==16) s=s.concat(":00");
+        if (s.length()>19) s=s.substring(0,19);
         return s;
     }
     public LocalDateTime getBeginLocalDate()
@@ -87,6 +83,7 @@ public abstract class AbstractsxObject {
     {
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         end=LocalDateTime.parse(date, sf);
+        Log.d("enddate",end.toString());
     }
     public void setEndDate(int year,int month,int day,int hour,int minute,int second)
     {
@@ -95,11 +92,10 @@ public abstract class AbstractsxObject {
     public String getEndDate()
     {
         String s=end.toString();
-        Log.w("???",s);
         s=s.replace('T',' ');
-
-        s=s.substring(0,19);
-
+        Log.e("StringError",s);
+        if (s.length()==16) s=s.concat(":00");
+        if (s.length()>19) s=s.substring(0,19);
         return s;
     }
     public LocalDateTime getEndLocalDate()
@@ -122,8 +118,7 @@ public abstract class AbstractsxObject {
     {
         return state;
     }
-    public void setImportantance(int i){
-        importantance =i;}
-    public int getImportantance(){return importantance;}
+    public void setImportance(int i){importance=i;}
+    public int getImportance(){return importance;}
 
 }

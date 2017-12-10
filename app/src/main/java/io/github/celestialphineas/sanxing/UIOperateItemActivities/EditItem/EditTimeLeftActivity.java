@@ -2,6 +2,7 @@ package io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem;
 
 import android.animation.Animator;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.SeekBar;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindInt;
@@ -28,38 +30,48 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateItemActivityBase;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTimeLeftActivityBase;
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
 public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
-
+    private MyApplication myApplication;
+    private TimeLeft timeLeft;
+    private int position;
     @BindView(R.id.time_left_linear_layout)     LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_time_left);
 
+        myApplication= (MyApplication) getApplication();
         // TODO: Handle the intent
+        //done
+        Intent intent=getIntent();
+        position=intent.getIntExtra("position",-1);
+        timeLeft=myApplication.get_time_left_manager().getObjectList().get(position);
         // TODO: Change the lines below to synchronize data of the view and that of the model
+        //done
         // You may modify the lines below to set the activity's UI state
         // Title
-        String timeLeftTitle = "Hello world!";
+        String timeLeftTitle = timeLeft.getTitle();
         // Change the "2017-12-25 14:28 below" to the model's value
-        startCalendar.set(Calendar.YEAR, 2017);
-        startCalendar.set(Calendar.MONTH, Calendar.DECEMBER);
-        startCalendar.set(Calendar.DAY_OF_MONTH, 23);
-        startCalendar.set(Calendar.HOUR_OF_DAY, 14);
-        startCalendar.set(Calendar.MINUTE, 28);
+        startCalendar.set(Calendar.YEAR, timeLeft.getBeginLocalDate().getYear());
+        startCalendar.set(Calendar.MONTH, timeLeft.getBeginLocalDate().getMonthValue()-1);
+        startCalendar.set(Calendar.DAY_OF_MONTH, timeLeft.getBeginLocalDate().getDayOfMonth());
+        startCalendar.set(Calendar.HOUR_OF_DAY, timeLeft.getBeginLocalDate().getHour());
+        startCalendar.set(Calendar.MINUTE, timeLeft.getBeginLocalDate().getMinute());
         // Change the "2017-12-25 14:28 below" to the model's value
-        dueCalendar.set(Calendar.YEAR, 2017);
-        dueCalendar.set(Calendar.MONTH, Calendar.DECEMBER);
-        dueCalendar.set(Calendar.DAY_OF_MONTH, 25);
-        dueCalendar.set(Calendar.HOUR_OF_DAY, 14);
-        dueCalendar.set(Calendar.MINUTE, 28);
+        dueCalendar.set(Calendar.YEAR, timeLeft.getEndLocalDate().getYear());
+        dueCalendar.set(Calendar.MONTH, timeLeft.getEndLocalDate().getMonthValue()-1);
+        dueCalendar.set(Calendar.DAY_OF_MONTH, timeLeft.getEndLocalDate().getDayOfMonth());
+        dueCalendar.set(Calendar.HOUR_OF_DAY, timeLeft.getEndLocalDate().getHour());
+        dueCalendar.set(Calendar.MINUTE, timeLeft.getEndLocalDate().getMinute());
         // Importance, edit the selectedImportance according to the model
-        selectedImportance = 3;
+        selectedImportance = timeLeft.getImportance();
         // Description
-        String timeLeftDescription = "To be implemented...";
+        String timeLeftDescription = timeLeft.getContent();
         // End of the TODO
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
@@ -99,8 +111,16 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
             // Use "selectedImportance" for the the importance 0~4
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
-
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            timeLeft.create_timeleft(inputTitle.getText().toString(),sdf.format(startCalendar.getTime()).substring(0,16).concat(":00"),
+                    sdf.format(dueCalendar.getTime()).substring(0,16).concat(":00"),descriptionContent.getText().toString(),
+                    selectedImportance);
             // finish
+            Intent intent = new Intent();
+            intent.putExtra("position",position);
+            intent.putExtra("ID",timeLeft.ID);
+            setResult(RESULT_OK, intent);
+            finish();
             animationSubmit();
             return true;
         }
