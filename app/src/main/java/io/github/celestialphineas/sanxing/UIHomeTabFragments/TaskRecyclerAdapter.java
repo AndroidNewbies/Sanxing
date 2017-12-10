@@ -100,7 +100,7 @@ public class TaskRecyclerAdapter
         long hours=diff/60/60;
         diff %=3600;
         long minutes=diff/60;
-        holder.taskCountdown.setText(String.valueOf(days)+" Days "+hours+":"+minutes);
+        holder.taskCountdown.setText(String.valueOf(days)+ holder.unitDay +hours+":"+minutes);
         // TODO: Get the description and print it out here
         //done by Lin
         holder.taskDescription.setText(task_at_position.getContent());

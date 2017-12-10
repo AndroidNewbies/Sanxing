@@ -70,7 +70,7 @@
     <string name="pref_title_vibrate">震动</string>
     <string name="pref_title_ringtone">铃声</string>
     <string name="pref_clear_data">清除用户数据</string>
-    <string name="pref_header_dangerous">三思且行</string>
+    <string name="pref_header_dangerous">三思后行</string>
     <string name="summary_clear_data">清除所有任务、习惯和倒计时数据，清空的数据将无法找回。</string>
     <string name="pref_set_notification_time">提醒时间</string>
 </resources>
