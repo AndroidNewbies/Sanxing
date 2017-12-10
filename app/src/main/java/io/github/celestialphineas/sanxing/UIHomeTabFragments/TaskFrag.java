@@ -1,10 +1,12 @@
 package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -30,7 +35,7 @@ public class TaskFrag extends Fragment {
     @BindView(R.id.task_recycler_view)      RecyclerView recyclerView;
 
     public TaskRecyclerAdapter mAdapter;
-    private TaskManager taskManager;
+    public TaskManager taskManager;
     private RecyclerView.LayoutManager layoutManager;
 
     public TaskFrag() {
@@ -54,11 +59,11 @@ public class TaskFrag extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    public TaskFrag newInstance(List<Task> mylist) {
+    public TaskFrag newInstance(TaskManager taskManager) {
 
-        taskManager = new TaskManager(mylist);
+        this.taskManager = taskManager;
         TaskFrag fragment = new TaskFrag();
-        fragment.taskManager = new TaskManager(mylist);
+        fragment.taskManager = taskManager;
         return fragment;
     }
     @Override
@@ -83,47 +88,7 @@ public class TaskFrag extends Fragment {
         mAdapter = new TaskRecyclerAdapter(taskManager.getObjectList());
         if(taskManager != null) recyclerView.setAdapter(mAdapter);
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
-
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setHasFixedSize(true);//可提高性能
-//
-//        mAdapter = new TaskRecyclerAdapter(taskManager.getObjectList());
-//
-//        if (taskManager != null) recyclerView.setAdapter(mAdapter);
-//        else recyclerView.setAdapter(new TaskRecyclerAdapter());
-//
-//        //以下是为了实现点击一个task 弹出删除界面 进行删除写的尝试性代码 bug很多 不能及时刷新，不能对数据库进行操作等
-//        mAdapter.setOnItemClickListener(new TaskRecyclerAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, final int position) {
-//                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {  //这个是设置确定按钮
-//
-//                    @RequiresApi(api = Build.VERSION_CODES.O)
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        taskManager.removeObject(position);
-//                    }
-//                });
-//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {  //取消按钮
-//
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//
-//                    }
-//                });
-//
-//                AlertDialog b=builder.create();
-//                b.setIcon(R.mipmap.ic_launcher);//设置图标
-//                b.setTitle("叮");//设置对话框的标题
-//                b.setMessage("要删除这个任务吗？");
-//                b.show();  //必须show一下才能看到对话框
-//            }
-//        });
         return view;
     }
-
 
 }

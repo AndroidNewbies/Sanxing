@@ -1,6 +1,7 @@
 package io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -24,27 +25,37 @@ import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateHabitActivityBase;
+import io.github.celestialphineas.sanxing.sxObject.Habit;
 
 public class EditHabitActivity extends OperateHabitActivityBase {
-
+    private MyApplication myApplication;
+    private Habit habit;
+    private int position;
     @BindView(R.id.habit_linear_layout)         LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_habit);
 
         // TODO: Handle the intent
+        //done
+        myApplication= (MyApplication) getApplication();
+        Intent intent=getIntent();
+        position=intent.getIntExtra("position",-1);
+        habit=myApplication.get_habit_manager().getObjectList().get(position);
         // TODO: Change the lines below to synchronize data of the view and that of the model
+        //done
         // You may modify the lines below to set the activity's UI state
         // Title
-        String habitTitle = "Hello world!";
+        String habitTitle = habit.getTitle();
         // Frequency, edit the selectedFreq according to the model
-        selectedFreq = 4;
+        selectedFreq = habit.getFrequency();
         // Importance, edit the selectedImportance according to the model
-        selectedImportance = 3;
+        selectedImportance = habit.getImportance();
         // Description
-        String habitDescription = "To be implemented...";
+        String habitDescription = habit.getContent();
         // End of the TODO
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
@@ -72,11 +83,16 @@ public class EditHabitActivity extends OperateHabitActivityBase {
             //////// INSERT NECESSARY CODE HERE
             // Use "selectedFreq" for frequency index
             // Use "selectedImportance" for the the importance 0~4
-            // Use "checkTimes" to get the times checked
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
-
+            habit.edit_habit(inputTitle.getText().toString(),"2020-01-01 18:21:00",
+                    descriptionContent.getText().toString(),selectedImportance,selectedFreq);
             // finish
+            Intent intent = new Intent();
+            intent.putExtra("position",position);
+            intent.putExtra("ID",habit.ID);
+            setResult(RESULT_OK, intent);
+            finish();
             animationSubmit();
             return true;
         }

@@ -4,6 +4,7 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
  * Created by apple on 2017/11/3.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,7 @@ import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTimeLeftActivity;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
+import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 
 public class TimeLeftRecyclerAdapter
@@ -76,20 +78,29 @@ public class TimeLeftRecyclerAdapter
     @Override
     public void onBindViewHolder(final TimeLeftViewHolder holder, final int position) {
 
-        holder.timeLeftTitle.setText(timeLeftList.get(position).getTitle());
+        TimeLeft timeLeft_at_position=timeLeftList.get(position);
+        holder.timeLeftTitle.setText(timeLeft_at_position.getTitle());
         // TODO: Bind the view with data
         // Please make changes to the timeLeftStartCalendar and timeLeftDueCalendar
         // to match the date with the model
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
-        String timeStartString = dateFormat.format(timeLeftStartCalendar.getTime());
-        String timeDueString = dateFormat.format(timeLeftDueCalendar.getTime());
-        holder.timeLeftDueTime.setText(timeStartString + holder.rightArrow + timeDueString);
-
+        holder.timeLeftDueTime.setText(timeLeft_at_position.getBeginDate().substring(0,11)
+                + holder.rightArrow + timeLeft_at_position.getEndDate().substring(0,11));
         // TODO: Calculate the time difference and print it here
-        holder.timeLeftCountDown.setText("23 Years");
+        //done by Lin
+        String endtime=timeLeft_at_position.getEndDate();
+        long diff= MyDuration.durationFromNowtoB(endtime);
+        diff /=1000;
+        long years= diff/60/60/24/365;
+        diff %=31536000;
+        long days= diff/60/60/24;
+        diff %=86400;
+        long hours=diff/60/60;
+        diff %=3600;
+        long minutes=diff/60;
+        if (years>0) holder.timeLeftCountDown.setText(years+" Years "+days+" Days "+hours+":"+minutes);
+        else holder.timeLeftCountDown.setText(days+" Days "+hours+":"+minutes);
         // TODO: Get the description and print it out here
-        holder.timeLeftDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                "Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla.");
+        holder.timeLeftDescription.setText(timeLeft_at_position.getContent());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +119,10 @@ public class TimeLeftRecyclerAdapter
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditTimeLeftActivity.class);
+                intent.putExtra("position",position);
                 // TODO: Send the object to edit via intent
-                context.startActivity(intent);
+                //done
+                ((Activity)context).startActivityForResult(intent, 4);
             }
         });
         // Button delete behavior
