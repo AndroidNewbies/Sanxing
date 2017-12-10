@@ -28,7 +28,7 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 public class TimeLeftFrag extends Fragment {
 
     private TimeLeftManager timeLeftManager;
-    private String mArgs;
+
     public TimeLeftFrag() {
         // Required empty public constructor
     }
@@ -41,42 +41,15 @@ public class TimeLeftFrag extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    // TODO: Rename and change types and number of parameters
-    public static TimeLeftFrag newInstance() {
-        TimeLeftFrag fragment = new TimeLeftFrag();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public TimeLeftFrag newInstance(String arguments) {
 
-        TimeLeftFrag fragment = new TimeLeftFrag();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        fragment.mArgs = arguments;
-        return fragment;
-    }
     public TimeLeftFrag newInstance(TimeLeftManager timeLeftManager) {
-        mArgs = "list";
-        this.timeLeftManager = timeLeftManager;
-
         TimeLeftFrag fragment = new TimeLeftFrag();
-        Bundle args = new Bundle();
-        ArrayList<String> test_args = new ArrayList<String>();
-        for (int i=0;i<timeLeftManager.getObjectList().size();i++){
-            test_args.add(timeLeftManager.getObjectList().get(i).getTitle());
-        }
-        //args.putStringArrayList("data",test_args);
-        //fragment.setArguments(args);
         fragment.timeLeftManager = timeLeftManager;
-        fragment.mArgs = "list";
         return fragment;
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override

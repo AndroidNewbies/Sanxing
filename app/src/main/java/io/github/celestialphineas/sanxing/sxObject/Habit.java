@@ -3,6 +3,7 @@ package io.github.celestialphineas.sanxing.sxObject;
 import android.content.Loader;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +22,26 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     private LocalDateTime nextddl;
     private int need_record_all;
     private int have_record_all;
+
+
+    //database tag
+    public static final String KEY_ID = "id";
+    public static final String TABLE = "Habit";//this name can't be changed
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_IMPORTANCE = "importance";
+    public static final String KEY_BEGIN_TIME = "begin_time";
+    public static final String KEY_END_TIME = "end_time";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_STATE = "state";
+    public static final String KEY_FREQUENCY = "frequency";
+    public static final String KEY_RECORDNUMBER = "record_number";
+    public static final String KEY_NEEDNUMBER = "need_number";
+    public static final String KEY_NEXTDDL = "next_ddl";
+    public static final String KEY_NEED_RECORD_ALL = "need_record_all";
+    public static final String KEY_HAVE_RECORD_ALL = "have_record_all";
+    private static final long serialVersionUID = 2L;
+
+
     public Habit()
     {
         super();
@@ -38,13 +59,34 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         recordnumber=0;
         super.setTitle(title);
     }
+    //this constructor only used when read data from the database
+    public Habit(int id,String title, String begin, String end, String n_description, int n_importance,int n_frequency,int n_recordnumber,
+                 int n_neednumber,String n_nextddl,int n_need_all,int n_have_all)
+    {
+
+        super.create_object(title,begin,end,n_description,n_importance);
+        ID  = id;//set the ID in the abstract class
+        frequency=n_frequency;
+        recordnumber=n_recordnumber;
+        neednumber=n_neednumber;
+        need_record_all=n_need_all;
+        have_record_all=n_have_all;
+        setNextddl(n_nextddl);
+    }
+    public void setNextddl(String date){
+        DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        nextddl= LocalDateTime.parse(date, sf);
+    }
     public int getFrequency(){ return frequency;}
     public int getRecordnumber(){ return recordnumber;}
     public int getNeednumber(){ return neednumber;}
     public int getNeed_record_all(){return need_record_all;}
     public int getHave_record_all(){ return have_record_all;}
     public String getNextddl() {
+
         String s = nextddl.toString();
+        if (s.length()==16) s=s.concat(":00");
+        if (s.length()>19) s=s.substring(0,19);
         s = s.replace('T', ' ');
         return s;
     }

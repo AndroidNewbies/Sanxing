@@ -7,6 +7,19 @@ import java.io.Serializable;
  */
 
 public class TimeLeft extends AbstractsxObject implements Serializable,Comparable<TimeLeft>{
+
+    //database tag
+    public static final String KEY_ID = "id";
+    public static final String TABLE = "TimeLeft";//this name can't be changed
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_IMPORTANCE = "importance";
+    public static final String KEY_BEGIN_TIME = "begin_time";
+    public static final String KEY_END_TIME = "end_time";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_STATE = "state";
+
+    private static final long serialVersionUID = 2L;
+
     public TimeLeft()
     {
         super();
@@ -15,6 +28,12 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
     {
         super();
         super.setTitle(title);
+    }
+    //this constructor only used when read data from the database
+    public TimeLeft(int id,String title,String begindate,String enddate,String content,int important)
+    {
+        ID  = id;//set the ID in the abstract class
+        create_timeleft(title, begindate, enddate, content, important);
     }
     public void create_timeleft(String title,String begindate,String enddate,String content,int important)
     {

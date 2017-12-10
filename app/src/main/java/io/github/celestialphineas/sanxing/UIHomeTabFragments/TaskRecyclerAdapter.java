@@ -123,7 +123,7 @@ public class TaskRecyclerAdapter
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditTaskActivity.class);
                 intent.putExtra("position",position);
-                // TODO: Send the object to edit via intent
+                // Send the object to edit via intent
                 ((Activity)context).startActivityForResult(intent, 3);
             }
 
@@ -132,23 +132,26 @@ public class TaskRecyclerAdapter
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final TaskRepo repo = new TaskRepo(context);
                 final Task task = taskList.get(position);
                 //taskList.remove(task);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
                         add(task, position);
-
-                        // TODO: Restore the lazily deleted database entry
+                        // Restore the lazily deleted database entry
+                        task.setState(1);
+                        repo.update(task);
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
                         .setAction(R.string.undo, redo)
                         .show();
-                TaskRepo repo = new TaskRepo(context);
+
+                //  Lazy delete a database entry
                 task.setState(0);
                 repo.update(task);
-                // TODO: Lazy delete a database entry
+
             }
         });
         //将position保存在itemView的Tag中，以便点击时进行获取

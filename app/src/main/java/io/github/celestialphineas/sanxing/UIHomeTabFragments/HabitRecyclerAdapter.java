@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditHabitActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 
@@ -138,18 +139,22 @@ public class HabitRecyclerAdapter
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final HabitRepo repo = new HabitRepo(context);
                 final Habit habit = habitList.get(position);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
                         add(habit, position);
-                        // TODO: Restore the lazily deleted database entry
+                        habit.setState(1);
+                        repo.update(habit);
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
                         .setAction(R.string.undo, redo)
                         .show();
-                // TODO: Lazy delete a database entry
+                //Lazy delete a database entry
+                habit.setState(0);
+                repo.update(habit);
             }
         });
         // Button check

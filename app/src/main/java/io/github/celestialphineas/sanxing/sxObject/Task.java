@@ -27,8 +27,9 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     public static final String KEY_BEGIN_TIME = "begin_time";
     public static final String KEY_END_TIME = "end_time";
     public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_STATE = "state";
+
     private static final long serialVersionUID = 2L;
-    public int task_ID;
     // Labels Table Columns names
 
     public Task()
@@ -42,6 +43,12 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     }
     public Task(String title,String begindate,String enddate,String content,int important)
     {
+        create_task(title, begindate, enddate, content, important);
+    }
+    //this constructor only used when read data from the database
+    public Task(int id,String title,String begindate,String enddate,String content,int important)
+    {
+        ID  = id;//set the ID in the abstract class
         create_task(title, begindate, enddate, content, important);
     }
     //创建时使用
