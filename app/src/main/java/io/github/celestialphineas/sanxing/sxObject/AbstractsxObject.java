@@ -37,7 +37,7 @@ public abstract class AbstractsxObject {
         begin = LocalDateTime.now();
 
         end = LocalDateTime.now();
-        Log.e("woc",end.toString());
+        Log.w("woc",end.toString());
     }
     public void create_object(String title,String begindate,String enddate,String content,int important)
     {
@@ -95,7 +95,7 @@ public abstract class AbstractsxObject {
     public String getEndDate()
     {
         String s=end.toString();
-        Log.e("???",s);
+        Log.w("???",s);
         s=s.replace('T',' ');
 
         s=s.substring(0,19);

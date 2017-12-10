@@ -156,6 +156,44 @@
                     android:max="4"
                     android:progress="2" />
             </android.support.v7.widget.LinearLayoutCompat>
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_padding"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:paddingTop="@dimen/edit_drawable_padding"
+                    android:paddingRight="@dimen/edit_drawable_padding"
+                    android:tint="@color/grey"
+                    android:src="@drawable/ic_date_picker"
+                    android:contentDescription="@string/calendar" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="6sp"
+                    android:text="@string/set_check_times"
+                    android:gravity="bottom|start" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:id="@+id/habit_check_times"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/habit_check_times_content"
+                        android:clickable="true"
+                        android:inputType="number"
+                        android:hint="@string/hint_times" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.LinearLayoutCompat>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

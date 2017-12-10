@@ -72,6 +72,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
             //////// INSERT NECESSARY CODE HERE
             // Use "selectedFreq" for frequency index
             // Use "selectedImportance" for the the importance 0~4
+            // Use "checkTimes" to get the times checked
             // Use inputTitle.getText().toString() to get the title
             // Use descriptionContent.getText().toString() to get the description
 

@@ -7,7 +7,9 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.transition.TransitionManager;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditHabitActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
@@ -47,6 +50,7 @@ public class HabitRecyclerAdapter
     }
 
     class HabitViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.card_root_view)              CardView cardView;
         @BindView(R.id.card_headline)               TextView habitTitle;
         @BindView(R.id.card_subheading)             TextView habitFreq;
         @BindView(R.id.card_countdown)              TextView habitCount;
@@ -111,6 +115,19 @@ public class HabitRecyclerAdapter
                 context.startActivity(intent);
             }
         });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TransitionManager.beginDelayedTransition(holder.cardView);
+                if(holder.habitDescription.getVisibility() == View.VISIBLE) {
+                    holder.habitDescription.setVisibility(View.GONE);
+                } else {
+                    holder.habitDescription.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         // Button delete behavior
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +173,7 @@ public class HabitRecyclerAdapter
     // Remove an entry
     public void remove(int position) {
         try { habitList.remove(position); } catch (Exception e) {
-            Log.e("HabitRecyclerAdapter", "remove: " + position + ", " + habitList.size());
+            Log.w("HabitRecyclerAdapter", "remove: " + position + ", " + habitList.size());
         }
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, habitList.size());
@@ -165,7 +182,7 @@ public class HabitRecyclerAdapter
     // Add an entry
     public void add(Habit habit, int position) {
         try { habitList.add(position, habit); } catch (Exception e) {
-            Log.e("HabitRecyclerAdapter", "add: " + position + ", " + habitList.size());
+            Log.w("HabitRecyclerAdapter", "add: " + position + ", " + habitList.size());
         }
         notifyItemInserted(position);
         notifyItemRangeChanged(position, habitList.size());

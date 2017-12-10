@@ -3,7 +3,9 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.transition.TransitionManager;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
@@ -53,12 +56,16 @@ public class TaskRecyclerAdapter
     }
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.card_root_view)      CardView cardView;
         @BindView(R.id.card_headline)       TextView taskTitle;
         @BindView(R.id.card_subheading)     TextView taskDueTime;
         @BindView(R.id.card_countdown)      TextView taskCountdown;
         @BindView(R.id.card_description)    TextView taskDescription;
         @BindView(R.id.card_button_edit)    AppCompatButton buttonEdit;
         @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
+        @BindString(R.string.unit_day)      String unitDay;
+        @BindString(R.string.unit_hour)     String unitHour;
+        @BindString(R.string.unit_minute)   String unitMinute;
         TaskViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -92,12 +99,25 @@ public class TaskRecyclerAdapter
         long hour=(dif/(60*60*1000)-day*24);
         long min=((dif/(60*1000))-day*24*60-hour*60);
 
-        Log.e("dif:",dif.toString());
-        Log.e("begintime:",begintime);
-        Log.e("endtime:",endtime);
-        holder.taskCountdown.setText(""+day+"天"+hour+"小时"+min+"分");
+        Log.w("dif:",dif.toString());
+        Log.w("begintime:",begintime);
+        Log.w("endtime:",endtime);
+        holder.taskCountdown.setText("" + day + holder.unitDay
+                + hour + holder.unitHour + min + holder.unitMinute);
 
         holder.taskDescription.setText(taskList.get(position).getContent());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TransitionManager.beginDelayedTransition(holder.cardView);
+                if(holder.taskDescription.getVisibility() == View.VISIBLE) {
+                    holder.taskDescription.setVisibility(View.GONE);
+                } else {
+                    holder.taskDescription.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         // Button edit behavior
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +164,7 @@ public class TaskRecyclerAdapter
     // Remove an entry
     public void remove(int position) {
         try { taskList.remove(position); } catch (Exception e) {
-            Log.e("TaskRecyclerAdapter", "remove: " + position + ", " + taskList.size());
+            Log.w("TaskRecyclerAdapter", "remove: " + position + ", " + taskList.size());
         }
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, taskList.size());
@@ -153,8 +173,8 @@ public class TaskRecyclerAdapter
     // Add an entry
     public void add(Task task, int position) {
         try { taskList.add(position, task);
-            Log.e("test","??");
-            Log.e("TaskRecyclerAdapter", "add: " + position + ", " + taskList.size());}
+            Log.w("test","??");
+            Log.w("TaskRecyclerAdapter", "add: " + position + ", " + taskList.size());}
         catch (Exception e) {
 
         }

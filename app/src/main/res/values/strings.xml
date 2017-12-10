@@ -28,8 +28,8 @@
     <string name="hint_description">Enter your description</string>
     <string name="snack_date_not_set">Please select a due date.</string>
     <string name="snack_op_set">Set</string>
-    <string name="snack_time_not_set">Please select due time.</string>
-    <string name="snack_title_not_set">Title not set.</string>
+    <string name="snack_time_not_set">Please select the due time.</string>
+    <string name="snack_title_not_set">Empty title.</string>
     <string name="snack_time_passed">has passed.</string>
     <string name="confirm">Confirm</string>
     <string name="time">Time</string>
@@ -59,7 +59,6 @@
     <string name="right_arrow">" → "</string>
     <string name="button_check">Check</string>
     <string name="snack_already_checked">You have already checked this.</string>
-    <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
 
@@ -137,4 +136,10 @@
     <string name="feedback_info">Tell us whatever problems you\'ve met with a GitHub issue.</string>
     <string name="opensource_license">Open source licenses</string>
     <string name="opensource_license_info">Thanks for the projects listed, we could get our work done more easily.</string>
+    <string name="unit_day">" Days "</string>
+    <string name="unit_hour">" h "</string>
+    <string name="unit_minute">" min "</string>
+    <string name="set_check_times">I\'ve already kept the habit for</string>
+    <string name="hint_times">how many times?</string>
+    <string name="snack_invalid_times">Please set a valid number for times.</string>
 </resources>

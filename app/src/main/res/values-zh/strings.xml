@@ -58,4 +58,10 @@
     <string name="feedback_info">通过GitHub Issue向我们反馈。</string>
     <string name="opensource_license">开源许可证</string>
     <string name="opensource_license_info">感谢这些开源项目让我们能够更加快速地开发。</string>
+    <string name="unit_day">天</string>
+    <string name="unit_minute">分</string>
+    <string name="unit_hour">小时</string>
+    <string name="set_check_times">我已经坚持这个习惯有</string>
+    <string name="hint_times">几次</string>
+    <string name="snack_invalid_times">请输入一个有效的打卡次数。</string>
 </resources>

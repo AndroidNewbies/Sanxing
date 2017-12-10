@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_root_view"
     android:layout_marginLeft="@dimen/card_margin_horizontal"
     android:layout_marginRight="@dimen/card_margin_horizontal"
     android:layout_marginTop="@dimen/card_margin_vertical"
@@ -42,7 +43,8 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textAlignment="center"
-            android:textSize="45sp"
+            android:textSize="30sp"
+            android:textStyle="bold"
             tools:text="15 Days 11:13"
             style="@style/CardSubheadingStyle" />
         <android.support.v7.widget.AppCompatTextView
@@ -52,6 +54,7 @@
             android:layout_below="@id/card_countdown"
             android:paddingTop="5dp"
             android:paddingBottom="10dp"
+            android:visibility="gone"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla." />
         <android.support.v7.widget.LinearLayoutCompat

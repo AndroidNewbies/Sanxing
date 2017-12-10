@@ -33,15 +33,19 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
     protected int selectedFreq = 2;
     // Selected importance 0, 1, 2, 3, 4
     protected int selectedImportance = 2;
+    // Times
+    protected int checkTimes = 0;
     View rootLayout;
     @BindView(R.id.create_new_item_toolbar)
     Toolbar toolbar;
     @BindView(R.id.input_title)                     protected TextInputEditText inputTitle;
     @BindView(R.id.habit_description_content)       protected TextInputEditText descriptionContent;
+    @BindView(R.id.habit_check_times_content)       protected TextInputEditText timesContent;
     @BindView(R.id.freq_text)                       protected AppCompatTextView freqText;
     @BindView(R.id.habit_freq_seek_bar)             protected AppCompatSeekBar habitFreqSeekBar;
     @BindView(R.id.habit_importance_seek_bar)       protected AppCompatSeekBar habitImportance;
     @BindString(R.string.snack_title_not_set)       protected String titleNotSet;
+    @BindString(R.string.snack_invalid_times)       protected String invalidTimes;
 
     @BindString(R.string.thrice_a_day)              protected String thriceADay;
     @BindString(R.string.twice_a_day)               protected String twiceADay;
@@ -120,6 +124,22 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
                     .show();
             inputTitle.requestFocus();
             return false;
+        } else {
+            String timesInput = timesContent.getText().toString();
+            if(!timesInput.isEmpty()) {
+                try{
+                    checkTimes = Integer.parseInt(timesInput);
+                    if(checkTimes < 0) {
+                        Snackbar.make(layout, invalidTimes, snackBarTimeout)
+                                .show();
+                        timesContent.requestFocus();
+                    }
+                } catch (Exception e){
+                    Snackbar.make(layout, invalidTimes, snackBarTimeout)
+                            .show();
+                    timesContent.requestFocus();
+                }
+            }
         }
         // TODO
         return true;

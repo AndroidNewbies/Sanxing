@@ -83,7 +83,7 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
             String endtime = s.format(dueCalendar.getTime());
             Long dif = MyDuration.durationFromAtoB(begintime,endtime);
             String diftime = s.format(dif);
-            Log.e("time:",diftime);
+            Log.w("time:",diftime);
             Intent intent = new Intent();
             intent.putExtra("task_title",inputTitle.getText().toString());
             intent.putExtra("task_importance",selectedImportance);

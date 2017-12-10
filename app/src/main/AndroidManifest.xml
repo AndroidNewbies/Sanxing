@@ -50,7 +50,7 @@
         <activity android:name=".UISupportActivities.AboutActivity" />
         <activity
             android:name=".UISupportActivities.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/settings"></activity>
     </application>
 
 </manifest>

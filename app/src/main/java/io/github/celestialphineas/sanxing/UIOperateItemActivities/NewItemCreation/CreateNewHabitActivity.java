@@ -58,6 +58,7 @@ public class CreateNewHabitActivity extends OperateHabitActivityBase {
             // Use "selectedFreq" for frequency index
             // Use "selectedImportance" for the the importance 0~4
             // Use inputTitle.getText().toString() to get the title
+            // Use "checkTimes" to get the times checked
             // Use descriptionContent.getText().toString() to get the description
 
             // finish

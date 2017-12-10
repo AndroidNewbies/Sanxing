@@ -7,7 +7,9 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.transition.TransitionManager;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +50,7 @@ public class TimeLeftRecyclerAdapter
     }
 
     class TimeLeftViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.card_root_view)      CardView cardView;
         @BindView(R.id.card_headline)       TextView timeLeftTitle;
         @BindView(R.id.card_subheading)     TextView timeLeftDueTime;
         @BindView(R.id.card_countdown)      TextView timeLeftCountDown;
@@ -71,7 +74,7 @@ public class TimeLeftRecyclerAdapter
     }
 
     @Override
-    public void onBindViewHolder(TimeLeftViewHolder holder, final int position) {
+    public void onBindViewHolder(final TimeLeftViewHolder holder, final int position) {
 
         holder.timeLeftTitle.setText(timeLeftList.get(position).getTitle());
         // TODO: Bind the view with data
@@ -87,6 +90,18 @@ public class TimeLeftRecyclerAdapter
         // TODO: Get the description and print it out here
         holder.timeLeftDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla.");
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TransitionManager.beginDelayedTransition(holder.cardView);
+                if(holder.timeLeftDescription.getVisibility() == View.VISIBLE) {
+                    holder.timeLeftDescription.setVisibility(View.GONE);
+                } else {
+                    holder.timeLeftDescription.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         // Button edit behavior
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +142,7 @@ public class TimeLeftRecyclerAdapter
     // Remove an entry
     public void remove(int position) {
         try { timeLeftList.remove(position); } catch (Exception e) {
-            Log.e("TimeLeftRecyclerAdapter", "remove: " + position + ", " + timeLeftList.size());
+            Log.w("TimeLeftRecyclerAdapter", "remove: " + position + ", " + timeLeftList.size());
         }
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, timeLeftList.size());
@@ -136,7 +151,7 @@ public class TimeLeftRecyclerAdapter
     // Add an entry
     public void add(TimeLeft timeLeft, int position) {
         try { timeLeftList.add(position, timeLeft); } catch (Exception e) {
-            Log.e("TimeLeftRecyclerAdapter", "add: " + position + ", " + timeLeftList.size());
+            Log.w("TimeLeftRecyclerAdapter", "add: " + position + ", " + timeLeftList.size());
         }
         notifyItemInserted(position);
         notifyItemRangeChanged(position, timeLeftList.size());

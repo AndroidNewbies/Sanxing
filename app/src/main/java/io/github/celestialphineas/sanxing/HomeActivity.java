@@ -129,7 +129,7 @@ public class HomeActivity extends AppCompatActivity
         else {
             _task_manager.addAll(repo.getTaskList());
             //repo.deleteAll();
-            Log.e("test","??");
+            Log.w("test","??");
         }
 
         // End of the onCreate(Bundle) method
@@ -140,7 +140,7 @@ public class HomeActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK) {
 //                    if (data!=null) Log.e("??", "?11?"+data.getStringExtra("baba"));
                     String title = data.getStringExtra("task_title");
-                    Log.e("return data:", title);
+                    Log.w("return data:", title);
                     String begin = data.getStringExtra("task_begin_time");
                     String end = data.getStringExtra("task_end_time");
                     String n_description=data.getStringExtra("task_description");
@@ -162,7 +162,7 @@ public class HomeActivity extends AppCompatActivity
 
     @OnClick(R.id.fab_tasks)
     void fabTasksOnClickBehavior() {
-        Log.e("repo.size:"+repo.getCount(),"??");
+        Log.w("repo.size:"+repo.getCount(),"??");
         Intent intent = new Intent(this, CreateNewTaskActivity.class);
 
         //startActivity(intent);
