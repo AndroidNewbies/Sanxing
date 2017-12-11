@@ -15,11 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-<<<<<<< HEAD
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
-=======
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
->>>>>>> 8ef8bf8a3972c63841b91b965c297e571dbe395b
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
