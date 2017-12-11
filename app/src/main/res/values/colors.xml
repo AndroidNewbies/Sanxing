@@ -19,6 +19,11 @@
     <color name="colorTimeLeft">#ff6f00</color>
     <color name="colorTimeLeftDark">#c43e00</color>
     <color name="colorTimeLeftAccent">#ffa040</color>
+    <color name="colorTimeLeft0">#ffa040</color>
+    <color name="colorTimeLeft1">#ff8020</color>
+    <color name="colorTimeLeft2">#ff6f00</color>
+    <color name="colorTimeLeft3">#dd5700</color>
+    <color name="colorTimeLeft4">#c43e00</color>
     <color name="colorPrimary">#0277bd</color>
     <color name="colorPrimaryLight">#58a5f0</color>
     <color name="colorPrimaryDark">#004c8c</color>

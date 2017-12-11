@@ -97,4 +97,5 @@
     <string name="details">Details</string>
     <string name="checked">checked</string>
     <string name="hint_choose_a_countdown">Choose a countdown</string>
+    <string name="choose_a_time_left">Choose countdown</string>
 </resources>
