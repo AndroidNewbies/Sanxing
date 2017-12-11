@@ -3,6 +3,11 @@
     <color name="colorTasks">#c2185b</color>
     <color name="colorTasksDark">#8c0032</color>
     <color name="colorTasksAccent">#fa5788</color>
+    <color name="colorTask0">#fa5788</color>
+    <color name="colorTask1">#d03468</color>
+    <color name="colorTask2">#c2185b</color>
+    <color name="colorTask3">#940847</color>
+    <color name="colorTask4">#8c0032</color>
     <color name="colorHabits">#33691e</color>
     <color name="colorHabitsDark">#003d00</color>
     <color name="colorHabitsAccent">#629749</color>
