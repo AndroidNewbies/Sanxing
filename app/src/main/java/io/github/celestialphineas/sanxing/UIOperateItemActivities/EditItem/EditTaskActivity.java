@@ -26,11 +26,11 @@ public class EditTaskActivity extends OperateTaskActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_task);
         myApplication= (MyApplication) getApplication();
-        // TODO: Handle the intent
+        // Handle the intent
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
         task=myApplication.get_task_manager().getObjectList().get(position);
-        // TODO: Change the lines below to synchronize data of the view and that of the model
+        //  Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
         String taskTitle = task.getTitle();
@@ -44,7 +44,7 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         selectedImportance = task.getImportance();
         // Description
         String taskDescription = task.getContent();
-        // End of the TODO
+        // End of the task content set
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
         super.onCreate(savedInstanceState);
@@ -67,11 +67,9 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
-            // TODO: The verifyForm() method can be modified if necessary
+            // The verifyForm() method can be modified if necessary
             if(!verifyForm(linearLayout)) return true;
-            ////////
-            // TODO: Write back the changes to the database
-            //////// INSERT NECESSARY CODE HERE
+            // Store the changes in the intent and write back the changes to the database
             // Use "dueCalendar" for due date and time
             // Use "selectedImportance" for the the importance 0~4
             // Use inputTitle.getText().toString() to get the title
@@ -80,7 +78,6 @@ public class EditTaskActivity extends OperateTaskActivityBase {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             task.edit_task(inputTitle.getText().toString(),sdf.format(dueCalendar.getTime()).substring(0,16).concat(":00")
                     ,descriptionContent.getText().toString(),selectedImportance);
-            // finish
 
             Intent intent = new Intent();
             intent.putExtra("position",position);

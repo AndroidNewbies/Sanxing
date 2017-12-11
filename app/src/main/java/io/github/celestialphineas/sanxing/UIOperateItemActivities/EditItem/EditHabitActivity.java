@@ -39,14 +39,12 @@ public class EditHabitActivity extends OperateHabitActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_habit);
 
-        // TODO: Handle the intent
-        //done
+        // Handle the intent
         myApplication= (MyApplication) getApplication();
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
         habit=myApplication.get_habit_manager().getObjectList().get(position);
-        // TODO: Change the lines below to synchronize data of the view and that of the model
-        //done
+        // Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
         String habitTitle = habit.getTitle();
@@ -57,7 +55,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         selectedImportance = habit.getImportance();
         // Description
         String habitDescription = habit.getContent();
-        // End of the TODO
+        // End of the card content set
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
         super.onCreate(savedInstanceState);
@@ -78,10 +76,10 @@ public class EditHabitActivity extends OperateHabitActivityBase {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
-            // TODO: The verifyForm() method can be modified if necessary
+            // The verifyForm() method can be modified if necessary
             if(!verifyForm(linearLayout)) return true;
             ////////
-            // TODO: Then register the changes in the database
+            // Then register the changes in the database
             //////// INSERT NECESSARY CODE HERE
             // Use "selectedFreq" for frequency index
             // Use "selectedImportance" for the the importance 0~4
@@ -89,7 +87,6 @@ public class EditHabitActivity extends OperateHabitActivityBase {
             // Use descriptionContent.getText().toString() to get the description
             habit.edit_habit(inputTitle.getText().toString(),"2020-01-01 18:21:00",
                     descriptionContent.getText().toString(),selectedImportance,selectedFreq);
-            // finish
             Intent intent = new Intent();
             intent.putExtra("position",position);
             intent.putExtra("ID",habit.ID);

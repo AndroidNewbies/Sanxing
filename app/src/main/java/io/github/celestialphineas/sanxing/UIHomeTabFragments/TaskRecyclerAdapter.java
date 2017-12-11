@@ -87,10 +87,10 @@ public class TaskRecyclerAdapter
         Task task_at_position=taskList.get(position);
         if (task_at_position==null) Log.e("task","empty");
         holder.taskTitle.setText(task_at_position.getTitle());
-        // TODO: Set taskCalendar to the due calendar got from the database
+        // Set taskCalendar to the due calendar got from the database
         // done by Lin
         holder.taskDueTime.setText(task_at_position.getEndDate());
-        // TODO: Calculate the time difference (i.e. the countdown) and print it here
+        // Calculate the time difference (i.e. the countdown) and print it here
         //done by Lin
         String endtime=task_at_position.getEndDate();
         long diff= MyDuration.durationFromNowtoB(endtime);
@@ -101,7 +101,7 @@ public class TaskRecyclerAdapter
         diff %=3600;
         long minutes=diff/60;
         holder.taskCountdown.setText(String.valueOf(days)+ holder.unitDay +hours+":"+minutes);
-        // TODO: Get the description and print it out here
+        // Get the description and print it out here
         //done by Lin
         holder.taskDescription.setText(task_at_position.getContent());
 

@@ -46,13 +46,11 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         title = getString(R.string.edit_time_left);
 
         myApplication= (MyApplication) getApplication();
-        // TODO: Handle the intent
-        //done
+        //Handle the intent
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
         timeLeft=myApplication.get_time_left_manager().getObjectList().get(position);
-        // TODO: Change the lines below to synchronize data of the view and that of the model
-        //done
+        // Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
         String timeLeftTitle = timeLeft.getTitle();
@@ -72,7 +70,7 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         selectedImportance = timeLeft.getImportance();
         // Description
         String timeLeftDescription = timeLeft.getContent();
-        // End of the TODO
+        // End of the timeleft set
 
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
         super.onCreate(savedInstanceState);
@@ -102,11 +100,10 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
-            // TODO: The verifyForm() method can be modified if necessary
+            // The verifyForm() method can be modified if necessary
             if(!verifyForm(linearLayout)) return true;
             ////////
-            // TODO: Then register the changes in the database
-            //////// INSERT NECESSARY CODE HERE
+            // Then register the changes in the database
             // Use "dueCalendar" for due date and time
             // Use "selectedImportance" for the the importance 0~4
             // Use inputTitle.getText().toString() to get the title
@@ -115,7 +112,6 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
             timeLeft.create_timeleft(inputTitle.getText().toString(),sdf.format(startCalendar.getTime()).substring(0,16).concat(":00"),
                     sdf.format(dueCalendar.getTime()).substring(0,16).concat(":00"),descriptionContent.getText().toString(),
                     selectedImportance);
-            // finish
             Intent intent = new Intent();
             intent.putExtra("position",position);
             intent.putExtra("ID",timeLeft.ID);

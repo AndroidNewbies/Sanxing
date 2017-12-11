@@ -81,12 +81,12 @@ public class TimeLeftRecyclerAdapter
 
         TimeLeft timeLeft_at_position=timeLeftList.get(position);
         holder.timeLeftTitle.setText(timeLeft_at_position.getTitle());
-        // TODO: Bind the view with data
+        // Bind the view with data
         // Please make changes to the timeLeftStartCalendar and timeLeftDueCalendar
         // to match the date with the model
         holder.timeLeftDueTime.setText(timeLeft_at_position.getBeginDate().substring(0,11)
                 + holder.rightArrow + timeLeft_at_position.getEndDate().substring(0,11));
-        // TODO: Calculate the time difference and print it here
+        // Calculate the time difference and print it here
         //done by Lin
         String endtime=timeLeft_at_position.getEndDate();
         long diff= MyDuration.durationFromNowtoB(endtime);
@@ -100,8 +100,8 @@ public class TimeLeftRecyclerAdapter
         long minutes=diff/60;
         if (years>0) holder.timeLeftCountDown.setText(years+" Years "+days+" Days "+hours+":"+minutes);
         else holder.timeLeftCountDown.setText(days+" Days "+hours+":"+minutes);
-        // TODO: Get the description and print it out here
-        holder.timeLeftDescription.setText(timeLeft_at_position.getContent());
+        // Get the description and print it out here
+        holder.timeLeftDescription.setText(timeLeft_at_position.getContent());//content is the description
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
