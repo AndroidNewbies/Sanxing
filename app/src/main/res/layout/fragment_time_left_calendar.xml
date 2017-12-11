@@ -1,14 +1,86 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="io.github.celestialphineas.sanxing.UICalendarViews.TimeLeftCalendarFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.celestialphineas.sanxing.UICalendarViews.TaskCalendarFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:background="@color/background_grey">
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="@string/hello_blank_fragment"
-        android:background="@color/colorHabitsAccent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin_horizontal"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="2dp"
+            app:cardPreventCornerOverlap="true">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/time_left_choice"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/time_left_choice_content"
+                    android:clickable="true"
+                    android:inputType="none"
+                    android:hint="@string/hint_choose_a_countdown" />
+            </android.support.design.widget.TextInputLayout>
+        </android.support.v7.widget.CardView>
 
-</FrameLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/time_left_calendar_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin_horizontal"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="2dp"
+            app:cardPreventCornerOverlap="true">
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:orientation="vertical">
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        style="@android:style/TextAppearance.Material.Headline"
+                        android:text="@string/calendar"/>
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/expand_time_left_calendar_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="end|top"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:background="@drawable/ic_expand"
+                        android:padding="0dp"
+                        android:drawablePadding="0dp"
+                        android:drawableTint="@color/grey"
+                        android:textColor="@color/grey" />
+                </android.support.v7.widget.LinearLayoutCompat>
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:id="@+id/time_left_calendar_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.CardView>
+    </android.support.v7.widget.LinearLayoutCompat>
+</ScrollView>

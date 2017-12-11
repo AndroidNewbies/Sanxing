@@ -76,4 +76,5 @@
     <string name="go_to_today">转到今天</string>
     <string name="details">详情</string>
     <string name="checked">已打卡</string>
+    <string name="hint_choose_a_countdown">选取一个倒计时</string>
 </resources>
