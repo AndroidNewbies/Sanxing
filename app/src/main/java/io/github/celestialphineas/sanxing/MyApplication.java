@@ -21,6 +21,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
+import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
+import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
@@ -44,6 +47,23 @@ public class MyApplication extends Application {
     private TaskManager _task_manager;
     private HabitManager _habit_manager;
     private TimeLeftManager _time_left_manager;
+
+    private TaskRepo taskRepo ;
+    private HabitRepo habitRepo ;//用于habit的数据库操作
+    private TimeLeftRepo timeLeftRepo ;//用于timeleft的数据库操作
+
+    public TaskRepo getTaskRepo() {
+        return taskRepo;
+    }
+
+    public HabitRepo getHabitRepo() {
+        return habitRepo;
+    }
+
+    public TimeLeftRepo getTimeLeftRepo() {
+        return timeLeftRepo;
+    }
+
     @Override
     public void onCreate()
     {
@@ -54,7 +74,17 @@ public class MyApplication extends Application {
         _task_manager = new TaskManager();
         _habit_manager = new HabitManager();
         _time_left_manager = new TimeLeftManager();
+
+        taskRepo = new TaskRepo(this);//用于task的数据库操作
+        habitRepo = new HabitRepo(this);//用于habit的数据库操作
+        timeLeftRepo = new TimeLeftRepo(this);//用于timeleft的数据库操作
         mysetting=new Setting();
+
+        _task_manager.addAll(taskRepo.getTaskList());
+        _time_left_manager.addAll(timeLeftRepo.getTimeLeftList());
+        _habit_manager.addAll(habitRepo.getHabitList());
+
+
         readSetting();
         if (!isServiceRunning(this,"io.github.celestialphineas.imer.MyService"))
         {
