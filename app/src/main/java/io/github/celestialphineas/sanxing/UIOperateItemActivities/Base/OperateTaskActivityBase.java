@@ -140,8 +140,6 @@ public abstract class OperateTaskActivityBase extends OperateItemActivityBase {
                 dueCalendar.set(Calendar.YEAR, year);
                 dueCalendar.set(Calendar.MONTH, monthOfYear);
                 dueCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                DateFormat sdf = android.text.format.DateFormat.getDateFormat(getBaseContext());
-                dueDateContent.setText(sdf.format(dueCalendar.getTime()));
                 setDate = true;
             }
         };

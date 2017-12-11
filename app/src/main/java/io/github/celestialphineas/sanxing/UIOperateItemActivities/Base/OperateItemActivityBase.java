@@ -20,7 +20,7 @@ import io.github.celestialphineas.sanxing.R;
  * Created by celestialphineas on 17-12-7.
  */
 
-public class OperateItemActivityBase extends AppCompatActivity {
+public abstract class OperateItemActivityBase extends AppCompatActivity {
     // Animation center
     protected int cx, cy;
     protected String title = "";

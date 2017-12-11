@@ -93,4 +93,6 @@
     <string name="summary_clear_data">Clear all your tasks, habits and countdowns and never get them back.</string>
     <string name="pref_set_notification_time">Notification time</string>
     <string name="entry_default"></string>
+    <string name="go_to_today">Go to today</string>
+    <string name="details">Details</string>
 </resources>

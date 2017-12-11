@@ -1,6 +1,5 @@
 package io.github.celestialphineas.sanxing;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,11 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.sql.Time;
-import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
@@ -45,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
     private TaskManager _task_manager;
     private HabitManager _habit_manager;
     private TimeLeftManager _time_left_manager;
-
+    private final int[] posPosition = new int[1];
     private TaskRepo repo = new TaskRepo(this);//用于task的数据库操作
 
     // Set the mAdapter
@@ -112,6 +109,7 @@ public class HomeActivity extends AppCompatActivity
                     int position, float positionOffset, int positionOffsetPixels) {}
             @Override
             public void onPageSelected(int position) {
+                posPosition[0] = position;
                 animateFab(position);
             }
             @Override
@@ -229,9 +227,6 @@ public class HomeActivity extends AppCompatActivity
 
         //startActivity(intent);
         startActivityForResult(intent, 0);
-
-
-
     }
 
     @OnClick(R.id.fab_habits)
@@ -304,6 +299,9 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.action_calendar) {
             // Intent to navigate to the calendar activity
             Intent navigateCalendarIntent = new Intent(this, CalendarActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("tab", posPosition[0]);
+            navigateCalendarIntent.putExtras(bundle);
             startActivity(navigateCalendarIntent);
             // TODO: Pass message to calendar activity through intent here
             return true;

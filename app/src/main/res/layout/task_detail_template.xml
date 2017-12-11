@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_detail_template_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/task_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        tools:text="Title"
+        style="@android:style/TextAppearance.Material.Title" />
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/task_detail_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_headline"
+        tools:text="Due: Nov. 12, 2012"
+        style="@style/CardSubheadingStyle" />
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/task_detail_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_countdown"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla." />
+</android.support.v7.widget.LinearLayoutCompat>

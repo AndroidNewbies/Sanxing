@@ -73,4 +73,6 @@
     <string name="pref_header_dangerous">三思后行</string>
     <string name="summary_clear_data">清除所有任务、习惯和倒计时数据，清空的数据将无法找回。</string>
     <string name="pref_set_notification_time">提醒时间</string>
+    <string name="go_to_today">转到今天</string>
+    <string name="details">详情</string>
 </resources>
