@@ -20,11 +20,13 @@ public class MyDuration {
     {
         String aString=A.toString();
         aString=aString.replace('T',' ');
-        aString=aString.substring(0,19);
-
+        if (aString.length()==16) aString=aString.concat(":00");
+        if (aString.length()>19) aString=aString.substring(0,19);
+        //todo : reform the aString
         String bString=B.toString();
         bString=bString.replace('T',' ');
-        bString=bString.substring(0,19);
+        if (bString.length()==16) bString=bString.concat(":00");
+        if (bString.length()>19) bString=bString.substring(0,19);
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long diff=0;

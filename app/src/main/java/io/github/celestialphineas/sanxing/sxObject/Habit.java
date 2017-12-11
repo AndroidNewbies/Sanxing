@@ -1,13 +1,15 @@
 package io.github.celestialphineas.sanxing.sxObject;
 
-import android.content.Loader;
+import android.util.Log;
 
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
+
+import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 
 /**
@@ -23,6 +25,7 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     private int need_record_all;
     private int have_record_all;
 
+    private List<Integer> record;
 
     //database tag
     public static final String KEY_ID = "id";
@@ -39,12 +42,14 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     public static final String KEY_NEXTDDL = "next_ddl";
     public static final String KEY_NEED_RECORD_ALL = "need_record_all";
     public static final String KEY_HAVE_RECORD_ALL = "have_record_all";
+    public static final String KEY_RECORD_LIST = "record_list";
     private static final long serialVersionUID = 2L;
 
 
     public Habit()
     {
         super();
+        record = new ArrayList<Integer>();
         frequency=2;
         recordnumber=0;
         neednumber=1;
@@ -61,7 +66,7 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     }
     //this constructor only used when read data from the database
     public Habit(int id,String title, String begin, String end, String n_description, int n_importance,int n_frequency,int n_recordnumber,
-                 int n_neednumber,String n_nextddl,int n_need_all,int n_have_all)
+                 int n_neednumber,String n_nextddl,int n_need_all,int n_have_all)//todo : record list
     {
 
         super.create_object(title,begin,end,n_description,n_importance);
@@ -72,6 +77,37 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         need_record_all=n_need_all;
         have_record_all=n_have_all;
         setNextddl(n_nextddl);
+        next_day();
+    }
+
+    public List<Integer> getRecord() {
+        return record;
+    }
+    public String getRecordInString() {
+        String result="";
+        for (int i=0;i<record.size();i++){
+            result += String.valueOf(record.get(i));
+            result += " ";
+        }
+        Log.e("Ken result","woc"+result);
+        return result;
+    }
+
+    public Habit(int id, String title, String begin, String end, String n_description, int n_importance, int n_frequency, int n_recordnumber,
+                 int n_neednumber, String n_nextddl, int n_need_all, int n_have_all, List<Integer> n_record_list )//todo : record list
+    {
+
+        super.create_object(title,begin,end,n_description,n_importance);
+        ID  = id;//set the ID in the abstract class
+        frequency=n_frequency;
+        recordnumber=n_recordnumber;
+        neednumber=n_neednumber;
+        need_record_all=n_need_all;
+        have_record_all=n_have_all;
+        setNextddl(n_nextddl);
+        record = n_record_list;
+//        record.addAll(n_record_list);
+        next_day();
     }
     public void setNextddl(String date){
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -123,6 +159,16 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
             recordnumber++;
             have_record_all++;
         }
+        if (recordnumber == neednumber){
+            //todo : list add days from today to begin
+            long diff = 0;
+            diff = LocalDateTime.now().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)-getBeginLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC);
+
+            int diff_int = (int)diff;
+            Integer day = diff_int/60/60/24;
+            Log.e("Ken: dif for habits", String.valueOf(diff)+" "+diff+" "+day);
+            record.add(day);
+        }
     }
 
     //消除
@@ -142,8 +188,8 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         while (!now.isBefore(nextddl))//更新总需要
         {
             nextddl=nextddl.plusDays(get_duration());
-            need_record_all+=neednumber;
             neednumber=get_need_record();
+            need_record_all+=neednumber;
             recordnumber=0;
         }
     }

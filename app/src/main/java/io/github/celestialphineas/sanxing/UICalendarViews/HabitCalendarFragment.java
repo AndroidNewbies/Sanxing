@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,12 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.sxObject.Habit;
+import io.github.celestialphineas.sanxing.sxObject.Task;
+import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
+import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 
 public class HabitCalendarFragment extends Fragment {
     @BindView(R.id.habit_calendar_view)
@@ -43,6 +49,8 @@ public class HabitCalendarFragment extends Fragment {
     final Calendar selectedCalendar = Calendar.getInstance();
     final List<Event> events = new ArrayList<>();
 
+    private MyApplication myApplication;
+    private HabitManager  mHabitManager;
     public HabitCalendarFragment() { }
 
     public static HabitCalendarFragment newInstance() {
@@ -52,6 +60,8 @@ public class HabitCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        myApplication= (MyApplication) getActivity().getApplication();
+        mHabitManager = myApplication.get_habit_manager();
         super.onCreate(savedInstanceState);
     }
 
@@ -95,12 +105,27 @@ public class HabitCalendarFragment extends Fragment {
         // 2. The second argument is the date of the event in milliseconds
         // 3. The third should be an object of the event
         //    Constructor: EventDetailObject(String title, String time, String description, int importance)
-        events.add(new Event(getColorByImportance(0), new Date().getTime() + 10000000,
-                new EventDetailObject("WTH!", "Brand new world!", 0)));
+        List<Habit> habitList = mHabitManager.getObjectList();//get tasklist stored in the database
+
+        for (int i=0;i<habitList.size();i++) {
+            Habit temp = habitList.get(i);
+            int importance = temp.getImportance();
+            for (int j = 0; j < temp.getRecord().size(); j++) {
+                long millionSeconds = 0;
+                millionSeconds = temp.getRecord().get(j)*86400000 + temp.getBeginLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)*1000;
+                Log.e("local mill 2", String.valueOf(millionSeconds));
+
+                //add event
+                events.add(new Event(getColorByImportance(importance),millionSeconds,
+                        new EventDetailObject(temp.getTitle(), temp.getContent(), importance)));
+
+            }
+            //get the milliseconds corresponding to the events constructor rule from the data stored in the database
+        }
+        //this a test event
         events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
-                new EventDetailObject("Hello!", "Lalala! Lalala~~~", 3)));
-        events.add(new Event(getColorByImportance(2), new Date().getTime() + 120000200,
-                new EventDetailObject("World!", "Hahahahahahahaha...", 2)));
+                new EventDetailObject("this is a test", "Lalala! Lalala~~~", 3)));
+
         // End of TODO
 
         // This will add the habits in the "events" list to the calendar view
@@ -138,7 +163,7 @@ public class HabitCalendarFragment extends Fragment {
     }
 
     final void updateHabitCalendarYearMonth() {
-        DateFormat sdf = new SimpleDateFormat("YYYY MMMM");
+        DateFormat sdf = new SimpleDateFormat("yyyy MMMM");
         habitCalendarYearMonth.setText(sdf.format(selectedCalendar.getTime()));
     }
 

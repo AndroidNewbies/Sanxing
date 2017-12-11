@@ -45,9 +45,10 @@ public class HabitRepo {
         values.put(Habit.KEY_NEED_RECORD_ALL,habit.getNeed_record_all());
         values.put(Habit.KEY_HAVE_RECORD_ALL,habit.getHave_record_all());
 
+        values.put(Habit.KEY_RECORD_LIST,habit.getRecordInString()+" ");
         // Inserting Row
         long habit_Id = db.insert(Habit.TABLE, null, values);
-
+        Log.e("baba a ",habit.getRecordInString());
         db.close(); // Closing database connection
         return (int) habit_Id;
     }
@@ -94,6 +95,8 @@ public class HabitRepo {
         values.put(Habit.KEY_NEXTDDL,habit.getNextddl());
         values.put(Habit.KEY_NEED_RECORD_ALL,habit.getNeed_record_all());
         values.put(Habit.KEY_HAVE_RECORD_ALL,habit.getHave_record_all());
+        Log.e("update",habit.getRecordInString()+"#");
+        values.put(Habit.KEY_RECORD_LIST,habit.getRecordInString()+" ");
 
         // It's a good practice to use parameter ?, instead of concatenate string
         db.update(Habit.TABLE, values, Habit.KEY_ID + "= ?", new String[] { String.valueOf(habit.ID) });
@@ -107,7 +110,8 @@ public class HabitRepo {
 //        Log.e("well","get habitlist");
         String selectQuery =  "SELECT  " +
                 Habit.KEY_ID + ", " + Habit.KEY_TITLE+ ", " +Habit.KEY_BEGIN_TIME+ ", " +Habit.KEY_END_TIME+ ", " +Habit.KEY_DESCRIPTION+ ", " +Habit.KEY_IMPORTANCE+" , "+
-                Habit.KEY_FREQUENCY +" , "+Habit.KEY_RECORDNUMBER +" , "+Habit.KEY_NEEDNUMBER +" , "+Habit.KEY_NEXTDDL +" , "+Habit.KEY_NEED_RECORD_ALL +" , "+Habit.KEY_HAVE_RECORD_ALL +
+                Habit.KEY_FREQUENCY +" , "+Habit.KEY_RECORDNUMBER +" , "+Habit.KEY_NEEDNUMBER +" , "+Habit.KEY_NEXTDDL +" , "+Habit.KEY_NEED_RECORD_ALL +" , "+Habit.KEY_HAVE_RECORD_ALL +" , "
+                + Habit.KEY_RECORD_LIST +
         " FROM " + Habit.TABLE +" WHERE "+ Habit.KEY_STATE +" > 0  ";
 
         ArrayList<Habit> habitList = new ArrayList<Habit>();
@@ -134,8 +138,16 @@ public class HabitRepo {
                 int n_need_all=cursor.getInt(cursor.getColumnIndex(Habit.KEY_NEED_RECORD_ALL));
                 int n_have_all=cursor.getInt(cursor.getColumnIndex(Habit.KEY_HAVE_RECORD_ALL));
 
+                String record_list_string = cursor.getString(cursor.getColumnIndex(Habit.KEY_RECORD_LIST));
+                Log.e("database read list ",record_list_string+"#");
+                String [] record_string = record_list_string.split(" ");
+                List<Integer> record_list = new ArrayList<>();
+                for (String ret : record_string ){
+                    if (!ret.isEmpty()) record_list.add(Integer.valueOf(ret));
+                }
+
                 habitList.add(new Habit(id,title, begin, end, n_description, n_importance,n_frequency,n_recordnumber,
-                        n_neednumber,n_nextddl,n_need_all,n_have_all));
+                        n_neednumber,n_nextddl,n_need_all,n_have_all,record_list));
                 //habitList.add(new Habit("jjj"));
 
             } while (cursor.moveToNext());

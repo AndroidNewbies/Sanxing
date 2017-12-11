@@ -169,8 +169,6 @@ public class HabitRecyclerAdapter
 
                 } else {
                     // The user has not checked yet
-
-
                     habit_at_position.addRecord();
                     holder.habitCount.setText(habit_at_position.getRecordnumber()+"/"+habit_at_position.getNeednumber());
                     // write the new change to database and refresh view

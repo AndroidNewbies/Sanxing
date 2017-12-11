@@ -152,10 +152,9 @@ public class HomeActivity extends AppCompatActivity
                     Task task=_task_manager.getObjectList().get(position);
 
                     //insert task to database
-                    taskRepo.insert(task);
-
-                    //ken
-                    //_task_manager.addObject(task);//when use Lin's version, this line should be commented
+                    int new_ID = taskRepo.insert(task);
+                    //assign the new ID (primary  key) to the new task
+                    task.ID=new_ID;
 
                     _task_manager.order();
                     adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager));
@@ -168,8 +167,10 @@ public class HomeActivity extends AppCompatActivity
                     int position=_habit_manager.getObjectList().size()-1;
                     Habit habit=_habit_manager.getObjectList().get(position);
                     //insert habit to database
-                    habitRepo.insert(habit);
-
+                    Log.e("baba home ","?"+habit.getRecordInString());
+                    int new_ID = habitRepo.insert(habit);
+                    //assign the new ID (primary  key) to the new habit
+                    _habit_manager.getObjectList().get(position).ID = new_ID;
                     _habit_manager.order();
                     adapter.replaceFrag(adapter.getItem(1),new HabitFrag().newInstance(_habit_manager));
                     viewPager.setAdapter(adapter);
@@ -181,8 +182,9 @@ public class HomeActivity extends AppCompatActivity
                     int position=_time_left_manager.getObjectList().size()-1;
                     TimeLeft timeLeft=_time_left_manager.getObjectList().get(position);
                     //insert habit to database
-                    timeLeftRepo.insert(timeLeft);
-
+                    int new_ID = timeLeftRepo.insert(timeLeft);
+                    //assign the new ID (primary  key) to the new habit
+                    _time_left_manager.getObjectList().get(position).ID = new_ID;
                     _time_left_manager.order();
                     adapter.replaceFrag(adapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager));
                     viewPager.setAdapter(adapter);
@@ -215,6 +217,7 @@ public class HomeActivity extends AppCompatActivity
                     Habit habit=_habit_manager.getObjectList().get(position);
                     //update the habit in database
                     habit.ID = habitID;
+                    Log.e("aahome list ",habit.getRecordInString());
                     habitRepo.update(habit);
 
                     _habit_manager.order();

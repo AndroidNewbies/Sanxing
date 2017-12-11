@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,21 +118,15 @@ public class TaskCalendarFragment extends Fragment {
             int importance = temp.getImportance();
 
             //get the milliseconds corresponding to the events constructor rule from the data stored in the database
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-            String endtime = temp.getEndLocalDate()+":00 000";
             long millionSeconds = 0;
-            try {
-                endtime =endtime.replace('T',' ');
-                millionSeconds = sdf.parse(endtime).getTime();//毫秒
+            millionSeconds = temp.getEndLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)*1000;
+            Log.e("local mill 2", String.valueOf(millionSeconds));
 
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
             //add event
             events.add(new Event(getColorByImportance(importance),millionSeconds,
-                    new EventDetailObject(temp.getTitle(), endtime.substring(11,16), temp.getContent(), importance)));
+                    new EventDetailObject(temp.getTitle(), temp.getEndDate().substring(11,16), temp.getContent(), importance)));
         }
-
+        //this is a test event
         events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
                 new EventDetailObject("this is test!", "12:00", "Lalala! Lalala~~~", 3)));
 

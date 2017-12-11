@@ -36,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String CREATE_TABLE_HABIT = "CREATE TABLE " + Habit.TABLE  + "("
                 + Habit.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
                 + Habit.KEY_TITLE +" TEXT, "+ Habit.KEY_BEGIN_TIME +" TEXT, "+Habit.KEY_END_TIME +" TEXT, "+Habit.KEY_DESCRIPTION +" TEXT,  "+Habit.KEY_STATE +" INTEGER, "+Habit.KEY_IMPORTANCE+" INTEGER , "
-                +Habit.KEY_FREQUENCY +" INTEGER, "+Habit.KEY_RECORDNUMBER +" INTEGER, "+Habit.KEY_NEEDNUMBER +" INTEGER, "+Habit.KEY_NEXTDDL +" TEXT, "+Habit.KEY_NEED_RECORD_ALL +" INTEGER, "+Habit.KEY_HAVE_RECORD_ALL +" INTEGER ) ";
+                +Habit.KEY_FREQUENCY +" INTEGER, "+Habit.KEY_RECORDNUMBER +" INTEGER, "+Habit.KEY_NEEDNUMBER +" INTEGER, "+Habit.KEY_NEXTDDL +" TEXT, "+Habit.KEY_NEED_RECORD_ALL +" INTEGER, "+Habit.KEY_HAVE_RECORD_ALL +" INTEGER , "+Habit.KEY_RECORD_LIST +" TEXT ) ";
 
         String CREATE_TABLE_TIMELEFT = "CREATE TABLE " + TimeLeft.TABLE  + "("
                 + TimeLeft.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
