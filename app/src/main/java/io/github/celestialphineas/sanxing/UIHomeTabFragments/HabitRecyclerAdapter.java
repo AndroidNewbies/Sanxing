@@ -101,15 +101,12 @@ public class HabitRecyclerAdapter
     public void onBindViewHolder(final HabitViewHolder holder, final int position) {
         final Habit habit_at_position=habitList.get(position);
         holder.habitTitle.setText(habit_at_position.getTitle());
-        // TODO: Set the frequency (in the form of integer, see OperateHabitActivity for definition)
-        // TODO: Modify the habitFreq private variable
-        //done
+        // Set the frequency (in the form of integer, see OperateHabitActivity for definition)
+        // Modify the habitFreq private variable
         holder.habitFreq.setText(holder.freqIntToString(habit_at_position.getFrequency()));
-        // TODO: Bind the view with data
-        //done
+        // Bind the view with data
         holder.habitCount.setText(habit_at_position.getRecordnumber()+"/"+habit_at_position.getNeednumber());
-        // TODO: Get the description and print it out here
-        //done
+        //Get the description and print it out here
         holder.habitDescription.setText(habit_at_position.getContent());
         // Button edit behavior
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +114,7 @@ public class HabitRecyclerAdapter
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditHabitActivity.class);
                 intent.putExtra("position",position);
-                // TODO: Send the object to edit via intent
-                //done
+                //  Send the object to edit via intent
                 ((Activity)context).startActivityForResult(intent, 4);
             }
         });
@@ -162,18 +158,23 @@ public class HabitRecyclerAdapter
         holder.buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HabitRepo repo = new HabitRepo(context);
                 boolean status = true;
-                // TODO: Check the checking status
+                // Check the checking status
                 status=habit_at_position.getRecordnumber()==habit_at_position.getNeednumber();
                 if(status) {
                     // The user has already checked today
                     Snackbar.make(view, holder.alreadyChecked, holder.snackBarTimeout)
                             .show();
+
                 } else {
                     // The user has not checked yet
-                    // TODO: Check, write the database and refresh view
+
+
                     habit_at_position.addRecord();
                     holder.habitCount.setText(habit_at_position.getRecordnumber()+"/"+habit_at_position.getNeednumber());
+                    // write the new change to database and refresh view
+                    repo.update(habit_at_position);
                 }
             }
         });

@@ -65,10 +65,10 @@ public class CreateNewTimeLeftActivity extends OperateTimeLeftActivityBase {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm_new_item) {
-            // TODO: The verifyForm() method can be modified if necessary
+            // The verifyForm() method can be modified if necessary
             if(!verifyForm(linearLayout)) return true;
             ////////
-            // TODO: Then register the changes in the database
+            // Then register the changes in the database
             //////// INSERT NECESSARY CODE HERE
             // Use "dueCalendar" for due date and time
             // Use "selectedImportance" for the the importance 0~4

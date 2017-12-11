@@ -11,6 +11,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,8 +34,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.sxObject.Task;
+import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 
 public class TaskCalendarFragment extends Fragment {
     @BindView(R.id.task_calendar_view)              CompactCalendarView taskCalendarView;
@@ -46,6 +51,9 @@ public class TaskCalendarFragment extends Fragment {
     final Calendar selectedCalendar = Calendar.getInstance();
     final List<Event> events = new ArrayList<>();
 
+    private MyApplication myApplication;
+    private TaskManager mTaskManager;
+
     public TaskCalendarFragment() { }
 
     public static TaskCalendarFragment newInstance() {
@@ -55,8 +63,11 @@ public class TaskCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        myApplication= (MyApplication) getActivity().getApplication();
+        mTaskManager = myApplication.get_task_manager();
         super.onCreate(savedInstanceState);
     }
+
 
     // An inner class for storing the task event details
     class EventDetailObject {
@@ -84,12 +95,13 @@ public class TaskCalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_task_calendar, container, false);
         ButterKnife.bind(this, view);
         taskCalendarView.setUseThreeLetterAbbreviation(true);
         updateTaskCalendarYearMonth();
 
-        // TODO: Get a list of events (tasks) from the model
+        // Get a list of events (tasks) from the model
         // The event list will be later drawn on the calendar
         // Below shows an example: 3 events are inserted
         // 1. The first argument of events should be a color, use the private method
@@ -97,13 +109,31 @@ public class TaskCalendarFragment extends Fragment {
         // 2. The second argument is the date of the event in milliseconds
         // 3. The third should be an object of the event
         //    Constructor: EventDetailObject(String title, String time, String description, int importance)
-        events.add(new Event(getColorByImportance(0), new Date().getTime() + 10000000,
-                new EventDetailObject("WTH!", "14:00", "Brand new world!", 0)));
+        List<Task> taskList = mTaskManager.getObjectList();//get tasklist stored in the database
+
+        for (int i=0;i<taskList.size();i++){
+            Task temp =  taskList.get(i);
+            int importance = temp.getImportance();
+
+            //get the milliseconds corresponding to the events constructor rule from the data stored in the database
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
+            String endtime = temp.getEndLocalDate()+":00 000";
+            long millionSeconds = 0;
+            try {
+                endtime =endtime.replace('T',' ');
+                millionSeconds = sdf.parse(endtime).getTime();//毫秒
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            //add event
+            events.add(new Event(getColorByImportance(importance),millionSeconds,
+                    new EventDetailObject(temp.getTitle(), endtime.substring(11,16), temp.getContent(), importance)));
+        }
+
         events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
-                new EventDetailObject("Hello!", "12:00", "Lalala! Lalala~~~", 3)));
-        events.add(new Event(getColorByImportance(2), new Date().getTime() + 120000200,
-                new EventDetailObject("World!", "13:00", "Hahahahahahahaha...", 2)));
-        // End of TODO
+                new EventDetailObject("this is test!", "12:00", "Lalala! Lalala~~~", 3)));
+
 
         // This will add the tasks in the "events" list to the calendar view
         taskCalendarView.addEvents(events);
