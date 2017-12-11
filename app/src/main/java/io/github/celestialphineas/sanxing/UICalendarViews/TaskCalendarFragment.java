@@ -140,7 +140,7 @@ public class TaskCalendarFragment extends Fragment {
     }
 
     final void updateTaskCalendarYearMonth() {
-        DateFormat sdf = new SimpleDateFormat("YYYY MMMM");
+        DateFormat sdf = new SimpleDateFormat("yyyy MMMM");
         taskCalendarYearMonth.setText(sdf.format(selectedCalendar.getTime()));
     }
 

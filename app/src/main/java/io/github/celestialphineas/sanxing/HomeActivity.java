@@ -1,7 +1,10 @@
 package io.github.celestialphineas.sanxing;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -20,6 +23,8 @@ import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -55,6 +60,7 @@ public class HomeActivity extends AppCompatActivity
     private HabitRepo habitRepo = new HabitRepo(this);//用于habit的数据库操作
     private TimeLeftRepo timeLeftRepo = new TimeLeftRepo(this);//用于timeleft的数据库操作
 
+    private Timer timer = new Timer(true);
     // Set the mAdapter
     ViewPagerAdapter adapter;
     // the view pager
@@ -68,8 +74,12 @@ public class HomeActivity extends AppCompatActivity
         _task_manager=myApplication.get_task_manager();
         _habit_manager=myApplication.get_habit_manager();
         _time_left_manager=myApplication.get_time_left_manager();
+        taskRepo =myApplication.getTaskRepo();
+        habitRepo = myApplication.getHabitRepo();
+        timeLeftRepo = myApplication.getTimeLeftRepo();
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -127,11 +137,7 @@ public class HomeActivity extends AppCompatActivity
         });
 
 
-        _task_manager.addAll(taskRepo.getTaskList());
-
-        _time_left_manager.addAll(timeLeftRepo.getTimeLeftList());
-
-        _habit_manager.addAll(habitRepo.getHabitList());
+        timer.schedule(timerTask,0, 30*1000);//the timer used to change left time
 
 
         // End of the onCreate(Bundle) method
@@ -365,4 +371,29 @@ public class HomeActivity extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler  = new Handler(){
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 1){
+                //redraw the adapter per 30sec to change the left time
+                    int current = viewPager.getCurrentItem();
+                    viewPager.setAdapter(adapter);
+
+                    viewPager.setCurrentItem(current);
+                }
+            }
+
+    };
+
+    //任务
+    private TimerTask timerTask = new TimerTask() {
+        public void run() {
+            Message msg = new Message();
+            msg.what = 1;
+            handler.sendMessage(msg);
+        }
+    };
+
 }
