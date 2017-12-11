@@ -11,6 +11,11 @@
     <color name="colorHabits">#33691e</color>
     <color name="colorHabitsDark">#003d00</color>
     <color name="colorHabitsAccent">#629749</color>
+    <color name="colorHabit0">#629749</color>
+    <color name="colorHabit1">#438032</color>
+    <color name="colorHabit2">#33691e</color>
+    <color name="colorHabit3">#104007</color>
+    <color name="colorHabit4">#003d00</color>
     <color name="colorTimeLeft">#ff6f00</color>
     <color name="colorTimeLeftDark">#c43e00</color>
     <color name="colorTimeLeftAccent">#ffa040</color>
