@@ -26,6 +26,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditTimeLeftActivity;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.timer.MyDuration;
@@ -120,9 +121,8 @@ public class TimeLeftRecyclerAdapter
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditTimeLeftActivity.class);
                 intent.putExtra("position",position);
-                // TODO: Send the object to edit via intent
-                //done
-                ((Activity)context).startActivityForResult(intent, 4);
+
+                ((Activity)context).startActivityForResult(intent, 5);
             }
         });
         // Button delete behavior
@@ -130,17 +130,23 @@ public class TimeLeftRecyclerAdapter
             @Override
             public void onClick(View view) {
                 final TimeLeft timeLeft = timeLeftList.get(position);
+                final TimeLeftRepo repo = new TimeLeftRepo(context);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
                         add(timeLeft, position);
-                        // TODO: Restore the lazily deleted database entry
+                        // Restore the lazily deleted database entry
+                        timeLeft.setState(1);
+                        repo.update(timeLeft);
+
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
                         .setAction(R.string.undo, redo)
                         .show();
-                // TODO: Lazy delete a database entry
+                // Lazy delete a database entry
+                timeLeft.setState(0);
+                repo.update(timeLeft);
             }
         });
         //将position保存在itemView的Tag中，以便点击时进行获取

@@ -46,22 +46,9 @@ public class TaskFrag extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    // TODO: Rename and change types and number of parameters
-    public static TaskFrag newInstance() {
-        TaskFrag fragment = new TaskFrag();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public TaskFrag newInstance(String arguments) {
-        TaskFrag fragment = new TaskFrag();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public TaskFrag newInstance(TaskManager taskManager) {
 
-        this.taskManager = taskManager;
+
+    public TaskFrag newInstance(TaskManager taskManager) {
         TaskFrag fragment = new TaskFrag();
         fragment.taskManager = taskManager;
         return fragment;
@@ -69,7 +56,6 @@ public class TaskFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) { }
     }
 
     @Override

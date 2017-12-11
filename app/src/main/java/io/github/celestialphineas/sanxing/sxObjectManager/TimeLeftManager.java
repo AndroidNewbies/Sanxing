@@ -24,7 +24,11 @@ public class TimeLeftManager implements SxObjectManager {
         TimeLeftPool.add(TimeLeft);
         return true;
     }
+    public boolean addAll(List<TimeLeft> list){
 
+        TimeLeftPool.addAll(list);
+        return true;
+    }
     public boolean removeObject(int index){
         if (index < TimeLeftPool.size()){
             TimeLeftPool.remove(index);

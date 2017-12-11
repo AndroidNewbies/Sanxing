@@ -36,6 +36,7 @@ public abstract class AbstractsxObject {
     }
     public void create_object(String title,String begindate,String enddate,String content,int importance)
     {
+        setState(1);//first create, set it to be active
         setTitle(title);
         setBeginDate(begindate);
         setEndDate(enddate);
@@ -59,6 +60,8 @@ public abstract class AbstractsxObject {
     }
     public void setBeginDate(String date)
     {
+        if (date.length()==16) date=date.concat(":00");
+        if (date.length()>19) date=date.substring(0,19);
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         begin= LocalDateTime.parse(date, sf);
         Log.d("begindate",begin.toString());
@@ -81,6 +84,8 @@ public abstract class AbstractsxObject {
     }
     public void setEndDate(String date)
     {
+        if (date.length()==16) date=date.concat(":00");
+        if (date.length()>19) date=date.substring(0,19);
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         end=LocalDateTime.parse(date, sf);
         Log.d("enddate",end.toString());
@@ -114,11 +119,16 @@ public abstract class AbstractsxObject {
     {
         state= newstate;
     }
+    public int getState()
+    {
+        return state;
+    }
     public int checkState()
     {
         return state;
     }
     public void setImportance(int i){importance=i;}
     public int getImportance(){return importance;}
+
 
 }

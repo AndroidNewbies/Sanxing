@@ -26,7 +26,11 @@ public class HabitManager implements SxObjectManager {
         HabitPool.add(Habit);
         return true;
     }
+    public boolean addAll(List<Habit> list){
 
+        HabitPool.addAll(list);
+        return true;
+    }
     public boolean removeObject(int index){
         if (index < HabitPool.size()){
             HabitPool.remove(index);

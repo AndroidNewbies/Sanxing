@@ -15,9 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+<<<<<<< HEAD
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
+import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
+>>>>>>> 8ef8bf8a3972c63841b91b965c297e571dbe395b
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
@@ -43,7 +53,10 @@ public class HomeActivity extends AppCompatActivity
     private HabitManager _habit_manager;
     private TimeLeftManager _time_left_manager;
     private final int[] posPosition = new int[1];
-    private TaskRepo repo = new TaskRepo(this);//用于task的数据库操作
+
+    private TaskRepo taskRepo = new TaskRepo(this);//用于task的数据库操作
+    private HabitRepo habitRepo = new HabitRepo(this);//用于habit的数据库操作
+    private TimeLeftRepo timeLeftRepo = new TimeLeftRepo(this);//用于timeleft的数据库操作
 
     // Set the mAdapter
     ViewPagerAdapter adapter;
@@ -116,18 +129,13 @@ public class HomeActivity extends AppCompatActivity
             public void onPageScrollStateChanged(int state) { }
         });
 
-        //////// TODO: to be refactored. /////////
 
-        if (repo.getCount()==0){
-            Task task=new Task();
-            task.create_task("1","2017-12-10 00:00:00",
-                    "2017-12-25 00:00:00","lalala",3);
-            _task_manager.addObject(task);
-        }
-        else {
-            _task_manager.addAll(repo.getTaskList());
-            //repo.deleteAll();
-        }
+        _task_manager.addAll(taskRepo.getTaskList());
+
+        _time_left_manager.addAll(timeLeftRepo.getTimeLeftList());
+
+        _habit_manager.addAll(habitRepo.getHabitList());
+
 
         // End of the onCreate(Bundle) method
     }
@@ -139,7 +147,12 @@ public class HomeActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK) {
                     int position=_task_manager.getObjectList().size()-1;
                     Task task=_task_manager.getObjectList().get(position);
-                    //TODO:insert task to database
+
+                    //insert task to database
+                    taskRepo.insert(task);
+
+                    //ken
+                    //_task_manager.addObject(task);//when use Lin's version, this line should be commented
 
                     _task_manager.order();
                     adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager));
@@ -151,7 +164,8 @@ public class HomeActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK) {
                     int position=_habit_manager.getObjectList().size()-1;
                     Habit habit=_habit_manager.getObjectList().get(position);
-                    //TODO:insert habit to database
+                    //insert habit to database
+                    habitRepo.insert(habit);
 
                     _habit_manager.order();
                     adapter.replaceFrag(adapter.getItem(1),new HabitFrag().newInstance(_habit_manager));
@@ -161,9 +175,10 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case 2://create left
                 if (resultCode == RESULT_OK) {
-                    int position=_habit_manager.getObjectList().size()-1;
-                    Habit habit=_habit_manager.getObjectList().get(position);
-                    //TODO:insert habit to database
+                    int position=_time_left_manager.getObjectList().size()-1;
+                    TimeLeft timeLeft=_time_left_manager.getObjectList().get(position);
+                    //insert habit to database
+                    timeLeftRepo.insert(timeLeft);
 
                     _time_left_manager.order();
                     adapter.replaceFrag(adapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager));
@@ -178,7 +193,9 @@ public class HomeActivity extends AppCompatActivity
                     int taskID=data.getIntExtra("ID",-1);
                     if (taskID==-1) break;
                     Task task=_task_manager.getObjectList().get(position);
-                    //TODO: update the task in database
+                    task.ID = taskID;
+                    //update the task in database
+                    taskRepo.update(task);
 
                     _task_manager.order();
                     adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager));
@@ -190,10 +207,12 @@ public class HomeActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK) {
                     int position=data.getIntExtra("position",-1);
                     if (position==-1) break;
-                    int taskID=data.getIntExtra("ID",-1);
-                    if (taskID==-1) break;
+                    int habitID=data.getIntExtra("ID",-1);
+                    if (habitID==-1) break;
                     Habit habit=_habit_manager.getObjectList().get(position);
-                    //TODO:update the habit in database
+                    //update the habit in database
+                    habit.ID = habitID;
+                    habitRepo.update(habit);
 
                     _habit_manager.order();
                     adapter.replaceFrag(adapter.getItem(1),new HabitFrag().newInstance(_habit_manager));
@@ -205,11 +224,13 @@ public class HomeActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK) {
                     int position=data.getIntExtra("position",-1);
                     if (position==-1) break;
-                    int taskID=data.getIntExtra("ID",-1);
-                    if (taskID==-1) break;
+                    int timeleftID=data.getIntExtra("ID",-1);
+                    if (timeleftID==-1) break;
                     TimeLeft timeLeft=_time_left_manager.getObjectList().get(position);
-                    //TODO:update the habit in database
-
+                    timeLeft.ID = timeleftID;
+                    Log.w("time left id", String.valueOf(timeLeft.ID));
+                    //update the habit in database
+                    timeLeftRepo.update(timeLeft);
                     _time_left_manager.order();
                     adapter.replaceFrag(adapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager));
                     viewPager.setAdapter(adapter);
@@ -219,10 +240,9 @@ public class HomeActivity extends AppCompatActivity
             default:
         }
     }
-
     @OnClick(R.id.fab_tasks)
     void fabTasksOnClickBehavior() {
-        Log.w("repo.size:"+repo.getCount(),"??");
+        Log.w("taskRepo.size:"+ taskRepo.getCount(),"??");
         Intent intent = new Intent(this, CreateNewTaskActivity.class);
 
         //startActivity(intent);
