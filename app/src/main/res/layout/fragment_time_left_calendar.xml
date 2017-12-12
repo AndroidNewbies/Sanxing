@@ -76,6 +76,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="50sp"
                             android:textStyle="bold"
+                            android:text="@string/no_countdowns"
                             tools:text="12%"/>
                         <io.github.celestialphineas.sanxing.UICalendarViews.BarCanvasView
                             android:id="@+id/time_left_bar_canvas"
@@ -177,6 +178,7 @@
                         android:textSize="30sp"
                         android:textColor="@color/black87"
                         android:layout_marginTop="5dp"
+                        android:text="@string/place_holder"
                         tools:text="100 Days" />
                     <android.support.v7.widget.LinearLayoutCompat
                         android:layout_width="match_parent"

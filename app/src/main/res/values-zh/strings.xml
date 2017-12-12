@@ -87,4 +87,6 @@
     <string name="unit_year">年</string>
     <string name="unit_month">月</string>
     <string name="unit_week">周</string>
+    <string name="no_countdowns">尚无倒计时</string>
+    <string name="place_holder">_(:з」 ∠)_</string>
 </resources>

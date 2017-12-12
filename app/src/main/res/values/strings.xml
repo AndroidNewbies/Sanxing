@@ -106,4 +106,6 @@
     <string name="unit_year">" Years "</string>
     <string name="unit_month">" Months "</string>
     <string name="unit_week">" Weeks "</string>
+    <string name="no_countdowns">No countdowns</string>
+    <string name="place_holder">_(:з」 ∠)_</string>
 </resources>

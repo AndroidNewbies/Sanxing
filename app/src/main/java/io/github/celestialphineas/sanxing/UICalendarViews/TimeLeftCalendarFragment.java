@@ -36,6 +36,8 @@ import io.github.celestialphineas.sanxing.R;
 
 public class TimeLeftCalendarFragment extends Fragment {
     @BindView(R.id.choose_a_time_left_button)           AppCompatButton chooseButton;
+    @BindView(R.id.view_bar_canvas_button)              AppCompatButton barCanvasButton;
+    @BindView(R.id.view_grid_canvas_button)             AppCompatButton gridCanvasButton;
     @BindView(R.id.time_left_choice_card)               CardView choiceCard;
     @BindView(R.id.time_left_calendar_card)             CardView calendarCard;
     @BindView(R.id.time_left_detail_card)               CardView detailCard;
@@ -143,7 +145,18 @@ public class TimeLeftCalendarFragment extends Fragment {
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
         });
-        updateViews();
+        if(!adapterData.isEmpty()) updateViews();
+        else {
+            timeLeftSubheading.setVisibility(View.GONE);
+            timeLeftDescription.setVisibility(View.GONE);
+            barCanvasButton.setEnabled(false);
+            barCanvasButton.setAlpha(0.5f);
+            gridCanvasButton.setEnabled(false);
+            gridCanvasButton.setAlpha(0.5f);
+            chooseButton.setEnabled(false);
+            chooseButton.setAlpha(0.5f);
+            seekBar.setEnabled(false);
+        }
         return view;
     }
 
