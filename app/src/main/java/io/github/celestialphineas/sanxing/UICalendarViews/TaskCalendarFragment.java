@@ -23,11 +23,13 @@ import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -119,7 +121,8 @@ public class TaskCalendarFragment extends Fragment {
 
             //get the milliseconds corresponding to the events constructor rule from the data stored in the database
             long millionSeconds = 0;
-            millionSeconds = temp.getEndLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)*1000;
+            ZoneOffset zoneoffset=OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+            millionSeconds = temp.getEndLocalDate().toEpochSecond(zoneoffset)*1000;
             Log.e("local mill 2", String.valueOf(millionSeconds));
 
             //add event
