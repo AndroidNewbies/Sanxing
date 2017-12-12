@@ -172,12 +172,12 @@ public class TimeLeftCalendarFragment extends Fragment {
             long nowMillis = Calendar.getInstance().getTimeInMillis();
             double percentage = ((double)(nowMillis - startMillis))/(endMillis - startMillis);
             // Calculate the number of squares
-            long span = endMillis - startMillis;
-            long hours = span/1000/60/60;
-            long days = hours/24;
-            long weeks = days/7;
-            long months = days/30;
-            long years = days/365;
+            double span = endMillis - startMillis;
+            double hours = span/1000/60/60;
+            double days = hours/24;
+            double weeks = days/7;
+            double months = days/30;
+            double years = days/365;
             int squares = hours > 100 ? days > 100 ? weeks > 100 ? months > 100 ?
                     (int)years : (int)months : (int)weeks : (int)days : (int)hours;
             // Set text
@@ -199,11 +199,11 @@ public class TimeLeftCalendarFragment extends Fragment {
             String colorString = "#" + Integer.toHexString(timeLeftEvent.getImportanceColor() & 0xFFFFFF);
             String numString, unitString;
             switch (timeScale) {
-                case 0: numString = Long.toString(hours); unitString = unitHourString; break;
-                case 1: numString = Long.toString(days); unitString = unitDayString; break;
-                case 2: numString = Long.toString(weeks); unitString = unitWeekString; break;
-                case 3: numString = Long.toString(months); unitString = unitMonthString; break;
-                case 4: default: numString = Long.toString(years); unitString = unitYearString; break;
+                case 0: numString = "" + (int)Math.round(hours); unitString = unitHourString; break;
+                case 1: numString = "" + (int)Math.round(days); unitString = unitDayString; break;
+                case 2: numString = "" + (int)Math.round(weeks); unitString = unitWeekString; break;
+                case 3: numString = "" + (int)Math.round(months); unitString = unitMonthString; break;
+                case 4: default: numString = "" + (int)Math.round(years); unitString = unitYearString; break;
             }
             detailString.append(numString);
             detailString.append("<b><font color=\"" + colorString + "\">");

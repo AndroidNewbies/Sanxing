@@ -84,7 +84,7 @@ public class GridCanvasView extends View {
         bgPaint.setColor(bgColor);
         fgPaint.setColor(fgColor);
 
-        for(i = 0; i < nSquares * percentage; i++) {
+        for(i = 0; i < (int)(nSquares * percentage); i++) {
             x = i % squaresPerLine;
             y = i / squaresPerLine;
             fgRect.set((int)((dx * (1 + marginRatio)) * x),
