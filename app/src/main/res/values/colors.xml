@@ -35,6 +35,7 @@
     <color name="black87">#212121</color>
     <color name="grey">#777777</color>
     <color name="light_grey">#AAAAAA</color>
+    <color name="light_light_grey">#CCCCCC</color>
     <color name="background_grey">#EDEDEE</color>
     <color name="bottomNavigation">#0277bd</color>
 </resources>

@@ -98,4 +98,9 @@
     <string name="checked">checked</string>
     <string name="hint_choose_a_countdown">Choose a countdown</string>
     <string name="choose_a_time_left">Choose countdown</string>
+    <string name="bar_view">Bar</string>
+    <string name="grid_view">Grid</string>
+    <string name="unit_year">" Years "</string>
+    <string name="unit_month">" Months "</string>
+    <string name="unit_week">" Weeks "</string>
 </resources>
