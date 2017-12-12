@@ -94,7 +94,7 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
             0,3,4,5,6,
             0,2,3,4,5,
             0,1,2,3,4 };
-    private int score()
+    public int score()
     {
         int day=0;
         LocalDateTime now=LocalDateTime.now();

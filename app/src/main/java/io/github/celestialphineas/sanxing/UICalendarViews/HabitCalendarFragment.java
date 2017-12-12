@@ -16,6 +16,10 @@ import android.widget.DatePicker;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -112,7 +116,8 @@ public class HabitCalendarFragment extends Fragment {
             int importance = temp.getImportance();
             for (int j = 0; j < temp.getRecord().size(); j++) {
                 long millionSeconds = 0;
-                millionSeconds = temp.getRecord().get(j)*86400000 + temp.getBeginLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)*1000;
+                ZoneOffset zoneoffset= OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+                millionSeconds = temp.getRecord().get(j)*86400000 + temp.getBeginLocalDate().toEpochSecond(zoneoffset)*1000;
                 Log.e("local mill 2", String.valueOf(millionSeconds));
 
                 //add event

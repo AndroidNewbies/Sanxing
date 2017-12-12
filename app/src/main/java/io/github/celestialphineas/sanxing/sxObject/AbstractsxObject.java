@@ -7,6 +7,8 @@ import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import io.github.celestialphineas.sanxing.timer.MyDuration;
+
 /**
  * Created by lin on 17-11-1.
  * Date format:yyyy-MM-dd
@@ -64,7 +66,7 @@ public abstract class AbstractsxObject {
         if (date.length()>19) date=date.substring(0,19);
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         begin= LocalDateTime.parse(date, sf);
-        Log.d("begindate",begin.toString());
+        //Log.d("begindate",begin.toString());
     }
     public void setBeginDate(int year,int month,int day,int hour,int minute,int second)
     {
@@ -72,11 +74,7 @@ public abstract class AbstractsxObject {
     }
     public String getBeginDate()
     {
-        String s=begin.toString();
-        s=s.replace('T',' ');
-        if (s.length()==16) s=s.concat(":00");
-        if (s.length()>19) s=s.substring(0,19);
-        return s;
+        return MyDuration.LocalDateTime_to_String(begin);
     }
     public LocalDateTime getBeginLocalDate()
     {
@@ -88,7 +86,7 @@ public abstract class AbstractsxObject {
         if (date.length()>19) date=date.substring(0,19);
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         end=LocalDateTime.parse(date, sf);
-        Log.d("enddate",end.toString());
+        //Log.d("enddate",end.toString());
     }
     public void setEndDate(int year,int month,int day,int hour,int minute,int second)
     {
@@ -96,12 +94,7 @@ public abstract class AbstractsxObject {
     }
     public String getEndDate()
     {
-        String s=end.toString();
-        s=s.replace('T',' ');
-        Log.e("StringError",s);
-        if (s.length()==16) s=s.concat(":00");
-        if (s.length()>19) s=s.substring(0,19);
-        return s;
+        return MyDuration.LocalDateTime_to_String(end);
     }
     public LocalDateTime getEndLocalDate()
     {

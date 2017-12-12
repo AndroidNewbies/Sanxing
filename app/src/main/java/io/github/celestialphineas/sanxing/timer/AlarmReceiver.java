@@ -19,10 +19,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         //唤醒service
         Log.d("AlarmReceiver","I start service at " +intent.getStringExtra("date"));
         Intent i = new Intent(context, MyService.class);
-        LocalDateTime date=LocalDateTime.parse(intent.getStringExtra("date"),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        date=date.plusDays(1);
-        i.putExtra("date",date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        i.putExtra("destory","NO");
         i.putExtra("source","receiver");
         context.startService(i);
     }

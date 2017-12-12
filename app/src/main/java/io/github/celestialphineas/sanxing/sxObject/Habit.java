@@ -118,13 +118,9 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     public int getNeednumber(){ return neednumber;}
     public int getNeed_record_all(){return need_record_all;}
     public int getHave_record_all(){ return have_record_all;}
-    public String getNextddl() {
-
-        String s = nextddl.toString();
-        if (s.length()==16) s=s.concat(":00");
-        if (s.length()>19) s=s.substring(0,19);
-        s = s.replace('T', ' ');
-        return s;
+    public String getNextddl()
+    {
+        return MyDuration.LocalDateTime_to_String(nextddl);
     }
     public LocalDateTime getLocalNextddl(){return nextddl;}
 

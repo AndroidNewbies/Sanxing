@@ -33,7 +33,7 @@ public class Alarmfunction {
         // 获取AlarmManager系统服务
         Calendar c=getCalendar(date);
         Intent intent = new Intent(context, cls);
-        intent.putExtra("date",date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        intent.putExtra("date",date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));//向receiver发送还是用intent
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         //设置一个PendingIntent对象，发送广播
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
