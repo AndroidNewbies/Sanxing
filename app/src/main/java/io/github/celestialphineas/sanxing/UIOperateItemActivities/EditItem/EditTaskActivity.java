@@ -83,7 +83,6 @@ public class EditTaskActivity extends OperateTaskActivityBase {
             intent.putExtra("position",position);
             intent.putExtra("ID",task.ID);
             setResult(RESULT_OK, intent);
-            finish();
             animationSubmit();
             return true;
         }

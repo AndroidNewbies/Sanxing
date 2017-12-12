@@ -84,7 +84,6 @@ public class CreateNewTimeLeftActivity extends OperateTimeLeftActivityBase {
             intent.putExtra("task_title",inputTitle.getText().toString());
             //pass data to the home activity
             setResult(Activity.RESULT_OK, intent);
-            finish();
             animationSubmit();
             return true;
         }

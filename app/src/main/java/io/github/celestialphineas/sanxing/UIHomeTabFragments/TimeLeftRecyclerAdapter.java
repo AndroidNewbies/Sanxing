@@ -18,9 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -61,6 +67,12 @@ public class TimeLeftRecyclerAdapter
         @BindView(R.id.card_button_edit)    AppCompatButton buttonEdit;
         @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
         @BindString(R.string.right_arrow)   String rightArrow;
+        @BindString(R.string.unit_year)     String unitYearString;
+        @BindString(R.string.unit_month)    String unitMonthString;
+        @BindString(R.string.unit_week)     String unitWeekString;
+        @BindString(R.string.unit_day)      String unitDayString;
+        @BindString(R.string.unit_hour)     String unitHourString;
+        @BindString(R.string.unit_minute)   String unitMinuteString;
         TimeLeftViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -78,14 +90,21 @@ public class TimeLeftRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TimeLeftViewHolder holder, final int position) {
-
         TimeLeft timeLeft_at_position=timeLeftList.get(position);
         holder.timeLeftTitle.setText(timeLeft_at_position.getTitle());
+        String beginDateString = timeLeft_at_position.getBeginDate().substring(0,11);
+        String endDateString = timeLeft_at_position.getEndDate().substring(0,11);
+        try {
+            DateFormat sdf = android.text.format.DateFormat.getDateFormat(context);
+            Date date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(beginDateString);
+            beginDateString = sdf.format(date);
+            date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(endDateString);
+            endDateString = sdf.format(date);
+        } catch (Exception e) {}
         // Bind the view with data
         // Please make changes to the timeLeftStartCalendar and timeLeftDueCalendar
         // to match the date with the model
-        holder.timeLeftDueTime.setText(timeLeft_at_position.getBeginDate().substring(0,11)
-                + holder.rightArrow + timeLeft_at_position.getEndDate().substring(0,11));
+        holder.timeLeftDueTime.setText(beginDateString + holder.rightArrow + endDateString);
         // Calculate the time difference and print it here
         //done by Lin
         String endtime=timeLeft_at_position.getEndDate();
@@ -98,8 +117,9 @@ public class TimeLeftRecyclerAdapter
         long hours=diff/60/60;
         diff %=3600;
         long minutes=diff/60;
-        if (years>0) holder.timeLeftCountDown.setText(years+" Years "+days+" Days "+hours+":"+minutes);
-        else holder.timeLeftCountDown.setText(days+" Days "+hours+":"+minutes);
+        if (years>0) holder.timeLeftCountDown.setText(years
+                + holder.unitYearString + days + holder.unitDayString + hours + ":" + minutes);
+        else holder.timeLeftCountDown.setText(days+ holder.unitDayString + hours + ":" + minutes);
         // Get the description and print it out here
         holder.timeLeftDescription.setText(timeLeft_at_position.getContent());//content is the description
 

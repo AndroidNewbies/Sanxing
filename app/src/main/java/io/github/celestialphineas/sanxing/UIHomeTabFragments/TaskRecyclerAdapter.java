@@ -19,7 +19,9 @@ import org.threeten.bp.LocalDateTime;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -89,7 +91,14 @@ public class TaskRecyclerAdapter
         holder.taskTitle.setText(task_at_position.getTitle());
         // Set taskCalendar to the due calendar got from the database
         // done by Lin
-        holder.taskDueTime.setText(task_at_position.getEndDate());
+        String dateString = task_at_position.getEndDate().substring(0,11);
+        String timeString = task_at_position.getEndDate().substring(11);
+        try {
+            DateFormat sdf = android.text.format.DateFormat.getDateFormat(context);
+            Date date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(dateString);
+            dateString = sdf.format(date);
+        } catch (Exception e) {}
+        holder.taskDueTime.setText(dateString + " " + timeString);
         // Calculate the time difference (i.e. the countdown) and print it here
         //done by Lin
         String endtime=task_at_position.getEndDate();

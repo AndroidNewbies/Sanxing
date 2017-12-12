@@ -79,7 +79,6 @@ public class CreateNewHabitActivity extends OperateHabitActivityBase {
             // finish
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
-            finish();
             animationSubmit();
             return true;
         }

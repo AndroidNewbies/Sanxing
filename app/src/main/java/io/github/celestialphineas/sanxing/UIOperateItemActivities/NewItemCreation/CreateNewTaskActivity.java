@@ -94,8 +94,7 @@ public class CreateNewTaskActivity extends OperateTaskActivityBase {
 
             //pass data to the home activity
             setResult(Activity.RESULT_OK, intent);
-            finish();
-
+            animationSubmit();
             return true;
         }
         return super.onOptionsItemSelected(item);
