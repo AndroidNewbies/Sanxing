@@ -89,4 +89,23 @@
     <string name="unit_week">周</string>
     <string name="no_countdowns">尚无倒计时</string>
     <string name="place_holder">_(:з」 ∠)_</string>
+    <string name="pref_title_first_day_of_the_week">一周起始于</string>
+    <string-array name="pref_week_first_day_list_titles">
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+    </string-array>
+    <string-array name="pref_week_first_day_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 </resources>

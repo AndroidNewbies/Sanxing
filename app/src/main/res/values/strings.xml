@@ -59,18 +59,6 @@
     <string name="right_arrow">" → "</string>
     <string name="button_check">Check</string>
     <string name="snack_already_checked">You have already checked this.</string>
-
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
@@ -108,4 +96,23 @@
     <string name="unit_week">" Weeks "</string>
     <string name="no_countdowns">No countdowns</string>
     <string name="place_holder">_(:з」 ∠)_</string>
+    <string name="pref_title_first_day_of_the_week">First day of the week</string>
+    <string-array name="pref_week_first_day_list_titles">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="pref_week_first_day_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 </resources>

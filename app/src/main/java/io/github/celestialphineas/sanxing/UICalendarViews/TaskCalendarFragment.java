@@ -2,9 +2,11 @@ package io.github.celestialphineas.sanxing.UICalendarViews;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -135,6 +137,9 @@ public class TaskCalendarFragment extends Fragment {
 
 
         // This will add the tasks in the "events" list to the calendar view
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int preferedWeekday = Integer.parseInt(prefs.getString("calendar_first_day_of_week", "0")) + 1;
+        taskCalendarView.setFirstDayOfWeek(preferedWeekday);
         taskCalendarView.addEvents(events);
         taskCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
         updateTaskDetails(selectedCalendar.getTime());
