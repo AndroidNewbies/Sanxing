@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.konifar.fab_transformation.FabTransformation;
+//import com.konifar.fab_transformation.FabTransformation;
 
 import java.util.TimerTask;
 
