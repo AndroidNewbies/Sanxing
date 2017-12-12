@@ -114,8 +114,8 @@ public class AboutActivity extends AppCompatActivity {
 
     @OnClick(R.id.credits_card)
     void creditsOnClickBehavior() {
-        TransitionManager.beginDelayedTransition(creditsCard);
         TransitionManager.beginDelayedTransition(aboutRootLayout);
+        TransitionManager.beginDelayedTransition(creditsCard);
         if(longlongText.getVisibility() == View.VISIBLE) {
             longlongText.setVisibility(View.GONE);
         } else {

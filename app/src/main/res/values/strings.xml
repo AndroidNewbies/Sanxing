@@ -97,6 +97,7 @@
     <string name="no_countdowns">No countdowns</string>
     <string name="place_holder">_(:з」 ∠)_</string>
     <string name="pref_title_first_day_of_the_week">First day of the week</string>
+    <string name="statistics_tasks">tasks</string>
     <string-array name="pref_week_first_day_list_titles">
         <item>Sunday</item>
         <item>Monday</item>
@@ -115,4 +116,10 @@
         <item>5</item>
         <item>6</item>
     </string-array>
+    <string name="statistics_habits">habits</string>
+    <string name="statistics_time_left">countdowns</string>
+    <string name="total_items">Total items</string>
+    <string name="statistics_and_achievements"><![CDATA[Statistics & Achievements]]></string>
+    <string name="statistics_total_description">The on-going sessions that you are now with us.</string>
+    <string name="toggle_summary">Toggle summary</string>
 </resources>

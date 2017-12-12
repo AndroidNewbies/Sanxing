@@ -70,6 +70,10 @@
             android:name=".UISupportActivities.SettingsActivity"
             android:screenOrientation="portrait"
             android:configChanges="layoutDirection|locale" />
+        <activity
+            android:name=".UIStatistics.StatisticsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="layoutDirection|locale" />
     </application>
 
 </manifest>
