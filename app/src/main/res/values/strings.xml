@@ -125,4 +125,5 @@
     <string name="statistics_finished_description">The sessions that you have already done.</string>
     <string name="achievement_description">See what you have achieved with us.</string>
     <string name="no_achievements">No achievements</string>
+    <string name="no_timeline_to_show">No timeline to show.</string>
 </resources>

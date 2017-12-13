@@ -118,4 +118,5 @@
     <string name="statistics_finished_description">你已经完成的三省：</string>
     <string name="achievement_description">和三省同行以来你所取得的成就。</string>
     <string name="no_achievements">尚无成就</string>
+    <string name="no_timeline_to_show">没有时间线可供显示。</string>
 </resources>
