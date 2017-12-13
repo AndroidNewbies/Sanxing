@@ -51,7 +51,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         // Frequency, edit the selectedFreq according to the model
         selectedFreq = habit.getFrequency();
         // Times checked
-        checkTimes = 1;
+        checkTimes = habit.getRecord().size();
         selectedImportance = habit.getImportance();
         // Description
         String habitDescription = habit.getContent();
@@ -64,7 +64,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         habitFreqSeekBar.setProgress(selectedFreq);
         habitImportance.setProgress(selectedImportance);
         descriptionContent.setText(habitDescription);
-        if(checkTimes != 0) timesContent.setText(Integer.toString(checkTimes));
+        timesContent.setText(Integer.toString(checkTimes));
     }
 
     @Override

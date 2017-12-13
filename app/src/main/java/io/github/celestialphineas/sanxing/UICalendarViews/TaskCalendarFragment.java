@@ -127,8 +127,8 @@ public class TaskCalendarFragment extends Fragment {
                     new EventDetailObject(temp.getTitle(), temp.getEndDate().substring(11,16), temp.getContent(), importance)));
         }
         //this is a test event
-        events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
-                new EventDetailObject("this is test!", "12:00", "Lalala! Lalala~~~", 3)));
+//        events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
+//                new EventDetailObject("this is test!", "12:00", "Lalala! Lalala~~~", 3)));
 
 
         // This will add the tasks in the "events" list to the calendar view

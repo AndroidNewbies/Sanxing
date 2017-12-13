@@ -123,8 +123,8 @@ public class HabitCalendarFragment extends Fragment {
             //get the milliseconds corresponding to the events constructor rule from the data stored in the database
         }
         //this a test event
-        events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
-                new EventDetailObject("this is a test", "Lalala! Lalala~~~", 3)));
+//        events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
+//                new EventDetailObject("this is a test", "Lalala! Lalala~~~", 3)));
 
         // End of TODO
 
