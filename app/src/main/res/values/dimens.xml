@@ -14,4 +14,5 @@
     <dimen name="edit_drawable_padding">10dp</dimen>
     <dimen name="typo_headline_margin">4dp</dimen>
     <dimen name="typo_subheading_margin">3dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

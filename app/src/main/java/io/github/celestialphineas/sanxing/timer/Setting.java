@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZoneOffset;
 
 import java.util.Date;
@@ -38,7 +40,8 @@ public class Setting {
         ifvibrate=sharedPreferences.getBoolean("notifications_vibrate_enabled",false);
         Ringtone=sharedPreferences.getString("notifications_ringtone","");
         long time=sharedPreferences.getLong("notifications_time", new Date().getTime());
-        callTime=LocalDateTime.ofEpochSecond(time/1000,0, ZoneOffset.UTC);
+        ZoneOffset zoneOffset = OffsetDateTime.now (ZoneId.systemDefault()).getOffset();//获取当前时区
+        callTime=LocalDateTime.ofEpochSecond(time/1000,0, zoneOffset);
         Log.w("Time2",callTime.toString());
         LocalDateTime now=LocalDateTime.now();
         callTime=LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),

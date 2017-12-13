@@ -46,32 +46,32 @@
             android:visibility="gone"
             android:fragmentEnterTransition="@anim/slide_in_up"/>
     </android.support.v7.widget.LinearLayoutCompat>
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right|end"
-        android:src="@drawable/ic_view_compact"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:tint="@android:color/white"
-        app:popupTheme="@style/AppTheme.PopupTheme"
-        app:backgroundTint="@color/bottomNavigation"
-        app:elevation="6dp" />
+    <!--<android.support.design.widget.FloatingActionButton android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|right|end"-->
+        <!--android:src="@drawable/ic_view_compact"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:clickable="true"-->
+        <!--android:tint="@android:color/white"-->
+        <!--app:popupTheme="@style/AppTheme.PopupTheme"-->
+        <!--app:backgroundTint="@color/bottomNavigation"-->
+        <!--app:elevation="6dp" />-->
     <!-- You must wrap transform view in Circular reveal container -->
-    <io.codetail.widget.RevealFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true">
-        <!-- Transform view -->
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/calendar_bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/bottomNavigation"
-            android:elevation="8dp"
-            android:visibility="invisible" />
-    </io.codetail.widget.RevealFrameLayout>
+    <!--<io.codetail.widget.RevealFrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_alignParentBottom="true">-->
+        <!--&lt;!&ndash; Transform view &ndash;&gt;-->
+        <!--<android.support.design.widget.BottomNavigationView-->
+            <!--android:id="@+id/calendar_bottom_navigation"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:background="@color/bottomNavigation"-->
+            <!--android:elevation="8dp"-->
+            <!--android:visibility="invisible" />-->
+    <!--</io.codetail.widget.RevealFrameLayout>-->
 </android.support.design.widget.CoordinatorLayout>

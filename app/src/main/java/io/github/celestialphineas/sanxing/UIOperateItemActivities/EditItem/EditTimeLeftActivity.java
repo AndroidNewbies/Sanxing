@@ -116,7 +116,6 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
             intent.putExtra("position",position);
             intent.putExtra("ID",timeLeft.ID);
             setResult(RESULT_OK, intent);
-            finish();
             animationSubmit();
             return true;
         }

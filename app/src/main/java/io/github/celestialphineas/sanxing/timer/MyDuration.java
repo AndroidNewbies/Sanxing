@@ -5,6 +5,7 @@ package io.github.celestialphineas.sanxing.timer;
  */
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,26 +15,23 @@ import java.util.Date;
 /**
  * Created by lin on 2017/12/9.
  */
-
+//时间相减函数，都默认用本地时间。
 public class MyDuration {
+    public static String LocalDateTime_to_String(LocalDateTime date)
+    {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
     public static long durationFromAtoB(LocalDateTime A,LocalDateTime B)
     {
-        String aString=A.toString();
-        aString=aString.replace('T',' ');
-        if (aString.length()==16) aString=aString.concat(":00");
-        if (aString.length()>19) aString=aString.substring(0,19);
+        String aString=LocalDateTime_to_String(A);
         //todo : reform the aString
-        String bString=B.toString();
-        bString=bString.replace('T',' ');
-        if (bString.length()==16) bString=bString.concat(":00");
-        if (bString.length()>19) bString=bString.substring(0,19);
-
+        String bString=LocalDateTime_to_String(B);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long diff=0;
         try
         {
             Date aDate=df.parse(aString);
-            Date bDate=df.parse(aString);
+            Date bDate=df.parse(bString);
             diff = bDate.getTime() - aDate.getTime();//这样得到的差值是微秒级别
         }
         catch(ParseException e)
@@ -50,7 +48,7 @@ public class MyDuration {
         {
             Date aDate=df.parse(A);
             Date bDate=df.parse(B);
-            diff = bDate.getTime() - aDate.getTime();//这样得到的差值是微秒级别
+            diff = bDate.getTime() - aDate.getTime();//这样得到的差值是毫秒级别
         }
         catch(ParseException e)
         {
@@ -60,16 +58,14 @@ public class MyDuration {
     }
     public static long durationFromNowtoB(LocalDateTime B)
     {
-        String endString=B.toString();
-        endString=endString.replace('T',' ');
-        endString=endString.substring(0,19);
+        String endString=LocalDateTime_to_String(B);
         long diff=0;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try
         {
             Date nowDate=new Date();
             Date endDate=df.parse(endString);
-            diff = endDate.getTime() - nowDate.getTime();//这样得到的差值是微秒级别
+            diff = endDate.getTime() - nowDate.getTime();
         }
         catch(ParseException e)
         {

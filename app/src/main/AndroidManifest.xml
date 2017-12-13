@@ -23,6 +23,7 @@
         </activity>
         <activity
             android:name=".UICalendarViews.CalendarActivity"
+            android:screenOrientation="portrait"
             android:configChanges="layoutDirection|locale" />
         <activity
             android:name=".UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity"
@@ -67,6 +68,10 @@
             android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".UISupportActivities.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="layoutDirection|locale" />
+        <activity
+            android:name=".UIStatistics.StatisticsActivity"
             android:screenOrientation="portrait"
             android:configChanges="layoutDirection|locale" />
     </application>

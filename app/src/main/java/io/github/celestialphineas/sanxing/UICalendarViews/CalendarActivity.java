@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.konifar.fab_transformation.FabTransformation;
+//import com.konifar.fab_transformation.FabTransformation;
 
 import java.util.TimerTask;
 
@@ -27,8 +27,8 @@ import io.github.celestialphineas.sanxing.R;
 public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.calendar_toolbar)            Toolbar toolbar;
     @BindView(R.id.toolbar_spinner)             AppCompatSpinner spinner;
-    @BindView(R.id.fab)                         FloatingActionButton fab;
-    @BindView(R.id.calendar_bottom_navigation)  BottomNavigationView bottomNav;
+//    @BindView(R.id.fab)                         FloatingActionButton fab;
+//    @BindView(R.id.calendar_bottom_navigation)  BottomNavigationView bottomNav;
     @BindView(R.id.calendar_view_linear_layout) LinearLayoutCompat calendarViewLinearLayout;
     @BindView(R.id.task_calendar_fragment)      View taskCalendarFrag;
     @BindView(R.id.habit_calendar_fragment)     View habitCalendarFrag;
@@ -94,23 +94,23 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.fab)
-    public void calendarFabOnClickBehavior() {
-        FabTransformation.with(fab).transformTo(bottomNav);
-        // Automatic close after a few seconds
-        TimerTask closeBottomNav = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    if(fab.getVisibility() != View.VISIBLE)
-                        FabTransformation.with(fab).transformFrom(bottomNav);
-                } catch(Exception e) {
-                    // Do nothing
-                }
-            }
-        };
-        Timer timer = new Timer();
-        // Navigation toggle timeout
-        timer.schedule(closeBottomNav, 5000);
-    }
+//    @OnClick(R.id.fab)
+//    public void calendarFabOnClickBehavior() {
+//        FabTransformation.with(fab).transformTo(bottomNav);
+//        // Automatic close after a few seconds
+//        TimerTask closeBottomNav = new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    if(fab.getVisibility() != View.VISIBLE)
+//                        FabTransformation.with(fab).transformFrom(bottomNav);
+//                } catch(Exception e) {
+//                    // Do nothing
+//                }
+//            }
+//        };
+//        Timer timer = new Timer();
+//        // Navigation toggle timeout
+//        timer.schedule(closeBottomNav, 5000);
+//    }
 }

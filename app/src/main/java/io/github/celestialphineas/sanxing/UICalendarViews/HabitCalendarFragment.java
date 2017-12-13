@@ -1,7 +1,10 @@
 package io.github.celestialphineas.sanxing.UICalendarViews;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -15,6 +18,10 @@ import android.widget.DatePicker;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -112,7 +119,8 @@ public class HabitCalendarFragment extends Fragment {
             int importance = temp.getImportance();
             for (int j = 0; j < temp.getRecord().size(); j++) {
                 long millionSeconds = 0;
-                millionSeconds = temp.getRecord().get(j)*86400000 + temp.getBeginLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)*1000;
+                ZoneOffset zoneoffset= OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+                millionSeconds = temp.getRecord().get(j)*86400000 + temp.getBeginLocalDate().toEpochSecond(zoneoffset)*1000;
                 Log.e("local mill 2", String.valueOf(millionSeconds));
 
                 //add event
@@ -129,6 +137,9 @@ public class HabitCalendarFragment extends Fragment {
         // End of TODO
 
         // This will add the habits in the "events" list to the calendar view
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int preferedWeekday = Integer.parseInt(prefs.getString("calendar_first_day_of_week", "0")) + 1;
+        habitCalendarView.setFirstDayOfWeek(preferedWeekday);
         habitCalendarView.addEvents(events);
         habitCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
         updateHabitDetails(selectedCalendar.getTime());

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/calendar">
+        <ListPreference
+            android:key="calendar_first_day_of_week"
+            android:title="@string/pref_title_first_day_of_the_week"
+            android:entries="@array/pref_week_first_day_list_titles"
+            android:entryValues="@array/pref_week_first_day_list_values"
+            android:summary="%s"
+            android:defaultValue="1">
+        </ListPreference>
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_header_notifications">
         <CheckBoxPreference
             android:defaultValue="true"

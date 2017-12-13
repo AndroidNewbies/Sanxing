@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
+import io.github.celestialphineas.sanxing.UIStatistics.StatisticsActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
@@ -350,7 +351,8 @@ public class HomeActivity extends AppCompatActivity
             startActivity(navigateCalendarIntent);
             // TODO: Pass message to calendar activity through intent here
         } else if (id == R.id.nav_statistics) {
-
+            Intent navigateStatisticsIntent = new Intent(this, StatisticsActivity.class);
+            startActivity(navigateStatisticsIntent);
         } else if (id == R.id.nav_achievements) {
 
         } else if (id == R.id.nav_timeline) {

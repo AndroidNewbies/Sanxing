@@ -29,7 +29,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <android.support.v7.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/time_left_title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_weight="1"
@@ -39,7 +40,7 @@
                         android:id="@+id/expand_time_left_calendar_view"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_gravity="end|top"
+                        android:layout_gravity="end|center"
                         style="?android:attr/borderlessButtonStyle"
                         android:background="@drawable/ic_expand"
                         android:padding="0dp"
@@ -51,8 +52,160 @@
                     android:id="@+id/time_left_calendar_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/time_left_subheading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Due: Nov. 12, 2012"
+                        style="@style/CardSubheadingStyle" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/time_left_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Description, hello world"/>
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:id="@+id/time_left_bar_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/time_left_percentage_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="50sp"
+                            android:textStyle="bold"
+                            android:text="@string/no_countdowns"
+                            tools:text="12%"/>
+                        <io.github.celestialphineas.sanxing.UICalendarViews.BarCanvasView
+                            android:id="@+id/time_left_bar_canvas"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"/>
+                    </android.support.v7.widget.LinearLayoutCompat>
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:id="@+id/time_left_grid_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                        <io.github.celestialphineas.sanxing.UICalendarViews.GridCanvasView
+                            android:id="@+id/time_left_grid_canvas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.LinearLayoutCompat>
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/view_bar_canvas_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:drawablePadding="5dp"
+                            android:drawableStart="@drawable/ic_bar"
+                            android:drawableTint="?colorPrimary"
+                            android:text="@string/bar_view"
+                            style="?android:attr/borderlessButtonStyle" />
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/view_grid_canvas_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:drawablePadding="5dp"
+                            android:drawableStart="@drawable/ic_grid"
+                            android:drawableTint="?colorPrimary"
+                            android:text="@string/grid_view"
+                            style="?android:attr/borderlessButtonStyle" />
+                    </android.support.v7.widget.LinearLayoutCompat>
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/time_left_detail_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin_horizontal"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="2dp"
+            app:cardPreventCornerOverlap="true">
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:orientation="vertical">
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        style="@android:style/TextAppearance.Material.Headline"
+                        android:text="@string/details"/>
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/expand_time_left_detail"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="end|center"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:background="@drawable/ic_expand"
+                        android:padding="0dp"
+                        android:drawablePadding="0dp"
+                        android:drawableTint="@color/grey"
+                        android:textColor="@color/grey" />
+                </android.support.v7.widget.LinearLayoutCompat>
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:id="@+id/time_left_detail_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/time_left_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:textColor="@color/black87"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/place_holder"
+                        tools:text="100 Days" />
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:text="@string/unit_hour"/>
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/time_left_scale_seek_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="10"
+                            android:max="4"
+                            android:progress="2" />
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:text="@string/unit_year"/>
+                    </android.support.v7.widget.LinearLayoutCompat>
                 </android.support.v7.widget.LinearLayoutCompat>
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.CardView>
@@ -63,6 +216,7 @@
             android:layout_margin="@dimen/card_margin_horizontal"
             android:text="@string/choose_a_time_left"
             android:textColor="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
             android:background="@color/colorTimeLeft"
             style="@android:style/Widget.Material.Button"/>
         <android.support.v7.widget.CardView
@@ -80,13 +234,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <android.support.v7.widget.ListViewCompat
+                <io.github.celestialphineas.sanxing.UIHomeTabFragments.MyListView
                     android:id="@+id/time_left_choice_list"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="match_parent"
                     android:footerDividersEnabled="true"
+                    android:scrollbars="none"
                     style="@android:style/Widget.Material.ListView"/>
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
     </android.support.v7.widget.LinearLayoutCompat>
 </ScrollView>

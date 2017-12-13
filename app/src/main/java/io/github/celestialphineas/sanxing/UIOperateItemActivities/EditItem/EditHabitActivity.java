@@ -91,7 +91,6 @@ public class EditHabitActivity extends OperateHabitActivityBase {
             intent.putExtra("position",position);
             intent.putExtra("ID",habit.ID);
             setResult(RESULT_OK, intent);
-            finish();
             animationSubmit();
             return true;
         }

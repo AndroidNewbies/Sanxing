@@ -13,6 +13,8 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.format.DateTimeFormatter;
 
@@ -164,9 +166,11 @@ public class MyApplication extends Application {
             editor.putBoolean("notifications_enabled",true);
             editor.putBoolean("notifications_vibrate_enabled",true);
             LocalDateTime now=LocalDateTime.now();
-            //now=LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),12,0);
-            editor.putLong("notifications_time",now.toEpochSecond(ZoneOffset.UTC)*1000);//12点
-            Log.w("Time1",String.valueOf(now.toEpochSecond(ZoneOffset.UTC)*1000));
+            now=LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),12,0);
+            ZoneOffset zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset ();
+            editor.putLong("notifications_time",now.toEpochSecond(zoneOffset)*1000);//当地12点的格林尼治时间戳
+            //Log.w("Time1",String.valueOf(now.toEpochSecond(zoneOffset)*1000));
+            //Log.w("Time1",String.valueOf(now.toEpochSecond(ZoneOffset.UTC)*1000));
             editor.putString("notifications_ringtone","content://settings/system/notification_sound");
             //提交修改
             editor.commit();

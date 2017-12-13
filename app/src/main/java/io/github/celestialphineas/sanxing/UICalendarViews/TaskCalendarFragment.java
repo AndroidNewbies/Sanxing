@@ -2,9 +2,11 @@ package io.github.celestialphineas.sanxing.UICalendarViews;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -23,11 +25,13 @@ import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -119,7 +123,8 @@ public class TaskCalendarFragment extends Fragment {
 
             //get the milliseconds corresponding to the events constructor rule from the data stored in the database
             long millionSeconds = 0;
-            millionSeconds = temp.getEndLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)*1000;
+            ZoneOffset zoneoffset=OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+            millionSeconds = temp.getEndLocalDate().toEpochSecond(zoneoffset)*1000;
             Log.e("local mill 2", String.valueOf(millionSeconds));
 
             //add event
@@ -132,6 +137,9 @@ public class TaskCalendarFragment extends Fragment {
 
 
         // This will add the tasks in the "events" list to the calendar view
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int preferedWeekday = Integer.parseInt(prefs.getString("calendar_first_day_of_week", "0")) + 1;
+        taskCalendarView.setFirstDayOfWeek(preferedWeekday);
         taskCalendarView.addEvents(events);
         taskCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
         updateTaskDetails(selectedCalendar.getTime());
