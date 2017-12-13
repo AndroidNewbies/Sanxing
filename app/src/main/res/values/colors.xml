@@ -39,4 +39,10 @@
     <color name="white_grey">#FAFAFA</color>
     <color name="background_grey">#EDEDEE</color>
     <color name="bottomNavigation">#0277bd</color>
+    <color name="bronze_bright">#ff7543</color>
+    <color name="bronze_dark">#d84315</color>
+    <color name="gold_bright">#ffe034</color>
+    <color name="gold_dark">#e9b92f</color>
+    <color name="silver_bright">#c1d5e0</color>
+    <color name="silver_dark">#62757f</color>
 </resources>

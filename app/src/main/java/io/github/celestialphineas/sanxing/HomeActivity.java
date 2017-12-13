@@ -354,7 +354,8 @@ public class HomeActivity extends AppCompatActivity
             Intent navigateStatisticsIntent = new Intent(this, StatisticsActivity.class);
             startActivity(navigateStatisticsIntent);
         } else if (id == R.id.nav_achievements) {
-
+            Intent navigateAchievementsIntent = new Intent(this, StatisticsActivity.class);
+            startActivity(navigateAchievementsIntent);
         } else if (id == R.id.nav_timeline) {
 
         } else if (id == R.id.nav_help) {

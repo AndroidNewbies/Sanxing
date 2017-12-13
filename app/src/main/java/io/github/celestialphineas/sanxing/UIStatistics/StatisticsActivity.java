@@ -1,30 +1,114 @@
 package io.github.celestialphineas.sanxing.UIStatistics;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemSelected;
+import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.R;
 
 //import com.konifar.fab_transformation.FabTransformation;
 
 public class StatisticsActivity extends AppCompatActivity {
-    @BindView(R.id.statistics_toolbar)            Toolbar toolbar;
+    @BindView(R.id.statistics_toolbar)              Toolbar toolbar;
+    @BindView(R.id.statistics_root_linear_layout)   ViewGroup rootLinearLayout;
+    @BindView(R.id.statistics_total_relative_layout)ViewGroup totalRelativeLayout;
+    @BindView(R.id.total_grid)                      ViewGroup totalGrid;
+    @BindView(R.id.statistics_place_holder)         ViewGroup placeHolder;
+    @BindView(R.id.achievement_card)                ViewGroup achievementCard;
+    @BindView(R.id.total_description)               AppCompatTextView totalDescriptionView;
+    @BindView(R.id.task_count)                      AppCompatTextView taskCountView;
+    @BindView(R.id.habit_count)                     AppCompatTextView habitCountView;
+    @BindView(R.id.time_left_count)                 AppCompatTextView timeLeftCountView;
+    @BindView(R.id.achievement_list)                ListView achievementListView;
+    @BindString(R.string.statistics_total_description)      String currentTotalString;
+    @BindString(R.string.statistics_finished_description)   String finishedTotalString;
+    int nTasks = 0, nHabits = 0, nTimeLefts = 0;
+    int nFinishedTasks = 0, nFinishedHabits = 0, nFinishedTimeLefts = 0;
+    boolean showCurrent = true;
+    static final int TASK = 0, HABIT = 1, TIME_LEFT = 2;
+    static final int BRONZE = 0, SILVER = 1, GOLD = 2;
+    List<Achievement> achievements = new ArrayList<>();
+
+    // Achievement
+    class Achievement {
+        int type, prize; String title, description;
+        Achievement(int type, int prize, String title, String description) {
+            this.type = type; this.prize = prize; this.title = title; this.description = description;
+        }
+        int getBandColor() {
+            switch (type) {
+                case TASK:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.colorTasks, null);
+                    } else return getBaseContext().getResources().getColor(R.color.colorTasks);
+                case HABIT:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.colorHabits, null);
+                    } else return getBaseContext().getResources().getColor(R.color.colorHabits);
+                case TIME_LEFT: default:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.colorTimeLeft, null);
+                    } else return getBaseContext().getResources().getColor(R.color.colorTimeLeft);
+            }
+        }
+        int getMedalBrightColor() {
+            switch (prize) {
+                case BRONZE:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.bronze_bright, null);
+                    } else return getBaseContext().getResources().getColor(R.color.bronze_bright);
+                case SILVER:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.silver_bright, null);
+                    } else return getBaseContext().getResources().getColor(R.color.silver_bright);
+                case GOLD: default:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.gold_bright, null);
+                    } else return getBaseContext().getResources().getColor(R.color.gold_bright);
+            }
+        }
+        int getMedalDarkColor() {
+            switch (prize) {
+                case BRONZE:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.bronze_dark, null);
+                    } else return getBaseContext().getResources().getColor(R.color.bronze_dark);
+                case SILVER:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.silver_dark, null);
+                    } else return getBaseContext().getResources().getColor(R.color.silver_dark);
+                case GOLD: default:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        return getBaseContext().getResources().getColor(R.color.gold_dark, null);
+                    } else return getBaseContext().getResources().getColor(R.color.gold_dark);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         ButterKnife.bind(this);
+
+
 
         //////// Toolbar ////////
         // Set the toolbar as the default action bar of the window
@@ -39,5 +123,51 @@ public class StatisticsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // TODO:
+        // Set the number of items
+        nTasks = 3; nHabits = 4; nTimeLefts = 123;
+        nFinishedTasks = 110; nFinishedHabits = 12; nFinishedTimeLefts = 5;
+        // Set up achievements
+        achievements.add(new Achievement(HABIT, GOLD, "Hello", "world, blablabla"));
+        achievements.add(new Achievement(TASK, BRONZE, "Task bla", "You've won a lot"));
+        achievements.add(new Achievement(TIME_LEFT, SILVER, "What?", "What the heck!!!"));
+        // End of TODO
+
+        //////// ListAdapter ////////
+        if(achievements == null || achievements.isEmpty()) {
+            placeHolder.setVisibility(View.VISIBLE);
+            achievementCard.setVisibility(View.GONE);
+        } else {
+            achievementListView.setAdapter(new AchievementsAdapter(this, achievements));
+        }
+        showCurrentNumbers();
+    }
+
+    @OnClick(R.id.toggle_summary_button)
+    void toggleSummaryButtonOnClickBehavior() {
+        TransitionManager.beginDelayedTransition(rootLinearLayout);
+        TransitionManager.beginDelayedTransition(totalRelativeLayout);
+        TransitionManager.beginDelayedTransition(totalGrid);
+        if(!showCurrent) {
+            showCurrentNumbers();
+            showCurrent = true;
+        } else {
+            showFinishedNumbers();
+            showCurrent = false;
+        }
+    }
+
+    private void showCurrentNumbers() {
+        totalDescriptionView.setText(currentTotalString);
+        taskCountView.setText(Integer.toString(nTasks));
+        habitCountView.setText(Integer.toString(nHabits));
+        timeLeftCountView.setText(Integer.toString(nTimeLefts));
+    }
+    private void showFinishedNumbers() {
+        totalDescriptionView.setText(finishedTotalString);
+        taskCountView.setText(Integer.toString(nFinishedTasks));
+        habitCountView.setText(Integer.toString(nFinishedHabits));
+        timeLeftCountView.setText(Integer.toString(nFinishedTimeLefts));
     }
 }

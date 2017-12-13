@@ -115,4 +115,7 @@
     <string name="statistics_and_achievements">统计与成就</string>
     <string name="statistics_total_description">你正在进行的三省：</string>
     <string name="toggle_summary">切换总计</string>
+    <string name="statistics_finished_description">你已经完成的三省：</string>
+    <string name="achievement_description">和三省同行以来你所取得的成就。</string>
+    <string name="no_achievements">尚无成就</string>
 </resources>

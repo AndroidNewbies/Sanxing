@@ -122,4 +122,7 @@
     <string name="statistics_and_achievements"><![CDATA[Statistics & Achievements]]></string>
     <string name="statistics_total_description">The on-going sessions that you are now with us.</string>
     <string name="toggle_summary">Toggle summary</string>
+    <string name="statistics_finished_description">The sessions that you have already done.</string>
+    <string name="achievement_description">See what you have achieved with us.</string>
+    <string name="no_achievements">No achievements</string>
 </resources>

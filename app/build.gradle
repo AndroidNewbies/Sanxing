@@ -37,7 +37,7 @@ dependencies {
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     compile 'com.github.sundeepk:compact-calendar-view:2.0.2.2'
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
-    compile 'konifar:fab-transformation:1.0.0'
+//    compile 'konifar:fab-transformation:1.0.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
