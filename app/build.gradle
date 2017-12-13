@@ -27,6 +27,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //    compile 'konifar:fab-transformation:1.0.0'
     compile 'com.android.support:appcompat-v7:26.0.+'
     compile 'com.android.support:design:26.0.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -37,7 +38,6 @@ dependencies {
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     compile 'com.github.sundeepk:compact-calendar-view:2.0.2.2'
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
-//    compile 'konifar:fab-transformation:1.0.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
