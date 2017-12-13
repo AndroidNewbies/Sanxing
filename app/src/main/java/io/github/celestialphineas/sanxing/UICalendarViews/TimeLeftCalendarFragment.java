@@ -20,6 +20,11 @@ import android.widget.AdapterView;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
+
+import java.sql.Time;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,7 +37,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
+import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
 public class TimeLeftCalendarFragment extends Fragment {
     @BindView(R.id.choose_a_time_left_button)           AppCompatButton chooseButton;
@@ -65,6 +73,9 @@ public class TimeLeftCalendarFragment extends Fragment {
     final List<TimeLeftEvent> timeLeftEventList = new ArrayList<>();
     final int[] currentIndex = new int[1];
 
+    private MyApplication myApplication;
+    private TimeLeftManager mTimeLeftManager;
+
     public TimeLeftCalendarFragment() { }
 
     public static TimeLeftCalendarFragment newInstance() {
@@ -74,6 +85,8 @@ public class TimeLeftCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        myApplication= (MyApplication) getActivity().getApplication();
+        mTimeLeftManager = myApplication.get_time_left_manager();
         super.onCreate(savedInstanceState);
     }
 
@@ -113,19 +126,31 @@ public class TimeLeftCalendarFragment extends Fragment {
         // TODO: Generate a list of timeLeftEvents
         // Constructor of the TimeLeftEvent:
         // TimeLeftEvent(String title, String description, Calendar startTime, Calendar endTime, int importance)
-        Calendar past = Calendar.getInstance();
-        Calendar now = Calendar.getInstance();
-        Calendar then1 = Calendar.getInstance();
-        Calendar then2 = Calendar.getInstance();
-        Calendar then3 = Calendar.getInstance();
-        past.setTimeInMillis(now.getTimeInMillis() - 1000000L);
-        then1.setTimeInMillis(now.getTimeInMillis() + 10000000L);
-        then2.setTimeInMillis(now.getTimeInMillis() + 5000000000L);
-        then3.setTimeInMillis(now.getTimeInMillis() + 120000000L);
-        timeLeftEventList.add(new TimeLeftEvent("Hello", "Hello world!!!", past, then1, 0));
-        timeLeftEventList.add(new TimeLeftEvent("World", "Fucking Java. Fuck Android!", past, then2, 3));
-        timeLeftEventList.add(new TimeLeftEvent("University time", "Lalala, hahaha", past, then3, 4));
-        // End of TODO
+
+        List<TimeLeft> timeLeftList = mTimeLeftManager.getObjectList();
+        ZoneOffset zoneoffset= OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+        for (TimeLeft timeLeft:timeLeftList){
+            Calendar begin = Calendar.getInstance();
+            begin.setTimeInMillis(timeLeft.getBeginLocalDate().toEpochSecond(zoneoffset)*1000);
+            Calendar end = Calendar.getInstance();
+            end.setTimeInMillis(timeLeft.getEndLocalDate().toEpochSecond(zoneoffset)*1000);
+            String title = timeLeft.getTitle();
+            String description = timeLeft.getContent();
+            timeLeftEventList.add(new TimeLeftEvent(title, description, begin, end, timeLeft.getImportance()));
+        }
+//        Calendar past = Calendar.getInstance();
+//        Calendar now = Calendar.getInstance();
+//        Calendar then1 = Calendar.getInstance();
+//        Calendar then2 = Calendar.getInstance();
+//        Calendar then3 = Calendar.getInstance();
+//        past.setTimeInMillis(now.getTimeInMillis() - 1000000L);
+//        then1.setTimeInMillis(now.getTimeInMillis() + 10000000L);
+//        then2.setTimeInMillis(now.getTimeInMillis() + 5000000000L);
+//        then3.setTimeInMillis(now.getTimeInMillis() + 120000000L);
+//        timeLeftEventList.add(new TimeLeftEvent("Hello", "Hello world!!!", past, then1, 0));
+//        timeLeftEventList.add(new TimeLeftEvent("World", "Fucking Java. Fuck Android!", past, then2, 3));
+//        timeLeftEventList.add(new TimeLeftEvent("University time", "Lalala, hahaha", past, then3, 4));
+        // End
 
         List<Map<String, Object>> adapterData = new ArrayList<>();
         for(TimeLeftEvent event : timeLeftEventList) {

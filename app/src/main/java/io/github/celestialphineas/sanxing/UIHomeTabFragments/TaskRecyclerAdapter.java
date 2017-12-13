@@ -200,4 +200,5 @@ public class TaskRecyclerAdapter
         notifyItemRangeChanged(position, taskList.size());
     }
 
+
 }

@@ -104,7 +104,7 @@ public class HabitCalendarFragment extends Fragment {
         habitCalendarView.setUseThreeLetterAbbreviation(true);
         updateHabitCalendarYearMonth();
 
-        // TODO: Get a list of events (habits) from the model
+        // Get a list of events (habits) from the model
         // The event list will be later drawn on the calendar
         // Below shows an example: 3 events are inserted
         // 1. The first argument of events should be a color, use the private method
@@ -134,7 +134,7 @@ public class HabitCalendarFragment extends Fragment {
 //        events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,
 //                new EventDetailObject("this is a test", "Lalala! Lalala~~~", 3)));
 
-        // End of TODO
+        // End
 
         // This will add the habits in the "events" list to the calendar view
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());

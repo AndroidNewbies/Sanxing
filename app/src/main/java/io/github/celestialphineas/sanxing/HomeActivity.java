@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -66,6 +68,7 @@ public class HomeActivity extends AppCompatActivity
     ViewPagerAdapter adapter;
     // the view pager
     ViewPager viewPager;
+
     // the tab layout
     TabLayout tabLayout;
 
@@ -136,10 +139,11 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onPageScrollStateChanged(int state) { }
         });
+        Log.e("on create","called");
 
+        //timer.schedule(timerTask,0, 60*1000);//the timer used to change left time
 
-        timer.schedule(timerTask,0, 30*1000);//the timer used to change left time
-
+        handler.sendEmptyMessage(1);
 
         // End of the onCreate(Bundle) method
     }
@@ -377,29 +381,70 @@ public class HomeActivity extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+    int count=0;
 
-    @SuppressLint("HandlerLeak")
-    private Handler handler  = new Handler(){
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.what == 1){
-                //redraw the adapter per 30sec to change the left time
-                    int current = viewPager.getCurrentItem();
-                    viewPager.setAdapter(adapter);
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
 
-                    viewPager.setCurrentItem(current);
-                }
+            if (msg.what == 1) {
+                int current = viewPager.getCurrentItem();
+                viewPager.setAdapter(adapter);
+                viewPager.setCurrentItem(current);
+                count++;
+                Log.e("bbb", String.valueOf(count));
+                handler.sendEmptyMessageDelayed(1,
+                        1000);
             }
-
-    };
-
-    //任务
-    private TimerTask timerTask = new TimerTask() {
-        public void run() {
-            Message msg = new Message();
-            msg.what = 1;
-            handler.sendMessage(msg);
+            return false;
         }
-    };
+    });
+//    @SuppressLint("HandlerLeak")
+//    private Handler handler  = new Handler(){
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if(msg.what == 1){
+//                //redraw the adapter per 30sec to change the left time
+//                    int current = viewPager.getCurrentItem();
+//                    viewPager.setAdapter(adapter);
+//
+//                    viewPager.setCurrentItem(current);
+//                }
+//            }
+//
+//    };
+//
+//    //任务
+//    private TimerTask timerTask = new TimerTask() {
+//        public void run() {
+//            Message msg = new Message();
+//            msg.what = 1;
+//            handler.sendMessage(msg);
+//        }
+//    };
+//private MyHandler handler = new MyHandler(this);
+//
+//    static class MyHandler extends Handler {
+//
+//        WeakReference weakReference;
+//
+//        public MyHandler(SecondActivity activity) {
+//            weakReference = new WeakReference(activity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//
+//        }
+//    }
 
+
+    @Override
+    public void finish() {
+        Log.e("finish!!!", String.valueOf(count));
+        if (handler.hasMessages(1)){
+            handler.removeMessages(1);
+        }
+        super.finish();
+    }
 }
