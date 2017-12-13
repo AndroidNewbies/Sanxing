@@ -141,7 +141,7 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
                 }
             }
         }
-        // TODO
+
         return true;
     }
 

@@ -3,6 +3,7 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 /**
  * Created by apple on 2017/11/3.
  */
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
@@ -26,7 +28,7 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
  */
 
 public class TimeLeftFrag extends Fragment {
-
+    @BindView(R.id.task_recycler_view)      RecyclerView recyclerView;
     private TimeLeftManager timeLeftManager;
 
     public TimeLeftFrag() {

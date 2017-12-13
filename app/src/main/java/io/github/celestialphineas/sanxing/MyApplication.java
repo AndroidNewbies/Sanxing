@@ -91,6 +91,7 @@ public class MyApplication extends Application {
             i.putExtra("source", "Application");
             this.startService(i);
         }
+        Log.e("on create","called");
 
     }
 

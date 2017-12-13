@@ -24,7 +24,7 @@ public class MyDuration {
     public static long durationFromAtoB(LocalDateTime A,LocalDateTime B)
     {
         String aString=LocalDateTime_to_String(A);
-        //todo : reform the aString
+        // reform the aString
         String bString=LocalDateTime_to_String(B);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long diff=0;

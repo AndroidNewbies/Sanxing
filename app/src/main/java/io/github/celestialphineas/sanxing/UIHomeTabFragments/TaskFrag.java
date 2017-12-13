@@ -4,6 +4,7 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,6 +38,8 @@ public class TaskFrag extends Fragment {
     public TaskRecyclerAdapter mAdapter;
     public TaskManager taskManager;
     private RecyclerView.LayoutManager layoutManager;
+
+    //public ViewPager mViewPager;
 
     public TaskFrag() {
         // Required empty public constructor
@@ -76,5 +79,13 @@ public class TaskFrag extends Fragment {
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }
+//    @Override public void onDestroyView() {
+//
+//        // uncomment the line below to fix the issue
+//        recyclerView.setAdapter(null);
+//
+//        super.onDestroyView();
+//    }
+
 
 }
