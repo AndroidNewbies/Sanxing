@@ -198,11 +198,18 @@ public class TimeLeftCalendarFragment extends Fragment {
             double percentage = ((double)(nowMillis - startMillis))/(endMillis - startMillis);
             // Calculate the number of squares
             double span = endMillis - startMillis;
+            double left = endMillis - nowMillis;
             double hours = span/1000/60/60;
             double days = hours/24;
             double weeks = days/7;
             double months = days/30;
             double years = days/365;
+            // Calculate the time left
+            double hoursLeft = left/1000/60/60;
+            double daysLeft = hoursLeft/24;
+            double weeksLeft = daysLeft/7;
+            double monthsLeft = daysLeft/30;
+            double yearsLeft = daysLeft/365;
             int squares = hours > 100 ? days > 100 ? weeks > 100 ? months > 100 ?
                     (int)years : (int)months : (int)weeks : (int)days : (int)hours;
             // Set text
@@ -224,11 +231,11 @@ public class TimeLeftCalendarFragment extends Fragment {
             String colorString = "#" + Integer.toHexString(timeLeftEvent.getImportanceColor() & 0xFFFFFF);
             String numString, unitString;
             switch (timeScale) {
-                case 0: numString = "" + (int)Math.round(hours); unitString = unitHourString; break;
-                case 1: numString = "" + (int)Math.round(days); unitString = unitDayString; break;
-                case 2: numString = "" + (int)Math.round(weeks); unitString = unitWeekString; break;
-                case 3: numString = "" + (int)Math.round(months); unitString = unitMonthString; break;
-                case 4: default: numString = "" + (int)Math.round(years); unitString = unitYearString; break;
+                case 0: numString = "" + (int)Math.round(hoursLeft); unitString = unitHourString; break;
+                case 1: numString = "" + (int)Math.round(daysLeft); unitString = unitDayString; break;
+                case 2: numString = "" + (int)Math.round(weeksLeft); unitString = unitWeekString; break;
+                case 3: numString = "" + (int)Math.round(monthsLeft); unitString = unitMonthString; break;
+                case 4: default: numString = "" + (int)Math.round(yearsLeft); unitString = unitYearString; break;
             }
             detailString.append(numString);
             detailString.append("<b><font color=\"" + colorString + "\">");

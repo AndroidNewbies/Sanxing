@@ -1,6 +1,5 @@
 package io.github.celestialphineas.sanxing;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,17 +21,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
 import io.github.celestialphineas.sanxing.UIStatistics.StatisticsActivity;
+import io.github.celestialphineas.sanxing.UIStatistics.TimelineActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
@@ -361,7 +355,8 @@ public class HomeActivity extends AppCompatActivity
             Intent navigateAchievementsIntent = new Intent(this, StatisticsActivity.class);
             startActivity(navigateAchievementsIntent);
         } else if (id == R.id.nav_timeline) {
-
+            Intent navigateTimelineIntent = new Intent(this, TimelineActivity.class);
+            startActivity(navigateTimelineIntent);
         } else if (id == R.id.nav_help) {
 
         } else if (id == R.id.nav_settings) {

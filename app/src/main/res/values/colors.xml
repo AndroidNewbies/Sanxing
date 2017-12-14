@@ -45,4 +45,6 @@
     <color name="gold_dark">#e9b92f</color>
     <color name="silver_bright">#c1d5e0</color>
     <color name="silver_dark">#62757f</color>
+    <color name="timeline_start">#ffcccccc</color>
+    <color name="timeline_end">#00cccccc</color>
 </resources>
