@@ -391,7 +391,7 @@ public class HomeActivity extends AppCompatActivity
                 count++;
                 Log.e("bbb", String.valueOf(count));
                 handler.sendEmptyMessageDelayed(1,
-                        1000);
+                        60*1000);
             }
             return false;
         }
