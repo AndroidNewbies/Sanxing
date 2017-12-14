@@ -119,4 +119,21 @@
     <string name="achievement_description">和三省同行以来你所取得的成就。</string>
     <string name="no_achievements">尚无成就</string>
     <string name="no_timeline_to_show">没有时间线可供显示。</string>
+    <string name="confucious_quote">吾日三省吾身：\n为人谋而不忠乎，\n与朋友交而不信乎，\n传不习乎？</string>
+    <string name="the_analects">《论语·学而》</string>
+    <string name="help_title_add_new">添加新项</string>
+    <string name="help_description_add_new">轻触圆形按钮添加新的项目。</string>
+    <string name="help_title_task">有条不紊</string>
+    <string name="help_description_task">随时查看手头的任务，\n三省可以帮助你理清所有的截止期限。</string>
+    <string name="help_description_habit">养成新习惯，\n在三省，你可以创建习惯并定期打卡。</string>
+    <string name="help_title_habit">坚持不懈</string>
+    <string name="help_title_time_left">修身自省</string>
+    <string name="help_description_time_left">关切剩余时日，\n在三省中看到自己所剩的人生、大学生活或工作岁月。</string>
+    <string name="help_title_calendar">日历视图</string>
+    <string name="help_description_calendar">在日历视图中，你可以更好地查看自己的三省。</string>
+    <string name="help_title_nav">侧边导航</string>
+    <string name="help_description_nav">在侧边导航中找到你的成就、统计和时间线。</string>
+    <string name="start_trinspect">开始你的三省</string>
+    <string name="trinspect_description">从现在起三省吾身，\n珍惜当下，让生活开始不同。</string>
+    <string name="gpl_description">GNU通用公共许可证 第三版</string>
 </resources>

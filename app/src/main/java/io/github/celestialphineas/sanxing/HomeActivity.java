@@ -28,6 +28,7 @@ import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
 import io.github.celestialphineas.sanxing.UIStatistics.StatisticsActivity;
 import io.github.celestialphineas.sanxing.UIStatistics.TimelineActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
+import io.github.celestialphineas.sanxing.UISupportActivities.IntroActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObject.Task;
@@ -358,7 +359,8 @@ public class HomeActivity extends AppCompatActivity
             Intent navigateTimelineIntent = new Intent(this, TimelineActivity.class);
             startActivity(navigateTimelineIntent);
         } else if (id == R.id.nav_help) {
-
+            Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
+            startActivity(navigateHelpIntent);
         } else if (id == R.id.nav_settings) {
             Intent navigateSettings = new Intent(this, SettingsActivity.class);
             startActivity(navigateSettings);

@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quote_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context="io.github.celestialphineas.sanxing.UISupportActivities.QuoteFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-42sp"
+        android:text="@string/confucious_quote"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="36sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="@string/the_analects"
+        android:textColor="@color/white"
+        android:textAlignment="viewEnd"
+        android:textSize="24sp"
+        android:textStyle="italic" />
+
+</LinearLayout>
