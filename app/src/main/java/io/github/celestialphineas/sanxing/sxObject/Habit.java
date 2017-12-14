@@ -3,6 +3,7 @@ package io.github.celestialphineas.sanxing.sxObject;
 import android.util.Log;
 
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.io.Serializable;
@@ -158,8 +159,10 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         if (recordnumber == neednumber){
             //todo : list add days from today to begin
             long diff = 0;
-            diff = LocalDateTime.now().toEpochSecond(org.threeten.bp.ZoneOffset.UTC)-getBeginLocalDate().toEpochSecond(org.threeten.bp.ZoneOffset.UTC);
-
+            LocalDateTime begindatetime=getBeginLocalDate();
+            LocalDateTime begindate=LocalDateTime.of(begindatetime.getYear(),begindatetime.getMonth(),
+                    begindatetime.getDayOfMonth(),0,0);
+            diff = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)-begindate.toEpochSecond(ZoneOffset.UTC);
             int diff_int = (int)diff;
             Integer day = diff_int/60/60/24;
             Log.e("Ken: dif for habits", String.valueOf(diff)+" "+diff+" "+day);
