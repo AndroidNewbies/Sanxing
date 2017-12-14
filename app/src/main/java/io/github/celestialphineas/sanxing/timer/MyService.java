@@ -20,6 +20,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.util.List;
 
 import butterknife.BindString;
+import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.HomeActivity;
 import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
@@ -40,9 +41,9 @@ public class MyService extends Service {
     private MyApplication myApplication;
     private Setting mysetting;
     private TaskManager taskManager;
-    @BindString(R.string.noti_title) String noti_title;
-    @BindString(R.string.noti_task_name) String noti_task_name;
-    @BindString(R.string.noti_ddl) String noti_ddl;
+    String noti_title= getString(R.string.noti_title);
+    String noti_task_name=getString(R.string.noti_task_name);
+    String noti_ddl=getString(R.string.noti_ddl);
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -50,6 +51,7 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+
         myApplication=(MyApplication)getApplication();
         mysetting=myApplication.getMysetting();
         mysetting.readSetting(myApplication.getApplicationContext());
@@ -96,7 +98,6 @@ public class MyService extends Service {
         //.setSubText("任务截止日期")
         if (mysetting.ifvibrate) myNotiBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
         if (!mysetting.Ringtone.equals("")) myNotiBuilder.setSound(Uri.parse(mysetting.Ringtone));
-
         List<Task> taskList=taskManager.getObjectList();
         Task task;
         for (int i=0;i<taskList.size();i++)
@@ -108,11 +109,8 @@ public class MyService extends Service {
             Notification myNotification=myNotiBuilder.build();
             myNotiManager.notify(i,myNotification);
         }
-
         //活干完了，就结束自己的生命，等待下一次
         stopSelf();
         return super.onStartCommand(intent,flags,startId);
     }
-
-
 }

@@ -89,11 +89,12 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
      * 意思是说，高一级别的剩余七天和第一级别剩余3天的重要性相同。
      */
 
-    private static int[] priority={ 0,5,6,7,8,
-            0,4,5,6,7,
-            0,3,4,5,6,
-            0,2,3,4,5,
-            0,1,2,3,4 };
+    private static int[] priority={
+            0,5,7,9,11,
+            0,4,6,8,10,
+            0,3,5,7,9,
+            0,2,4,6,8,
+            0,1,3,5,7 };
     public int score()
     {
         int day=0;
