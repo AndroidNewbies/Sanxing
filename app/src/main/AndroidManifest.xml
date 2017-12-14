@@ -3,7 +3,7 @@
     package="io.github.celestialphineas.sanxing"
     android:versionCode="1"
     android:versionName="1.0">
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -18,7 +18,6 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,13 +55,6 @@
             android:configChanges="layoutDirection|locale"
             android:screenOrientation="portrait"
             android:theme="@style/TimeLeftTheme" />
-
-        <service
-            android:name=".timer.MyService"
-            android:process="io.github.celestialphineas.sanxing.timer.myservice" />
-
-        <receiver android:name=".timer.AlarmReceiver" />
-
         <activity
             android:name=".UISupportActivities.AboutActivity"
             android:configChanges="layoutDirection|locale"
@@ -78,6 +70,12 @@
         <activity android:name=".UIStatistics.TimelineActivity"
             android:configChanges="layoutDirection|locale"
             android:screenOrientation="portrait"/>
+        <activity android:name=".UISupportActivities.IntroActivity"
+            android:configChanges="layoutDirection|locale"
+            android:screenOrientation="portrait"/>
+        <service
+            android:name=".timer.MyService"
+            android:process="io.github.celestialphineas.sanxing.timer.myservice" />
+        <receiver android:name=".timer.AlarmReceiver" />
     </application>
-
 </manifest>

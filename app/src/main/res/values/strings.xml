@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sanxing</string>
+    <string name="app_name">Trinspect</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -81,7 +81,7 @@
     <string name="summary_clear_data">Clear all your tasks, habits and countdowns and never get them back.</string>
     <string name="pref_set_notification_time">Notification time</string>
     <string name="entry_default"></string>
-    <string name="noti_title">SanXing : Notification</string>
+    <string name="noti_title">Trinspect: Notification</string>
     <string name="noti_task_name">Task Name: </string>
     <string name="noti_ddl">Dead Line: </string>
     <string name="go_to_today">Go to today</string>
@@ -126,4 +126,21 @@
     <string name="achievement_description">See what you have achieved with us.</string>
     <string name="no_achievements">No achievements</string>
     <string name="no_timeline_to_show">No timeline to show.</string>
+    <string name="confucious_quote">Every day I do self-inspection on three aspects…\nDid I spread any idea without practicing it?</string>
+    <string name="the_analects">The Analects of Confucious</string>
+    <string name="help_title_add_new">Add new</string>
+    <string name="help_description_add_new">Simply flip the add button to add a new item.</string>
+    <string name="help_title_task">Be organized</string>
+    <string name="help_description_task">Inspect your tasks at hands.\nTrinspect will help you organize the due days of events.</string>
+    <string name="help_description_habit">Develop a new habit. \nCheck them out regularly with Trinspect.</string>
+    <string name="help_title_habit">Be new</string>
+    <string name="help_title_time_left">Be self-educated</string>
+    <string name="help_description_time_left">See your time left. \nYou can see how many days are left for your life, your college years or your career in Trinspect.</string>
+    <string name="help_title_calendar">Calendar View</string>
+    <string name="help_description_calendar">In calendar view, you can see your Trinspects visually on a calendar.</string>
+    <string name="help_title_nav">Side navigation</string>
+    <string name="help_description_nav">Find your achievements, statistics and timelines in the side navigation.</string>
+    <string name="start_trinspect">Start your Trinspect</string>
+    <string name="trinspect_description">This is your self-inspection for three times. \nCarpe diem with Trinspect, and refresh your life.</string>
+    <string name="gpl_description">GNU General Public License v3</string>
 </resources>
