@@ -66,7 +66,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
             if (item.description != null) holder.itemContent.setText(item.description);
             if (position == 0)
                 holder.upperLine.setVisibility(View.INVISIBLE);
-            if (position < 4 && position == getItemCount() - 1)
+            if (position < 4 && position == getItemCount() - 1)//设置左边的线部分不可见
                 holder.lowerLine.setVisibility(View.INVISIBLE);
             holder.indicator.setCardBackgroundColor(item.getColor());
         }

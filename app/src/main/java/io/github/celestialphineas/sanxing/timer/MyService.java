@@ -41,9 +41,7 @@ public class MyService extends Service {
     private MyApplication myApplication;
     private Setting mysetting;
     private TaskManager taskManager;
-    String noti_title= getString(R.string.noti_title);
-    String noti_task_name=getString(R.string.noti_task_name);
-    String noti_ddl=getString(R.string.noti_ddl);
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -51,7 +49,9 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-
+        String noti_title= getString(R.string.noti_title);
+        String noti_task_name=getString(R.string.noti_task_name);
+        String noti_ddl=getString(R.string.noti_ddl);
         myApplication=(MyApplication)getApplication();
         mysetting=myApplication.getMysetting();
         mysetting.readSetting(myApplication.getApplicationContext());

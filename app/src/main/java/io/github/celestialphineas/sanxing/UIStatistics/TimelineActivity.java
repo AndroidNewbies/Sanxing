@@ -79,7 +79,7 @@ public class TimelineActivity extends AppCompatActivity {
         timelineItems.add(new TimelineItem(TASK, Calendar.getInstance(), "Hello world"));
         timelineItems.add(new TimelineItem(HABIT, Calendar.getInstance(), "Blablabla"));
         timelineItems.add(new TimelineItem(TIME_LEFT, Calendar.getInstance(), "Ahahahahaaaa"));
-        // End of TODO
+        // End
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

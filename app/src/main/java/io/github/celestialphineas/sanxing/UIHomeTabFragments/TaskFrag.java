@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -74,7 +75,15 @@ public class TaskFrag extends Fragment {
         // Set animator
         recyclerView.setItemAnimator(new FadeInLeftAnimator());
         // Set recycler
-        mAdapter = new TaskRecyclerAdapter(taskManager.getObjectList());
+
+        //todo: get unfinished list  task是不是引用？ 不是的话 在application里加一下need_add
+        List<Task> need_add = new ArrayList<>();
+        for (Task task : taskManager.getObjectList()){
+            if (task.getState()==1){//unfinished
+                need_add.add(task);
+            }
+        }
+        mAdapter = new TaskRecyclerAdapter(need_add);
         if(taskManager != null) recyclerView.setAdapter(mAdapter);
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
