@@ -13,26 +13,38 @@ import io.github.celestialphineas.sanxing.sxObject.Habit;
 
 public class HabitManager implements SxObjectManager {
     private  List<Habit> HabitPool;
+    private int nHabits=0;
+    private int nFinishedHabits=0;
     public HabitManager(){
         HabitPool = new ArrayList<Habit>();
-
+        nHabits=0;
+        nFinishedHabits=0;
     }
     public HabitManager(List<Habit> list){
         HabitPool = list;
-
+        resetNumbers();
     }
+    public int getNumberOfHabits(){return nHabits;}
+    public int getNumberOfFinishedHabits(){return nFinishedHabits;}
     public boolean addObject(Object obj){
-        Habit Habit = (Habit) obj;
-        HabitPool.add(Habit);
+        Habit habit = (Habit) obj;
+        HabitPool.add(habit);
+        if (habit.getState()==1) nHabits++;
+        else if (habit.getState()==2) nFinishedHabits++;
         return true;
     }
     public boolean addAll(List<Habit> list){
 
         HabitPool.addAll(list);
+        resetNumbers();
         return true;
     }
     public boolean removeObject(int index){
         if (index < HabitPool.size()){
+            Habit habit=HabitPool.get(index);
+            int state=habit.getState();
+            if (state==1) nHabits--;
+            else if (state==2) nFinishedHabits--;
             HabitPool.remove(index);
             return true;
         }else  return false;
@@ -47,5 +59,16 @@ public class HabitManager implements SxObjectManager {
         return HabitPool;
     }
     public void order(){ Collections.sort(HabitPool);}
+    private void resetNumbers()
+    {
+        nHabits=0;
+        nFinishedHabits=0;
+        for (Habit habit:HabitPool)
+        {
+            int state=habit.getState();
+            if (state==1) nHabits++;
+            else if (state==2) nFinishedHabits++;
+        }
+    }
 }
 

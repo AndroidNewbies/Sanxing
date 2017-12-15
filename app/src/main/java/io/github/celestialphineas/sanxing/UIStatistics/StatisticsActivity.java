@@ -21,7 +21,14 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.sxObject.Habit;
+import io.github.celestialphineas.sanxing.sxObject.Task;
+import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
+import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
+import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
+import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
 //import com.konifar.fab_transformation.FabTransformation;
 
@@ -45,7 +52,12 @@ public class StatisticsActivity extends AppCompatActivity {
     static final int TASK = 0, HABIT = 1, TIME_LEFT = 2;
     static final int BRONZE = 0, SILVER = 1, GOLD = 2;
     List<Achievement> achievements = new ArrayList<>();
-
+    //backend
+    private MyApplication myApplication;
+    private TaskManager taskManager;
+    private HabitManager habitManager;
+    private TimeLeftManager timeLeftManager;
+    //
     // Achievement
     class Achievement {
         int type, prize; String title, description;
@@ -107,9 +119,10 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         ButterKnife.bind(this);
-
-
-
+        myApplication=(MyApplication)getApplication();
+        taskManager=myApplication.get_task_manager();
+        habitManager=myApplication.get_habit_manager();
+        timeLeftManager=myApplication.get_time_left_manager();
         //////// Toolbar ////////
         // Set the toolbar as the default action bar of the window
         setSupportActionBar(toolbar);
@@ -126,8 +139,12 @@ public class StatisticsActivity extends AppCompatActivity {
 
         // TODO:
         // Set the number of items
-        nTasks = 3; nHabits = 4; nTimeLefts = 123;
-        nFinishedTasks = 110; nFinishedHabits = 12; nFinishedTimeLefts = 5;
+        nTasks=taskManager.getNumberOfTasks();
+        nHabits=habitManager.getNumberOfHabits();
+        nTimeLefts=timeLeftManager.getNumberOfTimeLefts();
+        nFinishedTasks=taskManager.getNumberOfFinishedTasks();
+        nFinishedHabits=habitManager.getNumberOfFinishedHabits();
+        nFinishedTimeLefts=timeLeftManager.getNumberOfFinishedTimeLefts();
         // Set up achievements
         achievements.add(new Achievement(HABIT, GOLD, "Hello", "world, blablabla"));
         achievements.add(new Achievement(TASK, BRONZE, "Task bla", "You've won a lot"));
@@ -144,7 +161,7 @@ public class StatisticsActivity extends AppCompatActivity {
         showCurrentNumbers();
     }
 
-    @OnClick(R.id.toggle_summary_button)
+    @OnClick(R.id.toggle_summary_button)//切换按钮
     void toggleSummaryButtonOnClickBehavior() {
         TransitionManager.beginDelayedTransition(rootLinearLayout);
         TransitionManager.beginDelayedTransition(totalRelativeLayout);

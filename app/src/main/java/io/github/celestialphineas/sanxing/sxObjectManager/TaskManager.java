@@ -12,26 +12,37 @@ import io.github.celestialphineas.sanxing.sxObject.Task;
 //对Task的list的封装
 public class TaskManager implements SxObjectManager {
     private  List<Task> TaskPool;
+    private int nTasks=0;
+    private int nFinishedTasks=0;
     public TaskManager(){
         TaskPool = new ArrayList<Task>();
-
+        nTasks=0;
+        nFinishedTasks=0;
     }
     public TaskManager(List<Task> list){
         TaskPool = list;
+        resetNumbers();
     }
-
+    public int getNumberOfTasks(){return nTasks;}
+    public int getNumberOfFinishedTasks(){return nFinishedTasks;}
     public boolean addObject(Object obj){
         Task task = (Task) obj;
+        if (task.getState()==1) nTasks++;
+        else if (task.getState()==2)nFinishedTasks++;
         TaskPool.add(task);
         return true;
     }
     public boolean addAll(List<Task> list){
-
         TaskPool.addAll(list);
+        resetNumbers();
         return true;
     }
     public boolean removeObject(int index){
         if (index < TaskPool.size()){
+            Task task = TaskPool.get(index);
+            int state=task.getState();
+            if (state==1) nTasks--;
+            else if (state==2)nFinishedTasks--;
             TaskPool.remove(index);
             return true;
         }else  return false;
@@ -46,13 +57,19 @@ public class TaskManager implements SxObjectManager {
         return TaskPool;
     }
 
-    public void updateTaskManager(List<Task> list){
-        TaskPool.clear();
-        TaskPool = list;
-    }
     //排序函数
     public void order()
     {
         Collections.sort(TaskPool);
+    }
+    private void resetNumbers()
+    {
+        nTasks=0;
+        for (Task task:TaskPool)
+        {
+            int state=task.getState();
+            if (state==1) nTasks++;
+            else if (state==2) nFinishedTasks++;
+        }
     }
 }
