@@ -41,10 +41,7 @@ public class MyService extends Service {
     private MyApplication myApplication;
     private Setting mysetting;
     private TaskManager taskManager;
-<<<<<<< HEAD
 
-=======
->>>>>>> adca512fec6eb4ab829ce5c31640cc5abb180f34
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -55,10 +52,7 @@ public class MyService extends Service {
         String noti_title= getString(R.string.noti_title);
         String noti_task_name=getString(R.string.noti_task_name);
         String noti_ddl=getString(R.string.noti_ddl);
-<<<<<<< HEAD
-=======
 
->>>>>>> adca512fec6eb4ab829ce5c31640cc5abb180f34
         myApplication=(MyApplication)getApplication();
         mysetting=myApplication.getMysetting();
         mysetting.readSetting(myApplication.getApplicationContext());
