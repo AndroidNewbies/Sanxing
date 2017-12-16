@@ -1,5 +1,7 @@
 package io.github.celestialphineas.sanxing.sxObject;
 
+import android.util.Log;
+
 import org.threeten.bp.LocalDateTime;
 
 import java.io.Serializable;
@@ -80,6 +82,7 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     {
         int this_score=this.score();
         int another_score=another_task.score();
+        Log.d("score",String.valueOf(this_score)+" "+String.valueOf(another_score));
         if (this_score<another_score) return -1;
         else if (this_score==another_score)
         {
@@ -107,7 +110,7 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     public int score()
     {
         int day=0;
-        long diff= MyDuration.durationFromNowtoB(this.getBeginDate());
+        long diff= MyDuration.durationFromNowtoB(this.getEndDate());
         day=(diff>0)?(int)(diff/1000/60/60/24):0;
         int i=0;
         i=(day>=15)?4:(day>=10)?3:(day>=7)?2:(day>=3)?1:(day>=1)?1:0;

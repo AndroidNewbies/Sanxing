@@ -65,6 +65,7 @@ public class TimeLeftFrag extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         //todo: get unfinished list  task是不是引用？ 不是的话 在application里加一下need_add
+
         List<TimeLeft> need_add = new ArrayList<>();
         for (TimeLeft timeLeft : timeLeftManager.getObjectList()){
             if (timeLeft.getState()==1){//unfinished
@@ -72,6 +73,7 @@ public class TimeLeftFrag extends Fragment {
             }
         }
         if (need_add !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
+        if (timeLeftManager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

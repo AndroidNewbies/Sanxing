@@ -33,6 +33,7 @@ import butterknife.BindString;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
+import io.github.celestialphineas.sanxing.UISupportActivities.IntroActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
@@ -82,8 +83,8 @@ public class MyApplication extends Application {
         _habit_manager.order();
         _time_left_manager.order();
         mysetting.readSetting(this);
-        Log.d("ringtone",mysetting.Ringtone);
-        Log.d("CallTime",mysetting.callTime.toString());
+        //Log.d("ringtone",mysetting.Ringtone);
+        //Log.d("CallTime",mysetting.callTime.toString());
         if (!isServiceRunning(this, "io.github.celestialphineas.imer.MyService"))
         {
             //开启第一次service，设置闹钟
@@ -91,7 +92,6 @@ public class MyApplication extends Application {
             i.putExtra("source", "Application");
             this.startService(i);
         }
-        Log.e("on create","called");
 
     }
 
@@ -173,6 +173,7 @@ public class MyApplication extends Application {
             //Log.w("Time1",String.valueOf(now.toEpochSecond(zoneOffset)*1000));
             //Log.w("Time1",String.valueOf(now.toEpochSecond(ZoneOffset.UTC)*1000));
             editor.putString("notifications_ringtone","content://settings/system/notification_sound");
+            editor.putString("calendar_first_day_of_week","0");
             //提交修改
             editor.commit();
         }

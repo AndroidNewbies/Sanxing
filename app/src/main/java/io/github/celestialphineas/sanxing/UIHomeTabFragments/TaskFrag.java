@@ -77,6 +77,7 @@ public class TaskFrag extends Fragment {
         // Set recycler
 
         //todo: get unfinished list  task是引用 在application里加一下need_add
+        //
         List<Task> need_add = new ArrayList<>();
         for (Task task : taskManager.getObjectList()){
             if (task.getState()==1){//unfinished
