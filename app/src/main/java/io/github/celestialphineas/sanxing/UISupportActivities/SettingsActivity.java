@@ -34,17 +34,19 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.timer.MyService;
+import io.github.celestialphineas.sanxing.timer.Setting;
 
 /*
 https://github.com/davcpas1234/MaterialSettings
 */
 
 public class SettingsActivity extends PreferenceActivity {
-
     protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
 
+        super.onPostCreate(savedInstanceState);
         AppBarLayout bar;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
@@ -271,5 +273,13 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     protected void onRestoreInstanceState(Bundle state) {
 
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        Intent i = new Intent(this, MyService.class);
+        i.putExtra("source", "Setting");
+        this.startService(i);
     }
 }
