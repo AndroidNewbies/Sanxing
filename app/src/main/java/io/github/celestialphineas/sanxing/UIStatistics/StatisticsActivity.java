@@ -150,10 +150,33 @@ public class StatisticsActivity extends AppCompatActivity {
         nFinishedHabits=habitManager.getNumberOfFinishedHabits();
         nFinishedTimeLefts=timeLeftManager.getNumberOfFinishedTimeLefts();
         // Set up achievements
-        achievements.add(new Achievement(HABIT, GOLD, "Hello", "world, blablabla"));
-        achievements.add(new Achievement(TASK, BRONZE, "Task bla", "You've won a lot"));
-        achievements.add(new Achievement(TIME_LEFT, SILVER, "What?", "What the heck!!!"));
-        // End of TODO
+//        nFinishedTimeLefts=101;
+//        nFinishedHabits=101;
+//        nFinishedTasks=101;
+        if (nFinishedTasks >= 100 ) achievements.add(new Achievement(TASK, GOLD, "打败deadline", "完成任务数 >= 100"));
+        if (nFinishedHabits >= 30 ) achievements.add(new Achievement(HABIT, GOLD, "坚持造就伟大", "完成习惯数 >= 30"));
+        if (nFinishedTimeLefts >= 30 ) achievements.add(new Achievement(TIME_LEFT, GOLD, "惟愿时光清浅,将你温柔以待", "完成倒计时数 >= 30"));
+
+        if (nFinishedTasks >= 10 ) achievements.add(new Achievement(TASK, SILVER, "任务达人", "完成任务数 >= 10"));
+        if (nFinishedHabits >= 10 ) achievements.add(new Achievement(HABIT, SILVER, "自律者", "完成习惯数 >= 10"));
+        if (nFinishedTimeLefts >= 10 ) achievements.add(new Achievement(TIME_LEFT, SILVER, "守望时光", "完成倒计时数 >= 10"));
+
+        if (nFinishedTasks >= 1 && nFinishedHabits ==0){
+            achievements.add(new Achievement(TASK, BRONZE, "第一次", "完成了一个任务或习惯"));
+        }else if (nFinishedTasks == 0 && nFinishedHabits >= 1){
+            achievements.add(new Achievement(HABIT, BRONZE, "第一次", "完成了一个任务或习惯"));
+        }else if (nFinishedTasks >= 1 && nFinishedHabits >= 1){
+            achievements.add(new Achievement(TASK, SILVER, "第一次", "完成了一个任务和一个习惯"));
+        }
+        if (nFinishedTimeLefts >= 1 ){
+            achievements.add(new Achievement(TIME_LEFT, SILVER, "倒计时，你怕了吗", "完成了一个倒计时"));
+
+        }
+
+//        achievements.add(new Achievement(HABIT, GOLD, "Hello", "world, blablabla"));
+//        achievements.add(new Achievement(TASK, BRONZE, "Task bla", "You've won a lot"));
+//        achievements.add(new Achievement(TIME_LEFT, SILVER, "What?", "What the heck!!!"));
+//        // End of TODO
 
         //////// ListAdapter ////////
         if(achievements == null || achievements.isEmpty()) {

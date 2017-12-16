@@ -74,6 +74,7 @@
     <string name="unit_hour">" h "</string>
     <string name="unit_minute">" min "</string>
     <string name="time_out">" Time Out! "</string>
+    <string name="end">" End "</string>
     <string name="set_check_times">I\'ve already kept the habit for</string>
     <string name="hint_times">how many times?</string>
     <string name="snack_invalid_times">Please set a valid number for times.</string>

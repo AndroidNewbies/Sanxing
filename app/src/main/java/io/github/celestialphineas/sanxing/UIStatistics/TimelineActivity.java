@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.celestialphineas.sanxing.MyApplication;
@@ -35,6 +36,7 @@ public class TimelineActivity extends AppCompatActivity {
     @BindView(R.id.timeline_toolbar)            Toolbar toolbar;
     @BindView(R.id.timeline_recycler_view)      RecyclerView timelineRecyclerView;
     @BindView(R.id.timeline_place_holder)       ViewGroup placeHolder;
+    @BindString(R.string.time_out)       String timeout;
     static final int TASK = 0, HABIT = 1, TIME_LEFT = 2;
     List<TimelineItem> timelineItems = new ArrayList<>();
 
@@ -103,7 +105,6 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
-        // TODO:
         // Constructor: Type, Time Calendar, Description
 
         for (Task task:mTaskManager.getObjectList()){
@@ -116,8 +117,8 @@ public class TimelineActivity extends AppCompatActivity {
             Calendar ca=Calendar.getInstance();
             ca.setTimeInMillis(millionSeconds);
             if (millionSeconds< LocalDateTime.now().toEpochSecond(zoneoffset)*1000){// if has exceeded the deadline
-                //todo 加上timeout string
-                timelineItems.add(new TimelineItem(TASK,ca,task.getTitle()));
+
+                timelineItems.add(new TimelineItem(TASK,ca,task.getTitle()+timeout));
             }
             else timelineItems.add(new TimelineItem(TASK,ca,task.getTitle()));
         }
@@ -143,8 +144,7 @@ public class TimelineActivity extends AppCompatActivity {
             Calendar ca=Calendar.getInstance();
             ca.setTimeInMillis(millionSeconds);
             if (millionSeconds< LocalDateTime.now().toEpochSecond(zoneoffset)*1000){// if has exceeded the deadline
-                //todo 加上timeout string
-                timelineItems.add(new TimelineItem(TIME_LEFT,ca,timeLeft.getTitle()));
+                timelineItems.add(new TimelineItem(TIME_LEFT,ca,timeLeft.getTitle()+timeout));
             }
             else timelineItems.add(new TimelineItem(TIME_LEFT,ca,timeLeft.getTitle()));
         }
