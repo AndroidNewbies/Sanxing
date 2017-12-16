@@ -27,6 +27,7 @@ public class HabitManager implements SxObjectManager {
     public int getNumberOfFinishedHabits(){return nFinishedHabits;}
     public boolean addObject(Object obj){
         Habit habit = (Habit) obj;
+        HabitPool.add(habit);
         return true;
     }
     public boolean addAll(List<Habit> list){
