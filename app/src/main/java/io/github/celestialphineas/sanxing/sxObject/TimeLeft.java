@@ -2,6 +2,8 @@ package io.github.celestialphineas.sanxing.sxObject;
 
 import java.io.Serializable;
 
+import io.github.celestialphineas.sanxing.timer.MyDuration;
+
 /**
  * Created by lin on 2017/11/4.
  */
@@ -54,6 +56,12 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
             if (this_weight>another_weight) return -1;
             return 1;
         }
-        return 0;
+        else
+        {
+            long left1= MyDuration.durationFromNowtoB(this.getEndDate());
+            long left2= MyDuration.durationFromNowtoB(another_left.getEndDate());
+            if (left1<left2) return -1;
+            else return 1;
+        }
     }
 }

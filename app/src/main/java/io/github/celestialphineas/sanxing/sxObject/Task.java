@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.github.celestialphineas.sanxing.timer.MyDuration;
+
 /**
  * Created by lin on 2017/11/3.
  *
@@ -78,7 +80,13 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
         int this_score=this.score();
         int another_score=another_task.score();
         if (this_score<another_score) return -1;
-        else if (this_score==another_score) return 0;
+        else if (this_score==another_score)
+        {
+            long left1=MyDuration.durationFromNowtoB(this.getEndDate());
+            long left2=MyDuration.durationFromNowtoB(another_task.getEndDate());
+            if (left1 < left2) return -1;
+            else return 1;
+        }
         else return 1;
     }
 
@@ -86,7 +94,7 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
      * 剩余一天还没完成时，得分都为0，意思是最该做的
      * 分为0到4五个重要级别，也就是五行
      * 每行的五列，分别表示，剩余一天，剩余三天，七天，十天，十五天
-     * 意思是说，高一级别的剩余七天和第一级别剩余3天的重要性相同。
+     * 意思是说，高一级别的剩余七天和低一级别剩余3天的重要性相同。
      */
 
     private static int[] priority={
@@ -98,25 +106,8 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
     public int score()
     {
         int day=0;
-        LocalDateTime now=LocalDateTime.now();
-        String nowString=now.toString();
-        nowString=nowString.replace('T',' ');
-        nowString=nowString.substring(0,19);
-        String endString=this.getEndDate();
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try
-        {
-            Date nowDate=df.parse(nowString);
-            Date endDate=df.parse(endString);
-            long diff = endDate.getTime() - nowDate.getTime();//这样得到的差值是微秒级别
-            day=(diff>0)?(int)(diff/1000/60/60/24):0;
-        }
-        catch(ParseException e)
-        {
-            e.printStackTrace();
-        }
-
+        long diff= MyDuration.durationFromNowtoB(this.getBeginDate());
+        day=(diff>0)?(int)(diff/1000/60/60/24):0;
         int i=0;
         i=(day>=15)?4:(day>=10)?3:(day>=7)?2:(day>=3)?1:(day>=1)?1:0;
         return priority[getImportance()*5+i];

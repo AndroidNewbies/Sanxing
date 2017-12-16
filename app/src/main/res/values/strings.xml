@@ -50,6 +50,7 @@
     <string name="edit">Edit</string>
     <string name="undo">Undo</string>
     <string name="snack_one_item_deleted">One item deleted.</string>
+    <string name="snack_one_item_finished">One item finished.</string>
     <string name="edit_habit">Edit habit</string>
     <string name="edit_task">Edit task</string>
     <string name="edit_time_left">Edit countdown</string>
@@ -58,6 +59,7 @@
     <string name="snack_start_before_due">The start time seems earlier than the due.</string>
     <string name="right_arrow">" → "</string>
     <string name="button_check">Check</string>
+    <string name="button_finish">Finish</string>
     <string name="snack_already_checked">You have already checked this.</string>
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_title_ringtone">Ringtone</string>
@@ -71,6 +73,7 @@
     <string name="unit_day">" Days "</string>
     <string name="unit_hour">" h "</string>
     <string name="unit_minute">" min "</string>
+    <string name="time_out">" Time Out! "</string>
     <string name="set_check_times">I\'ve already kept the habit for</string>
     <string name="hint_times">how many times?</string>
     <string name="snack_invalid_times">Please set a valid number for times.</string>

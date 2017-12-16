@@ -43,6 +43,7 @@
     <string name="edit">编辑</string>
     <string name="undo">撤销</string>
     <string name="snack_one_item_deleted">删除了一个项目。</string>
+    <string name="snack_one_item_finished">完成了一个项目。.</string>
     <string name="edit_habit">编辑习惯</string>
     <string name="edit_task">编辑任务</string>
     <string name="edit_time_left">编辑倒计时</string>
@@ -52,6 +53,7 @@
     <string name="snack_start_before_due">起始时间似乎比结束时间早呢。</string>
     <string name="right_arrow">" → "</string>
     <string name="button_check">打卡</string>
+    <string name="button_finish">完成</string>
     <string name="snack_already_checked">您已经打过卡了。</string>
     <string name="authors">作者</string>
     <string name="feedback">反馈</string>
@@ -61,6 +63,7 @@
     <string name="unit_day">天</string>
     <string name="unit_minute">分</string>
     <string name="unit_hour">小时</string>
+    <string name="time_out">" 已超时 "</string>
     <string name="set_check_times">我已经坚持这个习惯有</string>
     <string name="hint_times">几次</string>
     <string name="snack_invalid_times">请输入一个有效的打卡次数。</string>

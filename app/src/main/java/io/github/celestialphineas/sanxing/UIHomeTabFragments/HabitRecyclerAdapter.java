@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.util.List;
 
 
@@ -30,6 +32,7 @@ import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.EditItem.EditHabitActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
+import io.github.celestialphineas.sanxing.timer.MyDuration;
 
 
 public class HabitRecyclerAdapter
@@ -136,6 +139,8 @@ public class HabitRecyclerAdapter
             @Override
             public void onClick(View view) {
                 final HabitRepo repo = new HabitRepo(context);
+                long diff= MyDuration.durationFromAtoB(habit_at_position.getBeginLocalDate(),
+                        LocalDateTime.now());//标准为7天,604800000
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
@@ -144,16 +149,28 @@ public class HabitRecyclerAdapter
                         repo.update(habit_at_position);
                     }
                 };
-                Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
-                        .setAction(R.string.undo, redo)
-                        .show();
-                //Lazy delete a database entry
-                habit_at_position.setState(0);
+                if (diff>604800000&& habit_at_position.getRecord().size()>4)//习惯持续时间大于7天并且完整打卡次数大于4次
+                {
+                    Snackbar.make(view, R.string.snack_one_item_finished, R.integer.undo_timeout)
+                            .setAction(R.string.undo, redo)
+                            .show();
+                    //Lazy delete a database entry
+                    habit_at_position.setState(2);
+                }
+                else
+                {
+                    Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
+                            .setAction(R.string.undo, redo)
+                            .show();
+                    //Lazy delete a database entry
+                    habit_at_position.setState(0);
+                }
                 repo.update(habit_at_position);
             }
         });
         // Button check
         holder.buttonCheck.setVisibility(View.VISIBLE);
+        holder.buttonCheck.setText(R.string.button_check);
         holder.buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

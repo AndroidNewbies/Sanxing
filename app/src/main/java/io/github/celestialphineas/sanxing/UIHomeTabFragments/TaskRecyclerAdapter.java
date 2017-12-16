@@ -66,6 +66,7 @@ public class TaskRecyclerAdapter
         @BindView(R.id.card_description)    TextView taskDescription;
         @BindView(R.id.card_button_edit)    AppCompatButton buttonEdit;
         @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
+        @BindView(R.id.card_button_check)   AppCompatButton buttonCheck;
         @BindString(R.string.unit_day)      String unitDay;
         @BindString(R.string.unit_hour)     String unitHour;
         @BindString(R.string.unit_minute)   String unitMinute;
@@ -159,7 +160,31 @@ public class TaskRecyclerAdapter
                 //  Lazy delete a database entry
                 task_at_position.setState(0);
                 repo.update(task_at_position);
-
+            }
+        });
+        // Button check
+        holder.buttonCheck.setVisibility(View.VISIBLE);
+        holder.buttonCheck.setText(R.string.button_finish);
+        holder.buttonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final TaskRepo repo = new TaskRepo(context);
+                //taskList.remove(task);
+                remove(position);
+                View.OnClickListener redo = new View.OnClickListener() {
+                    @Override public void onClick(View view) {
+                        add(task_at_position, position);
+                        // Restore the lazily deleted database entry
+                        task_at_position.setState(1);
+                        repo.update(task_at_position);
+                    }
+                };
+                Snackbar.make(view, R.string.snack_one_item_finished, R.integer.undo_timeout)
+                        .setAction(R.string.undo, redo)
+                        .show();
+                //  Lazy delete a database entry
+                task_at_position.setState(2);
+                repo.update(task_at_position);
             }
         });
         //将position保存在itemView的Tag中，以便点击时进行获取
