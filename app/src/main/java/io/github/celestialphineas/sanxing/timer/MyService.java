@@ -99,16 +99,16 @@ public class MyService extends Service {
         //.setSubText("任务截止日期")
         if (mysetting.ifvibrate) myNotiBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
         if (!mysetting.Ringtone.equals("")) myNotiBuilder.setSound(Uri.parse(mysetting.Ringtone));
-        List<Task> taskList=taskManager.getObjectList();
-        Task task;
-        for (int i=0;i<taskList.size();i++)
+        int i=0;
+        for (Task task:taskManager.getObjectList())
         {
-            task=taskList.get(i);
+            if (task.getState()==2) continue;
             if (task.score()>3 && i>0) break;//如果有,至少显示一个，大于3分的不显示
             myNotiBuilder.setContentText(noti_task_name+task.getTitle())
                     .setSubText(noti_ddl+task.getEndDate());
             Notification myNotification=myNotiBuilder.build();
             myNotiManager.notify(i,myNotification);
+            i++;
         }
         //活干完了，就结束自己的生命，等待下一次
         stopSelf();

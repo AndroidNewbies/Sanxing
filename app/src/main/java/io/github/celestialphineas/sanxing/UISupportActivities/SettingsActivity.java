@@ -184,6 +184,9 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Intent i = new Intent(this, MyService.class);
+        i.putExtra("source", "Setting");
+        this.startService(i);
     }
 
     @SuppressWarnings("deprecation")
