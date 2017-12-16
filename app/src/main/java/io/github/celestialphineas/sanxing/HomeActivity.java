@@ -340,7 +340,6 @@ public class HomeActivity extends AppCompatActivity
             bundle.putInt("tab", posPosition[0]);
             navigateCalendarIntent.putExtras(bundle);
             startActivity(navigateCalendarIntent);
-            // TODO: Pass message to calendar activity through intent here
             return true;
         }
 
@@ -359,7 +358,7 @@ public class HomeActivity extends AppCompatActivity
             // Intent to navigate to the calendar activity
             Intent navigateCalendarIntent = new Intent(this, CalendarActivity.class);
             startActivity(navigateCalendarIntent);
-            // TODO: Pass message to calendar activity through intent here
+
         } else if (id == R.id.nav_statistics) {
             Intent navigateStatisticsIntent = new Intent(this, StatisticsActivity.class);
             startActivity(navigateStatisticsIntent);

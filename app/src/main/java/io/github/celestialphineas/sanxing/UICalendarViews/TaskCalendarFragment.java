@@ -133,7 +133,7 @@ public class TaskCalendarFragment extends Fragment {
                         new EventDetailObject(temp.getTitle()+" " +finish, temp.getEndDate().substring(11,16), temp.getContent(), importance)));
             }
             //add event
-            else if (millionSeconds<LocalDateTime.now().toEpochSecond(zoneoffset)){
+            else if (temp.istimeout()){
                 events.add(new Event(getColorByImportance(importance),millionSeconds,
                         new EventDetailObject(temp.getTitle()+" " +timeout, temp.getEndDate().substring(11,16), temp.getContent(), importance)));
             }else events.add(new Event(getColorByImportance(importance),millionSeconds,

@@ -88,6 +88,11 @@ public abstract class AbstractsxObject {
         end=LocalDateTime.parse(date, sf);
         //Log.d("enddate",end.toString());
     }
+    public void setEndDate(LocalDateTime date)
+    {
+        end=date;
+        //Log.d("enddate",end.toString());
+    }
     public void setEndDate(int year,int month,int day,int hour,int minute,int second)
     {
         end = LocalDateTime.of(year, month, day, hour, minute, second);

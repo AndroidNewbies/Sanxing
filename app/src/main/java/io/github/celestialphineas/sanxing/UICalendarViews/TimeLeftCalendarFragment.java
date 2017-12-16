@@ -123,7 +123,7 @@ public class TimeLeftCalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_time_left_calendar, container, false);
         ButterKnife.bind(this, view);
 
-        // TODO: Generate a list of timeLeftEvents
+        // TGenerate a list of timeLeftEvents
         // Constructor of the TimeLeftEvent:
         // TimeLeftEvent(String title, String description, Calendar startTime, Calendar endTime, int importance)
 
