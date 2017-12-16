@@ -43,7 +43,7 @@
     <string name="edit">编辑</string>
     <string name="undo">撤销</string>
     <string name="snack_one_item_deleted">删除了一个项目。</string>
-    <string name="snack_one_item_finished">完成了一个项目。.</string>
+    <string name="snack_one_item_finished">完成了一个项目。</string>
     <string name="edit_habit">编辑习惯</string>
     <string name="edit_task">编辑任务</string>
     <string name="edit_time_left">编辑倒计时</string>
