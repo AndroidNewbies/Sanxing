@@ -76,6 +76,7 @@
         <service
             android:name=".timer.MyService"
             android:process="io.github.celestialphineas.sanxing.timer.myservice" />
-        <receiver android:name=".timer.AlarmReceiver" />
+        <receiver android:name=".timer.AlarmReceiver"
+            android:process=":newinst"/>
     </application>
 </manifest>

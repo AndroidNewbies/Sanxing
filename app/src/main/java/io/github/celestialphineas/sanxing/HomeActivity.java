@@ -83,7 +83,18 @@ public class HomeActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        ///////// Only display one time/////////
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        boolean first=sharedPreferences.getBoolean("iffirst",true);
+        if (first)
+        {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            //存入数据
+            editor.putBoolean("iffirst",false);//已安装
+            editor.commit();
+            Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
+            startActivity(navigateHelpIntent);
+        }
         ///////// Toolbar ////////
         // Get the toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
@@ -136,17 +147,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onPageScrollStateChanged(int state) { }
         });
-        Log.e("on create","called");
-        /*SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-        boolean first=sharedPreferences.getBoolean("iffirst",true);
-        if (first)
-        {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            //存入数据
-            editor.putBoolean("iffirst",false);//已安装
-            Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
-            startActivity(navigateHelpIntent);
-        }*/
+
 
         handler.sendEmptyMessage(1);
 

@@ -83,8 +83,8 @@ public class MyApplication extends Application {
         _habit_manager.order();
         _time_left_manager.order();
         mysetting.readSetting(this);
-        Log.d("ringtone",mysetting.Ringtone);
-        Log.d("CallTime",mysetting.callTime.toString());
+        //Log.d("ringtone",mysetting.Ringtone);
+        //Log.d("CallTime",mysetting.callTime.toString());
         if (!isServiceRunning(this, "io.github.celestialphineas.imer.MyService"))
         {
             //开启第一次service，设置闹钟
@@ -92,7 +92,6 @@ public class MyApplication extends Application {
             i.putExtra("source", "Application");
             this.startService(i);
         }
-        Log.e("on create","called");
 
     }
 
@@ -177,8 +176,6 @@ public class MyApplication extends Application {
             editor.putString("calendar_first_day_of_week","0");
             //提交修改
             editor.commit();
-            Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
-            startActivity(navigateHelpIntent);//进入帮助界面
         }
     }
 }
