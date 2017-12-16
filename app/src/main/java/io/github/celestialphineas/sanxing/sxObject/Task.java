@@ -48,10 +48,11 @@ public class Task extends AbstractsxObject implements Serializable,Comparable<Ta
         create_task(title, begindate, enddate, content, important);
     }
     //this constructor only used when read data from the database
-    public Task(int id,String title,String begindate,String enddate,String content,int important)
+    public Task(int id,String title,String begindate,String enddate,String content,int important,int state)
     {
         ID  = id;//set the ID in the abstract class
         create_task(title, begindate, enddate, content, important);
+        setState(state);// attention: setState must be called after create_task. create_task will set state to be default 1!
     }
     //创建时使用
     public void create_task(String title,String begindate,String enddate,String content,int important)

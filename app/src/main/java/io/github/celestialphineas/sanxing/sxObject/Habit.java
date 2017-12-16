@@ -65,21 +65,7 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         recordnumber=0;
         super.setTitle(title);
     }
-    //this constructor only used when read data from the database
-    public Habit(int id,String title, String begin, String end, String n_description, int n_importance,int n_frequency,int n_recordnumber,
-                 int n_neednumber,String n_nextddl,int n_need_all,int n_have_all)//todo : record list
-    {
 
-        super.create_object(title,begin,end,n_description,n_importance);
-        ID  = id;//set the ID in the abstract class
-        frequency=n_frequency;
-        recordnumber=n_recordnumber;
-        neednumber=n_neednumber;
-        need_record_all=n_need_all;
-        have_record_all=n_have_all;
-        setNextddl(n_nextddl);
-        next_day();
-    }
 
     public List<Integer> getRecord() {
         return record;
@@ -93,9 +79,9 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         Log.e("Ken result","woc"+result);
         return result;
     }
-
+    //this constructor only used when read data from the database
     public Habit(int id, String title, String begin, String end, String n_description, int n_importance, int n_frequency, int n_recordnumber,
-                 int n_neednumber, String n_nextddl, int n_need_all, int n_have_all, List<Integer> n_record_list )//todo : record list
+                 int n_neednumber, String n_nextddl, int n_need_all, int n_have_all,int n_state, List<Integer> n_record_list )
     {
 
         super.create_object(title,begin,end,n_description,n_importance);
@@ -106,9 +92,11 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
         need_record_all=n_need_all;
         have_record_all=n_have_all;
         setNextddl(n_nextddl);
+        setState(n_state);
         record = n_record_list;
 //        record.addAll(n_record_list);
         next_day();
+        setState(n_state);// attention: setState must be called after create_task. create_task will set state to be default 1!
     }
     public void setNextddl(String date){
         DateTimeFormatter sf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

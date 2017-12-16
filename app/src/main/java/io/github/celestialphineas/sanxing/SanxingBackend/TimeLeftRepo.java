@@ -94,7 +94,7 @@ public class TimeLeftRepo {
 
         String selectQuery =  "SELECT  " +
                 TimeLeft.KEY_ID + ", " +
-                TimeLeft.KEY_TITLE+ ", " +TimeLeft.KEY_BEGIN_TIME+ ", " +TimeLeft.KEY_END_TIME+ ", " +TimeLeft.KEY_DESCRIPTION+ ", " +TimeLeft.KEY_IMPORTANCE+
+                TimeLeft.KEY_TITLE+ ", " +TimeLeft.KEY_BEGIN_TIME+ ", " +TimeLeft.KEY_END_TIME+ ", " +TimeLeft.KEY_DESCRIPTION+ ", " +TimeLeft.KEY_IMPORTANCE+", "+TimeLeft.KEY_STATE+
                 " FROM " + TimeLeft.TABLE  +" WHERE "+TimeLeft.KEY_STATE +" > 0  ";
 
         ArrayList<TimeLeft> timeLeftList = new ArrayList<TimeLeft>();
@@ -110,8 +110,8 @@ public class TimeLeftRepo {
                 String end=cursor.getString(cursor.getColumnIndex(TimeLeft.KEY_END_TIME));
                 String n_description=cursor.getString(cursor.getColumnIndex(TimeLeft.KEY_DESCRIPTION));
                 int n_importance=cursor.getInt(cursor.getColumnIndex(TimeLeft.KEY_IMPORTANCE));
-
-                timeLeftList.add(new TimeLeft(id,title,begin,end,n_description,n_importance));
+                int n_state = cursor.getInt(cursor.getColumnIndex(TimeLeft.KEY_STATE));
+                timeLeftList.add(new TimeLeft(id,title,begin,end,n_description,n_importance,n_state));
                 //timeLeftList.add(new TimeLeft(content));
 
 

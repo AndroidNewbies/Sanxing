@@ -111,7 +111,7 @@ public class HabitRepo {
         String selectQuery =  "SELECT  " +
                 Habit.KEY_ID + ", " + Habit.KEY_TITLE+ ", " +Habit.KEY_BEGIN_TIME+ ", " +Habit.KEY_END_TIME+ ", " +Habit.KEY_DESCRIPTION+ ", " +Habit.KEY_IMPORTANCE+" , "+
                 Habit.KEY_FREQUENCY +" , "+Habit.KEY_RECORDNUMBER +" , "+Habit.KEY_NEEDNUMBER +" , "+Habit.KEY_NEXTDDL +" , "+Habit.KEY_NEED_RECORD_ALL +" , "+Habit.KEY_HAVE_RECORD_ALL +" , "
-                + Habit.KEY_RECORD_LIST +
+                + Habit.KEY_RECORD_LIST +", "+ Habit.KEY_STATE +
         " FROM " + Habit.TABLE +" WHERE "+ Habit.KEY_STATE +" > 0  ";
 
         ArrayList<Habit> habitList = new ArrayList<Habit>();
@@ -138,6 +138,8 @@ public class HabitRepo {
                 int n_need_all=cursor.getInt(cursor.getColumnIndex(Habit.KEY_NEED_RECORD_ALL));
                 int n_have_all=cursor.getInt(cursor.getColumnIndex(Habit.KEY_HAVE_RECORD_ALL));
 
+                int n_sate = cursor.getInt(cursor.getColumnIndex(Habit.KEY_STATE));
+
                 String record_list_string = cursor.getString(cursor.getColumnIndex(Habit.KEY_RECORD_LIST));
                 Log.e("database read list ",record_list_string+"#");
                 String [] record_string = record_list_string.split(" ");
@@ -147,7 +149,7 @@ public class HabitRepo {
                 }
 
                 habitList.add(new Habit(id,title, begin, end, n_description, n_importance,n_frequency,n_recordnumber,
-                        n_neednumber,n_nextddl,n_need_all,n_have_all,record_list));
+                        n_neednumber,n_nextddl,n_need_all,n_have_all,n_sate,record_list));
                 //habitList.add(new Habit("jjj"));
 
             } while (cursor.moveToNext());

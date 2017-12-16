@@ -32,10 +32,11 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
         super.setTitle(title);
     }
     //this constructor only used when read data from the database
-    public TimeLeft(int id,String title,String begindate,String enddate,String content,int important)
+    public TimeLeft(int id,String title,String begindate,String enddate,String content,int important,int state)
     {
         ID  = id;//set the ID in the abstract class
         create_timeleft(title, begindate, enddate, content, important);
+        setState(state);
     }
     public void create_timeleft(String title,String begindate,String enddate,String content,int important)
     {

@@ -96,7 +96,7 @@ public class TaskRepo {
 
         String selectQuery =  "SELECT  " +
                 Task.KEY_ID + ", " +
-                Task.KEY_TITLE+ ", " +Task.KEY_BEGIN_TIME+ ", " +Task.KEY_END_TIME+ ", " +Task.KEY_DESCRIPTION+ ", " +Task.KEY_IMPORTANCE+
+                Task.KEY_TITLE+ ", " +Task.KEY_BEGIN_TIME+ ", " +Task.KEY_END_TIME+ ", " +Task.KEY_DESCRIPTION+ ", " +Task.KEY_IMPORTANCE+", "+Task.KEY_STATE+
                 " FROM " + Task.TABLE  +" WHERE "+Task.KEY_STATE +" >0  ";
 
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -112,8 +112,8 @@ public class TaskRepo {
                 String end=cursor.getString(cursor.getColumnIndex(Task.KEY_END_TIME));
                 String n_description=cursor.getString(cursor.getColumnIndex(Task.KEY_DESCRIPTION));
                 int n_importance=cursor.getInt(cursor.getColumnIndex(Task.KEY_IMPORTANCE));
-
-                taskList.add(new Task(id,title,begin,end,n_description,n_importance));
+                int n_state = cursor.getInt(cursor.getColumnIndex(Task.KEY_STATE));
+                taskList.add(new Task(id,title,begin,end,n_description,n_importance,n_state));
                 //taskList.add(new Task(content));
 
 
