@@ -21,14 +21,11 @@ public class TaskManager implements SxObjectManager {
     }
     public TaskManager(List<Task> list){
         TaskPool = list;
-        resetNumbers();
     }
     public int getNumberOfTasks(){return nTasks;}
     public int getNumberOfFinishedTasks(){return nFinishedTasks;}
     public boolean addObject(Object obj){
         Task task = (Task) obj;
-        if (task.getState()==1) nTasks++;
-        else if (task.getState()==2)nFinishedTasks++;
         TaskPool.add(task);
         return true;
     }
@@ -39,10 +36,6 @@ public class TaskManager implements SxObjectManager {
     }
     public boolean removeObject(int index){
         if (index < TaskPool.size()){
-            Task task = TaskPool.get(index);
-            int state=task.getState();
-            if (state==1) nTasks--;
-            else if (state==2)nFinishedTasks--;
             TaskPool.remove(index);
             return true;
         }else  return false;
@@ -62,9 +55,10 @@ public class TaskManager implements SxObjectManager {
     {
         Collections.sort(TaskPool);
     }
-    private void resetNumbers()
+    public void resetNumbers()
     {
         nTasks=0;
+        nFinishedTasks=0;
         for (Task task:TaskPool)
         {
             int state=task.getState();

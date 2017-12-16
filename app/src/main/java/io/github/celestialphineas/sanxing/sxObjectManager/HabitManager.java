@@ -22,15 +22,11 @@ public class HabitManager implements SxObjectManager {
     }
     public HabitManager(List<Habit> list){
         HabitPool = list;
-        resetNumbers();
     }
     public int getNumberOfHabits(){return nHabits;}
     public int getNumberOfFinishedHabits(){return nFinishedHabits;}
     public boolean addObject(Object obj){
         Habit habit = (Habit) obj;
-        HabitPool.add(habit);
-        if (habit.getState()==1) nHabits++;
-        else if (habit.getState()==2) nFinishedHabits++;
         return true;
     }
     public boolean addAll(List<Habit> list){
@@ -41,10 +37,6 @@ public class HabitManager implements SxObjectManager {
     }
     public boolean removeObject(int index){
         if (index < HabitPool.size()){
-            Habit habit=HabitPool.get(index);
-            int state=habit.getState();
-            if (state==1) nHabits--;
-            else if (state==2) nFinishedHabits--;
             HabitPool.remove(index);
             return true;
         }else  return false;
@@ -59,7 +51,7 @@ public class HabitManager implements SxObjectManager {
         return HabitPool;
     }
     public void order(){ Collections.sort(HabitPool);}
-    private void resetNumbers()
+    public void resetNumbers()
     {
         nHabits=0;
         nFinishedHabits=0;

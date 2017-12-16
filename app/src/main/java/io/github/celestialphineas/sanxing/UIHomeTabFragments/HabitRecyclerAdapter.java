@@ -35,7 +35,7 @@ import io.github.celestialphineas.sanxing.sxObject.Habit;
 public class HabitRecyclerAdapter
         extends RecyclerView.Adapter<HabitRecyclerAdapter.HabitViewHolder> {
 
-    private int habitFreq = 3;
+    //private int habitFreq = 3;
     private List<Habit> habitList;
     private Context context;
 
@@ -45,11 +45,11 @@ public class HabitRecyclerAdapter
         habitList = Habit_list;
     }
 
-    public List<Habit> getHabitList() { return habitList; }
+    /*public List<Habit> getHabitList() { return habitList; }
     public void setHabitList(List<Habit> habit_list) {
         habitList = habit_list;
         notifyDataSetChanged();
-    }
+    }*/
 
     class HabitViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.card_root_view)              CardView cardView;
@@ -136,21 +136,20 @@ public class HabitRecyclerAdapter
             @Override
             public void onClick(View view) {
                 final HabitRepo repo = new HabitRepo(context);
-                final Habit habit = habitList.get(position);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
-                        add(habit, position);
-                        habit.setState(1);
-                        repo.update(habit);
+                        add(habit_at_position, position);
+                        habit_at_position.setState(1);
+                        repo.update(habit_at_position);
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
                         .setAction(R.string.undo, redo)
                         .show();
                 //Lazy delete a database entry
-                habit.setState(0);
-                repo.update(habit);
+                habit_at_position.setState(0);
+                repo.update(habit_at_position);
             }
         });
         // Button check

@@ -50,13 +50,13 @@ public class TaskRecyclerAdapter
         taskList = task_list;
     }
 
-    public List<Task> getTaskList() {
+    /*public List<Task> getTaskList() {
         return taskList;
     }
     public void setTaskList(List<Task> task_list) {
         this.taskList = task_list;
         notifyDataSetChanged();
-    }
+    }*/
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.card_root_view)      CardView cardView;
@@ -86,18 +86,18 @@ public class TaskRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, final int position) {
-        Task task_at_position=taskList.get(position);
+        final Task task_at_position=taskList.get(position);
         if (task_at_position==null) Log.e("task","empty");
         holder.taskTitle.setText(task_at_position.getTitle());
         // Set taskCalendar to the due calendar got from the database
         // done by Lin
         String dateString = task_at_position.getEndDate().substring(0,11);
         String timeString = task_at_position.getEndDate().substring(11);
-        try {
+        /*try {
             DateFormat sdf = android.text.format.DateFormat.getDateFormat(context);
             Date date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(dateString);
             dateString = sdf.format(date);
-        } catch (Exception e) {}
+        } catch (Exception e) {}*/
         holder.taskDueTime.setText(dateString + " " + timeString);
         // Calculate the time difference (i.e. the countdown) and print it here
         //done by Lin
@@ -142,15 +142,14 @@ public class TaskRecyclerAdapter
             @Override
             public void onClick(View view) {
                 final TaskRepo repo = new TaskRepo(context);
-                final Task task = taskList.get(position);
                 //taskList.remove(task);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
-                        add(task, position);
+                        add(task_at_position, position);
                         // Restore the lazily deleted database entry
-                        task.setState(1);
-                        repo.update(task);
+                        task_at_position.setState(1);
+                        repo.update(task_at_position);
                     }
                 };
                 Snackbar.make(view, R.string.snack_one_item_deleted, R.integer.undo_timeout)
@@ -158,8 +157,8 @@ public class TaskRecyclerAdapter
                         .show();
 
                 //  Lazy delete a database entry
-                task.setState(0);
-                repo.update(task);
+                task_at_position.setState(0);
+                repo.update(task_at_position);
 
             }
         });

@@ -90,17 +90,17 @@ public class TimeLeftRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TimeLeftViewHolder holder, final int position) {
-        TimeLeft timeLeft_at_position=timeLeftList.get(position);
+        final TimeLeft timeLeft_at_position=timeLeftList.get(position);
         holder.timeLeftTitle.setText(timeLeft_at_position.getTitle());
         String beginDateString = timeLeft_at_position.getBeginDate().substring(0,11);
         String endDateString = timeLeft_at_position.getEndDate().substring(0,11);
-        try {
+        /*try {
             DateFormat sdf = android.text.format.DateFormat.getDateFormat(context);
             Date date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(beginDateString);
             beginDateString = sdf.format(date);
             date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(endDateString);
             endDateString = sdf.format(date);
-        } catch (Exception e) {}
+        } catch (Exception e) {}*/
         // Bind the view with data
         // Please make changes to the timeLeftStartCalendar and timeLeftDueCalendar
         // to match the date with the model
@@ -149,15 +149,14 @@ public class TimeLeftRecyclerAdapter
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final TimeLeft timeLeft = timeLeftList.get(position);
                 final TimeLeftRepo repo = new TimeLeftRepo(context);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
                     @Override public void onClick(View view) {
-                        add(timeLeft, position);
+                        add(timeLeft_at_position, position);
                         // Restore the lazily deleted database entry
-                        timeLeft.setState(1);
-                        repo.update(timeLeft);
+                        timeLeft_at_position.setState(1);
+                        repo.update(timeLeft_at_position);
 
                     }
                 };
@@ -165,8 +164,8 @@ public class TimeLeftRecyclerAdapter
                         .setAction(R.string.undo, redo)
                         .show();
                 // Lazy delete a database entry
-                timeLeft.setState(0);
-                repo.update(timeLeft);
+                timeLeft_at_position.setState(0);
+                repo.update(timeLeft_at_position);
             }
         });
         //将position保存在itemView的Tag中，以便点击时进行获取

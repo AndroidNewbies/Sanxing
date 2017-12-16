@@ -139,6 +139,10 @@ public class StatisticsActivity extends AppCompatActivity {
 
         // TODO:
         // Set the number of items
+        //end numbers
+        taskManager.resetNumbers();
+        habitManager.resetNumbers();
+        timeLeftManager.resetNumbers();
         nTasks=taskManager.getNumberOfTasks();
         nHabits=habitManager.getNumberOfHabits();
         nTimeLefts=timeLeftManager.getNumberOfTimeLefts();
