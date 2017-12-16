@@ -1,9 +1,11 @@
 package io.github.celestialphineas.sanxing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -135,8 +137,16 @@ public class HomeActivity extends AppCompatActivity
             public void onPageScrollStateChanged(int state) { }
         });
         Log.e("on create","called");
-
-        //timer.schedule(timerTask,0, 60*1000);//the timer used to change left time
+        /*SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        boolean first=sharedPreferences.getBoolean("iffirst",true);
+        if (first)
+        {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            //存入数据
+            editor.putBoolean("iffirst",false);//已安装
+            Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
+            startActivity(navigateHelpIntent);
+        }*/
 
         handler.sendEmptyMessage(1);
 

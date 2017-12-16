@@ -58,9 +58,14 @@ public class HabitFrag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
+        List<Habit> need_add = new ArrayList<>();
+        for (Habit habit : habitManager.getObjectList()){
+            if (habit.getState()==1){//unfinished
+                need_add.add(habit);
+            }
+        }
         if (habitManager !=null)
-            recyclerView.setAdapter(new HabitRecyclerAdapter(habitManager.getObjectList()));
+            recyclerView.setAdapter(new HabitRecyclerAdapter(need_add));
         else recyclerView.setAdapter(new HabitRecyclerAdapter());
         return view;
     }

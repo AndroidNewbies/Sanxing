@@ -63,8 +63,13 @@ public class TimeLeftFrag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
-        if (timeLeftManager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(timeLeftManager.getObjectList()));
+        List<TimeLeft> need_add = new ArrayList<>();
+        for (TimeLeft timeLeft : timeLeftManager.getObjectList()){
+            if (timeLeft.getState()==1){//unfinished
+                need_add.add(timeLeft);
+            }
+        }
+        if (timeLeftManager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

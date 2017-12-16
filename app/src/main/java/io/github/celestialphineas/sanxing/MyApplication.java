@@ -33,6 +33,7 @@ import butterknife.BindString;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
+import io.github.celestialphineas.sanxing.UISupportActivities.IntroActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
@@ -173,8 +174,11 @@ public class MyApplication extends Application {
             //Log.w("Time1",String.valueOf(now.toEpochSecond(zoneOffset)*1000));
             //Log.w("Time1",String.valueOf(now.toEpochSecond(ZoneOffset.UTC)*1000));
             editor.putString("notifications_ringtone","content://settings/system/notification_sound");
+            editor.putString("calendar_first_day_of_week","0");
             //提交修改
             editor.commit();
+            Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
+            startActivity(navigateHelpIntent);//进入帮助界面
         }
     }
 }
