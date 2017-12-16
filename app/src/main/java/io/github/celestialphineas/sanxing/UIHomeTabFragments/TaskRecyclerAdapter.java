@@ -170,6 +170,7 @@ public class TaskRecyclerAdapter
         holder.buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final LocalDateTime for_undo = task_at_position.getEndLocalDate();
                 final TaskRepo repo = new TaskRepo(context);
                 //taskList.remove(task);
                 remove(position);
@@ -177,6 +178,7 @@ public class TaskRecyclerAdapter
                     @Override public void onClick(View view) {
                         add(task_at_position, position);
                         // Restore the lazily deleted database entry
+                        task_at_position.setEndDate(for_undo);
                         task_at_position.setState(1);
                         repo.update(task_at_position);
                     }
@@ -186,7 +188,9 @@ public class TaskRecyclerAdapter
                         .show();
                 //  Lazy delete a database entry
                 task_at_position.setState(2);
-                //todo: renew end time
+                //renew end time
+
+                task_at_position.setEndDate(LocalDateTime.now());
                 repo.update(task_at_position);
             }
         });

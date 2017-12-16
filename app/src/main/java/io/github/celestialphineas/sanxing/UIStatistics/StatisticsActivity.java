@@ -137,7 +137,7 @@ public class StatisticsActivity extends AppCompatActivity {
             }
         });
 
-        // TODO:
+
         // Set the number of items
         //end numbers
         taskManager.resetNumbers();
@@ -176,7 +176,7 @@ public class StatisticsActivity extends AppCompatActivity {
 //        achievements.add(new Achievement(HABIT, GOLD, "Hello", "world, blablabla"));
 //        achievements.add(new Achievement(TASK, BRONZE, "Task bla", "You've won a lot"));
 //        achievements.add(new Achievement(TIME_LEFT, SILVER, "What?", "What the heck!!!"));
-//        // End of TODO
+//
 
         //////// ListAdapter ////////
         if(achievements == null || achievements.isEmpty()) {

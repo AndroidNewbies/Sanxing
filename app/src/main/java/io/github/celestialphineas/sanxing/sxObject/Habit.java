@@ -145,7 +145,7 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
             have_record_all++;
         }
         if (recordnumber == neednumber){
-            //todo : list add days from today to begin
+            //list add days from today to begin
             long diff = 0;
             LocalDateTime begindatetime=getBeginLocalDate();
             LocalDateTime begindate=LocalDateTime.of(begindatetime.getYear(),begindatetime.getMonth(),

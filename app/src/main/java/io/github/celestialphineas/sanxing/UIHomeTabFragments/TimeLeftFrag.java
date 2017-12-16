@@ -64,7 +64,7 @@ public class TimeLeftFrag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        //todo: get unfinished list  task是不是引用？ 不是的话 在application里加一下need_add
+        //get unfinished list  task 是引用？  在application里加一下need_add
 
         List<TimeLeft> need_add = new ArrayList<>();
         for (TimeLeft timeLeft : timeLeftManager.getObjectList()){
