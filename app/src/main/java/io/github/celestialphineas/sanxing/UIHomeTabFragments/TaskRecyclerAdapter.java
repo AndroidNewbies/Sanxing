@@ -70,6 +70,7 @@ public class TaskRecyclerAdapter
         @BindString(R.string.unit_day)      String unitDay;
         @BindString(R.string.unit_hour)     String unitHour;
         @BindString(R.string.unit_minute)   String unitMinute;
+        @BindString(R.string.time_out)      String timeout;
         TaskViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -110,7 +111,8 @@ public class TaskRecyclerAdapter
         long hours=diff/60/60;
         diff %=3600;
         long minutes=diff/60;
-        holder.taskCountdown.setText(String.valueOf(days)+ holder.unitDay +hours+":"+minutes);
+        if (diff<0) holder.taskCountdown.setText(holder.timeout);
+        else holder.taskCountdown.setText(String.valueOf(days)+ holder.unitDay +hours+":"+minutes);
         // Get the description and print it out here
         //done by Lin
         holder.taskDescription.setText(task_at_position.getContent());

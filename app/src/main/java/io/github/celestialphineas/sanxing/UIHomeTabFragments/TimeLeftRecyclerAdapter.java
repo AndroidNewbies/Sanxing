@@ -73,6 +73,7 @@ public class TimeLeftRecyclerAdapter
         @BindString(R.string.unit_day)      String unitDayString;
         @BindString(R.string.unit_hour)     String unitHourString;
         @BindString(R.string.unit_minute)   String unitMinuteString;
+        @BindString(R.string.end)   String end;
         TimeLeftViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -117,9 +118,12 @@ public class TimeLeftRecyclerAdapter
         long hours=diff/60/60;
         diff %=3600;
         long minutes=diff/60;
-        if (years>0) holder.timeLeftCountDown.setText(years
-                + holder.unitYearString + days + holder.unitDayString + hours + ":" + minutes);
-        else holder.timeLeftCountDown.setText(days+ holder.unitDayString + hours + ":" + minutes);
+        if (diff>0){
+            if (years>0) holder.timeLeftCountDown.setText(years
+                    + holder.unitYearString + days + holder.unitDayString + hours + ":" + minutes);
+            else holder.timeLeftCountDown.setText(days+ holder.unitDayString + hours + ":" + minutes);
+        }
+        else  holder.timeLeftCountDown.setText(holder.end);
         // Get the description and print it out here
         holder.timeLeftDescription.setText(timeLeft_at_position.getContent());//content is the description
 
