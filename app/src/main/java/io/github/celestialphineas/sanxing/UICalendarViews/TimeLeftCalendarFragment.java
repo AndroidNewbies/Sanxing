@@ -196,6 +196,7 @@ public class TimeLeftCalendarFragment extends Fragment {
             long endMillis = timeLeftEvent.endTime.getTimeInMillis();
             long nowMillis = Calendar.getInstance().getTimeInMillis();
             double percentage = ((double)(nowMillis - startMillis))/(endMillis - startMillis);
+            if (percentage>1) percentage=1;//handle overflow
             // Calculate the number of squares
             double span = endMillis - startMillis;
             double left = endMillis - nowMillis;

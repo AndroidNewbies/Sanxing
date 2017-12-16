@@ -49,7 +49,17 @@ public class TimeLeftRecyclerAdapter
     TimeLeftRecyclerAdapter() { }
 
     TimeLeftRecyclerAdapter(List<TimeLeft> time_left_list) {
+        final TimeLeftRepo repo = new TimeLeftRepo(context);
+
         timeLeftList = time_left_list;
+        //renew state of each item
+        for (TimeLeft timeLeft:timeLeftList){
+            long diff= MyDuration.durationFromNowtoB(timeLeft.getEndLocalDate());
+            if (diff<0) {
+                timeLeft.setState(2);
+                repo.update(timeLeft);
+            }
+        }
     }
 
     public List<TimeLeft> getTimeLeftList() { return timeLeftList; }
@@ -123,7 +133,10 @@ public class TimeLeftRecyclerAdapter
                     + holder.unitYearString + days + holder.unitDayString + hours + ":" + minutes);
             else holder.timeLeftCountDown.setText(days+ holder.unitDayString + hours + ":" + minutes);
         }
-        else  holder.timeLeftCountDown.setText(holder.end);
+        else {
+
+            holder.timeLeftCountDown.setText(holder.end);// this code will never be executed
+        }
         // Get the description and print it out here
         holder.timeLeftDescription.setText(timeLeft_at_position.getContent());//content is the description
 

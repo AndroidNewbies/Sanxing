@@ -37,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -54,6 +55,8 @@ public class TaskCalendarFragment extends Fragment {
     @BindView(R.id.task_detail_content)             ViewGroup taskDetailContent;
     @BindView(R.id.task_detail_card)                ViewGroup taskDetailCard;
     @BindView(R.id.task_detail_text)                AppCompatTextView taskDetailText;
+    @BindString(R.string.finished)                String finish;
+    @BindString(R.string.time_out)      String timeout;
     final Calendar selectedCalendar = Calendar.getInstance();
     final List<Event> events = new ArrayList<>();
 
@@ -125,11 +128,17 @@ public class TaskCalendarFragment extends Fragment {
             long millionSeconds = 0;
             ZoneOffset zoneoffset=OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
             millionSeconds = temp.getEndLocalDate().toEpochSecond(zoneoffset)*1000;
-            Log.e("local mill 2", String.valueOf(millionSeconds));
-
+            if (temp.getState()==2){
+                events.add(new Event(getColorByImportance(importance),millionSeconds,
+                        new EventDetailObject(temp.getTitle()+" " +finish, temp.getEndDate().substring(11,16), temp.getContent(), importance)));
+            }
             //add event
-            events.add(new Event(getColorByImportance(importance),millionSeconds,
+            else if (millionSeconds<LocalDateTime.now().toEpochSecond(zoneoffset)){
+                events.add(new Event(getColorByImportance(importance),millionSeconds,
+                        new EventDetailObject(temp.getTitle()+" " +timeout, temp.getEndDate().substring(11,16), temp.getContent(), importance)));
+            }else events.add(new Event(getColorByImportance(importance),millionSeconds,
                     new EventDetailObject(temp.getTitle(), temp.getEndDate().substring(11,16), temp.getContent(), importance)));
+
         }
         //this is a test event
 //        events.add(new Event(getColorByImportance(3), new Date().getTime() + 120000000,

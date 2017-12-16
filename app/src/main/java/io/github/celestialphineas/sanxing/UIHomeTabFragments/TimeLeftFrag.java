@@ -17,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.github.celestialphineas.sanxing.R;
+import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
@@ -63,8 +64,14 @@ public class TimeLeftFrag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
-        if (timeLeftManager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(timeLeftManager.getObjectList()));
+        //todo: get unfinished list  task是不是引用？ 不是的话 在application里加一下need_add
+        List<TimeLeft> need_add = new ArrayList<>();
+        for (TimeLeft timeLeft : timeLeftManager.getObjectList()){
+            if (timeLeft.getState()==1){//unfinished
+                need_add.add(timeLeft);
+            }
+        }
+        if (need_add !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

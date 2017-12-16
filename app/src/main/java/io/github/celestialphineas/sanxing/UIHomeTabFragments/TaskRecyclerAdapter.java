@@ -186,6 +186,7 @@ public class TaskRecyclerAdapter
                         .show();
                 //  Lazy delete a database entry
                 task_at_position.setState(2);
+                //todo: renew end time
                 repo.update(task_at_position);
             }
         });
