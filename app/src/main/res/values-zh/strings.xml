@@ -88,7 +88,6 @@
     <string name="choose_a_time_left">选取倒计时</string>
     <string name="bar_view">进度条</string>
     <string name="grid_view">网格</string>
-    <string name="pref_lang"></string>
     <string name="unit_year">年</string>
     <string name="unit_month">月</string>
     <string name="unit_week">周</string>
