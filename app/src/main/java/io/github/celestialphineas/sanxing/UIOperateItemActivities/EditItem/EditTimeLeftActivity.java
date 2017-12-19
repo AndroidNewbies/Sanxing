@@ -34,6 +34,7 @@ import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateItemActivityBase;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTimeLeftActivityBase;
+import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
 public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
@@ -49,7 +50,19 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         //Handle the intent
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
+        int count = 0;
+        for (TimeLeft temp : myApplication.get_time_left_manager().getObjectList()){// neglect the finished time left item
+            if (temp.getState()==2) continue;
+            else {
+                if (count==position){
+                    timeLeft = temp;
+                }
+                count++;
+            }
+
+        }
         timeLeft=myApplication.get_time_left_manager().getObjectList().get(position);
+
         // Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title

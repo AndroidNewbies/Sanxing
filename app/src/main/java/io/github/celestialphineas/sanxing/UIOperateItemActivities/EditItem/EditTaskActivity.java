@@ -29,7 +29,18 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         // Handle the intent
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
-        task=myApplication.get_task_manager().getObjectList().get(position);
+        int count = 0;
+        for (Task temp : myApplication.get_task_manager().getObjectList()){// neglect the finished task
+            if (temp.getState()==2) continue;
+            else {
+                if (count==position){
+                    task = temp;
+                }
+                count++;
+            }
+
+        }
+
         //  Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title

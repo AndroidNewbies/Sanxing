@@ -29,6 +29,7 @@ import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateHabitActivityBase;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
+import io.github.celestialphineas.sanxing.sxObject.Task;
 
 public class EditHabitActivity extends OperateHabitActivityBase {
     private MyApplication myApplication;
@@ -44,6 +45,17 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
         habit=myApplication.get_habit_manager().getObjectList().get(position);
+        int count = 0;
+        for (Habit temp : myApplication.get_habit_manager().getObjectList()){// neglect the finished habit
+            if (temp.getState()==2) continue;
+            else {
+                if (count==position){
+                    habit = temp;
+                }
+                count++;
+            }
+
+        }
         // Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
