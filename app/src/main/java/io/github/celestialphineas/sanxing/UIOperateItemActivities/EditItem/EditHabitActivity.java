@@ -35,6 +35,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
     private MyApplication myApplication;
     private Habit habit;
     private int position;
+    private int pos_habit_manager;//find the position in the manager
     @BindView(R.id.habit_linear_layout)         LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,9 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         position=intent.getIntExtra("position",-1);
         habit=myApplication.get_habit_manager().getObjectList().get(position);
         int count = 0;
+        pos_habit_manager=0;
         for (Habit temp : myApplication.get_habit_manager().getObjectList()){// neglect the finished habit
+            pos_habit_manager++;
             if (temp.getState()==2) continue;
             else {
                 if (count==position){
@@ -56,6 +59,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
             }
 
         }
+        pos_habit_manager--;
         // Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
         // Title
@@ -100,7 +104,7 @@ public class EditHabitActivity extends OperateHabitActivityBase {
             habit.edit_habit(inputTitle.getText().toString(),"2020-01-01 18:21:00",
                     descriptionContent.getText().toString(),selectedImportance,selectedFreq);
             Intent intent = new Intent();
-            intent.putExtra("position",position);
+            intent.putExtra("position",pos_habit_manager);
             intent.putExtra("ID",habit.ID);
             setResult(RESULT_OK, intent);
             animationSubmit();

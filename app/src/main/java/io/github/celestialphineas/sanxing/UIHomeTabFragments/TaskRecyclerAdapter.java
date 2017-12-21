@@ -186,6 +186,7 @@ public class TaskRecyclerAdapter
                 Snackbar.make(view, R.string.snack_one_item_finished, R.integer.undo_timeout)
                         .setAction(R.string.undo, redo)
                         .show();
+
                 //  Lazy delete a database entry
                 task_at_position.setState(2);
                 //renew end time

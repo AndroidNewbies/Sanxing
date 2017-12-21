@@ -21,6 +21,7 @@ public class EditTaskActivity extends OperateTaskActivityBase {
     private MyApplication myApplication;
     private Task task;
     private int position;
+    private int pos_task_manager;
     @BindView(R.id.task_linear_layout)      LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,9 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
         int count = 0;
+        pos_task_manager=0;
         for (Task temp : myApplication.get_task_manager().getObjectList()){// neglect the finished task
+            pos_task_manager++;//find the position in the manager
             if (temp.getState()==2) continue;
             else {
                 if (count==position){
@@ -39,7 +42,10 @@ public class EditTaskActivity extends OperateTaskActivityBase {
                 count++;
             }
 
+
         }
+        pos_task_manager--;
+
 
         //  Change the lines below to synchronize data of the view and that of the model
         // You may modify the lines below to set the activity's UI state
@@ -91,7 +97,7 @@ public class EditTaskActivity extends OperateTaskActivityBase {
                     ,descriptionContent.getText().toString(),selectedImportance);
 
             Intent intent = new Intent();
-            intent.putExtra("position",position);
+            intent.putExtra("position",pos_task_manager);
             intent.putExtra("ID",task.ID);
             setResult(RESULT_OK, intent);
             animationSubmit();
