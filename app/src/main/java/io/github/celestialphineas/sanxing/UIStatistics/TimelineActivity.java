@@ -108,7 +108,7 @@ public class TimelineActivity extends AppCompatActivity {
         // Constructor: Type, Time Calendar, Description
 
         for (Task task:mTaskManager.getObjectList()){
-            if (task.getState()==2){//task is finished  ,no show
+            if (task.getState()==2||task.getState()==0){//task is finished or deleted ,no show
                 continue;
             }
             long millionSeconds = 0;
@@ -123,7 +123,7 @@ public class TimelineActivity extends AppCompatActivity {
             else timelineItems.add(new TimelineItem(TASK,ca,task.getTitle()));
         }
         for (Habit habit:mHabitManager.getObjectList()){
-            if (habit.getState()==2){//task is finished  ,no show
+            if (habit.getState()==2||habit.getState()==0){//task is finished or deleted ,no show
                 continue;
             }
             long millionSeconds = 0;
@@ -135,7 +135,7 @@ public class TimelineActivity extends AppCompatActivity {
             timelineItems.add(new TimelineItem(HABIT,ca,habit.getTitle()));
         }
         for (TimeLeft timeLeft:mTimeLeftManager.getObjectList()){
-            if (timeLeft.getState()==2){//task is finished  ,no show
+            if (timeLeft.getState()==2||timeLeft.getState()==0){//task is finished or deleted ,no show
                 continue;
             }
             long millionSeconds = 0;
