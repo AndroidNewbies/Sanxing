@@ -103,6 +103,7 @@ public class HabitRecyclerAdapter
     @Override
     public void onBindViewHolder(final HabitViewHolder holder, final int position) {
         final Habit habit_at_position=habitList.get(position);
+        habit_at_position.next_day();//renew deadline of the habit
         holder.habitTitle.setText(habit_at_position.getTitle());
         // Set the frequency (in the form of integer, see OperateHabitActivity for definition)
         // Modify the habitFreq private variable

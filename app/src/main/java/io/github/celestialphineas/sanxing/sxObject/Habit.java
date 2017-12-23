@@ -169,7 +169,7 @@ public class Habit extends AbstractsxObject implements Serializable,Comparable<H
     }
 
     //到了ddl，就保存当前阶段打卡，进入下一次打卡
-    private void next_day()
+    public void next_day()
     {
         LocalDateTime now=LocalDateTime.now();
         while (!now.isBefore(nextddl))//更新总需要

@@ -41,6 +41,7 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
     private MyApplication myApplication;
     private TimeLeft timeLeft;
     private int position;
+    private int pos_timeleft_manager;
     @BindView(R.id.time_left_linear_layout)     LinearLayoutCompat linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,9 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         Intent intent=getIntent();
         position=intent.getIntExtra("position",-1);
         int count = 0;
+        pos_timeleft_manager=0;
         for (TimeLeft temp : myApplication.get_time_left_manager().getObjectList()){// neglect the finished time left item
+            pos_timeleft_manager++;//find the position in the manager
             if (temp.getState()==2) continue;
             else {
                 if (count==position){
@@ -61,6 +64,7 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
             }
 
         }
+        pos_timeleft_manager--;
         timeLeft=myApplication.get_time_left_manager().getObjectList().get(position);
 
         // Change the lines below to synchronize data of the view and that of the model
@@ -126,7 +130,7 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
                     sdf.format(dueCalendar.getTime()).substring(0,16).concat(":00"),descriptionContent.getText().toString(),
                     selectedImportance);
             Intent intent = new Intent();
-            intent.putExtra("position",position);
+            intent.putExtra("position",pos_timeleft_manager);
             intent.putExtra("ID",timeLeft.ID);
             setResult(RESULT_OK, intent);
             animationSubmit();
