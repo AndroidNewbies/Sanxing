@@ -130,6 +130,7 @@ public class TimeLeftCalendarFragment extends Fragment {
         List<TimeLeft> timeLeftList = mTimeLeftManager.getObjectList();
         ZoneOffset zoneoffset= OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
         for (TimeLeft timeLeft:timeLeftList){
+            if (timeLeft.getState()==0) continue;//if a time left is delete , no show
             Calendar begin = Calendar.getInstance();
             begin.setTimeInMillis(timeLeft.getBeginLocalDate().toEpochSecond(zoneoffset)*1000);
             Calendar end = Calendar.getInstance();
