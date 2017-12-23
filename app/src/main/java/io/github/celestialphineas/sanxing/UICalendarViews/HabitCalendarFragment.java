@@ -116,6 +116,7 @@ public class HabitCalendarFragment extends Fragment {
 
         for (int i=0;i<habitList.size();i++) {
             Habit temp = habitList.get(i);
+            if (temp.getState()==0) continue;
             int importance = temp.getImportance();
             for (int j = 0; j < temp.getRecord().size(); j++) {
                 long millionSeconds = 0;

@@ -121,7 +121,9 @@ public class TaskCalendarFragment extends Fragment {
         List<Task> taskList = mTaskManager.getObjectList();//get tasklist stored in the database
 
         for (int i=0;i<taskList.size();i++){
+
             Task temp =  taskList.get(i);
+            if (temp.getState()==0) continue;
             int importance = temp.getImportance();
 
             //get the milliseconds corresponding to the events constructor rule from the data stored in the database
