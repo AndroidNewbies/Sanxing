@@ -50,11 +50,10 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         pos_habit_manager=0;
         for (Habit temp : myApplication.get_habit_manager().getObjectList()){// neglect the finished habit
             pos_habit_manager++;
-            if (temp.getState()!=1) continue;
+            if (temp.getState()==2) continue;
             else {
                 if (count==position){
                     habit = temp;
-                    break;
                 }
                 count++;
             }

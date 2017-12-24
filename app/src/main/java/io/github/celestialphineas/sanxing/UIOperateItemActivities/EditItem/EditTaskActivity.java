@@ -34,11 +34,10 @@ public class EditTaskActivity extends OperateTaskActivityBase {
         pos_task_manager=0;
         for (Task temp : myApplication.get_task_manager().getObjectList()){// neglect the finished task
             pos_task_manager++;//find the position in the manager
-            if (temp.getState()!=1) continue;
+            if (temp.getState()==2) continue;
             else {
                 if (count==position){
                     task = temp;
-                    break;
                 }
                 count++;
             }
