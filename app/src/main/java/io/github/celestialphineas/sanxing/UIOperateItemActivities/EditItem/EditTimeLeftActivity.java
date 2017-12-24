@@ -55,10 +55,11 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
         pos_timeleft_manager=0;
         for (TimeLeft temp : myApplication.get_time_left_manager().getObjectList()){// neglect the finished time left item
             pos_timeleft_manager++;//find the position in the manager
-            if (temp.getState()==2) continue;
+            if (temp.getState()!=1) continue;
             else {
                 if (count==position){
                     timeLeft = temp;
+                    break;
                 }
                 count++;
             }
