@@ -45,9 +45,7 @@ In *Trinspect*, you can see every progress you've achieved with us. Calendar, Ti
 
 This is a rather "dirty" project lacking code beauty and regularity, since this is the first time for the authors to write an Android app. And we would of course credit StackOverflow authors for sharing solutions for so many problems that we've met on our way of development.
 
-We make this stuff in fact for ourselves. We eat our own dogfood and already find this project helpful in our lives. Yep, this is a course project, but we now have an interest in keep maintaining this and add new features later on.
-
-Issues and pull requests are welcomed.
+** No longer maintained. **
 
 ## Authors
 
