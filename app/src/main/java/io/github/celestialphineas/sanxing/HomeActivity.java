@@ -359,12 +359,9 @@ public class HomeActivity extends AppCompatActivity
             Intent navigateCalendarIntent = new Intent(this, CalendarActivity.class);
             startActivity(navigateCalendarIntent);
 
-        } else if (id == R.id.nav_statistics) {
+        } else if (id == R.id.nav_statistics_achievements) {
             Intent navigateStatisticsIntent = new Intent(this, StatisticsActivity.class);
             startActivity(navigateStatisticsIntent);
-        } else if (id == R.id.nav_achievements) {
-            Intent navigateAchievementsIntent = new Intent(this, StatisticsActivity.class);
-            startActivity(navigateAchievementsIntent);
         } else if (id == R.id.nav_timeline) {
             Intent navigateTimelineIntent = new Intent(this, TimelineActivity.class);
             startActivity(navigateTimelineIntent);

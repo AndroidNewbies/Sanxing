@@ -7,13 +7,9 @@
             android:icon="@drawable/ic_calendar"
             android:title="@string/calendar" />
         <item
-            android:id="@+id/nav_statistics"
-            android:icon="@drawable/ic_statistics"
-            android:title="@string/statistics" />
-        <item
-            android:id="@+id/nav_achievements"
+            android:id="@+id/nav_statistics_achievements"
             android:icon="@drawable/ic_achievements"
-            android:title="@string/achievements" />
+            android:title="@string/statistics_and_achievements" />
         <item
             android:id="@+id/nav_timeline"
             android:icon="@drawable/ic_timeline"
