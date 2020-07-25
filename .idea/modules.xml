@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sanxing.iml" filepath="$PROJECT_DIR$/Sanxing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Trinspect.iml" filepath="$PROJECT_DIR$/.idea/modules/Trinspect.iml" group="Trinspect" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Trinspect-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Trinspect-app.iml" group="Trinspect/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
