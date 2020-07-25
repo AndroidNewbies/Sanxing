@@ -53,7 +53,7 @@ public class HabitRecyclerAdapter
         notifyDataSetChanged();
     }*/
 
-    class HabitViewHolder extends RecyclerView.ViewHolder {
+    static class HabitViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.card_root_view)
         CardView cardView;
         @BindView(R.id.card_headline)

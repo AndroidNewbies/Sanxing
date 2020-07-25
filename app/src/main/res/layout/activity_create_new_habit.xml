@@ -31,7 +31,7 @@
                 <ImageView
                     android:layout_height="match_parent"
                     android:layout_width="wrap_content"
-                    android:paddingRight="@dimen/edit_drawable_padding"
+                    android:paddingEnd="@dimen/edit_drawable_padding"
                     android:gravity="center"
                     android:tint="@color/grey"
                     android:src="@drawable/ic_time_picker"
@@ -40,7 +40,7 @@
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.AppCompatTextView
@@ -71,8 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/form_padding"
-                android:layout_marginLeft="-10dp"
-                android:layout_marginRight="-10dp"
+                android:layout_marginStart="-10dp"
+                android:layout_marginEnd="-10dp"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatTextView
@@ -150,7 +150,7 @@
                 <ImageView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:paddingRight="@dimen/edit_drawable_padding"
+                    android:paddingEnd="@dimen/edit_drawable_padding"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:tint="@color/grey"
@@ -161,8 +161,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/hint_importance" />
@@ -188,7 +188,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="wrap_content"
                     android:paddingTop="@dimen/edit_drawable_padding"
-                    android:paddingRight="@dimen/edit_drawable_padding"
+                    android:paddingEnd="@dimen/edit_drawable_padding"
                     android:tint="@color/grey"
                     android:src="@drawable/ic_date_picker"
                     android:contentDescription="@string/calendar" />

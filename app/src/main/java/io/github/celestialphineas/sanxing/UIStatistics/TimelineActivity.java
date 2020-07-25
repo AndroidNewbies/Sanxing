@@ -44,11 +44,6 @@ public class TimelineActivity extends AppCompatActivity {
     static final int TASK = 0, HABIT = 1, TIME_LEFT = 2;
     List<TimelineItem> timelineItems = new ArrayList<>();
 
-    private MyApplication myApplication;
-    private TaskManager mTaskManager;
-    private HabitManager mHabitManager;
-    private TimeLeftManager mTimeLeftManager;
-
     class TimelineItem implements Comparable<TimelineItem> {
         int type;
         Calendar calendar;
@@ -92,10 +87,10 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myApplication = (MyApplication) getApplication();
-        mTaskManager = myApplication.get_task_manager();
-        mHabitManager = myApplication.get_habit_manager();
-        mTimeLeftManager = myApplication.get_time_left_manager();
+        MyApplication myApplication = (MyApplication) getApplication();
+        TaskManager mTaskManager = myApplication.get_task_manager();
+        HabitManager mHabitManager = myApplication.get_habit_manager();
+        TimeLeftManager mTimeLeftManager = myApplication.get_time_left_manager();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);

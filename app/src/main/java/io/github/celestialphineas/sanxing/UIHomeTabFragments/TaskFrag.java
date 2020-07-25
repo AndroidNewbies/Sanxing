@@ -33,7 +33,6 @@ public class TaskFrag extends Fragment {
 
     public TaskRecyclerAdapter mAdapter;
     public TaskManager taskManager;
-    private RecyclerView.LayoutManager layoutManager;
 
     //public ViewPager mViewPager;
 
@@ -47,7 +46,7 @@ public class TaskFrag extends Fragment {
      */
 
 
-    public TaskFrag newInstance(TaskManager taskManager) {
+    public static TaskFrag newInstance(TaskManager taskManager) {
         TaskFrag fragment = new TaskFrag();
         fragment.taskManager = taskManager;
         return fragment;
@@ -65,7 +64,7 @@ public class TaskFrag extends Fragment {
         ButterKnife.bind(this, view);
 
         // Set layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         // Set animator

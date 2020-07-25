@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 
 public class MyListView extends ListViewCompat {
 
-    private android.view.ViewGroup.LayoutParams params;
     private int oldCount = 0;
 
     public MyListView(Context context, AttributeSet attrs) {
@@ -23,7 +22,7 @@ public class MyListView extends ListViewCompat {
         if (getCount() != oldCount) {
             int height = getChildAt(0).getHeight() + 1;
             oldCount = getCount();
-            params = getLayoutParams();
+            android.view.ViewGroup.LayoutParams params = getLayoutParams();
             params.height = getCount() * height;
             setLayoutParams(params);
         }

@@ -45,7 +45,7 @@ public class TimeLeftFrag extends Fragment {
      * this fragment using the provided parameters.
      */
 
-    public TimeLeftFrag newInstance(TimeLeftManager timeLeftManager) {
+    public static TimeLeftFrag newInstance(TimeLeftManager timeLeftManager) {
         TimeLeftFrag fragment = new TimeLeftFrag();
         fragment.timeLeftManager = timeLeftManager;
         return fragment;

@@ -26,9 +26,6 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
  */
 
 public class MyService extends Service {
-    private MyApplication myApplication;
-    private Setting mysetting;
-    private TaskManager taskManager;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,8 +38,8 @@ public class MyService extends Service {
         String noti_task_name = getString(R.string.noti_task_name);
         String noti_ddl = getString(R.string.noti_ddl);
 
-        myApplication = (MyApplication) getApplication();
-        mysetting = myApplication.getMysetting();
+        MyApplication myApplication = (MyApplication) getApplication();
+        Setting mysetting = myApplication.getMysetting();
         mysetting.readSetting(myApplication.getApplicationContext());
         if (mysetting.ifnotify)//启用提醒
         {
@@ -63,7 +60,7 @@ public class MyService extends Service {
          * do what you wang to do
          * catch Task pool data and judge which task needs to be noticed
          */
-        taskManager = myApplication.get_task_manager();
+        TaskManager taskManager = myApplication.get_task_manager();
         /*
          * 通知菜单栏demo
          * */

@@ -12,9 +12,7 @@ import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateHa
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 
 public class EditHabitActivity extends OperateHabitActivityBase {
-    private MyApplication myApplication;
     private Habit habit;
-    private int position;
     private int pos_habit_manager;//find the position in the manager
     @BindView(R.id.habit_linear_layout)
     LinearLayoutCompat linearLayout;
@@ -24,9 +22,9 @@ public class EditHabitActivity extends OperateHabitActivityBase {
         title = getString(R.string.edit_habit);
 
         // Handle the intent
-        myApplication = (MyApplication) getApplication();
+        MyApplication myApplication = (MyApplication) getApplication();
         Intent intent = getIntent();
-        position = intent.getIntExtra("position", -1);
+        int position = intent.getIntExtra("position", -1);
         habit = myApplication.get_habit_manager().getObjectList().get(position);
         int count = 0;
         pos_habit_manager = 0;

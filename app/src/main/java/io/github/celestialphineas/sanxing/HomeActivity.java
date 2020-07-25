@@ -48,8 +48,6 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //分别管理三种item
-    private MyApplication myApplication;
     private TaskManager _task_manager;
     private HabitManager _habit_manager;
     private TimeLeftManager _time_left_manager;
@@ -70,7 +68,8 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        myApplication = (MyApplication) getApplication();
+        //分别管理三种item
+        MyApplication myApplication = (MyApplication) getApplication();
         _task_manager = myApplication.get_task_manager();
         _habit_manager = myApplication.get_habit_manager();
         _time_left_manager = myApplication.get_time_left_manager();

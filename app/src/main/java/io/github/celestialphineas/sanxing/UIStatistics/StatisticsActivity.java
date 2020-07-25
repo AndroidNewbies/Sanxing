@@ -58,11 +58,6 @@ public class StatisticsActivity extends AppCompatActivity {
     static final int TASK = 0, HABIT = 1, TIME_LEFT = 2;
     static final int BRONZE = 0, SILVER = 1, GOLD = 2;
     List<Achievement> achievements = new ArrayList<>();
-    //backend
-    private MyApplication myApplication;
-    private TaskManager taskManager;
-    private HabitManager habitManager;
-    private TimeLeftManager timeLeftManager;
 
     //
     // Achievement
@@ -137,10 +132,11 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         ButterKnife.bind(this);
-        myApplication = (MyApplication) getApplication();
-        taskManager = myApplication.get_task_manager();
-        habitManager = myApplication.get_habit_manager();
-        timeLeftManager = myApplication.get_time_left_manager();
+        //backend
+        MyApplication myApplication = (MyApplication) getApplication();
+        TaskManager taskManager = myApplication.get_task_manager();
+        HabitManager habitManager = myApplication.get_habit_manager();
+        TimeLeftManager timeLeftManager = myApplication.get_time_left_manager();
         //////// Toolbar ////////
         // Set the toolbar as the default action bar of the window
         setSupportActionBar(toolbar);

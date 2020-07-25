@@ -17,9 +17,7 @@ import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTa
 import io.github.celestialphineas.sanxing.sxObject.Task;
 
 public class EditTaskActivity extends OperateTaskActivityBase {
-    private MyApplication myApplication;
     private Task task;
-    private int position;
     private int pos_task_manager;
     @BindView(R.id.task_linear_layout)
     LinearLayoutCompat linearLayout;
@@ -27,10 +25,10 @@ public class EditTaskActivity extends OperateTaskActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_task);
-        myApplication = (MyApplication) getApplication();
+        MyApplication myApplication = (MyApplication) getApplication();
         // Handle the intent
         Intent intent = getIntent();
-        position = intent.getIntExtra("position", -1);
+        int position = intent.getIntExtra("position", -1);
         int count = 0;
         pos_task_manager = 0;
         for (Task temp : myApplication.get_task_manager().getObjectList()) {// neglect the finished task

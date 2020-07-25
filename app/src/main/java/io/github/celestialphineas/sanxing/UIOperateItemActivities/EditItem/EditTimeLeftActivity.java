@@ -17,9 +17,7 @@ import io.github.celestialphineas.sanxing.UIOperateItemActivities.Base.OperateTi
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 
 public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
-    private MyApplication myApplication;
     private TimeLeft timeLeft;
-    private int position;
     private int pos_timeleft_manager;
     @BindView(R.id.time_left_linear_layout)
     LinearLayoutCompat linearLayout;
@@ -28,10 +26,10 @@ public class EditTimeLeftActivity extends OperateTimeLeftActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         title = getString(R.string.edit_time_left);
 
-        myApplication = (MyApplication) getApplication();
+        MyApplication myApplication = (MyApplication) getApplication();
         //Handle the intent
         Intent intent = getIntent();
-        position = intent.getIntExtra("position", -1);
+        int position = intent.getIntExtra("position", -1);
         int count = 0;
         pos_timeleft_manager = 0;
         for (TimeLeft temp : myApplication.get_time_left_manager().getObjectList()) {// neglect the finished time left item

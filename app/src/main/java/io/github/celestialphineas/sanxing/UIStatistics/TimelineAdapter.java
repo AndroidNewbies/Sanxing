@@ -21,7 +21,6 @@ import io.github.celestialphineas.sanxing.R;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder> {
     private LayoutInflater inflater;
-    private Context context;
     List<TimelineActivity.TimelineItem> items;
     DateFormat dateFormat;
     DateFormat timeFormat;
@@ -32,7 +31,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
     }
 
 
-    class TimelineViewHolder extends RecyclerView.ViewHolder {
+    static class TimelineViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.timeline_item_time)
         AppCompatTextView timeText;
         @BindView(R.id.timeline_item_content)
@@ -55,7 +54,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.timeline_list_template, parent, false);
-        context = parent.getContext();
+        Context context = parent.getContext();
         dateFormat = android.text.format.DateFormat.getDateFormat(context);
         timeFormat = android.text.format.DateFormat.getTimeFormat(context);
         return new TimelineViewHolder(itemView);

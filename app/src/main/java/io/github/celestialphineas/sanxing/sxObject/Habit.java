@@ -71,13 +71,13 @@ public class Habit extends AbstractsxObject implements Serializable, Comparable<
     }
 
     public String getRecordInString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < record.size(); i++) {
-            result += String.valueOf(record.get(i));
-            result += " ";
+            result.append(String.valueOf(record.get(i)));
+            result.append(" ");
         }
         Log.e("Ken result", "woc" + result);
-        return result;
+        return result.toString();
     }
 
     //this constructor only used when read data from the database

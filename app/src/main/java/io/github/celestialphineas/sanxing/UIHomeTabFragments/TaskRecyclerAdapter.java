@@ -56,7 +56,7 @@ public class TaskRecyclerAdapter
         notifyDataSetChanged();
     }*/
 
-    class TaskViewHolder extends RecyclerView.ViewHolder {
+    static class TaskViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.card_root_view)
         CardView cardView;
         @BindView(R.id.card_headline)

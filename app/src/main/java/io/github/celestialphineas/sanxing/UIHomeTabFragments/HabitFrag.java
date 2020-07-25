@@ -36,7 +36,7 @@ public class HabitFrag extends Fragment {
      * this fragment using the provided parameters.
      */
 
-    public HabitFrag newInstance(HabitManager habitManager) {
+    public static HabitFrag newInstance(HabitManager habitManager) {
 
         HabitFrag fragment = new HabitFrag();
         fragment.habitManager = habitManager;

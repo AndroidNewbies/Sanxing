@@ -96,7 +96,6 @@ public class TimeLeftCalendarFragment extends Fragment {
     final List<TimeLeftEvent> timeLeftEventList = new ArrayList<>();
     final int[] currentIndex = new int[1];
 
-    private MyApplication myApplication;
     private TimeLeftManager mTimeLeftManager;
 
     public TimeLeftCalendarFragment() {
@@ -109,7 +108,7 @@ public class TimeLeftCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        myApplication = (MyApplication) getActivity().getApplication();
+        MyApplication myApplication = (MyApplication) getActivity().getApplication();
         mTimeLeftManager = myApplication.get_time_left_manager();
         super.onCreate(savedInstanceState);
     }
@@ -299,7 +298,7 @@ public class TimeLeftCalendarFragment extends Fragment {
                     break;
             }
             detailString.append(numString);
-            detailString.append("<b><font color=\"" + colorString + "\">");
+            detailString.append("<b><font color=\"").append(colorString).append("\">");
             detailString.append(unitString);
             detailString.append("</font></b>");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

@@ -61,7 +61,6 @@ public class TaskCalendarFragment extends Fragment {
     final Calendar selectedCalendar = Calendar.getInstance();
     final List<Event> events = new ArrayList<>();
 
-    private MyApplication myApplication;
     private TaskManager mTaskManager;
 
     public TaskCalendarFragment() {
@@ -74,7 +73,7 @@ public class TaskCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        myApplication = (MyApplication) getActivity().getApplication();
+        MyApplication myApplication = (MyApplication) getActivity().getApplication();
         mTaskManager = myApplication.get_task_manager();
         super.onCreate(savedInstanceState);
     }
@@ -96,8 +95,8 @@ public class TaskCalendarFragment extends Fragment {
             StringBuilder result = new StringBuilder();
             String colorString = "#" + Integer.toHexString(getColorByImportance(importance) & 0xFFFFFF);
             result.append("<p>");
-            result.append("<big><big><b><font color=\"" + colorString + "\">");
-            result.append(timeString + " ");
+            result.append("<big><big><b><font color=\"").append(colorString).append("\">");
+            result.append(timeString).append(" ");
             result.append(title);
             result.append("</font></b></big></big><br/>");
             result.append(description);

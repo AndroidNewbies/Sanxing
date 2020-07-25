@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:theme="@style/AppTheme.AppBarTheme"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></android.support.v7.widget.Toolbar>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/main_tab"
@@ -28,7 +28,7 @@
         android:id="@+id/fab_tasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right|end"
+        android:layout_gravity="bottom|end|end"
         android:src="@drawable/ic_add"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
@@ -41,7 +41,7 @@
         android:id="@+id/fab_habits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right|end"
+        android:layout_gravity="bottom|end|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add"
         android:visibility="invisible"
@@ -55,7 +55,7 @@
         android:id="@+id/fab_time_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right|end"
+        android:layout_gravity="bottom|end|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add"
         android:visibility="invisible"
