@@ -38,23 +38,39 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
     View rootLayout;
     @BindView(R.id.create_new_item_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.input_title)                     protected TextInputEditText inputTitle;
-    @BindView(R.id.habit_description_content)       protected TextInputEditText descriptionContent;
-    @BindView(R.id.habit_check_times_content)       protected TextInputEditText timesContent;
-    @BindView(R.id.freq_text)                       protected AppCompatTextView freqText;
-    @BindView(R.id.habit_freq_seek_bar)             protected AppCompatSeekBar habitFreqSeekBar;
-    @BindView(R.id.habit_importance_seek_bar)       protected AppCompatSeekBar habitImportance;
-    @BindString(R.string.snack_title_not_set)       protected String titleNotSet;
-    @BindString(R.string.snack_invalid_times)       protected String invalidTimes;
+    @BindView(R.id.input_title)
+    protected TextInputEditText inputTitle;
+    @BindView(R.id.habit_description_content)
+    protected TextInputEditText descriptionContent;
+    @BindView(R.id.habit_check_times_content)
+    protected TextInputEditText timesContent;
+    @BindView(R.id.freq_text)
+    protected AppCompatTextView freqText;
+    @BindView(R.id.habit_freq_seek_bar)
+    protected AppCompatSeekBar habitFreqSeekBar;
+    @BindView(R.id.habit_importance_seek_bar)
+    protected AppCompatSeekBar habitImportance;
+    @BindString(R.string.snack_title_not_set)
+    protected String titleNotSet;
+    @BindString(R.string.snack_invalid_times)
+    protected String invalidTimes;
 
-    @BindString(R.string.thrice_a_day)              protected String thriceADay;
-    @BindString(R.string.twice_a_day)               protected String twiceADay;
-    @BindString(R.string.every_day)                 protected String everyDay;
-    @BindString(R.string.once_two_days)             protected String onceTwoDays;
-    @BindString(R.string.once_three_days)           protected String onceThreeDays;
-    @BindString(R.string.once_a_week)               protected String onceAWeek;
-    @BindString(R.string.once_a_fortnight)          protected String onceAFortnight;
-    @BindString(R.string.once_a_month)              protected String onceAMonth;
+    @BindString(R.string.thrice_a_day)
+    protected String thriceADay;
+    @BindString(R.string.twice_a_day)
+    protected String twiceADay;
+    @BindString(R.string.every_day)
+    protected String everyDay;
+    @BindString(R.string.once_two_days)
+    protected String onceTwoDays;
+    @BindString(R.string.once_three_days)
+    protected String onceThreeDays;
+    @BindString(R.string.once_a_week)
+    protected String onceAWeek;
+    @BindString(R.string.once_a_fortnight)
+    protected String onceAFortnight;
+    @BindString(R.string.once_a_month)
+    protected String onceAMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,35 +106,56 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
                 selectedFreq = seekBar.getProgress();
                 freqText.setText(freqIntToString(selectedFreq));
             }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
-            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
         habitImportance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 selectedImportance = seekBar.getProgress();
             }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
-            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
     }
 
     public String freqIntToString(int freq) {
         switch (freq) {
-            case 0: return thriceADay;
-            case 1: return twiceADay;
-            case 2: return everyDay;
-            case 3: return onceTwoDays;
-            case 4: return onceThreeDays;
-            case 5: return onceAWeek;
-            case 6: return onceAFortnight;
-            case 7: default: return onceAMonth;
+            case 0:
+                return thriceADay;
+            case 1:
+                return twiceADay;
+            case 2:
+                return everyDay;
+            case 3:
+                return onceTwoDays;
+            case 4:
+                return onceThreeDays;
+            case 5:
+                return onceAWeek;
+            case 6:
+                return onceAFortnight;
+            case 7:
+            default:
+                return onceAMonth;
         }
     }
 
     // Verify input
     protected boolean verifyForm(View layout) {
-        if(inputTitle != null && inputTitle.getText() != null
+        if (inputTitle != null && inputTitle.getText() != null
                 && inputTitle.getText().toString().trim().isEmpty()) {
             Snackbar.make(layout, titleNotSet, snackBarTimeout)
                     .show();
@@ -126,15 +163,15 @@ public abstract class OperateHabitActivityBase extends OperateItemActivityBase {
             return false;
         } else {
             String timesInput = timesContent.getText().toString();
-            if(!timesInput.isEmpty()) {
-                try{
+            if (!timesInput.isEmpty()) {
+                try {
                     checkTimes = Integer.parseInt(timesInput);
-                    if(checkTimes < 0) {
+                    if (checkTimes < 0) {
                         Snackbar.make(layout, invalidTimes, snackBarTimeout)
                                 .show();
                         timesContent.requestFocus();
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
                     Snackbar.make(layout, invalidTimes, snackBarTimeout)
                             .show();
                     timesContent.requestFocus();

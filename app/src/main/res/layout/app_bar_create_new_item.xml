@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:elevation="4dp">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/create_new_item_toolbar"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:theme="@style/FormBarTheme"
-            app:popupTheme="@style/AppTheme.PopupTheme">
-        </android.support.v7.widget.Toolbar>
+            app:popupTheme="@style/AppTheme.PopupTheme"></android.support.v7.widget.Toolbar>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/task_title"
             android:layout_width="match_parent"
@@ -21,6 +23,7 @@
             android:layout_gravity="bottom"
             android:theme="@style/TextEditHeadlineStyle"
             android:layout_margin="10dp">
+
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/input_title"
                 android:layout_width="match_parent"

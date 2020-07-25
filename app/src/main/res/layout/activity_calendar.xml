@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
+
     <android.support.v7.widget.LinearLayoutCompat
         android:id="@+id/calendar_view_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <android.support.v7.widget.Toolbar android:id="@+id/calendar_toolbar"
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/calendar_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:background="?android:colorPrimary"
             android:theme="@style/AppTheme.AppBarTheme"
             app:popupTheme="@style/AppTheme.PopupTheme">
-            <android.support.v7.widget.AppCompatSpinner android:id="@+id/toolbar_spinner"
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/toolbar_spinner"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:theme="@style/SpinnerStyle"
                 android:spinnerMode="dropdown"
                 app:popupTheme="@style/AppTheme.PopupTheme" />
         </android.support.v7.widget.Toolbar>
+
         <fragment
             android:name="io.github.celestialphineas.sanxing.UICalendarViews.TaskCalendarFragment"
             android:id="@+id/task_calendar_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            android:fragmentEnterTransition="@anim/slide_in_up"/>
+            android:fragmentEnterTransition="@anim/slide_in_up" />
+
         <fragment
             android:name="io.github.celestialphineas.sanxing.UICalendarViews.HabitCalendarFragment"
             android:id="@+id/habit_calendar_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            android:fragmentEnterTransition="@anim/slide_in_up"/>
+            android:fragmentEnterTransition="@anim/slide_in_up" />
+
         <fragment
             android:name="io.github.celestialphineas.sanxing.UICalendarViews.TimeLeftCalendarFragment"
             android:id="@+id/time_left_calendar_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            android:fragmentEnterTransition="@anim/slide_in_up"/>
+            android:fragmentEnterTransition="@anim/slide_in_up" />
     </android.support.v7.widget.LinearLayoutCompat>
     <!--<android.support.design.widget.FloatingActionButton android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|right|end"-->
-        <!--android:src="@drawable/ic_view_compact"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--android:clickable="true"-->
-        <!--android:tint="@android:color/white"-->
-        <!--app:popupTheme="@style/AppTheme.PopupTheme"-->
-        <!--app:backgroundTint="@color/bottomNavigation"-->
-        <!--app:elevation="6dp" />-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|right|end"-->
+    <!--android:src="@drawable/ic_view_compact"-->
+    <!--android:layout_margin="@dimen/fab_margin"-->
+    <!--android:clickable="true"-->
+    <!--android:tint="@android:color/white"-->
+    <!--app:popupTheme="@style/AppTheme.PopupTheme"-->
+    <!--app:backgroundTint="@color/bottomNavigation"-->
+    <!--app:elevation="6dp" />-->
     <!-- You must wrap transform view in Circular reveal container -->
     <!--<io.codetail.widget.RevealFrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_alignParentBottom="true">-->
-        <!--&lt;!&ndash; Transform view &ndash;&gt;-->
-        <!--<android.support.design.widget.BottomNavigationView-->
-            <!--android:id="@+id/calendar_bottom_navigation"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom"-->
-            <!--android:background="@color/bottomNavigation"-->
-            <!--android:elevation="8dp"-->
-            <!--android:visibility="invisible" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_alignParentBottom="true">-->
+    <!--&lt;!&ndash; Transform view &ndash;&gt;-->
+    <!--<android.support.design.widget.BottomNavigationView-->
+    <!--android:id="@+id/calendar_bottom_navigation"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="@color/bottomNavigation"-->
+    <!--android:elevation="8dp"-->
+    <!--android:visibility="invisible" />-->
     <!--</io.codetail.widget.RevealFrameLayout>-->
 </android.support.design.widget.CoordinatorLayout>

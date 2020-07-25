@@ -16,12 +16,8 @@ import android.widget.TextView;
 
 import org.threeten.bp.LocalDateTime;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -45,7 +41,9 @@ public class TaskRecyclerAdapter
     private Context context;
     private Calendar taskCalendar = Calendar.getInstance();
 
-    TaskRecyclerAdapter() { }
+    TaskRecyclerAdapter() {
+    }
+
     TaskRecyclerAdapter(List<Task> task_list) {
         taskList = task_list;
     }
@@ -59,18 +57,31 @@ public class TaskRecyclerAdapter
     }*/
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.card_root_view)      CardView cardView;
-        @BindView(R.id.card_headline)       TextView taskTitle;
-        @BindView(R.id.card_subheading)     TextView taskDueTime;
-        @BindView(R.id.card_countdown)      TextView taskCountdown;
-        @BindView(R.id.card_description)    TextView taskDescription;
-        @BindView(R.id.card_button_edit)    AppCompatButton buttonEdit;
-        @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
-        @BindView(R.id.card_button_check)   AppCompatButton buttonCheck;
-        @BindString(R.string.unit_day)      String unitDay;
-        @BindString(R.string.unit_hour)     String unitHour;
-        @BindString(R.string.unit_minute)   String unitMinute;
-        @BindString(R.string.time_out)      String timeout;
+        @BindView(R.id.card_root_view)
+        CardView cardView;
+        @BindView(R.id.card_headline)
+        TextView taskTitle;
+        @BindView(R.id.card_subheading)
+        TextView taskDueTime;
+        @BindView(R.id.card_countdown)
+        TextView taskCountdown;
+        @BindView(R.id.card_description)
+        TextView taskDescription;
+        @BindView(R.id.card_button_edit)
+        AppCompatButton buttonEdit;
+        @BindView(R.id.card_button_delete)
+        AppCompatButton buttonDelete;
+        @BindView(R.id.card_button_check)
+        AppCompatButton buttonCheck;
+        @BindString(R.string.unit_day)
+        String unitDay;
+        @BindString(R.string.unit_hour)
+        String unitHour;
+        @BindString(R.string.unit_minute)
+        String unitMinute;
+        @BindString(R.string.time_out)
+        String timeout;
+
         TaskViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -80,20 +91,20 @@ public class TaskRecyclerAdapter
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewGroup) {
         View itemView = LayoutInflater
-                            .from(parent.getContext())
-                            .inflate(R.layout.home_card, parent, false);
+                .from(parent.getContext())
+                .inflate(R.layout.home_card, parent, false);
         context = parent.getContext();
         return new TaskViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, final int position) {
-        final Task task_at_position=taskList.get(position);
-        if (task_at_position==null) Log.e("task","empty");
+        final Task task_at_position = taskList.get(position);
+        if (task_at_position == null) Log.e("task", "empty");
         holder.taskTitle.setText(task_at_position.getTitle());
         // Set taskCalendar to the due calendar got from the database
         // done by Lin
-        String dateString = task_at_position.getEndDate().substring(0,11);
+        String dateString = task_at_position.getEndDate().substring(0, 11);
         String timeString = task_at_position.getEndDate().substring(11);
         /*try {
             DateFormat sdf = android.text.format.DateFormat.getDateFormat(context);
@@ -103,16 +114,17 @@ public class TaskRecyclerAdapter
         holder.taskDueTime.setText(dateString + " " + timeString);
         // Calculate the time difference (i.e. the countdown) and print it here
         //done by Lin
-        String endtime=task_at_position.getEndDate();
-        long diff= MyDuration.durationFromNowtoB(endtime);
-        diff /=1000;
-        long days= diff/60/60/24;
-        diff %=86400;
-        long hours=diff/60/60;
-        diff %=3600;
-        long minutes=diff/60;
-        if (diff<0) holder.taskCountdown.setText(holder.timeout);
-        else holder.taskCountdown.setText(String.valueOf(days)+ holder.unitDay +hours+":"+minutes);
+        String endtime = task_at_position.getEndDate();
+        long diff = MyDuration.durationFromNowtoB(endtime);
+        diff /= 1000;
+        long days = diff / 60 / 60 / 24;
+        diff %= 86400;
+        long hours = diff / 60 / 60;
+        diff %= 3600;
+        long minutes = diff / 60;
+        if (diff < 0) holder.taskCountdown.setText(holder.timeout);
+        else
+            holder.taskCountdown.setText(String.valueOf(days) + holder.unitDay + hours + ":" + minutes);
         // Get the description and print it out here
         //done by Lin
         holder.taskDescription.setText(task_at_position.getContent());
@@ -121,7 +133,7 @@ public class TaskRecyclerAdapter
             @Override
             public void onClick(View view) {
                 TransitionManager.beginDelayedTransition(holder.cardView);
-                if(holder.taskDescription.getVisibility() == View.VISIBLE) {
+                if (holder.taskDescription.getVisibility() == View.VISIBLE) {
                     holder.taskDescription.setVisibility(View.GONE);
                 } else {
                     holder.taskDescription.setVisibility(View.VISIBLE);
@@ -134,9 +146,9 @@ public class TaskRecyclerAdapter
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditTaskActivity.class);
-                intent.putExtra("position",position);
+                intent.putExtra("position", position);
                 // Send the object to edit via intent
-                ((Activity)context).startActivityForResult(intent, 3);
+                ((Activity) context).startActivityForResult(intent, 3);
             }
 
         });
@@ -148,7 +160,8 @@ public class TaskRecyclerAdapter
                 //taskList.remove(task);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
-                    @Override public void onClick(View view) {
+                    @Override
+                    public void onClick(View view) {
                         add(task_at_position, position);
                         // Restore the lazily deleted database entry
                         task_at_position.setState(1);
@@ -175,7 +188,8 @@ public class TaskRecyclerAdapter
                 //taskList.remove(task);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
-                    @Override public void onClick(View view) {
+                    @Override
+                    public void onClick(View view) {
                         add(task_at_position, position);
                         // Restore the lazily deleted database entry
                         task_at_position.setEndDate(for_undo);
@@ -201,12 +215,14 @@ public class TaskRecyclerAdapter
 
     @Override
     public int getItemCount() {
-        return taskList == null ? 0: taskList.size();
+        return taskList == null ? 0 : taskList.size();
     }
 
     // Remove an entry
     public void remove(int position) {
-        try { taskList.remove(position); } catch (Exception e) {
+        try {
+            taskList.remove(position);
+        } catch (Exception e) {
             Log.w("TaskRecyclerAdapter", "remove: " + position + ", " + taskList.size());
         }
         notifyItemRemoved(position);
@@ -215,10 +231,11 @@ public class TaskRecyclerAdapter
 
     // Add an entry
     public void add(Task task, int position) {
-        try { taskList.add(position, task);
-            Log.w("test","??");
-            Log.w("TaskRecyclerAdapter", "add: " + position + ", " + taskList.size());}
-        catch (Exception e) {
+        try {
+            taskList.add(position, task);
+            Log.w("test", "??");
+            Log.w("TaskRecyclerAdapter", "add: " + position + ", " + taskList.size());
+        } catch (Exception e) {
 
         }
         //context.getDatabasePath(Task.TABLE);

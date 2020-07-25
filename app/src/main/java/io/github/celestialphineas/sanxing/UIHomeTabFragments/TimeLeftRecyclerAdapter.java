@@ -18,15 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -46,44 +39,64 @@ public class TimeLeftRecyclerAdapter
     private Calendar timeLeftStartCalendar = Calendar.getInstance();
     private Calendar timeLeftDueCalendar = Calendar.getInstance();
 
-    TimeLeftRecyclerAdapter() { }
+    TimeLeftRecyclerAdapter() {
+    }
 
     TimeLeftRecyclerAdapter(List<TimeLeft> time_left_list) {
         final TimeLeftRepo repo = new TimeLeftRepo(context);
 
         timeLeftList = time_left_list;
         //renew state of each item
-        for (TimeLeft timeLeft:timeLeftList){
-            long diff= MyDuration.durationFromNowtoB(timeLeft.getEndLocalDate());
-            if (diff<0) {
+        for (TimeLeft timeLeft : timeLeftList) {
+            long diff = MyDuration.durationFromNowtoB(timeLeft.getEndLocalDate());
+            if (diff < 0) {
                 timeLeft.setState(2);
                 repo.update(timeLeft);
             }
         }
     }
 
-    public List<TimeLeft> getTimeLeftList() { return timeLeftList; }
+    public List<TimeLeft> getTimeLeftList() {
+        return timeLeftList;
+    }
+
     public void setTimeLeftList(List<TimeLeft> time_left_list) {
         timeLeftList = time_left_list;
         notifyDataSetChanged();
     }
 
     class TimeLeftViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.card_root_view)      CardView cardView;
-        @BindView(R.id.card_headline)       TextView timeLeftTitle;
-        @BindView(R.id.card_subheading)     TextView timeLeftDueTime;
-        @BindView(R.id.card_countdown)      TextView timeLeftCountDown;
-        @BindView(R.id.card_description)    TextView timeLeftDescription;
-        @BindView(R.id.card_button_edit)    AppCompatButton buttonEdit;
-        @BindView(R.id.card_button_delete)  AppCompatButton buttonDelete;
-        @BindString(R.string.right_arrow)   String rightArrow;
-        @BindString(R.string.unit_year)     String unitYearString;
-        @BindString(R.string.unit_month)    String unitMonthString;
-        @BindString(R.string.unit_week)     String unitWeekString;
-        @BindString(R.string.unit_day)      String unitDayString;
-        @BindString(R.string.unit_hour)     String unitHourString;
-        @BindString(R.string.unit_minute)   String unitMinuteString;
-        @BindString(R.string.end)   String end;
+        @BindView(R.id.card_root_view)
+        CardView cardView;
+        @BindView(R.id.card_headline)
+        TextView timeLeftTitle;
+        @BindView(R.id.card_subheading)
+        TextView timeLeftDueTime;
+        @BindView(R.id.card_countdown)
+        TextView timeLeftCountDown;
+        @BindView(R.id.card_description)
+        TextView timeLeftDescription;
+        @BindView(R.id.card_button_edit)
+        AppCompatButton buttonEdit;
+        @BindView(R.id.card_button_delete)
+        AppCompatButton buttonDelete;
+        @BindString(R.string.right_arrow)
+        String rightArrow;
+        @BindString(R.string.unit_year)
+        String unitYearString;
+        @BindString(R.string.unit_month)
+        String unitMonthString;
+        @BindString(R.string.unit_week)
+        String unitWeekString;
+        @BindString(R.string.unit_day)
+        String unitDayString;
+        @BindString(R.string.unit_hour)
+        String unitHourString;
+        @BindString(R.string.unit_minute)
+        String unitMinuteString;
+        @BindString(R.string.end)
+        String end;
+
         TimeLeftViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -101,10 +114,10 @@ public class TimeLeftRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final TimeLeftViewHolder holder, final int position) {
-        final TimeLeft timeLeft_at_position=timeLeftList.get(position);
+        final TimeLeft timeLeft_at_position = timeLeftList.get(position);
         holder.timeLeftTitle.setText(timeLeft_at_position.getTitle());
-        String beginDateString = timeLeft_at_position.getBeginDate().substring(0,11);
-        String endDateString = timeLeft_at_position.getEndDate().substring(0,11);
+        String beginDateString = timeLeft_at_position.getBeginDate().substring(0, 11);
+        String endDateString = timeLeft_at_position.getEndDate().substring(0, 11);
         /*try {
             DateFormat sdf = android.text.format.DateFormat.getDateFormat(context);
             Date date = new SimpleDateFormat("yyyy-M-d", Locale.ENGLISH).parse(beginDateString);
@@ -118,22 +131,22 @@ public class TimeLeftRecyclerAdapter
         holder.timeLeftDueTime.setText(beginDateString + holder.rightArrow + endDateString);
         // Calculate the time difference and print it here
         //done by Lin
-        String endtime=timeLeft_at_position.getEndDate();
-        long diff= MyDuration.durationFromNowtoB(endtime);
-        diff /=1000;
-        long years= diff/60/60/24/365;
-        diff %=31536000;
-        long days= diff/60/60/24;
-        diff %=86400;
-        long hours=diff/60/60;
-        diff %=3600;
-        long minutes=diff/60;
-        if (diff>0){
-            if (years>0) holder.timeLeftCountDown.setText(years
+        String endtime = timeLeft_at_position.getEndDate();
+        long diff = MyDuration.durationFromNowtoB(endtime);
+        diff /= 1000;
+        long years = diff / 60 / 60 / 24 / 365;
+        diff %= 31536000;
+        long days = diff / 60 / 60 / 24;
+        diff %= 86400;
+        long hours = diff / 60 / 60;
+        diff %= 3600;
+        long minutes = diff / 60;
+        if (diff > 0) {
+            if (years > 0) holder.timeLeftCountDown.setText(years
                     + holder.unitYearString + days + holder.unitDayString + hours + ":" + minutes);
-            else holder.timeLeftCountDown.setText(days+ holder.unitDayString + hours + ":" + minutes);
-        }
-        else {
+            else
+                holder.timeLeftCountDown.setText(days + holder.unitDayString + hours + ":" + minutes);
+        } else {
 
             holder.timeLeftCountDown.setText(holder.end);// this code will never be executed
         }
@@ -144,7 +157,7 @@ public class TimeLeftRecyclerAdapter
             @Override
             public void onClick(View view) {
                 TransitionManager.beginDelayedTransition(holder.cardView);
-                if(holder.timeLeftDescription.getVisibility() == View.VISIBLE) {
+                if (holder.timeLeftDescription.getVisibility() == View.VISIBLE) {
                     holder.timeLeftDescription.setVisibility(View.GONE);
                 } else {
                     holder.timeLeftDescription.setVisibility(View.VISIBLE);
@@ -157,9 +170,9 @@ public class TimeLeftRecyclerAdapter
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditTimeLeftActivity.class);
-                intent.putExtra("position",position);
+                intent.putExtra("position", position);
 
-                ((Activity)context).startActivityForResult(intent, 5);
+                ((Activity) context).startActivityForResult(intent, 5);
             }
         });
         // Button delete behavior
@@ -169,7 +182,8 @@ public class TimeLeftRecyclerAdapter
                 final TimeLeftRepo repo = new TimeLeftRepo(context);
                 remove(position);
                 View.OnClickListener redo = new View.OnClickListener() {
-                    @Override public void onClick(View view) {
+                    @Override
+                    public void onClick(View view) {
                         add(timeLeft_at_position, position);
                         // Restore the lazily deleted database entry
                         timeLeft_at_position.setState(1);
@@ -196,7 +210,9 @@ public class TimeLeftRecyclerAdapter
 
     // Remove an entry
     public void remove(int position) {
-        try { timeLeftList.remove(position); } catch (Exception e) {
+        try {
+            timeLeftList.remove(position);
+        } catch (Exception e) {
             Log.w("TimeLeftRecyclerAdapter", "remove: " + position + ", " + timeLeftList.size());
         }
         notifyItemRemoved(position);
@@ -205,7 +221,9 @@ public class TimeLeftRecyclerAdapter
 
     // Add an entry
     public void add(TimeLeft timeLeft, int position) {
-        try { timeLeftList.add(position, timeLeft); } catch (Exception e) {
+        try {
+            timeLeftList.add(position, timeLeft);
+        } catch (Exception e) {
             Log.w("TimeLeftRecyclerAdapter", "add: " + position + ", " + timeLeftList.size());
         }
         notifyItemInserted(position);

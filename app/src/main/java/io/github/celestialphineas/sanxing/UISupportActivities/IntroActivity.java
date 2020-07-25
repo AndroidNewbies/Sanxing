@@ -1,19 +1,12 @@
 package io.github.celestialphineas.sanxing.UISupportActivities;
 
-import android.Manifest;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.github.paolorotolo.appintro.AppIntro2;
-import com.github.paolorotolo.appintro.AppIntroFragment;
-import com.github.paolorotolo.appintro.model.SliderPage;
 
-import butterknife.BindString;
 import butterknife.ButterKnife;
-import io.github.celestialphineas.sanxing.R;
 
 /**
  * Created by celestialphineas on 17-12-14.
@@ -69,14 +62,14 @@ public class IntroActivity extends AppIntro2 {
 
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
-        if(newFragment instanceof AddHelpFragment) {
-            if(((AddHelpFragment)newFragment).currentFAB[0] == 0) {
-                ((AddHelpFragment)newFragment).showAnimation();
+        if (newFragment instanceof AddHelpFragment) {
+            if (((AddHelpFragment) newFragment).currentFAB[0] == 0) {
+                ((AddHelpFragment) newFragment).showAnimation();
             }
-        } else if(newFragment instanceof CalendarHelpFragment) {
-            ((CalendarHelpFragment)newFragment).showAnimation();
-        } else if(newFragment instanceof NavigationHelpFragment) {
-            ((NavigationHelpFragment)newFragment).showAnimation();
+        } else if (newFragment instanceof CalendarHelpFragment) {
+            ((CalendarHelpFragment) newFragment).showAnimation();
+        } else if (newFragment instanceof NavigationHelpFragment) {
+            ((NavigationHelpFragment) newFragment).showAnimation();
         }
     }
 }

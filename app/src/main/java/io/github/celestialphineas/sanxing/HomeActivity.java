@@ -19,14 +19,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
-
 import java.util.Timer;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
+import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
+import io.github.celestialphineas.sanxing.UICalendarViews.CalendarActivity;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.HabitFrag;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.TaskFrag;
+import io.github.celestialphineas.sanxing.UIHomeTabFragments.TimeLeftFrag;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewHabitActivity;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity;
+import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity;
 import io.github.celestialphineas.sanxing.UIStatistics.StatisticsActivity;
 import io.github.celestialphineas.sanxing.UIStatistics.TimelineActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.AboutActivity;
@@ -34,17 +40,10 @@ import io.github.celestialphineas.sanxing.UISupportActivities.IntroActivity;
 import io.github.celestialphineas.sanxing.UISupportActivities.SettingsActivity;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObject.Task;
-import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
-import io.github.celestialphineas.sanxing.UIHomeTabFragments.HabitFrag;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
-import io.github.celestialphineas.sanxing.UIHomeTabFragments.TaskFrag;
 import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
-import io.github.celestialphineas.sanxing.UIHomeTabFragments.TimeLeftFrag;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
-import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewHabitActivity;
-import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewTaskActivity;
-import io.github.celestialphineas.sanxing.UIOperateItemActivities.NewItemCreation.CreateNewTimeLeftActivity;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,12 +69,12 @@ public class HomeActivity extends AppCompatActivity
     TabLayout tabLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-        myApplication= (MyApplication) getApplication();
-        _task_manager=myApplication.get_task_manager();
-        _habit_manager=myApplication.get_habit_manager();
-        _time_left_manager=myApplication.get_time_left_manager();
-        taskRepo =myApplication.getTaskRepo();
+    protected void onCreate(Bundle savedInstanceState) {
+        myApplication = (MyApplication) getApplication();
+        _task_manager = myApplication.get_task_manager();
+        _habit_manager = myApplication.get_habit_manager();
+        _time_left_manager = myApplication.get_time_left_manager();
+        taskRepo = myApplication.getTaskRepo();
         habitRepo = myApplication.getHabitRepo();
         timeLeftRepo = myApplication.getTimeLeftRepo();
 
@@ -84,13 +83,12 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ///////// Only display one time/////////
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-        boolean first=sharedPreferences.getBoolean("iffirst",true);
-        if (first)
-        {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean first = sharedPreferences.getBoolean("iffirst", true);
+        if (first) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             //存入数据
-            editor.putBoolean("iffirst",false);//已安装
+            editor.putBoolean("iffirst", false);//已安装
             editor.commit();
             Intent navigateHelpIntent = new Intent(this, IntroActivity.class);
             startActivity(navigateHelpIntent);
@@ -106,7 +104,7 @@ public class HomeActivity extends AppCompatActivity
         //////// Navigation drawer ////////
         // Set drawer layout
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -126,7 +124,7 @@ public class HomeActivity extends AppCompatActivity
         TaskFrag taskFrag = new TaskFrag().newInstance(_task_manager);
         adapter.addFrag(taskFrag, getString(R.string.tab_tasks));
 
-        HabitFrag _habit =new HabitFrag().newInstance(_habit_manager);
+        HabitFrag _habit = new HabitFrag().newInstance(_habit_manager);
         adapter.addFrag(_habit, getString(R.string.tab_habits));
 
         TimeLeftFrag _time_left = new TimeLeftFrag().newInstance(_time_left_manager);
@@ -138,14 +136,18 @@ public class HomeActivity extends AppCompatActivity
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(
-                    int position, float positionOffset, int positionOffsetPixels) {}
+                    int position, float positionOffset, int positionOffsetPixels) {
+            }
+
             @Override
             public void onPageSelected(int position) {
                 posPosition[0] = position;
                 animateFab(position);
             }
+
             @Override
-            public void onPageScrollStateChanged(int state) { }
+            public void onPageScrollStateChanged(int state) {
+            }
         });
 
 
@@ -153,103 +155,104 @@ public class HomeActivity extends AppCompatActivity
 
         // End of the onCreate(Bundle) method
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 0://create task
                 if (resultCode == RESULT_OK) {
-                    int position=_task_manager.getObjectList().size()-1;
-                    Task task=_task_manager.getObjectList().get(position);
+                    int position = _task_manager.getObjectList().size() - 1;
+                    Task task = _task_manager.getObjectList().get(position);
 
                     //insert task to database
                     int new_ID = taskRepo.insert(task);
                     //assign the new ID (primary  key) to the new task
-                    task.ID=new_ID;
+                    task.ID = new_ID;
 
                     _task_manager.order();
-                    adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager));
+                    adapter.replaceFrag(adapter.getItem(0), new TaskFrag().newInstance(_task_manager));
                     viewPager.setAdapter(adapter);
                     viewPager.setCurrentItem(0);
                 }
                 break;
             case 1://create habit
                 if (resultCode == RESULT_OK) {
-                    int position=_habit_manager.getObjectList().size()-1;
-                    Habit habit=_habit_manager.getObjectList().get(position);
+                    int position = _habit_manager.getObjectList().size() - 1;
+                    Habit habit = _habit_manager.getObjectList().get(position);
                     //insert habit to database
-                    Log.e("baba home ","?"+habit.getRecordInString());
+                    Log.e("baba home ", "?" + habit.getRecordInString());
                     int new_ID = habitRepo.insert(habit);
                     //assign the new ID (primary  key) to the new habit
                     _habit_manager.getObjectList().get(position).ID = new_ID;
                     _habit_manager.order();
-                    adapter.replaceFrag(adapter.getItem(1),new HabitFrag().newInstance(_habit_manager));
+                    adapter.replaceFrag(adapter.getItem(1), new HabitFrag().newInstance(_habit_manager));
                     viewPager.setAdapter(adapter);
                     viewPager.setCurrentItem(1);
                 }
                 break;
             case 2://create left
                 if (resultCode == RESULT_OK) {
-                    int position=_time_left_manager.getObjectList().size()-1;
-                    TimeLeft timeLeft=_time_left_manager.getObjectList().get(position);
+                    int position = _time_left_manager.getObjectList().size() - 1;
+                    TimeLeft timeLeft = _time_left_manager.getObjectList().get(position);
                     //insert habit to database
                     int new_ID = timeLeftRepo.insert(timeLeft);
                     //assign the new ID (primary  key) to the new habit
                     _time_left_manager.getObjectList().get(position).ID = new_ID;
                     _time_left_manager.order();
-                    adapter.replaceFrag(adapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager));
+                    adapter.replaceFrag(adapter.getItem(2), new TimeLeftFrag().newInstance(_time_left_manager));
                     viewPager.setAdapter(adapter);
                     viewPager.setCurrentItem(2);
                 }
                 break;
             case 3://edit task
                 if (resultCode == RESULT_OK) {
-                    int position=data.getIntExtra("position",-1);
-                    if (position==-1) break;
-                    int taskID=data.getIntExtra("ID",-1);
-                    if (taskID==-1) break;
-                    Task task=_task_manager.getObjectList().get(position);
+                    int position = data.getIntExtra("position", -1);
+                    if (position == -1) break;
+                    int taskID = data.getIntExtra("ID", -1);
+                    if (taskID == -1) break;
+                    Task task = _task_manager.getObjectList().get(position);
                     task.ID = taskID;
                     //update the task in database
                     taskRepo.update(task);
 
                     _task_manager.order();
-                    adapter.replaceFrag(adapter.getItem(0),new TaskFrag().newInstance(_task_manager));
+                    adapter.replaceFrag(adapter.getItem(0), new TaskFrag().newInstance(_task_manager));
                     viewPager.setAdapter(adapter);
                     viewPager.setCurrentItem(0);
                 }
                 break;
             case 4://edit habit
                 if (resultCode == RESULT_OK) {
-                    int position=data.getIntExtra("position",-1);
-                    if (position==-1) break;
-                    int habitID=data.getIntExtra("ID",-1);
-                    if (habitID==-1) break;
-                    Habit habit=_habit_manager.getObjectList().get(position);
+                    int position = data.getIntExtra("position", -1);
+                    if (position == -1) break;
+                    int habitID = data.getIntExtra("ID", -1);
+                    if (habitID == -1) break;
+                    Habit habit = _habit_manager.getObjectList().get(position);
                     //update the habit in database
                     habit.ID = habitID;
-                    Log.e("aahome list ",habit.getRecordInString());
+                    Log.e("aahome list ", habit.getRecordInString());
                     habitRepo.update(habit);
 
                     _habit_manager.order();
-                    adapter.replaceFrag(adapter.getItem(1),new HabitFrag().newInstance(_habit_manager));
+                    adapter.replaceFrag(adapter.getItem(1), new HabitFrag().newInstance(_habit_manager));
                     viewPager.setAdapter(adapter);
                     viewPager.setCurrentItem(1);
                 }
                 break;
             case 5://edit left
                 if (resultCode == RESULT_OK) {
-                    int position=data.getIntExtra("position",-1);
-                    if (position==-1) break;
-                    int timeleftID=data.getIntExtra("ID",-1);
-                    if (timeleftID==-1) break;
-                    TimeLeft timeLeft=_time_left_manager.getObjectList().get(position);
+                    int position = data.getIntExtra("position", -1);
+                    if (position == -1) break;
+                    int timeleftID = data.getIntExtra("ID", -1);
+                    if (timeleftID == -1) break;
+                    TimeLeft timeLeft = _time_left_manager.getObjectList().get(position);
                     timeLeft.ID = timeleftID;
                     Log.w("time left id", String.valueOf(timeLeft.ID));
                     //update the habit in database
                     timeLeftRepo.update(timeLeft);
                     _time_left_manager.order();
-                    adapter.replaceFrag(adapter.getItem(2),new TimeLeftFrag().newInstance(_time_left_manager));
+                    adapter.replaceFrag(adapter.getItem(2), new TimeLeftFrag().newInstance(_time_left_manager));
                     viewPager.setAdapter(adapter);
                     viewPager.setCurrentItem(2);
                 }
@@ -257,9 +260,10 @@ public class HomeActivity extends AppCompatActivity
             default:
         }
     }
+
     @OnClick(R.id.fab_tasks)
     void fabTasksOnClickBehavior() {
-        Log.w("taskRepo.size:"+ taskRepo.getCount(),"??");
+        Log.w("taskRepo.size:" + taskRepo.getCount(), "??");
         Intent intent = new Intent(this, CreateNewTaskActivity.class);
 
         //startActivity(intent);
@@ -385,7 +389,8 @@ public class HomeActivity extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-    int count=0;
+
+    int count = 0;
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -398,7 +403,7 @@ public class HomeActivity extends AppCompatActivity
                 count++;
                 Log.e("bbb", String.valueOf(count));
                 handler.sendEmptyMessageDelayed(1,
-                        60*1000);
+                        60 * 1000);
             }
             return false;
         }
@@ -446,7 +451,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void finish() {
         Log.e("finish!!!", String.valueOf(count));
-        if (handler.hasMessages(1)){
+        if (handler.hasMessages(1)) {
             handler.removeMessages(1);
         }
         super.finish();

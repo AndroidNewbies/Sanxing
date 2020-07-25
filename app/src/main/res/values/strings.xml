@@ -13,7 +13,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="calendar">Calendar</string>
+    <string name="statistics">Statistics</string>
     <string name="timeline">Timeline</string>
+    <string name="achievements">Achievements</string>
 
     <string name="supports">Supports</string>
     <string name="help">Help</string>

@@ -3,7 +3,6 @@ package io.github.celestialphineas.sanxing.UICalendarViews;
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
@@ -37,28 +36,35 @@ import butterknife.OnClick;
 import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
-import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
-import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 
 public class HabitCalendarFragment extends Fragment {
     @BindView(R.id.habit_calendar_view)
     CompactCalendarView habitCalendarView;
     @BindView(R.id.habit_calendar_year_month)
     AppCompatTextView habitCalendarYearMonth;
-    @BindView(R.id.frag_habit_root_linear_layout)    ViewGroup fragHabitRootLinearLayout;
-    @BindView(R.id.habit_calendar_content)           ViewGroup habitCalendarContent;
-    @BindView(R.id.habit_calendar_card)              ViewGroup habitCalendarCard;
-    @BindView(R.id.habit_detail_content)             ViewGroup habitDetailContent;
-    @BindView(R.id.habit_detail_card)                ViewGroup habitDetailCard;
-    @BindView(R.id.habit_detail_text)                AppCompatTextView habitDetailText;
-    @BindString(R.string.checked)                   String checkedString;
+    @BindView(R.id.frag_habit_root_linear_layout)
+    ViewGroup fragHabitRootLinearLayout;
+    @BindView(R.id.habit_calendar_content)
+    ViewGroup habitCalendarContent;
+    @BindView(R.id.habit_calendar_card)
+    ViewGroup habitCalendarCard;
+    @BindView(R.id.habit_detail_content)
+    ViewGroup habitDetailContent;
+    @BindView(R.id.habit_detail_card)
+    ViewGroup habitDetailCard;
+    @BindView(R.id.habit_detail_text)
+    AppCompatTextView habitDetailText;
+    @BindString(R.string.checked)
+    String checkedString;
     final Calendar selectedCalendar = Calendar.getInstance();
     final List<Event> events = new ArrayList<>();
 
     private MyApplication myApplication;
-    private HabitManager  mHabitManager;
-    public HabitCalendarFragment() { }
+    private HabitManager mHabitManager;
+
+    public HabitCalendarFragment() {
+    }
 
     public static HabitCalendarFragment newInstance() {
         HabitCalendarFragment fragment = new HabitCalendarFragment();
@@ -67,19 +73,22 @@ public class HabitCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        myApplication= (MyApplication) getActivity().getApplication();
+        myApplication = (MyApplication) getActivity().getApplication();
         mHabitManager = myApplication.get_habit_manager();
         super.onCreate(savedInstanceState);
     }
 
     // An inner class for storing the habit event details
     class EventDetailObject {
-        private String title, description; private int importance;
+        private String title, description;
+        private int importance;
+
         EventDetailObject(String title, String description, int importance) {
             this.title = title;
             this.description = description;
             this.importance = importance;
         }
+
         String getHTML() {
             StringBuilder result = new StringBuilder();
             String colorString = "#" + Integer.toHexString(getColorByImportance(importance) & 0xFFFFFF);
@@ -92,8 +101,11 @@ public class HabitCalendarFragment extends Fragment {
             result.append("</p>");
             return result.toString();
         }
+
         @Override
-        public String toString() { return getHTML(); }
+        public String toString() {
+            return getHTML();
+        }
     }
 
     @Override
@@ -114,18 +126,18 @@ public class HabitCalendarFragment extends Fragment {
         //    Constructor: EventDetailObject(String title, String time, String description, int importance)
         List<Habit> habitList = mHabitManager.getObjectList();//get tasklist stored in the database
 
-        for (int i=0;i<habitList.size();i++) {
+        for (int i = 0; i < habitList.size(); i++) {
             Habit temp = habitList.get(i);
-            if (temp.getState()==0) continue;
+            if (temp.getState() == 0) continue;
             int importance = temp.getImportance();
             for (int j = 0; j < temp.getRecord().size(); j++) {
                 long millionSeconds = 0;
-                ZoneOffset zoneoffset= OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
-                millionSeconds = temp.getRecord().get(j)*86400000 + temp.getBeginLocalDate().toEpochSecond(zoneoffset)*1000;
+                ZoneOffset zoneoffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+                millionSeconds = temp.getRecord().get(j) * 86400000 + temp.getBeginLocalDate().toEpochSecond(zoneoffset) * 1000;
                 Log.e("local mill 2", String.valueOf(millionSeconds));
 
                 //add event
-                events.add(new Event(getColorByImportance(importance),millionSeconds,
+                events.add(new Event(getColorByImportance(importance), millionSeconds,
                         new EventDetailObject(temp.getTitle(), temp.getContent(), importance)));
 
             }
@@ -166,11 +178,16 @@ public class HabitCalendarFragment extends Fragment {
     // Give the color by the importance of the habit (0~4)
     final private int getColorByImportance(int importance) {
         switch (importance) {
-            case 0: return ResourcesCompat.getColor(getResources(), R.color.colorHabit0, null);
-            case 1: return ResourcesCompat.getColor(getResources(), R.color.colorHabit1, null);
-            case 2: return ResourcesCompat.getColor(getResources(), R.color.colorHabit2, null);
-            case 3: return ResourcesCompat.getColor(getResources(), R.color.colorHabit3, null);
-            default: return ResourcesCompat.getColor(getResources(), R.color.colorHabit4, null);
+            case 0:
+                return ResourcesCompat.getColor(getResources(), R.color.colorHabit0, null);
+            case 1:
+                return ResourcesCompat.getColor(getResources(), R.color.colorHabit1, null);
+            case 2:
+                return ResourcesCompat.getColor(getResources(), R.color.colorHabit2, null);
+            case 3:
+                return ResourcesCompat.getColor(getResources(), R.color.colorHabit3, null);
+            default:
+                return ResourcesCompat.getColor(getResources(), R.color.colorHabit4, null);
         }
     }
 
@@ -183,7 +200,7 @@ public class HabitCalendarFragment extends Fragment {
     final void updateHabitDetails(Date dateClicked) {
         List<Event> events = habitCalendarView.getEvents(dateClicked);
         StringBuilder habitsToPrint = new StringBuilder();
-        for(Event event : events) {
+        for (Event event : events) {
             habitsToPrint.append(event.getData().toString());
         }
         // Here prints the habits in the text view.
@@ -232,7 +249,7 @@ public class HabitCalendarFragment extends Fragment {
         TransitionManager.beginDelayedTransition(habitCalendarContent);
         TransitionManager.beginDelayedTransition(fragHabitRootLinearLayout);
         TransitionManager.beginDelayedTransition(habitCalendarCard);
-        if(habitCalendarContent.getVisibility() == View.VISIBLE) {
+        if (habitCalendarContent.getVisibility() == View.VISIBLE) {
             habitCalendarContent.setVisibility(View.GONE);
         } else {
             habitCalendarContent.setVisibility(View.VISIBLE);
@@ -245,7 +262,7 @@ public class HabitCalendarFragment extends Fragment {
         TransitionManager.beginDelayedTransition(habitDetailContent);
         TransitionManager.beginDelayedTransition(fragHabitRootLinearLayout);
         TransitionManager.beginDelayedTransition(habitDetailCard);
-        if(habitDetailContent.getVisibility() == View.VISIBLE) {
+        if (habitDetailContent.getVisibility() == View.VISIBLE) {
             habitDetailContent.setVisibility(View.GONE);
         } else {
             habitDetailContent.setVisibility(View.VISIBLE);

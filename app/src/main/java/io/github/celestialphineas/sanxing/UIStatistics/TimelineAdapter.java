@@ -33,11 +33,16 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
 
     class TimelineViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.timeline_item_time)      AppCompatTextView timeText;
-        @BindView(R.id.timeline_item_content)   AppCompatTextView itemContent;
-        @BindView(R.id.timeline_item_indicator) CardView indicator;
-        @BindView(R.id.upper_line)              View upperLine;
-        @BindView(R.id.lower_line)              View lowerLine;
+        @BindView(R.id.timeline_item_time)
+        AppCompatTextView timeText;
+        @BindView(R.id.timeline_item_content)
+        AppCompatTextView itemContent;
+        @BindView(R.id.timeline_item_indicator)
+        CardView indicator;
+        @BindView(R.id.upper_line)
+        View upperLine;
+        @BindView(R.id.lower_line)
+        View lowerLine;
 
         TimelineViewHolder(View view) {
             super(view);
@@ -58,7 +63,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
     @Override
     public void onBindViewHolder(TimelineViewHolder holder, int position) {
-        if(getItemCount() != 0 && items.get(position) != null) {
+        if (getItemCount() != 0 && items.get(position) != null) {
             TimelineActivity.TimelineItem item = items.get(position);
             String timeString = dateFormat.format(item.calendar.getTime()) + " "
                     + timeFormat.format(item.calendar.getTime());

@@ -17,9 +17,11 @@ import io.github.celestialphineas.sanxing.R;
 
 public class StartSanxingFragment extends Fragment implements ISlideBackgroundColorHolder {
 
-    @BindView(R.id.start_intro_root_layout)   ViewGroup rootView;
+    @BindView(R.id.start_intro_root_layout)
+    ViewGroup rootView;
 
-    public StartSanxingFragment() { }
+    public StartSanxingFragment() {
+    }
 
     public static StartSanxingFragment newInstance(String param1, String param2) {
         StartSanxingFragment fragment = new StartSanxingFragment();
@@ -63,7 +65,7 @@ public class StartSanxingFragment extends Fragment implements ISlideBackgroundCo
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-        if(rootView != null) {
+        if (rootView != null) {
             rootView.setBackgroundColor(color);
         }
     }

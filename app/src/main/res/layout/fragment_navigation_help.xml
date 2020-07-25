@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_help_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,19 +17,22 @@
         android:text="@string/help_title_nav"
         android:textAlignment="center"
         android:textColor="@color/grey"
-        style="@android:style/TextAppearance.Material.Display1"/>
+        style="@android:style/TextAppearance.Material.Display1" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:gravity="center">
+
         <android.support.v7.widget.CardView
             android:id="@+id/card_bottom1"
             android:layout_width="120dp"
             android:layout_height="20dp"
             android:backgroundTint="@color/colorPrimary"
             android:elevation="2dp" />
+
         <android.support.v7.widget.CardView
             android:id="@+id/card_bottom2"
             android:layout_width="120dp"
@@ -39,6 +41,7 @@
             android:layout_alignStart="@id/card_bottom1"
             android:backgroundTint="@color/light_light_grey"
             android:elevation="2dp" />
+
         <android.support.v7.widget.CardView
             android:id="@+id/card_side_nav"
             android:layout_width="80dp"
@@ -47,11 +50,13 @@
             android:layout_alignStart="@id/card_bottom1"
             android:backgroundTint="@color/white"
             android:elevation="4dp">
-            <View
+
+        <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/colorAccent" />
         </android.support.v7.widget.CardView>
+
         <ImageView
             android:id="@+id/nav_icon1"
             android:layout_width="40dp"
@@ -59,6 +64,7 @@
             android:layout_marginStart="-80dp"
             android:src="@drawable/ic_achievements"
             android:tint="@color/light_grey" />
+
         <ImageView
             android:id="@+id/nav_icon2"
             android:layout_width="40dp"
@@ -68,6 +74,7 @@
             android:layout_marginEnd="-80dp"
             android:src="@drawable/ic_statistics"
             android:tint="@color/light_grey" />
+
         <ImageView
             android:id="@+id/nav_icon3"
             android:layout_width="40dp"
@@ -77,6 +84,7 @@
             android:src="@drawable/ic_timeline"
             android:tint="@color/light_grey" />
     </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,6 +94,6 @@
         android:layout_marginRight="40dp"
         android:textAlignment="center"
         android:textColor="@color/grey"
-        style="@style/Base.TextAppearance.AppCompat.Body1"/>
+        style="@style/Base.TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

@@ -9,8 +9,7 @@
         android:repeatMode="reverse"
         android:interpolator="@android:anim/linear_interpolator"
         android:toDegrees="5" />
-    <set
-        android:duration="300">
+    <set android:duration="300">
         <alpha
             android:fromAlpha="0"
             android:toAlpha="1"

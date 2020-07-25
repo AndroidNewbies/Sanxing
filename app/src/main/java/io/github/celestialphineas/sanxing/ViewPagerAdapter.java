@@ -27,23 +27,26 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return  mFragmentList.size();
+        return mFragmentList.size();
     }
 
     public void addFrag(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
+
     public void removeFrag(Fragment fragment) {
         mFragmentList.remove(fragment);
         //mFragmentTitleList.remove(title);
     }
+
     public void replaceFrag(Fragment old_fragment, Fragment new_fragment) {
         int position = mFragmentList.indexOf(old_fragment);
         mFragmentList.remove(position);
-        mFragmentList.add(position,new_fragment);
+        mFragmentList.add(position, new_fragment);
         //mFragmentTitleList.remove(title);
     }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);

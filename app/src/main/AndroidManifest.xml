@@ -3,6 +3,7 @@
     package="io.github.celestialphineas.sanxing"
     android:versionCode="1"
     android:versionName="1.0">
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:name=".MyApplication"
@@ -67,16 +68,20 @@
             android:name=".UIStatistics.StatisticsActivity"
             android:configChanges="layoutDirection|locale"
             android:screenOrientation="portrait" />
-        <activity android:name=".UIStatistics.TimelineActivity"
+        <activity
+            android:name=".UIStatistics.TimelineActivity"
             android:configChanges="layoutDirection|locale"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".UISupportActivities.IntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UISupportActivities.IntroActivity"
             android:configChanges="layoutDirection|locale"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".timer.MyService"
             android:process="io.github.celestialphineas.sanxing.timer.myservice" />
-        <receiver android:name=".timer.AlarmReceiver"
-            android:process=":newinst"/>
+        <receiver
+            android:name=".timer.AlarmReceiver"
+            android:process=":newinst" />
     </application>
 </manifest>

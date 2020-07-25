@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,9 +23,12 @@ public abstract class OperateItemActivityBase extends AppCompatActivity {
     // Animation center
     protected int cx, cy;
     protected String title = "";
-    @BindView(R.id.create_new_item_toolbar)         protected Toolbar toolbar;
-    @BindInt(R.integer.reveal_time)                 protected int revealTime;
-    @BindInt(R.integer.snack_bar_timeout)           protected int snackBarTimeout;
+    @BindView(R.id.create_new_item_toolbar)
+    protected Toolbar toolbar;
+    @BindInt(R.integer.reveal_time)
+    protected int revealTime;
+    @BindInt(R.integer.snack_bar_timeout)
+    protected int snackBarTimeout;
 
     //////////////// ANIMATIONS ////////////////
     // Reveal animation implementation
@@ -59,6 +61,7 @@ public abstract class OperateItemActivityBase extends AppCompatActivity {
             }
         }
     }
+
     // Exiting animation
     protected void animationExit() {
         final View rootLayout = getWindow().getDecorView().getRootView();
@@ -68,14 +71,23 @@ public abstract class OperateItemActivityBase extends AppCompatActivity {
                     = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, finalRadius, 0);
             circularReveal.setDuration(revealTime);
             circularReveal.addListener(new Animator.AnimatorListener() {
-                @Override public void onAnimationStart(Animator animator) { }
+                @Override
+                public void onAnimationStart(Animator animator) {
+                }
+
                 @Override
                 public void onAnimationEnd(Animator animator) {
                     rootLayout.setVisibility(View.INVISIBLE);
                     finish();
                 }
-                @Override public void onAnimationCancel(Animator animator) { }
-                @Override public void onAnimationRepeat(Animator animator) { }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+                }
             });
             circularReveal.setDuration(400);
             circularReveal.start();
@@ -83,11 +95,13 @@ public abstract class OperateItemActivityBase extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
     protected void animationSubmit() {
         cx = getResources().getDisplayMetrics().widthPixels - 120;
         cy = 100;
         animationExit();
     }
+
     @Override
     public void onBackPressed() {
         cx = 120;

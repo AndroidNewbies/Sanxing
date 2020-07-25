@@ -17,9 +17,11 @@ import io.github.celestialphineas.sanxing.R;
 
 public class HabitIntroFragment extends Fragment implements ISlideBackgroundColorHolder {
 
-    @BindView(R.id.habit_intro_root_layout)      ViewGroup rootView;
+    @BindView(R.id.habit_intro_root_layout)
+    ViewGroup rootView;
 
-    public HabitIntroFragment() { }
+    public HabitIntroFragment() {
+    }
 
     public static HabitIntroFragment newInstance(String param1, String param2) {
         HabitIntroFragment fragment = new HabitIntroFragment();
@@ -61,7 +63,7 @@ public class HabitIntroFragment extends Fragment implements ISlideBackgroundColo
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-        if(rootView != null) {
+        if (rootView != null) {
             rootView.setBackgroundColor(color);
         }
     }

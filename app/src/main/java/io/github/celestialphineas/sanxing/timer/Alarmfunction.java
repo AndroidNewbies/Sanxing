@@ -17,37 +17,36 @@ import java.util.Calendar;
  */
 
 public class Alarmfunction {
-    public static Calendar getCalendar(LocalDateTime date)
-    {
+    public static Calendar getCalendar(LocalDateTime date) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, date.getYear());
-        c.set(Calendar.MONTH, date.getMonthValue()-1);//也可以填数字，0-11,一月为0
+        c.set(Calendar.MONTH, date.getMonthValue() - 1);//也可以填数字，0-11,一月为0
         c.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
         c.set(Calendar.HOUR_OF_DAY, date.getHour());
         c.set(Calendar.MINUTE, date.getMinute());
         c.set(Calendar.SECOND, date.getSecond());
         return c;
     }
-    public static void startRTCWakeUpAlarm(Context context, Class<?> cls, LocalDateTime date)
-    {
+
+    public static void startRTCWakeUpAlarm(Context context, Class<?> cls, LocalDateTime date) {
         // 获取AlarmManager系统服务
-        Calendar c=getCalendar(date);
+        Calendar c = getCalendar(date);
         Intent intent = new Intent(context, cls);
-        intent.putExtra("date",date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));//向receiver发送还是用intent
+        intent.putExtra("date", date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));//向receiver发送还是用intent
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         //设置一个PendingIntent对象，发送广播
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarm.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
     }
-    public static void killalarm(Context context,Class<?> cls)
-    {
+
+    public static void killalarm(Context context, Class<?> cls) {
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, cls);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        if (pi!=null)//闹钟存在
+        if (pi != null)//闹钟存在
         {
             alarm.cancel(pi);
-            Log.i("ALARM","I cancel the alarm");
+            Log.i("ALARM", "I cancel the alarm");
         }
 
     }

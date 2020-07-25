@@ -1,17 +1,13 @@
 package io.github.celestialphineas.sanxing.UICalendarViews;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
-
-import org.w3c.dom.Attr;
 
 import io.github.celestialphineas.sanxing.R;
 
@@ -59,8 +55,8 @@ public class BarCanvasView extends View {
     }
 
     public void setPercentage(double val) {
-        if(val < 0)         percentage = 0.;
-        else if(val > 1.)   percentage = 1.;
+        if (val < 0) percentage = 0.;
+        else if (val > 1.) percentage = 1.;
         percentage = val;
         invalidate();
         requestLayout();
@@ -72,7 +68,7 @@ public class BarCanvasView extends View {
         bgPaint.setColor(bgColor);
         fgPaint.setColor(fgColor);
         bgRect.set(0, 0, w, h);
-        fgRect.set(0, 0, (int)(percentage * w), h);
+        fgRect.set(0, 0, (int) (percentage * w), h);
         canvas.drawRect(bgRect, bgPaint);
         canvas.drawRect(fgRect, fgPaint);
     }

@@ -3,9 +3,7 @@ package io.github.celestialphineas.sanxing.UISupportActivities;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.ColorInt;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -23,12 +21,16 @@ import io.github.celestialphineas.sanxing.R;
 
 public class CalendarHelpFragment extends Fragment implements ISlideBackgroundColorHolder {
 
-    @BindView(R.id.calendar_help_root_layout)       ViewGroup rootView;
-    @BindView(R.id.calendar_icon)                   ImageView imageView;
-    @BindView(R.id.bar_holder)                      CardView barHolder;
+    @BindView(R.id.calendar_help_root_layout)
+    ViewGroup rootView;
+    @BindView(R.id.calendar_icon)
+    ImageView imageView;
+    @BindView(R.id.bar_holder)
+    CardView barHolder;
 
 
-    public CalendarHelpFragment() { }
+    public CalendarHelpFragment() {
+    }
 
     public static CalendarHelpFragment newInstance(String param1, String param2) {
         CalendarHelpFragment fragment = new CalendarHelpFragment();
@@ -72,7 +74,7 @@ public class CalendarHelpFragment extends Fragment implements ISlideBackgroundCo
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-        if(rootView != null) {
+        if (rootView != null) {
             rootView.setBackgroundColor(color);
         }
     }
