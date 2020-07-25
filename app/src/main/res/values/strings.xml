@@ -1,19 +1,14 @@
 <resources>
     <string name="app_name">Trinspect</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_tasks">Tasks</string>
     <string name="tab_habits">Habits</string>
     <string name="tab_time_left">My Time Left</string>
-    <!-- TODO: This line could possibly be removed -->
-    <string name="tab_learn">Learn</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="calendar">Calendar</string>
-    <string name="statistics">Statistics</string>
     <string name="timeline">Timeline</string>
     <string name="achievements">Achievements</string>
 
@@ -45,7 +40,6 @@
     <string name="once_a_month">Once a month</string>
     <string name="hint_importance">Importance</string>
     <string name="create_new_time_left">New countdown</string>
-    <string name="hint_quick_add">Quick add</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="undo">Undo</string>
@@ -90,7 +84,6 @@
     <string name="go_to_today">Go to today</string>
     <string name="details">Details</string>
     <string name="checked">checked</string>
-    <string name="hint_choose_a_countdown">Choose a countdown</string>
     <string name="choose_a_time_left">Choose countdown</string>
     <string name="bar_view">Bar</string>
     <string name="grid_view">Grid</string>

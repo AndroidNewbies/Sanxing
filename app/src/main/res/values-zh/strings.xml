@@ -1,16 +1,13 @@
 <resources>
     <string name="app_name">三省</string>
-    <string name="hello_blank_fragment">Hello world!</string>
     <string name="tab_habits">习惯</string>
     <string name="tab_tasks">任务</string>
     <string name="tab_time_left">余时</string>
-    <string name="tab_learn">学习</string>
     <string name="navigation_drawer_close">关闭导航</string>
     <string name="navigation_drawer_open">打开导航</string>
     <string name="calendar">日历</string>
     <string name="help">帮助</string>
     <string name="settings">设置</string>
-    <string name="statistics">统计</string>
     <string name="supports">支持</string>
     <string name="about">关于</string>
     <string name="timeline">时间线</string>
@@ -47,7 +44,6 @@
     <string name="edit_habit">编辑习惯</string>
     <string name="edit_task">编辑任务</string>
     <string name="edit_time_left">编辑倒计时</string>
-    <string name="hint_quick_add">快速添加</string>
     <string name="hint_start_epoch">从这时</string>
     <string name="hint_countdown_due">到结束</string>
     <string name="snack_start_before_due">起始时间似乎比结束时间早呢。</string>
@@ -84,7 +80,6 @@
     <string name="go_to_today">转到今天</string>
     <string name="details">详情</string>
     <string name="checked">已打卡</string>
-    <string name="hint_choose_a_countdown">选取一个倒计时</string>
     <string name="choose_a_time_left">选取倒计时</string>
     <string name="bar_view">进度条</string>
     <string name="grid_view">网格</string>

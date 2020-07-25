@@ -30,7 +30,6 @@
     <color name="colorAccent">#4fc3f7</color>
     <color name="appBarWhite">#ffffff</color>
     <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="black87">#212121</color>
     <color name="grey">#777777</color>
@@ -38,7 +37,6 @@
     <color name="light_light_grey">#CCCCCC</color>
     <color name="white_grey">#FAFAFA</color>
     <color name="background_grey">#EDEDEE</color>
-    <color name="bottomNavigation">#0277bd</color>
     <color name="bronze_bright">#ff7543</color>
     <color name="bronze_dark">#d84315</color>
     <color name="gold_bright">#ffe034</color>
@@ -46,5 +44,4 @@
     <color name="silver_bright">#c1d5e0</color>
     <color name="silver_dark">#62757f</color>
     <color name="timeline_start">#ffcccccc</color>
-    <color name="timeline_end">#00cccccc</color>
 </resources>
