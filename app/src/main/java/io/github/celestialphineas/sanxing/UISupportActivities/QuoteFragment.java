@@ -1,7 +1,6 @@
 package io.github.celestialphineas.sanxing.UISupportActivities;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -18,9 +17,11 @@ import io.github.celestialphineas.sanxing.R;
 
 public class QuoteFragment extends Fragment implements ISlideBackgroundColorHolder {
 
-    @BindView(R.id.quote_root_layout)   ViewGroup rootView;
+    @BindView(R.id.quote_root_layout)
+    ViewGroup rootView;
 
-    public QuoteFragment() { }
+    public QuoteFragment() {
+    }
 
     public static QuoteFragment newInstance(String param1, String param2) {
         QuoteFragment fragment = new QuoteFragment();
@@ -64,7 +65,7 @@ public class QuoteFragment extends Fragment implements ISlideBackgroundColorHold
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-        if(rootView != null) {
+        if (rootView != null) {
             rootView.setBackgroundColor(color);
         }
     }

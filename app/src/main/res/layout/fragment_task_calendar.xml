@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_grey">
+
     <android.support.v7.widget.LinearLayoutCompat
         android:id="@+id/frag_task_root_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <android.support.v7.widget.CardView
             android:id="@+id/task_calendar_card"
             android:layout_width="match_parent"
@@ -19,22 +21,26 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="2dp"
             app:cardPreventCornerOverlap="true">
+
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_weight="1"
                         style="@android:style/TextAppearance.Material.Headline"
-                        android:text="@string/calendar"/>
+                        android:text="@string/calendar" />
+
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/expand_task_calendar_view"
                         android:layout_width="24dp"
@@ -47,16 +53,19 @@
                         android:drawableTint="@color/grey"
                         android:textColor="@color/grey" />
                 </android.support.v7.widget.LinearLayoutCompat>
+
                 <android.support.v7.widget.LinearLayoutCompat
                     android:id="@+id/task_calendar_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
+
                     <android.support.v7.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/task_calendar_year_month"
                             android:layout_width="wrap_content"
@@ -66,7 +75,8 @@
                             android:layout_weight="1"
                             android:layout_marginStart="10dp"
                             style="@android:style/TextAppearance.Material.Title"
-                            tools:text="2017-08"/>
+                            tools:text="2017-08" />
+
                         <android.support.v7.widget.AppCompatButton
                             android:id="@+id/calendar_go_to_today"
                             android:layout_width="wrap_content"
@@ -79,13 +89,13 @@
                             android:text="@string/go_to_today"
                             android:textColor="?colorPrimary" />
                     </android.support.v7.widget.LinearLayoutCompat>
-                    <com.github.sundeepk.compactcalendarview.CompactCalendarView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+                    <com.github.sundeepk.compactcalendarview.CompactCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/task_calendar_view"
                         android:layout_width="fill_parent"
                         android:layout_height="250dp"
-                        android:paddingRight="10dp"
-                        android:paddingLeft="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
                         app:compactCalendarTargetHeight="250dp"
                         app:compactCalendarTextSize="12sp"
                         app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorTasksAccent"
@@ -95,6 +105,7 @@
                 </android.support.v7.widget.LinearLayoutCompat>
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/task_detail_card"
             android:layout_width="match_parent"
@@ -104,22 +115,26 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="2dp"
             app:cardPreventCornerOverlap="true">
+
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_weight="1"
                         style="@android:style/TextAppearance.Material.Headline"
-                        android:text="@string/details"/>
+                        android:text="@string/details" />
+
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/expand_task_detail_view"
                         android:layout_width="24dp"
@@ -132,10 +147,12 @@
                         android:drawableTint="@color/grey"
                         android:textColor="@color/grey" />
                 </android.support.v7.widget.LinearLayoutCompat>
+
                 <android.support.v7.widget.LinearLayoutCompat
                     android:id="@+id/task_detail_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/task_detail_text"
                         android:layout_width="match_parent"
@@ -143,18 +160,18 @@
                         android:layout_marginTop="15dp" />
                 </android.support.v7.widget.LinearLayoutCompat>
                 <!--<android.support.v7.widget.LinearLayoutCompat-->
-                    <!--android:id="@+id/task_detail_content"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:visibility="gone"-->
-                    <!--android:orientation="vertical">-->
-                    <!--<android.support.v7.widget.LinearLayoutCompat-->
-                        <!--android:id="@+id/task_detail_linear_layout"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:orientation="vertical">-->
-                    <!--</android.support.v7.widget.LinearLayoutCompat>-->
+                <!--android:id="@+id/task_detail_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:visibility="gone"-->
+                <!--android:orientation="vertical">-->
+                <!--<android.support.v7.widget.LinearLayoutCompat-->
+                <!--android:id="@+id/task_detail_linear_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+                <!--</android.support.v7.widget.LinearLayoutCompat>-->
                 <!--</android.support.v7.widget.LinearLayoutCompat>-->
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.CardView>

@@ -21,14 +21,20 @@ import io.github.celestialphineas.sanxing.R;
 
 public class NavigationHelpFragment extends Fragment implements ISlideBackgroundColorHolder {
 
-    @BindView(R.id.navigation_help_root_layout)     ViewGroup rootView;
-    @BindView(R.id.nav_icon1)                       ImageView imageView1;
-    @BindView(R.id.nav_icon2)                       ImageView imageView2;
-    @BindView(R.id.nav_icon3)                       ImageView imageView3;
-    @BindView(R.id.card_side_nav)                   CardView navigationCard;
+    @BindView(R.id.navigation_help_root_layout)
+    ViewGroup rootView;
+    @BindView(R.id.nav_icon1)
+    ImageView imageView1;
+    @BindView(R.id.nav_icon2)
+    ImageView imageView2;
+    @BindView(R.id.nav_icon3)
+    ImageView imageView3;
+    @BindView(R.id.card_side_nav)
+    CardView navigationCard;
 
 
-    public NavigationHelpFragment() { }
+    public NavigationHelpFragment() {
+    }
 
     public static NavigationHelpFragment newInstance(String param1, String param2) {
         NavigationHelpFragment fragment = new NavigationHelpFragment();
@@ -72,7 +78,7 @@ public class NavigationHelpFragment extends Fragment implements ISlideBackground
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-        if(rootView != null) {
+        if (rootView != null) {
             rootView.setBackgroundColor(color);
         }
     }

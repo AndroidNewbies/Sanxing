@@ -37,17 +37,29 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
     protected boolean setDate1 = false, setDate2 = false;
     @BindView(R.id.create_new_item_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.input_title)                     protected TextInputEditText inputTitle;
-    @BindView(R.id.time_left_from_date_content)     protected TextInputEditText startDateContent;
-    @BindView(R.id.time_left_due_date_content)      protected TextInputEditText dueDateContent;
-    @BindView(R.id.time_left_description_content)   protected TextInputEditText descriptionContent;
-    @BindView(R.id.time_left_importance_seek_bar)   protected AppCompatSeekBar timeLeftImportance;
-    @BindString(R.string.snack_title_not_set)       protected String titleNotSet;
-    @BindString(R.string.snack_date_not_set)        protected String dateNotSet;
-    @BindString(R.string.snack_time_not_set)        protected String timeNotSet;
-    @BindString(R.string.snack_op_set)              protected String setSnack;
-    @BindString(R.string.snack_time_passed)         protected String hasPassed;
-    @BindString(R.string.snack_start_before_due)         protected String startBeforeDue;
+    @BindView(R.id.input_title)
+    protected TextInputEditText inputTitle;
+    @BindView(R.id.time_left_from_date_content)
+    protected TextInputEditText startDateContent;
+    @BindView(R.id.time_left_due_date_content)
+    protected TextInputEditText dueDateContent;
+    @BindView(R.id.time_left_description_content)
+    protected TextInputEditText descriptionContent;
+    @BindView(R.id.time_left_importance_seek_bar)
+    protected AppCompatSeekBar timeLeftImportance;
+    @BindString(R.string.snack_title_not_set)
+    protected String titleNotSet;
+    @BindString(R.string.snack_date_not_set)
+    protected String dateNotSet;
+    @BindString(R.string.snack_time_not_set)
+    protected String timeNotSet;
+    @BindString(R.string.snack_op_set)
+    protected String setSnack;
+    @BindString(R.string.snack_time_passed)
+    protected String hasPassed;
+    @BindString(R.string.snack_start_before_due)
+    protected String startBeforeDue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         rootLayout = getWindow().getDecorView().getRootView();
@@ -82,48 +94,66 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 selectedImportance = seekBar.getProgress();
             }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
-            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
     }
 
     // Verify input
     protected boolean verifyForm(View layout) {
         Calendar now = Calendar.getInstance();
-        if(inputTitle != null && inputTitle.getText() != null
+        if (inputTitle != null && inputTitle.getText() != null
                 && inputTitle.getText().toString().trim().isEmpty()) {
             Snackbar.make(layout, titleNotSet, snackBarTimeout)
                     .show();
             inputTitle.requestFocus();
             return false;
-        } else if(!setDate1) {
+        } else if (!setDate1) {
             Snackbar.make(layout, dateNotSet, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { timeLeftStartDateOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            timeLeftStartDateOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
-        } else if(!setDate2) {
+        } else if (!setDate2) {
             Snackbar.make(layout, dateNotSet, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { timeLeftDueDateOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            timeLeftDueDateOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
-        } else if(dueCalendar.before(startCalendar)) {
+        } else if (dueCalendar.before(startCalendar)) {
             Snackbar.make(layout, startBeforeDue, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { timeLeftDueDateOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            timeLeftDueDateOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
-        } else if(dueCalendar.before(now)) {
+        } else if (dueCalendar.before(now)) {
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getBaseContext());
-            String timeString = dateFormat.format(dueCalendar.getTime()) +  " ";
+            String timeString = dateFormat.format(dueCalendar.getTime()) + " ";
             Snackbar.make(layout, timeString + hasPassed, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { timeLeftDueDateOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            timeLeftDueDateOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
         }
@@ -136,10 +166,11 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
     // The selected date will be stored in the dueCalendar object.
     @OnFocusChange(R.id.time_left_from_date_content)
     void timeLeftFromDateOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
+        if (hasFocus) {
             timeLeftStartDateOnClickBehavior();
         }
     }
+
     @OnClick(R.id.time_left_from_date_content)
     void timeLeftStartDateOnClickBehavior() {
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -161,10 +192,11 @@ public abstract class OperateTimeLeftActivityBase extends OperateItemActivityBas
 
     @OnFocusChange(R.id.time_left_due_date_content)
     void timeLeftDueDateOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
+        if (hasFocus) {
             timeLeftDueDateOnClickBehavior();
         }
     }
+
     @OnClick(R.id.time_left_due_date_content)
     void timeLeftDueDateOnClickBehavior() {
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {

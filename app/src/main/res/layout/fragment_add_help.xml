@@ -18,56 +18,61 @@
         android:text="@string/help_title_add_new"
         android:textAlignment="center"
         android:textColor="@color/grey"
-        style="@android:style/TextAppearance.Material.Display1"/>
+        style="@android:style/TextAppearance.Material.Display1" />
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:elevation="20dp"
-                android:src="@drawable/ic_add"
-                android:tint="@android:color/white"
-                android:layout_gravity="center"
-                android:visibility="invisible"
-                app:popupTheme="@style/AppTheme.PopupTheme"
-                app:backgroundTint="@color/colorTasks"/>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:elevation="20dp"
-                android:src="@drawable/ic_add"
-                android:tint="@android:color/white"
-                android:layout_gravity="center"
-                android:visibility="invisible"
-                app:popupTheme="@style/AppTheme.PopupTheme"
-                app:backgroundTint="@color/colorHabits"/>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:elevation="20dp"
-                android:src="@drawable/ic_add"
-                android:tint="@android:color/white"
-                android:layout_gravity="center"
-                android:visibility="invisible"
-                app:popupTheme="@style/AppTheme.PopupTheme"
-                app:backgroundTint="@color/colorTimeLeft"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="20dp"
+            android:src="@drawable/ic_add"
+            android:tint="@android:color/white"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:popupTheme="@style/AppTheme.PopupTheme"
+            app:backgroundTint="@color/colorTasks" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="20dp"
+            android:src="@drawable/ic_add"
+            android:tint="@android:color/white"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:popupTheme="@style/AppTheme.PopupTheme"
+            app:backgroundTint="@color/colorHabits" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="20dp"
+            android:src="@drawable/ic_add"
+            android:tint="@android:color/white"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:popupTheme="@style/AppTheme.PopupTheme"
+            app:backgroundTint="@color/colorTimeLeft" />
     </android.support.design.widget.CoordinatorLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/help_description_add_new"
         android:padding="20sp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:textAlignment="center"
         android:textColor="@color/grey"
-        style="@style/Base.TextAppearance.AppCompat.Body1"/>
+        style="@style/Base.TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

@@ -1,9 +1,9 @@
 package io.github.celestialphineas.sanxing.UIStatistics;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -33,22 +33,26 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
 public class TimelineActivity extends AppCompatActivity {
-    @BindView(R.id.timeline_toolbar)            Toolbar toolbar;
-    @BindView(R.id.timeline_recycler_view)      RecyclerView timelineRecyclerView;
-    @BindView(R.id.timeline_place_holder)       ViewGroup placeHolder;
-    @BindString(R.string.time_out)       String timeout;
+    @BindView(R.id.timeline_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.timeline_recycler_view)
+    RecyclerView timelineRecyclerView;
+    @BindView(R.id.timeline_place_holder)
+    ViewGroup placeHolder;
+    @BindString(R.string.time_out)
+    String timeout;
     static final int TASK = 0, HABIT = 1, TIME_LEFT = 2;
     List<TimelineItem> timelineItems = new ArrayList<>();
 
-    private MyApplication myApplication;
-    private TaskManager mTaskManager;
-    private HabitManager mHabitManager;
-    private TimeLeftManager mTimeLeftManager;
-
     class TimelineItem implements Comparable<TimelineItem> {
-        int type; Calendar calendar; String description;
+        int type;
+        Calendar calendar;
+        String description;
+
         TimelineItem(int type, Calendar calendar, String description) {
-            this.type = type; this.calendar = calendar; this.description = description;
+            this.type = type;
+            this.calendar = calendar;
+            this.description = description;
         }
 
         int getColor() {
@@ -61,7 +65,8 @@ public class TimelineActivity extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         return getBaseContext().getResources().getColor(R.color.colorHabits, null);
                     } else return getBaseContext().getResources().getColor(R.color.colorHabits);
-                case TIME_LEFT: default:
+                case TIME_LEFT:
+                default:
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         return getBaseContext().getResources().getColor(R.color.colorTimeLeft, null);
                     } else return getBaseContext().getResources().getColor(R.color.colorTimeLeft);
@@ -70,11 +75,11 @@ public class TimelineActivity extends AppCompatActivity {
 
         @Override
         public int compareTo(@NonNull TimelineItem o) {
-            if (this.calendar.getTimeInMillis()<o.calendar.getTimeInMillis()){
+            if (this.calendar.getTimeInMillis() < o.calendar.getTimeInMillis()) {
                 return -1;
-            }else if (this.calendar.getTimeInMillis()==o.calendar.getTimeInMillis()){
+            } else if (this.calendar.getTimeInMillis() == o.calendar.getTimeInMillis()) {
                 return this.description.compareTo(o.description);
-            }else return 1;
+            } else return 1;
         }
 
     }
@@ -82,10 +87,10 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myApplication= (MyApplication) getApplication();
-        mTaskManager = myApplication.get_task_manager();
-        mHabitManager = myApplication.get_habit_manager();
-        mTimeLeftManager = myApplication.get_time_left_manager();
+        MyApplication myApplication = (MyApplication) getApplication();
+        TaskManager mTaskManager = myApplication.get_task_manager();
+        HabitManager mHabitManager = myApplication.get_habit_manager();
+        TimeLeftManager mTimeLeftManager = myApplication.get_time_left_manager();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
@@ -107,46 +112,44 @@ public class TimelineActivity extends AppCompatActivity {
 
         // Constructor: Type, Time Calendar, Description
 
-        for (Task task:mTaskManager.getObjectList()){
-            if (task.getState()==2||task.getState()==0){//task is finished or deleted ,no show
+        for (Task task : mTaskManager.getObjectList()) {
+            if (task.getState() == 2 || task.getState() == 0) {//task is finished or deleted ,no show
                 continue;
             }
             long millionSeconds = 0;
-            ZoneOffset zoneoffset=OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
-            millionSeconds = task.getEndLocalDate().toEpochSecond(zoneoffset)*1000;
-            Calendar ca=Calendar.getInstance();
+            ZoneOffset zoneoffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+            millionSeconds = task.getEndLocalDate().toEpochSecond(zoneoffset) * 1000;
+            Calendar ca = Calendar.getInstance();
             ca.setTimeInMillis(millionSeconds);
-            if (millionSeconds< LocalDateTime.now().toEpochSecond(zoneoffset)*1000){// if has exceeded the deadline
+            if (millionSeconds < LocalDateTime.now().toEpochSecond(zoneoffset) * 1000) {// if has exceeded the deadline
 
-                timelineItems.add(new TimelineItem(TASK,ca,task.getTitle()+timeout));
-            }
-            else timelineItems.add(new TimelineItem(TASK,ca,task.getTitle()));
+                timelineItems.add(new TimelineItem(TASK, ca, task.getTitle() + timeout));
+            } else timelineItems.add(new TimelineItem(TASK, ca, task.getTitle()));
         }
-        for (Habit habit:mHabitManager.getObjectList()){
-            if (habit.getState()==2||habit.getState()==0){//task is finished or deleted ,no show
+        for (Habit habit : mHabitManager.getObjectList()) {
+            if (habit.getState() == 2 || habit.getState() == 0) {//task is finished or deleted ,no show
                 continue;
             }
             long millionSeconds = 0;
-            ZoneOffset zoneoffset=OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
-            millionSeconds = habit.getLocalNextddl().toEpochSecond(zoneoffset)*1000;
-            Calendar ca=Calendar.getInstance();
+            ZoneOffset zoneoffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+            millionSeconds = habit.getLocalNextddl().toEpochSecond(zoneoffset) * 1000;
+            Calendar ca = Calendar.getInstance();
             ca.setTimeInMillis(millionSeconds);
             //for nextddl is always set to be after now, time out shouldn't happen
-            timelineItems.add(new TimelineItem(HABIT,ca,habit.getTitle()));
+            timelineItems.add(new TimelineItem(HABIT, ca, habit.getTitle()));
         }
-        for (TimeLeft timeLeft:mTimeLeftManager.getObjectList()){
-            if (timeLeft.getState()==2||timeLeft.getState()==0){//task is finished or deleted ,no show
+        for (TimeLeft timeLeft : mTimeLeftManager.getObjectList()) {
+            if (timeLeft.getState() == 2 || timeLeft.getState() == 0) {//task is finished or deleted ,no show
                 continue;
             }
             long millionSeconds = 0;
-            ZoneOffset zoneoffset=OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
-            millionSeconds = timeLeft.getEndLocalDate().toEpochSecond(zoneoffset)*1000;
-            Calendar ca=Calendar.getInstance();
+            ZoneOffset zoneoffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+            millionSeconds = timeLeft.getEndLocalDate().toEpochSecond(zoneoffset) * 1000;
+            Calendar ca = Calendar.getInstance();
             ca.setTimeInMillis(millionSeconds);
-            if (millionSeconds< LocalDateTime.now().toEpochSecond(zoneoffset)*1000){// if has exceeded the deadline
-                timelineItems.add(new TimelineItem(TIME_LEFT,ca,timeLeft.getTitle()+timeout));
-            }
-            else timelineItems.add(new TimelineItem(TIME_LEFT,ca,timeLeft.getTitle()));
+            if (millionSeconds < LocalDateTime.now().toEpochSecond(zoneoffset) * 1000) {// if has exceeded the deadline
+                timelineItems.add(new TimelineItem(TIME_LEFT, ca, timeLeft.getTitle() + timeout));
+            } else timelineItems.add(new TimelineItem(TIME_LEFT, ca, timeLeft.getTitle()));
         }
 
         Collections.sort(timelineItems);
@@ -163,7 +166,7 @@ public class TimelineActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        if(timelineItems == null || timelineItems.isEmpty()) {
+        if (timelineItems == null || timelineItems.isEmpty()) {
             placeHolder.setVisibility(View.VISIBLE);
             timelineRecyclerView.setVisibility(View.GONE);
         } else {

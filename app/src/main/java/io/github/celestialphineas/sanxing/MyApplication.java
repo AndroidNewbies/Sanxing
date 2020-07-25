@@ -6,36 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
-import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.LocalTime;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZoneOffset;
-import org.threeten.bp.format.DateTimeFormatter;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import butterknife.BindString;
 import io.github.celestialphineas.sanxing.SanxingBackend.HabitRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TaskRepo;
 import io.github.celestialphineas.sanxing.SanxingBackend.TimeLeftRepo;
-import io.github.celestialphineas.sanxing.UISupportActivities.IntroActivity;
-import io.github.celestialphineas.sanxing.sxObject.Habit;
-import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
 import io.github.celestialphineas.sanxing.sxObjectManager.TaskManager;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
@@ -85,8 +68,7 @@ public class MyApplication extends Application {
         mysetting.readSetting(this);
         //Log.d("ringtone",mysetting.Ringtone);
         //Log.d("CallTime",mysetting.callTime.toString());
-        if (!isServiceRunning(this, "io.github.celestialphineas.imer.MyService"))
-        {
+        if (!isServiceRunning(this, "io.github.celestialphineas.imer.MyService")) {
             //开启第一次service，设置闹钟
             Intent i = new Intent(this, MyService.class);
             i.putExtra("source", "Application");
@@ -152,28 +134,27 @@ public class MyApplication extends Application {
         //Log.i("IsServiceRunning",String.valueOf(isRunning));
         return isRunning;
     }
+
     //安装时，就建立设置表，并设置默认值
-    private void install()
-    {
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-        boolean ifinstall=sharedPreferences.getBoolean("ifinstall",false);
-        if (!ifinstall)
-        {
+    private void install() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean ifinstall = sharedPreferences.getBoolean("ifinstall", false);
+        if (!ifinstall) {
             //实例化Editor对象
             SharedPreferences.Editor editor = sharedPreferences.edit();
             //存入数据
-            editor.putBoolean("ifinstall",true);//已安装
+            editor.putBoolean("ifinstall", true);//已安装
             //默认值
-            editor.putBoolean("notifications_enabled",true);
-            editor.putBoolean("notifications_vibrate_enabled",true);
-            LocalDateTime now=LocalDateTime.now();
-            now=LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),12,0);
-            ZoneOffset zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset ();
-            editor.putLong("notifications_time",now.toEpochSecond(zoneOffset)*1000);//当地12点的格林尼治时间戳
+            editor.putBoolean("notifications_enabled", true);
+            editor.putBoolean("notifications_vibrate_enabled", true);
+            LocalDateTime now = LocalDateTime.now();
+            now = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 12, 0);
+            ZoneOffset zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+            editor.putLong("notifications_time", now.toEpochSecond(zoneOffset) * 1000);//当地12点的格林尼治时间戳
             //Log.w("Time1",String.valueOf(now.toEpochSecond(zoneOffset)*1000));
             //Log.w("Time1",String.valueOf(now.toEpochSecond(ZoneOffset.UTC)*1000));
-            editor.putString("notifications_ringtone","content://settings/system/notification_sound");
-            editor.putString("calendar_first_day_of_week","0");
+            editor.putString("notifications_ringtone", "content://settings/system/notification_sound");
+            editor.putString("calendar_first_day_of_week", "0");
             //提交修改
             editor.commit();
         }

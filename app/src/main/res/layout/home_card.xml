@@ -5,22 +5,24 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_root_view"
-    android:layout_marginLeft="@dimen/card_margin_horizontal"
-    android:layout_marginRight="@dimen/card_margin_horizontal"
+    android:layout_marginStart="@dimen/card_margin_horizontal"
+    android:layout_marginEnd="@dimen/card_margin_horizontal"
     android:layout_marginTop="@dimen/card_margin_vertical"
     android:layout_marginBottom="@dimen/card_padding_bottom"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="2dp"
     app:cardPreventCornerOverlap="true">
+
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/card_padding_top"
-        android:paddingLeft="@dimen/card_padding_horizontal"
-        android:paddingRight="@dimen/card_padding_horizontal"
+        android:paddingStart="@dimen/card_padding_horizontal"
+        android:paddingEnd="@dimen/card_padding_horizontal"
         android:paddingBottom="@dimen/card_padding_bottom"
         android:orientation="vertical">
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/card_headline"
             android:layout_width="match_parent"
@@ -28,6 +30,7 @@
             android:gravity="center_vertical"
             tools:text="Title"
             style="@style/CardHeadingStyle" />
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/card_subheading"
             android:layout_width="match_parent"
@@ -35,6 +38,7 @@
             android:layout_below="@id/card_headline"
             tools:text="Due: Nov. 12, 2012"
             style="@style/CardSubheadingStyle" />
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/card_countdown"
             android:layout_width="match_parent"
@@ -47,6 +51,7 @@
             android:textStyle="bold"
             tools:text="15 Days 11:13"
             style="@style/CardSubheadingStyle" />
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/card_description"
             android:layout_width="match_parent"
@@ -57,10 +62,12 @@
             android:visibility="gone"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendisse fringilla." />
+
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/card_padding_bottom">
+
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/card_button_check"
                 android:layout_width="wrap_content"
@@ -74,10 +81,12 @@ Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendiss
                 android:visibility="gone"
                 android:textColor="@color/grey"
                 android:text="@string/button_check" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/card_button_edit"
                 android:layout_width="wrap_content"
@@ -89,12 +98,13 @@ Curabitur non mauris lorem. Mauris ac ex nec purus feugiat venenatis. Suspendiss
                 android:drawableTint="@color/grey"
                 android:textColor="@color/grey"
                 android:text="@string/edit" />
+
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/card_button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginRight="-10dp"
+                android:layout_marginEnd="-10dp"
                 android:textColor="?attr/colorPrimary"
                 android:drawableStart="@drawable/ic_delete"
                 android:drawableTint="?attr/colorPrimary"

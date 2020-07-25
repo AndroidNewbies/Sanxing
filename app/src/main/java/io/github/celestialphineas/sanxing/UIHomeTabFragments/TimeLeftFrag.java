@@ -3,7 +3,7 @@ package io.github.celestialphineas.sanxing.UIHomeTabFragments;
 /**
  * Created by apple on 2017/11/3.
  */
-import android.app.Activity;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +17,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.github.celestialphineas.sanxing.R;
-import io.github.celestialphineas.sanxing.sxObject.Task;
 import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
@@ -29,7 +28,8 @@ import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
  */
 
 public class TimeLeftFrag extends Fragment {
-    @BindView(R.id.task_recycler_view)      RecyclerView recyclerView;
+    @BindView(R.id.task_recycler_view)
+    RecyclerView recyclerView;
     private TimeLeftManager timeLeftManager;
 
     public TimeLeftFrag() {
@@ -45,11 +45,12 @@ public class TimeLeftFrag extends Fragment {
      * this fragment using the provided parameters.
      */
 
-    public TimeLeftFrag newInstance(TimeLeftManager timeLeftManager) {
+    public static TimeLeftFrag newInstance(TimeLeftManager timeLeftManager) {
         TimeLeftFrag fragment = new TimeLeftFrag();
         fragment.timeLeftManager = timeLeftManager;
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +68,13 @@ public class TimeLeftFrag extends Fragment {
         //get unfinished list  task 是引用？  在application里加一下need_add
 
         List<TimeLeft> need_add = new ArrayList<>();
-        for (TimeLeft timeLeft : timeLeftManager.getObjectList()){
-            if (timeLeft.getState()==1){//unfinished
+        for (TimeLeft timeLeft : timeLeftManager.getObjectList()) {
+            if (timeLeft.getState() == 1) {//unfinished
                 need_add.add(timeLeft);
             }
         }
-        if (need_add !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
-        if (timeLeftManager !=null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
+        if (need_add != null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
+        if (timeLeftManager != null) recyclerView.setAdapter(new TimeLeftRecyclerAdapter(need_add));
         else recyclerView.setAdapter(new TaskRecyclerAdapter());
         return view;
     }

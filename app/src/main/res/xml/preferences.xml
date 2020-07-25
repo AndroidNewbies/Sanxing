@@ -7,8 +7,7 @@
             android:entries="@array/pref_week_first_day_list_titles"
             android:entryValues="@array/pref_week_first_day_list_values"
             android:summary="%s"
-            android:defaultValue="1">
-        </ListPreference>
+            android:defaultValue="1" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_header_notifications">
         <CheckBoxPreference
@@ -18,7 +17,7 @@
         <io.github.celestialphineas.sanxing.UISupportActivities.TimePreference
             android:key="notifications_time"
             android:dependency="notifications_enabled"
-            android:title="@string/pref_set_notification_time"/>
+            android:title="@string/pref_set_notification_time" />
         <RingtonePreference
             android:defaultValue="content://settings/system/notification_sound"
             android:dependency="notifications_enabled"
@@ -38,8 +37,9 @@
         <PreferenceScreen
             android:summary="@string/summary_clear_data"
             android:title="@string/pref_clear_data">
-            <intent android:action="android.settings.APPLICATION_DETAILS_SETTINGS"
-                android:data="package:io.github.celestialphineas.sanxing"/>
+            <intent
+                android:action="android.settings.APPLICATION_DETAILS_SETTINGS"
+                android:data="package:io.github.celestialphineas.sanxing" />
         </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>

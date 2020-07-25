@@ -17,7 +17,8 @@
         android:text="@string/confucious_quote"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="36sp"/>
+        android:textSize="36sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

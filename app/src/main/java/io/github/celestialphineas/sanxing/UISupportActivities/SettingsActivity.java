@@ -3,8 +3,6 @@ package io.github.celestialphineas.sanxing.UISupportActivities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -17,7 +15,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
-import android.provider.Settings;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatCheckedTextView;
@@ -34,10 +31,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import io.github.celestialphineas.sanxing.MyApplication;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.timer.MyService;
-import io.github.celestialphineas.sanxing.timer.Setting;
 
 /*
 https://github.com/davcpas1234/MaterialSettings
@@ -63,7 +58,7 @@ public class SettingsActivity extends PreferenceActivity {
             TypedValue tv = new TypedValue();
             if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
                 height = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-            }else{
+            } else {
                 height = bar.getHeight();
             }
 
@@ -194,7 +189,7 @@ public class SettingsActivity extends PreferenceActivity {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         super.onPreferenceTreeClick(preferenceScreen, preference);
 
-        if (preference!=null) {
+        if (preference != null) {
             if (preference instanceof PreferenceScreen) {
                 if (((PreferenceScreen) preference).getDialog() != null) {
                     ((PreferenceScreen) preference).getDialog().getWindow().getDecorView().setBackgroundDrawable(this.getWindow().getDecorView().getBackground().getConstantState().newDrawable());
@@ -277,9 +272,9 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onRestoreInstanceState(Bundle state) {
 
     }
+
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         Intent i = new Intent(this, MyService.class);
         i.putExtra("source", "Setting");

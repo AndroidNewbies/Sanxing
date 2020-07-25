@@ -8,7 +8,7 @@ import io.github.celestialphineas.sanxing.timer.MyDuration;
  * Created by lin on 2017/11/4.
  */
 
-public class TimeLeft extends AbstractsxObject implements Serializable,Comparable<TimeLeft>{
+public class TimeLeft extends AbstractsxObject implements Serializable, Comparable<TimeLeft> {
 
     //database tag
     public static final String KEY_ID = "id";
@@ -22,46 +22,42 @@ public class TimeLeft extends AbstractsxObject implements Serializable,Comparabl
 
     private static final long serialVersionUID = 2L;
 
-    public TimeLeft()
-    {
+    public TimeLeft() {
         super();
     }
-    public TimeLeft(String title)
-    {
+
+    public TimeLeft(String title) {
         super();
         super.setTitle(title);
     }
+
     //this constructor only used when read data from the database
-    public TimeLeft(int id,String title,String begindate,String enddate,String content,int important,int state)
-    {
-        ID  = id;//set the ID in the abstract class
+    public TimeLeft(int id, String title, String begindate, String enddate, String content, int important, int state) {
+        ID = id;//set the ID in the abstract class
         create_timeleft(title, begindate, enddate, content, important);
         setState(state);
     }
-    public void create_timeleft(String title,String begindate,String enddate,String content,int important)
-    {
+
+    public void create_timeleft(String title, String begindate, String enddate, String content, int important) {
         super.create_object(title, begindate, enddate, content, important);
     }
-    public void edit_timeleft(String title,String enddate,String content,int important)
-    {
+
+    public void edit_timeleft(String title, String enddate, String content, int important) {
         super.edit_object(title, enddate, content, important);
     }
+
     //余时只按照重要程度排序
     @Override
-    public int compareTo(TimeLeft another_left)
-    {
-        int this_weight=this.getImportance();
-        int another_weight=another_left.getImportance();
-        if (this_weight!=another_weight)
-        {
-            if (this_weight>another_weight) return -1;
+    public int compareTo(TimeLeft another_left) {
+        int this_weight = this.getImportance();
+        int another_weight = another_left.getImportance();
+        if (this_weight != another_weight) {
+            if (this_weight > another_weight) return -1;
             return 1;
-        }
-        else
-        {
-            long left1= MyDuration.durationFromNowtoB(this.getEndDate());
-            long left2= MyDuration.durationFromNowtoB(another_left.getEndDate());
-            if (left1<left2) return -1;
+        } else {
+            long left1 = MyDuration.durationFromNowtoB(this.getEndDate());
+            long left2 = MyDuration.durationFromNowtoB(another_left.getEndDate());
+            if (left1 < left2) return -1;
             else return 1;
         }
     }

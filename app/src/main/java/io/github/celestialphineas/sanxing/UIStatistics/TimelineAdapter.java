@@ -21,7 +21,6 @@ import io.github.celestialphineas.sanxing.R;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder> {
     private LayoutInflater inflater;
-    private Context context;
     List<TimelineActivity.TimelineItem> items;
     DateFormat dateFormat;
     DateFormat timeFormat;
@@ -32,12 +31,17 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
     }
 
 
-    class TimelineViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.timeline_item_time)      AppCompatTextView timeText;
-        @BindView(R.id.timeline_item_content)   AppCompatTextView itemContent;
-        @BindView(R.id.timeline_item_indicator) CardView indicator;
-        @BindView(R.id.upper_line)              View upperLine;
-        @BindView(R.id.lower_line)              View lowerLine;
+    static class TimelineViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.timeline_item_time)
+        AppCompatTextView timeText;
+        @BindView(R.id.timeline_item_content)
+        AppCompatTextView itemContent;
+        @BindView(R.id.timeline_item_indicator)
+        CardView indicator;
+        @BindView(R.id.upper_line)
+        View upperLine;
+        @BindView(R.id.lower_line)
+        View lowerLine;
 
         TimelineViewHolder(View view) {
             super(view);
@@ -50,7 +54,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.timeline_list_template, parent, false);
-        context = parent.getContext();
+        Context context = parent.getContext();
         dateFormat = android.text.format.DateFormat.getDateFormat(context);
         timeFormat = android.text.format.DateFormat.getTimeFormat(context);
         return new TimelineViewHolder(itemView);
@@ -58,7 +62,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
     @Override
     public void onBindViewHolder(TimelineViewHolder holder, int position) {
-        if(getItemCount() != 0 && items.get(position) != null) {
+        if (getItemCount() != 0 && items.get(position) != null) {
             TimelineActivity.TimelineItem item = items.get(position);
             String timeString = dateFormat.format(item.calendar.getTime()) + " "
                     + timeFormat.format(item.calendar.getTime());

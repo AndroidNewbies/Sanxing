@@ -58,8 +58,8 @@ public class GridCanvasView extends View {
     }
 
     public void setPercentage(double val) {
-        if(val < 0)         percentage = 0.;
-        else if(val > 1.)   percentage = 1.;
+        if (val < 0) percentage = 0.;
+        else if (val > 1.) percentage = 1.;
         percentage = val;
         invalidate();
         requestLayout();
@@ -70,44 +70,44 @@ public class GridCanvasView extends View {
     }
 
     public void setnSquares(int n) {
-        if(n <= 0) return;
+        if (n <= 0) return;
         nSquares = n;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         int w = canvas.getWidth();
-        double dx = w/(squaresPerLine + (squaresPerLine - 1) * marginRatio);
+        double dx = w / (squaresPerLine + (squaresPerLine - 1) * marginRatio);
         int x, y;
         int i;
 
         bgPaint.setColor(bgColor);
         fgPaint.setColor(fgColor);
 
-        for(i = 0; i < (int)(nSquares * percentage); i++) {
+        for (i = 0; i < (int) (nSquares * percentage); i++) {
             x = i % squaresPerLine;
             y = i / squaresPerLine;
-            fgRect.set((int)((dx * (1 + marginRatio)) * x),
-                    (int)((dx * (1 + marginRatio)) * y),
-                    (int)((dx * (1 + marginRatio)) * x + dx),
-                    (int)((dx * (1 + marginRatio)) * y + dx));
+            fgRect.set((int) ((dx * (1 + marginRatio)) * x),
+                    (int) ((dx * (1 + marginRatio)) * y),
+                    (int) ((dx * (1 + marginRatio)) * x + dx),
+                    (int) ((dx * (1 + marginRatio)) * y + dx));
             canvas.drawRect(fgRect, fgPaint);
         }
-        for(; i < nSquares; i++) {
+        for (; i < nSquares; i++) {
             x = i % squaresPerLine;
             y = i / squaresPerLine;
-            bgRect.set((int)((dx * (1 + marginRatio)) * x),
-                    (int)((dx * (1 + marginRatio)) * y),
-                    (int)((dx * (1 + marginRatio)) * x + dx),
-                    (int)((dx * (1 + marginRatio)) * y + dx));
+            bgRect.set((int) ((dx * (1 + marginRatio)) * x),
+                    (int) ((dx * (1 + marginRatio)) * y),
+                    (int) ((dx * (1 + marginRatio)) * x + dx),
+                    (int) ((dx * (1 + marginRatio)) * y + dx));
             canvas.drawRect(bgRect, bgPaint);
         }
     }
 
     private int getDesiredHeight(int width) {
-        double x = width/(squaresPerLine + (squaresPerLine - 1) * marginRatio);
-        int nLines = nSquares/squaresPerLine + (nSquares%squaresPerLine==0?0:1);
-        return (int)(nLines * x + (nLines - 1) * x * marginRatio);
+        double x = width / (squaresPerLine + (squaresPerLine - 1) * marginRatio);
+        int nLines = nSquares / squaresPerLine + (nSquares % squaresPerLine == 0 ? 0 : 1);
+        return (int) (nLines * x + (nLines - 1) * x * marginRatio);
     }
 
     @Override

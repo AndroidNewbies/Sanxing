@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import io.github.celestialphineas.sanxing.R;
 import io.github.celestialphineas.sanxing.sxObject.Habit;
 import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
@@ -25,7 +24,7 @@ import io.github.celestialphineas.sanxing.sxObjectManager.HabitManager;
  */
 
 public class HabitFrag extends Fragment {
-//    @BindView(R.id.task_recycler_view)      RecyclerView recyclerView;
+    //    @BindView(R.id.task_recycler_view)      RecyclerView recyclerView;
     private HabitManager habitManager;
 
     public HabitFrag() {
@@ -37,12 +36,13 @@ public class HabitFrag extends Fragment {
      * this fragment using the provided parameters.
      */
 
-    public HabitFrag newInstance(HabitManager habitManager) {
+    public static HabitFrag newInstance(HabitManager habitManager) {
 
         HabitFrag fragment = new HabitFrag();
         fragment.habitManager = habitManager;
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +59,12 @@ public class HabitFrag extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         List<Habit> need_add = new ArrayList<>();
-        for (Habit habit : habitManager.getObjectList()){
-            if (habit.getState()==1){//unfinished
+        for (Habit habit : habitManager.getObjectList()) {
+            if (habit.getState() == 1) {//unfinished
                 need_add.add(habit);
             }
         }
-        if (habitManager !=null)
+        if (habitManager != null)
             recyclerView.setAdapter(new HabitRecyclerAdapter(need_add));
         else recyclerView.setAdapter(new HabitRecyclerAdapter());
         return view;

@@ -17,11 +17,13 @@ import io.github.celestialphineas.sanxing.R;
 
 public class TimeLeftIntroFragment extends Fragment implements ISlideBackgroundColorHolder {
 
-    @BindView(R.id.time_left_intro_root_layout)      ViewGroup rootView;
+    @BindView(R.id.time_left_intro_root_layout)
+    ViewGroup rootView;
     final int[] currentFAB = new int[1];
 
 
-    public TimeLeftIntroFragment() { }
+    public TimeLeftIntroFragment() {
+    }
 
     public static TimeLeftIntroFragment newInstance(String param1, String param2) {
         TimeLeftIntroFragment fragment = new TimeLeftIntroFragment();
@@ -63,7 +65,7 @@ public class TimeLeftIntroFragment extends Fragment implements ISlideBackgroundC
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-        if(rootView != null) {
+        if (rootView != null) {
             rootView.setBackgroundColor(color);
         }
     }

@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/calendar_help_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,19 +17,22 @@
         android:text="@string/help_title_calendar"
         android:textAlignment="center"
         android:textColor="@color/grey"
-        style="@android:style/TextAppearance.Material.Display1"/>
+        style="@android:style/TextAppearance.Material.Display1" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:gravity="center">
+
         <android.support.v7.widget.CardView
             android:id="@+id/bar_holder"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:backgroundTint="@color/colorPrimary"
             android:elevation="4dp" />
+
         <ImageView
             android:id="@+id/calendar_icon"
             android:layout_width="60dp"
@@ -39,17 +41,18 @@
             android:src="@drawable/ic_calendar"
             android:tint="@color/white"
             android:elevation="4dp"
-            android:padding="10dp"/>
+            android:padding="10dp" />
     </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/help_description_calendar"
         android:padding="20sp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:textAlignment="center"
         android:textColor="@color/grey"
-        style="@style/Base.TextAppearance.AppCompat.Body1"/>
+        style="@style/Base.TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

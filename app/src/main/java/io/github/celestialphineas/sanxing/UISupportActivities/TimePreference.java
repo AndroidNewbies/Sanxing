@@ -2,23 +2,19 @@ package io.github.celestialphineas.sanxing.UISupportActivities;
 
 /*
  *https://stackoverflow.com/questions/5533078/timepicker-in-preferencescreen
-*/
+ */
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.Window;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import io.github.celestialphineas.sanxing.R;
 
 public class TimePreference extends DialogPreference {
     private Calendar calendar;

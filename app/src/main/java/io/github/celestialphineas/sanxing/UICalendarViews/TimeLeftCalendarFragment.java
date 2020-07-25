@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.media.MediaMetadataCompat;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.AppCompatTextView;
@@ -24,7 +22,6 @@ import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZoneOffset;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,40 +40,66 @@ import io.github.celestialphineas.sanxing.sxObject.TimeLeft;
 import io.github.celestialphineas.sanxing.sxObjectManager.TimeLeftManager;
 
 public class TimeLeftCalendarFragment extends Fragment {
-    @BindView(R.id.choose_a_time_left_button)           AppCompatButton chooseButton;
-    @BindView(R.id.view_bar_canvas_button)              AppCompatButton barCanvasButton;
-    @BindView(R.id.view_grid_canvas_button)             AppCompatButton gridCanvasButton;
-    @BindView(R.id.time_left_choice_card)               CardView choiceCard;
-    @BindView(R.id.time_left_calendar_card)             CardView calendarCard;
-    @BindView(R.id.time_left_detail_card)               CardView detailCard;
-    @BindView(R.id.frag_time_left_root_linear_layout)   ViewGroup fragTimeLeftRootLinearLayout;
-    @BindView(R.id.time_left_calendar_content)          ViewGroup timeLeftCalendarContent;
-    @BindView(R.id.time_left_bar_content)               ViewGroup timeLeftBarContent;
-    @BindView(R.id.time_left_grid_content)              ViewGroup timeLeftGridContent;
-    @BindView(R.id.time_left_detail_content)            ViewGroup timeLeftDetailContent;
-    @BindView(R.id.time_left_choice_list)               ListViewCompat timeLeftListView;
-    @BindView(R.id.time_left_percentage_text)           AppCompatTextView percentageText;
-    @BindView(R.id.time_left_title)                     AppCompatTextView timeLeftTitle;
-    @BindView(R.id.time_left_subheading)                AppCompatTextView timeLeftSubheading;
-    @BindView(R.id.time_left_description)               AppCompatTextView timeLeftDescription;
-    @BindView(R.id.time_left_detail)                    AppCompatTextView timeLeftDetail;
-    @BindView(R.id.time_left_bar_canvas)                BarCanvasView barCanvas;
-    @BindView(R.id.time_left_grid_canvas)               GridCanvasView gridCanvas;
-    @BindView(R.id.time_left_scale_seek_bar)            AppCompatSeekBar seekBar;
-    @BindString(R.string.right_arrow)                   String rightArrow;
-    @BindString(R.string.unit_year)                     String unitYearString;
-    @BindString(R.string.unit_month)                    String unitMonthString;
-    @BindString(R.string.unit_week)                     String unitWeekString;
-    @BindString(R.string.unit_day)                      String unitDayString;
-    @BindString(R.string.unit_hour)                     String unitHourString;
+    @BindView(R.id.choose_a_time_left_button)
+    AppCompatButton chooseButton;
+    @BindView(R.id.view_bar_canvas_button)
+    AppCompatButton barCanvasButton;
+    @BindView(R.id.view_grid_canvas_button)
+    AppCompatButton gridCanvasButton;
+    @BindView(R.id.time_left_choice_card)
+    CardView choiceCard;
+    @BindView(R.id.time_left_calendar_card)
+    CardView calendarCard;
+    @BindView(R.id.time_left_detail_card)
+    CardView detailCard;
+    @BindView(R.id.frag_time_left_root_linear_layout)
+    ViewGroup fragTimeLeftRootLinearLayout;
+    @BindView(R.id.time_left_calendar_content)
+    ViewGroup timeLeftCalendarContent;
+    @BindView(R.id.time_left_bar_content)
+    ViewGroup timeLeftBarContent;
+    @BindView(R.id.time_left_grid_content)
+    ViewGroup timeLeftGridContent;
+    @BindView(R.id.time_left_detail_content)
+    ViewGroup timeLeftDetailContent;
+    @BindView(R.id.time_left_choice_list)
+    ListViewCompat timeLeftListView;
+    @BindView(R.id.time_left_percentage_text)
+    AppCompatTextView percentageText;
+    @BindView(R.id.time_left_title)
+    AppCompatTextView timeLeftTitle;
+    @BindView(R.id.time_left_subheading)
+    AppCompatTextView timeLeftSubheading;
+    @BindView(R.id.time_left_description)
+    AppCompatTextView timeLeftDescription;
+    @BindView(R.id.time_left_detail)
+    AppCompatTextView timeLeftDetail;
+    @BindView(R.id.time_left_bar_canvas)
+    BarCanvasView barCanvas;
+    @BindView(R.id.time_left_grid_canvas)
+    GridCanvasView gridCanvas;
+    @BindView(R.id.time_left_scale_seek_bar)
+    AppCompatSeekBar seekBar;
+    @BindString(R.string.right_arrow)
+    String rightArrow;
+    @BindString(R.string.unit_year)
+    String unitYearString;
+    @BindString(R.string.unit_month)
+    String unitMonthString;
+    @BindString(R.string.unit_week)
+    String unitWeekString;
+    @BindString(R.string.unit_day)
+    String unitDayString;
+    @BindString(R.string.unit_hour)
+    String unitHourString;
     int timeScale = 2;
     final List<TimeLeftEvent> timeLeftEventList = new ArrayList<>();
     final int[] currentIndex = new int[1];
 
-    private MyApplication myApplication;
     private TimeLeftManager mTimeLeftManager;
 
-    public TimeLeftCalendarFragment() { }
+    public TimeLeftCalendarFragment() {
+    }
 
     public static TimeLeftCalendarFragment newInstance() {
         TimeLeftCalendarFragment fragment = new TimeLeftCalendarFragment();
@@ -85,7 +108,7 @@ public class TimeLeftCalendarFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        myApplication= (MyApplication) getActivity().getApplication();
+        MyApplication myApplication = (MyApplication) getActivity().getApplication();
         mTimeLeftManager = myApplication.get_time_left_manager();
         super.onCreate(savedInstanceState);
     }
@@ -94,24 +117,37 @@ public class TimeLeftCalendarFragment extends Fragment {
         String title, description;
         Calendar startTime, endTime;
         int importance;
+
         TimeLeftEvent(String title, String description, Calendar startTime, Calendar endTime, int importance) {
-            this.title = title; this.description = description; this.startTime = startTime;
-            this.endTime = endTime; this.importance = importance;
+            this.title = title;
+            this.description = description;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.importance = importance;
         }
+
         public Map<String, Object> getHashSet() {
             Map<String, Object> map = new HashMap<>();
-            map.put("title", title);            map.put("description", description);
-            map.put("startTime", startTime);    map.put("endTime", endTime);
+            map.put("title", title);
+            map.put("description", description);
+            map.put("startTime", startTime);
+            map.put("endTime", endTime);
             return map;
         }
+
         // This public method returns the importance color value of the object
         public int getImportanceColor() {
             switch (importance) {
-                case 0: return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft0, null);
-                case 1: return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft1, null);
-                case 2: return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft2, null);
-                case 3: return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft3, null);
-                default: return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft4, null);
+                case 0:
+                    return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft0, null);
+                case 1:
+                    return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft1, null);
+                case 2:
+                    return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft2, null);
+                case 3:
+                    return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft3, null);
+                default:
+                    return ResourcesCompat.getColor(getResources(), R.color.colorTimeLeft4, null);
             }
         }
     }
@@ -128,13 +164,13 @@ public class TimeLeftCalendarFragment extends Fragment {
         // TimeLeftEvent(String title, String description, Calendar startTime, Calendar endTime, int importance)
 
         List<TimeLeft> timeLeftList = mTimeLeftManager.getObjectList();
-        ZoneOffset zoneoffset= OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
-        for (TimeLeft timeLeft:timeLeftList){
-            if (timeLeft.getState()==0) continue;//if a time left is delete , no show
+        ZoneOffset zoneoffset = OffsetDateTime.now(ZoneId.systemDefault()).getOffset();
+        for (TimeLeft timeLeft : timeLeftList) {
+            if (timeLeft.getState() == 0) continue;//if a time left is delete , no show
             Calendar begin = Calendar.getInstance();
-            begin.setTimeInMillis(timeLeft.getBeginLocalDate().toEpochSecond(zoneoffset)*1000);
+            begin.setTimeInMillis(timeLeft.getBeginLocalDate().toEpochSecond(zoneoffset) * 1000);
             Calendar end = Calendar.getInstance();
-            end.setTimeInMillis(timeLeft.getEndLocalDate().toEpochSecond(zoneoffset)*1000);
+            end.setTimeInMillis(timeLeft.getEndLocalDate().toEpochSecond(zoneoffset) * 1000);
             String title = timeLeft.getTitle();
             String description = timeLeft.getContent();
             timeLeftEventList.add(new TimeLeftEvent(title, description, begin, end, timeLeft.getImportance()));
@@ -154,13 +190,13 @@ public class TimeLeftCalendarFragment extends Fragment {
         // End
 
         List<Map<String, Object>> adapterData = new ArrayList<>();
-        for(TimeLeftEvent event : timeLeftEventList) {
+        for (TimeLeftEvent event : timeLeftEventList) {
             adapterData.add(event.getHashSet());
         }
         timeLeftListView.setAdapter(new SimpleAdapter(view.getContext(), adapterData,
                 R.layout.list_view_template,
-                new String[] {"title", "description"},
-                new int[] {R.id.list_view_item_title, R.id.list_view_item_description}));
+                new String[]{"title", "description"},
+                new int[]{R.id.list_view_item_title, R.id.list_view_item_description}));
         // Bind SeekBar UI
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -168,10 +204,16 @@ public class TimeLeftCalendarFragment extends Fragment {
                 timeScale = seekBar.getProgress();
                 updateViews();
             }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
-            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
-        if(!adapterData.isEmpty()) updateViews();
+        if (!adapterData.isEmpty()) updateViews();
         else {
             timeLeftSubheading.setVisibility(View.GONE);
             timeLeftDescription.setVisibility(View.GONE);
@@ -188,7 +230,7 @@ public class TimeLeftCalendarFragment extends Fragment {
 
     // This method update the canvases
     private void updateViews() {
-        if(currentIndex[0] < timeLeftEventList.size()) {
+        if (currentIndex[0] < timeLeftEventList.size()) {
             TimeLeftEvent timeLeftEvent = timeLeftEventList.get(currentIndex[0]);
             // Title
             timeLeftTitle.setText(timeLeftEvent.title);
@@ -196,31 +238,31 @@ public class TimeLeftCalendarFragment extends Fragment {
             long startMillis = timeLeftEvent.startTime.getTimeInMillis();
             long endMillis = timeLeftEvent.endTime.getTimeInMillis();
             long nowMillis = Calendar.getInstance().getTimeInMillis();
-            double percentage = ((double)(nowMillis - startMillis))/(endMillis - startMillis);
-            if (percentage>1) percentage=1;//handle overflow
+            double percentage = ((double) (nowMillis - startMillis)) / (endMillis - startMillis);
+            if (percentage > 1) percentage = 1;//handle overflow
             // Calculate the number of squares
             double span = endMillis - startMillis;
             double left = endMillis - nowMillis;
-            double hours = span/1000/60/60;
-            double days = hours/24;
-            double weeks = days/7;
-            double months = days/30;
-            double years = days/365;
+            double hours = span / 1000 / 60 / 60;
+            double days = hours / 24;
+            double weeks = days / 7;
+            double months = days / 30;
+            double years = days / 365;
             // Calculate the time left
-            double hoursLeft = left/1000/60/60;
-            double daysLeft = hoursLeft/24;
-            double weeksLeft = daysLeft/7;
-            double monthsLeft = daysLeft/30;
-            double yearsLeft = daysLeft/365;
+            double hoursLeft = left / 1000 / 60 / 60;
+            double daysLeft = hoursLeft / 24;
+            double weeksLeft = daysLeft / 7;
+            double monthsLeft = daysLeft / 30;
+            double yearsLeft = daysLeft / 365;
             int squares = hours > 100 ? days > 100 ? weeks > 100 ? months > 100 ?
-                    (int)years : (int)months : (int)weeks : (int)days : (int)hours;
+                    (int) years : (int) months : (int) weeks : (int) days : (int) hours;
             // Set text
             DateFormat sdf = android.text.format.DateFormat.getDateFormat(getContext());
             String timespanString = sdf.format(startMillis) + rightArrow + sdf.format(endMillis);
             timeLeftSubheading.setText(timespanString);
             timeLeftDescription.setText(timeLeftEvent.description);
             // Bar canvas
-            percentageText.setText("" + (int)(percentage * 100 + 0.5) + "%");
+            percentageText.setText("" + (int) (percentage * 100 + 0.5) + "%");
             percentageText.setTextColor(timeLeftEvent.getImportanceColor());
             barCanvas.setPercentage(percentage);
             barCanvas.setFgColor(timeLeftEvent.getImportanceColor());
@@ -233,15 +275,31 @@ public class TimeLeftCalendarFragment extends Fragment {
             String colorString = "#" + Integer.toHexString(timeLeftEvent.getImportanceColor() & 0xFFFFFF);
             String numString, unitString;
             switch (timeScale) {
-                case 0: numString = "" + (int)Math.round(hoursLeft); unitString = unitHourString; break;
-                case 1: numString = "" + (int)Math.round(daysLeft); unitString = unitDayString; break;
-                case 2: numString = "" + (int)Math.round(weeksLeft); unitString = unitWeekString; break;
-                case 3: numString = "" + (int)Math.round(monthsLeft); unitString = unitMonthString; break;
-                case 4: default: numString = "" + (int)Math.round(yearsLeft); unitString = unitYearString; break;
+                case 0:
+                    numString = "" + (int) Math.round(hoursLeft);
+                    unitString = unitHourString;
+                    break;
+                case 1:
+                    numString = "" + (int) Math.round(daysLeft);
+                    unitString = unitDayString;
+                    break;
+                case 2:
+                    numString = "" + (int) Math.round(weeksLeft);
+                    unitString = unitWeekString;
+                    break;
+                case 3:
+                    numString = "" + (int) Math.round(monthsLeft);
+                    unitString = unitMonthString;
+                    break;
+                case 4:
+                default:
+                    numString = "" + (int) Math.round(yearsLeft);
+                    unitString = unitYearString;
+                    break;
             }
             detailString.append(numString);
-            detailString.append("<b><font color=\"" + colorString + "\">");
-                detailString.append(unitString);
+            detailString.append("<b><font color=\"").append(colorString).append("\">");
+            detailString.append(unitString);
             detailString.append("</font></b>");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 timeLeftDetail.setText(Html.fromHtml(detailString.toString(), Html.FROM_HTML_MODE_COMPACT));
@@ -273,7 +331,7 @@ public class TimeLeftCalendarFragment extends Fragment {
         TransitionManager.beginDelayedTransition(timeLeftGridContent);
         TransitionManager.beginDelayedTransition(timeLeftBarContent);
         TransitionManager.beginDelayedTransition(fragTimeLeftRootLinearLayout);
-        if(timeLeftBarContent.getVisibility() != View.VISIBLE) {
+        if (timeLeftBarContent.getVisibility() != View.VISIBLE) {
             timeLeftGridContent.setVisibility(View.GONE);
             timeLeftBarContent.setVisibility(View.VISIBLE);
         }
@@ -285,7 +343,7 @@ public class TimeLeftCalendarFragment extends Fragment {
         TransitionManager.beginDelayedTransition(timeLeftBarContent);
         TransitionManager.beginDelayedTransition(timeLeftGridContent);
         TransitionManager.beginDelayedTransition(fragTimeLeftRootLinearLayout);
-        if(timeLeftGridContent.getVisibility() != View.VISIBLE) {
+        if (timeLeftGridContent.getVisibility() != View.VISIBLE) {
             timeLeftBarContent.setVisibility(View.GONE);
             timeLeftGridContent.setVisibility(View.VISIBLE);
         }
@@ -296,7 +354,7 @@ public class TimeLeftCalendarFragment extends Fragment {
         TransitionManager.beginDelayedTransition(timeLeftCalendarContent);
         TransitionManager.beginDelayedTransition(calendarCard);
         TransitionManager.beginDelayedTransition(fragTimeLeftRootLinearLayout);
-        if(timeLeftCalendarContent.getVisibility() == View.VISIBLE) {
+        if (timeLeftCalendarContent.getVisibility() == View.VISIBLE) {
             timeLeftCalendarContent.setVisibility(View.GONE);
         } else timeLeftCalendarContent.setVisibility(View.VISIBLE);
     }
@@ -306,7 +364,7 @@ public class TimeLeftCalendarFragment extends Fragment {
         TransitionManager.beginDelayedTransition(timeLeftDetailContent);
         TransitionManager.beginDelayedTransition(detailCard);
         TransitionManager.beginDelayedTransition(fragTimeLeftRootLinearLayout);
-        if(timeLeftDetailContent.getVisibility() == View.VISIBLE) {
+        if (timeLeftDetailContent.getVisibility() == View.VISIBLE) {
             timeLeftDetailContent.setVisibility(View.GONE);
         } else timeLeftDetailContent.setVisibility(View.VISIBLE);
     }

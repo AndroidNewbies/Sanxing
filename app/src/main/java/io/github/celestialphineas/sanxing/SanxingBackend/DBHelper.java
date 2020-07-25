@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "sanxing.db";
 
-    public DBHelper(Context context ) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -29,18 +29,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //create necessary tables: Task / Habit / TimeLeft
 
-        String CREATE_TABLE_TASK = "CREATE TABLE " + Task.TABLE  + "("
-                + Task.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
-                + Task.KEY_TITLE +" TEXT, "+ Task.KEY_BEGIN_TIME +" TEXT, "+Task.KEY_END_TIME +" TEXT, "+Task.KEY_DESCRIPTION +" TEXT,  "+Task.KEY_STATE +" INTEGER, "+Task.KEY_IMPORTANCE+" INTEGER )";
+        String CREATE_TABLE_TASK = "CREATE TABLE " + Task.TABLE + "("
+                + Task.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Task.KEY_TITLE + " TEXT, " + Task.KEY_BEGIN_TIME + " TEXT, " + Task.KEY_END_TIME + " TEXT, " + Task.KEY_DESCRIPTION + " TEXT,  " + Task.KEY_STATE + " INTEGER, " + Task.KEY_IMPORTANCE + " INTEGER )";
 
-        String CREATE_TABLE_HABIT = "CREATE TABLE " + Habit.TABLE  + "("
-                + Habit.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
-                + Habit.KEY_TITLE +" TEXT, "+ Habit.KEY_BEGIN_TIME +" TEXT, "+Habit.KEY_END_TIME +" TEXT, "+Habit.KEY_DESCRIPTION +" TEXT,  "+Habit.KEY_STATE +" INTEGER, "+Habit.KEY_IMPORTANCE+" INTEGER , "
-                +Habit.KEY_FREQUENCY +" INTEGER, "+Habit.KEY_RECORDNUMBER +" INTEGER, "+Habit.KEY_NEEDNUMBER +" INTEGER, "+Habit.KEY_NEXTDDL +" TEXT, "+Habit.KEY_NEED_RECORD_ALL +" INTEGER, "+Habit.KEY_HAVE_RECORD_ALL +" INTEGER , "+Habit.KEY_RECORD_LIST +" TEXT ) ";
+        String CREATE_TABLE_HABIT = "CREATE TABLE " + Habit.TABLE + "("
+                + Habit.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Habit.KEY_TITLE + " TEXT, " + Habit.KEY_BEGIN_TIME + " TEXT, " + Habit.KEY_END_TIME + " TEXT, " + Habit.KEY_DESCRIPTION + " TEXT,  " + Habit.KEY_STATE + " INTEGER, " + Habit.KEY_IMPORTANCE + " INTEGER , "
+                + Habit.KEY_FREQUENCY + " INTEGER, " + Habit.KEY_RECORDNUMBER + " INTEGER, " + Habit.KEY_NEEDNUMBER + " INTEGER, " + Habit.KEY_NEXTDDL + " TEXT, " + Habit.KEY_NEED_RECORD_ALL + " INTEGER, " + Habit.KEY_HAVE_RECORD_ALL + " INTEGER , " + Habit.KEY_RECORD_LIST + " TEXT ) ";
 
-        String CREATE_TABLE_TIMELEFT = "CREATE TABLE " + TimeLeft.TABLE  + "("
-                + TimeLeft.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
-                + TimeLeft.KEY_TITLE +" TEXT, "+ TimeLeft.KEY_BEGIN_TIME +" TEXT, "+TimeLeft.KEY_END_TIME +" TEXT, "+TimeLeft.KEY_DESCRIPTION +" TEXT,  "+TimeLeft.KEY_STATE +" INTEGER, "+TimeLeft.KEY_IMPORTANCE+" INTEGER )";
+        String CREATE_TABLE_TIMELEFT = "CREATE TABLE " + TimeLeft.TABLE + "("
+                + TimeLeft.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + TimeLeft.KEY_TITLE + " TEXT, " + TimeLeft.KEY_BEGIN_TIME + " TEXT, " + TimeLeft.KEY_END_TIME + " TEXT, " + TimeLeft.KEY_DESCRIPTION + " TEXT,  " + TimeLeft.KEY_STATE + " INTEGER, " + TimeLeft.KEY_IMPORTANCE + " INTEGER )";
 
         //exec the sql order
         db.execSQL(CREATE_TABLE_TASK);

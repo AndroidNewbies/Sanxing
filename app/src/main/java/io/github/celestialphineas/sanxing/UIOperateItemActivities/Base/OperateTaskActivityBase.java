@@ -34,16 +34,27 @@ public abstract class OperateTaskActivityBase extends OperateItemActivityBase {
     // Flags to show if the user has already set date and time
     protected boolean setDate = false, setTime = false;
     View rootLayout;
-    @BindView(R.id.input_title)                     protected TextInputEditText inputTitle;
-    @BindView(R.id.task_due_date_content)           protected TextInputEditText dueDateContent;
-    @BindView(R.id.task_due_time_content)           protected TextInputEditText dueTimeContent;
-    @BindView(R.id.task_description_content)        protected TextInputEditText descriptionContent;
-    @BindView(R.id.task_importance_seek_bar)        protected AppCompatSeekBar taskImportance;
-    @BindString(R.string.snack_title_not_set)       protected String titleNotSet;
-    @BindString(R.string.snack_date_not_set)        protected String dateNotSet;
-    @BindString(R.string.snack_time_not_set)        protected String timeNotSet;
-    @BindString(R.string.snack_op_set)              protected String setSnack;
-    @BindString(R.string.snack_time_passed)         protected String hasPassed;
+    @BindView(R.id.input_title)
+    protected TextInputEditText inputTitle;
+    @BindView(R.id.task_due_date_content)
+    protected TextInputEditText dueDateContent;
+    @BindView(R.id.task_due_time_content)
+    protected TextInputEditText dueTimeContent;
+    @BindView(R.id.task_description_content)
+    protected TextInputEditText descriptionContent;
+    @BindView(R.id.task_importance_seek_bar)
+    protected AppCompatSeekBar taskImportance;
+    @BindString(R.string.snack_title_not_set)
+    protected String titleNotSet;
+    @BindString(R.string.snack_date_not_set)
+    protected String dateNotSet;
+    @BindString(R.string.snack_time_not_set)
+    protected String timeNotSet;
+    @BindString(R.string.snack_op_set)
+    protected String setSnack;
+    @BindString(R.string.snack_time_passed)
+    protected String hasPassed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         rootLayout = getWindow().getDecorView().getRootView();
@@ -79,43 +90,58 @@ public abstract class OperateTaskActivityBase extends OperateItemActivityBase {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 selectedImportance = seekBar.getProgress();
             }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
-            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
     }
 
     // Verify input
     protected boolean verifyForm(View layout) {
         Calendar now = Calendar.getInstance();
-        if(inputTitle != null && inputTitle.getText() != null
+        if (inputTitle != null && inputTitle.getText() != null
                 && inputTitle.getText().toString().trim().isEmpty()) {
             Snackbar.make(layout, titleNotSet, snackBarTimeout)
                     .show();
             inputTitle.requestFocus();
             return false;
-        } else if(!setDate) {
+        } else if (!setDate) {
             Snackbar.make(layout, dateNotSet, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueDateOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            taskDueDateOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
-        } else if(!setTime) {
+        } else if (!setTime) {
             Snackbar.make(layout, timeNotSet, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueTimeOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            taskDueTimeOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
-        } else if(dueCalendar.before(now)) {
+        } else if (dueCalendar.before(now)) {
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getBaseContext());
             DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getBaseContext());
             String timeString = dateFormat.format(dueCalendar.getTime())
                     + " " + timeFormat.format(dueCalendar.getTime()) + " ";
             Snackbar.make(layout, timeString + hasPassed, snackBarTimeout)
                     .setAction(setSnack, new View.OnClickListener() {
-                        @Override public void onClick(View view)
-                        { taskDueDateOnClickBehavior(); } })
+                        @Override
+                        public void onClick(View view) {
+                            taskDueDateOnClickBehavior();
+                        }
+                    })
                     .show();
             return false;
         }
@@ -128,10 +154,11 @@ public abstract class OperateTaskActivityBase extends OperateItemActivityBase {
     // The selected date will be stored in the dueCalendar object.
     @OnFocusChange(R.id.task_due_date_content)
     void taskDueDateOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
+        if (hasFocus) {
             taskDueDateOnClickBehavior();
         }
     }
+
     @OnClick(R.id.task_due_date_content)
     void taskDueDateOnClickBehavior() {
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -157,10 +184,11 @@ public abstract class OperateTaskActivityBase extends OperateItemActivityBase {
     // The selected time will be stored in the dueCalendar object.
     @OnFocusChange(R.id.task_due_time_content)
     void taskDueTimeOnFocusBehavior(View view, boolean hasFocus) {
-        if(hasFocus) {
+        if (hasFocus) {
             taskDueTimeOnClickBehavior();
         }
     }
+
     @OnClick(R.id.task_due_time_content)
     void taskDueTimeOnClickBehavior() {
         TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
